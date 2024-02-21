@@ -1,0 +1,26 @@
+.container-preguntas {
+  display: flex;
+  flex-direction: column;
+  row-gap: 25px;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgba(79, 79, 79, 0.02);
+}
+.pregunta {
+  display: flex;
+ align-items: center;
+  column-gap: 5px;
+  border-radius: 5px;
+}
+.pregunta summary{
+  background-color: rgba(134, 143, 188, 0.433);
+  padding: 10px;
+  color: rgba(8, 8, 8, 0.908);
+  cursor:pointer;
+}
+.pregunta p{
+  padding: 3% 7%;
+  background-color :rgb(255, 255, 255);
+  color:rgb(61,61,61);
+  padding: 10px 30px;
+}

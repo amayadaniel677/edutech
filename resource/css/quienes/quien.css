@@ -1,0 +1,169 @@
+/* PERTENECE AL CSS MAIN*/
+a {
+    text-decoration: none;
+    color: #000;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .boton {
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    transition: background-color ease 0.4s;
+    font-weight: normal;
+  }
+  body {
+    background-color: rgb(247, 247, 247);
+  }
+.ales {
+    display: flex;
+    justify-content: center;
+    margin: 50PX;
+    font-size: 36px;
+    font-family: Arial;
+}
+
+.texto_botones , .princi{
+    font-family: Arial;
+    
+}
+.princi{
+    font-size: 20px;
+    line-height: 1.2;
+    margin-left: -10%;
+    max-width: 700px;
+    text-align: center;   
+}
+
+.contenido{
+    display: flex;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.punto_decorativo {
+    width: 40px;
+    height: 40px;
+    background-color: #00AB0B;
+    border-radius: 50%;
+    border: none;  
+}
+.box{
+    padding: o 100px;
+}
+
+.orden{
+    display: flex; 
+    align-items: center;
+}
+
+.orden p {
+    text-align: right;
+    display: flex;
+    margin: 20px;
+}
+
+.inicio{
+
+    justify-content: center;
+    margin: 80px;
+}
+.sub_titulos {
+    display: flex;
+    justify-content: center;
+    background: #CFCFCF;
+    border-radius: 5px;
+    font-family: Arial;
+
+}
+.about{
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+    row-gap: 80px;
+     margin-left: 200px;
+     margin-right: 200px;
+    justify-items: center;
+    align-items: center;
+    
+}
+.about_ala{
+    max-width: 600px;
+}
+.about_img{
+text-align: center;
+border-radius: 15px;
+}
+
+.about_img--left{
+    text-align: left;
+}
+.about_text{
+    display: flex; 
+    align-items: center;
+}
+.about_pictore{
+    max-width:100%;
+
+}
+
+.about_paragraph{
+    margin-bottom: 20px;
+    line-height: 1.5;
+    font-weight: 300;
+    font-size: 19px;
+    text-align: center;
+    
+}
+
+@media (min-width: 1000px) and (max-width: 1600px){
+    .about{
+        margin: 0 50px;
+    }
+    figure.about_img{
+        margin: 0px 10px;
+        height: 60%;
+        overflow: hidden;
+    }
+    figure.about_img img{
+        min-width: 160%;
+        height: 100%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .about{
+        display:flex;
+        flex-direction: column;
+        margin-left: 0;
+        margin-right: 0; 
+        row-gap: 0;
+    }
+    .about_img--left{
+        display: block; 
+        order: 1;
+    }
+
+   .contenido{
+    flex-direction: column;
+   }
+   .contenido>div:nth-child(1){
+    order:5
+   }
+   .princi{
+    margin-left:0;
+    
+   }
+   .ales{
+    margin:5px;
+    margin-bottom: 30px;
+    font-size: 35px;
+    text-align: center;
+
+   }
+   .inicio{
+    margin:5px;
+   }
+}

@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.pagos-docentes {
+  margin: 50px 0 0 70px;
+}
+.titulo {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}
+.titulo img {
+  height: 15px;
+}
+.cuerpo {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+}
+.formulario {
+  width: 50%;
+}
+.formulario form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 60px;
+  margin: 0 70px;
+  height: 100%;
+}
+.formulario form label {
+  color: rgb(11, 54, 3);
+  font-size: 25px;
+}
+.input {
+  height: 20px;
+  width: 100%;
+  margin-top: 20px;
+  max-width: 380px;
+}
+.boton {
+  width: 115px;
+  height: 28px;
+  background-color: green;
+  color: white;
+  border-radius: 10px;
+  border: none;
+}
+.boton:hover {
+  background-color: rgb(1, 158, 1);
+}
+.imagen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 50vh;
+}
+.imagen img {
+  width: 100%;
+  max-height: 90%;
+  max-width: 500px;
+}
+@media (max-width: 650px) {
+  .imagen {
+    display: none;
+  }
+  .formulario {
+    width: 100%;
+    margin-top: 50px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+  .formulario form {
+    width: 100%;
+    margin: 0 10px;
+  }
+  .pagos-docentes {
+    margin: 30px 10px;
+  }
+}

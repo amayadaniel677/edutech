@@ -1,0 +1,157 @@
+.big-container{
+    margin-top: 40px;
+    width: 90%;
+    max-width: 900px;
+   
+     
+}
+
+.product-container{
+    display: flex;
+    background-color:rgb(37, 233, 141) ;
+    width: 100%;
+    height: 5%;
+    border-top-left-radius: 8px ;
+    border-top-right-radius: 8px;
+    align-items: center;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+.product-container img{
+    width: 3%;
+    column-gap: 16px;
+   margin-right: 10px;
+    
+}
+.product-container h1{
+    font-size:35px;
+    
+}
+
+.form{
+    padding: 2%;
+    margin-top: 3%;
+    display: flex;
+   
+   
+   
+}
+.form__1 {
+    width: 50%;
+}
+.form__1 label{
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    color: green;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   font-weight: 900;
+
+}
+.form__1 select{
+    margin-top: 16px;
+    display: block;
+    margin-bottom: 16px;
+    width: 100%;
+    height: 2em;
+    border: 2px solid rgb(90, 89, 89);
+    border-radius: 6px;
+    font-size: 16px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.form__1 input{
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 100%;
+    height: 2em;
+    border: 2px solid rgb(90, 89, 89);
+    border-radius: 6px;
+}
+.form__1 button{
+    margin-top: 45px;
+    height: 40px;
+    width: 60%;
+    max-width:170px;
+    font-size: 18px;
+    color: white;
+    background-color: green;
+    border-radius: 15px;
+    border: 0;
+}
+.pagotarje{
+    display: flex;
+    width: 50%;
+    align-items: center;
+    background-color: rgb(212, 209, 209);
+    border-radius: 6px;
+    margin-left: 13%;
+    
+    margin-bottom: 30px;
+    height: 400px;
+    align-items: center;
+    justify-content: center;
+}
+.pagotarje img {
+    width: 90%;
+}
+
+@media screen and (max-width: 700px) {
+   .product-container h1{
+        font-size: 22px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .form__1 {
+        width: 100%;
+        padding-left: 3%;
+    }
+
+    .form__1 button {
+        font-size: 14px;
+    }
+    .form__1 input, .form__1 select  {
+        width: 90%;
+        max-width: 340px;
+    }
+
+    .pagotarje{
+        display: none !important;
+    }
+    .product-container img{
+        width:15px ;
+    }
+    
+}
+/*
+@media (min-width: 700px) and (max-width: 1600px) {
+    .product-container {
+        width:600px;
+        height: 60px;
+        align-items: center;
+        text-align: center;
+    }
+   .product-container h1 {
+    font-size: 15px;
+   }
+   
+   
+   .form__1 input {
+    width: 250px;
+   }
+
+    .pagotarje{
+        align-items: center;
+        justify-content: center;
+       width: 55%;
+
+    }
+    
+    
+}
+*/
