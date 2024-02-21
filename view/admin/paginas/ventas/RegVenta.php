@@ -81,39 +81,67 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <section class="content">
           
             <div>
-              <div class="agregarcurso">
-                <a href="#">AGREGAR CURSO A LA VENTA<i class="bi bi-plus-circle"></i></a>
-                
+              <div class="">
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-detalle">
+                    Agregar detalle<i class="bi bi-plus-circle"></i>
+                </button>
+                <?php include('modal_add_detalle_venta.php')?>
               </div>
 
-              <article class="container-form-regventa">
-                <form action="get">
-                  <label class="label-form">
-                    ID Cliente
-                    <input type="text" placeholder="Escriba aquí..." />
-                  </label>
-                  <label class="label-form">
-                    ID Cliente
-                    <input type="text" placeholder="Escriba aquí..." />
-                  </label>
-                  <label class="label-form">
-                    ID Cliente
-                    <input type="text" placeholder="Escriba aquí..." />
-                  </label>
-                  <label class="label-form">
-                    ID Cliente
-                    <input type="text" placeholder="Escriba aquí..." />
-                  </label>
-                  <label class="label-form">
-                    ID Cliente
-                    <input type="text" placeholder="Escriba aquí..." />
-                  </label>
-                  <label class="label-form">
-                    ID Cliente
-                    <input type="text" placeholder="Escriba aquí..." />
-                  </label>
+              
+                <form action="get" class="col-md-8">
+                <label for="nombre" style="display:block;">Nombre cliente</label>
+                <div class="input-group mb-3 col-md-8">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                  </div>
+                  <input type="text" class="form-control" name="nombre" id="nombre"placeholder="Nombre">
+                </div>
+
+                <label for="nombre" style="display:block;">DNI Cliente</label>
+                <div class="input-group mb-3 col-md-8">
+                  
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                  </div>
+        
+                  <input type="email" class="form-control" placeholder="DNI">
+                </div>
+
+                <label for="ciudad" style="display:block;">Ciudad</label>
+                <div class="input-group mb-3 col-md-8">
+                  
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                  </div>
+        
+                  <input type="email" class="form-control" placeholder="Ciudad">
+                </div>
+
+                <label for="telefono" style="display:block;">Telefono</label>
+                <div class="input-group mb-3 col-md-8">
+                  
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                  </div>
+        
+                  <input type="email" class="form-control" placeholder="Telefono">
+                </div>
+
+                <label for="correo" style="display:block;">Correo</label>
+                <div class="input-group mb-3 col-md-8">
+                  
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                  </div>
+        
+                  <input type="email" class="form-control" placeholder="Correo">
+                </div>
+                  
+                  
                 </form>
-              </article>
+          
               <section class="main-table">
                 <article class="table-header">
                   <h2>REGISTRO DE VENTAS</h2>
@@ -242,9 +270,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </tbody>
                   </table>
                 </article>
+              
               </section>
             
           </div>
+          <br>
+          <div class='div-btn-regventa'><button class="btn btn-success ">Registrar</button></div>
+          
         </section>
         <!-- /. Maincontent -->
       </div>
