@@ -94,8 +94,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </select>
           </label>
           <label for="imagen"
-            >Insertar Imagen <br />
-            <button class="agregar">Agregar</button><br />
+            >Insertar Imagen  </br>
+            <input type="file" class="btn btn-success"></input><br />
             
           </label>
           <label for="precio"
@@ -118,11 +118,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </section>
     <div class='footer'>
       <div>
-        <input type="submit" value="Agregar curso" class="boton" />
+        <input type="submit" value="Agregar curso" class="btn btn-success" id="btn-add-curso"/>
       </div>
-      <div>
-        <button class="boton">cancelar</button>
-      </div>
+
     </div>
           
       </div>
@@ -150,6 +148,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
+<!-- alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- js alert -->
+<script src="../../../resource/js/admin/cursos/alert_add_curso.js"> </script>
 
 <!-- jQuery -->
 <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>

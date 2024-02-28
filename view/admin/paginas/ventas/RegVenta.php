@@ -34,14 +34,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       rel="stylesheet"
       href="../../../view/admin/dist/css/adminlte.min.css"
     />
-    <!-- CSS CURSOS ADMIN -->
-    <link rel="stylesheet" href="../../../resource/css/sales/table.css" />
-    <link rel="stylesheet" href="../../../resource/css/sales/form.css" />
-
+   
     <link
       rel="icon"
       href="../../../resource/img/icons/logo-kepler-removebg-preview.png"
     />
+   
+  
   </head>
   <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -87,195 +86,113 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     Agregar detalle<i class="bi bi-plus-circle"></i>
                 </button>
                 <?php include('modal_add_detalle_venta.php')?>
+              </div>    
+              
+              <form action="" class="row mb-3">
+    <div class="col-md-6 col-12">
+        <label for="nombres" style="display:block;">Nombres cliente</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input required type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombre">
+        </div>
+        <label for="dni" style="display:block;">DNI Cliente</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input required type="text" class="form-control"  id='dni'name="dni" placeholder="DNI">
+        </div>
+        <label for="correo" style="display:block;">Correo</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input required type="email" class="form-control" name="correo" id="correo" placeholder="Correo">
+        </div>
+       
+
+        <label for="ciudad" style="display:block;">Ciudad</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input required type="text" class="form-control" id='ciudad' name="ciudad" placeholder="Ciudad">
+        </div>
+
+    </div>
+
+    <div class="col-md-6 col-12">
+    <label for="apellidos" style="display:block;">Apellidos cliente</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input required type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Nombre">
+        </div>
+       
+
+        
+        <label for="telefono" style="display:block;">Telefono</label>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <input required type="text" class="form-control" name="telefono" id='telefono' placeholder="Telefono">
+        </div>
+
+        <label for="descuento" class="col-form-label">Descuento:</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+            </div>
+            <input required type="number" class="form-control" id="descuento" name="descuento" placeholder="">
+        </div>
+
+        <label for="valor-total" class="col-form-label">Valor total:</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+            </div>
+            <input required readonly="" type="number" class="form-control" id="valor-total" name="valor-total" value='' placeholder="">
+        </div>
+    </div>
+    <button type="button" class="btn btn-success " id="btn-regventa" value=''>Registrar</button>
+</form>
+<div class="card">
+<div class="card-header">
+           <h2 class="card-title">Detalles de Venta</h2>
+           </div>
+              
+    
+    <div class="card-body table-responsive p-0">
+                <table id="tabla-detalles" class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Categoria</th>
+                      <th>Nombre Curso</th>
+                      <th>Horas</th>
+                      <th>Valor hora</th>
+                      <th>Subtotal</th>
+                      <th>Editar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
               </div>
 
-              
-                <form action="get" class="col-md-8">
-                <label for="nombre" style="display:block;">Nombre cliente</label>
-                <div class="input-group mb-3 col-md-8">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                  </div>
-                  <input type="text" class="form-control" name="nombre" id="nombre"placeholder="Nombre">
-                </div>
-
-                <label for="nombre" style="display:block;">DNI Cliente</label>
-                <div class="input-group mb-3 col-md-8">
-                  
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                  </div>
-        
-                  <input type="email" class="form-control" placeholder="DNI">
-                </div>
-
-                <label for="ciudad" style="display:block;">Ciudad</label>
-                <div class="input-group mb-3 col-md-8">
-                  
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                  </div>
-        
-                  <input type="email" class="form-control" placeholder="Ciudad">
-                </div>
-
-                <label for="telefono" style="display:block;">Telefono</label>
-                <div class="input-group mb-3 col-md-8">
-                  
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                  </div>
-        
-                  <input type="email" class="form-control" placeholder="Telefono">
-                </div>
-
-                <label for="correo" style="display:block;">Correo</label>
-                <div class="input-group mb-3 col-md-8">
-                  
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                  </div>
-        
-                  <input type="email" class="form-control" placeholder="Correo">
-                </div>
-                  
-                  
-                </form>
+</div>
           
-              <section class="main-table">
-                <article class="table-header">
-                  <h2>REGISTRO DE VENTAS</h2>
-                </article>
-                <article class="table-body">
-                  <table class="table-regventa">
-                    <thead class="head-table">
-                      <tr>
-                        <th>Id</th>
-                        <th>Curso</th>
-                        <th>Horas</th>
-                        <th>Valor hora</th>
-                        <th>Subtotal</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="tr-impar">
-                        <td>1</td>
-                        <td class="banner-curso">
-                          <img src="https://cdn.colombia.com/sdi/2020/03/28/cursos-virtuales-del-sena-sofia-plus-para-formarse-en-casa-821989.jpg" alt="" />
-                          <div class="curso-txt">
-                            <h5>Nombre curso</h5>
-                            <div>
-                              <p>15 cupos disponibles</p>
-                              <p>ID 2615133</p>
-                            </div>
-
-                            <div class="curso-dto">
-                              <i class="bi bi-shop-window"></i>
-                              <p>20%<span> descuento</span></p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="horas">
-                            <div class="add-horas">
-                             <input type="number">
-                            </div>
-                          </div>
-                        </td>
-                        <td>15000</td>
-                        <td><span>$320000</span> $250000</td>
-                      </tr>
-                      <tr>
-                        <td>1</td>
-                        <td class="banner-curso">
-                          <img src="https://cdn.colombia.com/sdi/2020/03/28/cursos-virtuales-del-sena-sofia-plus-para-formarse-en-casa-821989.jpg" alt="" />
-                          <div class="curso-txt">
-                            <h5>Nombre curso</h5>
-                            <div>
-                              <p>15 cupos disponibles</p>
-                              <p>ID 2615133</p>
-                            </div>
-
-                            <div class="curso-dto">
-                              <i class="bi bi-shop-window"></i>
-                              <p>20%<span> descuento</span></p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="horas">
-                            <div class="add-horas">
-                            <input type="number">
-                            </div>
-                          </div>
-                        </td>
-                        <td>15000</td>
-                        <td><span>$320000</span> $250000</td>
-                      </tr>
-                      <tr class="tr-impar">
-                        <td>1</td>
-                        <td class="banner-curso">
-                          <img src="https://cdn.colombia.com/sdi/2020/03/28/cursos-virtuales-del-sena-sofia-plus-para-formarse-en-casa-821989.jpg" alt="" />
-                          <div class="curso-txt">
-                            <h5>Nombre curso</h5>
-                            <div>
-                              <p>15 cupos disponibles</p>
-                              <p>ID 2615133</p>
-                            </div>
-
-                            <div class="curso-dto">
-                              <i class="bi bi-shop-window"></i>
-                              <p>20%<span> descuento</span></p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="horas">
-                            <div class="add-horas">
-                            <input type="number">
-                            </div>
-                          </div>
-                        </td>
-                        <td>15000</td>
-                        <td><span>$320000</span> $250000</td>
-                      </tr>
-                      <tr class="">
-                        <td>1</td>
-                        <td class="banner-curso">
-                          <img src="https://cdn.colombia.com/sdi/2020/03/28/cursos-virtuales-del-sena-sofia-plus-para-formarse-en-casa-821989.jpg" alt="" />
-                          <div class="curso-txt">
-                            <h5>Nombre curso</h5>
-                            <div>
-                              <p>15 cupos disponibles</p>
-                              <p>ID 2615133</p>
-                            </div>
-
-                            <div class="curso-dto">
-                              <i class="bi bi-shop-window"></i>
-                              <p>20%<span> descuento</span></p>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div class="horas">
-                            <div class="add-horas">
-                            <input type="number">
-                            </div>
-                          </div>
-                        </td>
-                        <td>15000</td>
-                        <td><span>$320000</span> $250000</td>
-                      </tr>
-                    
-                    </tbody>
-                  </table>
-                </article>
-              
+</div>
+             
               </section>
             
           </div>
           <br>
-          <div class='div-btn-regventa'><button class="btn btn-success ">Registrar</button></div>
+       
           
         </section>
         <!-- /. Maincontent -->
@@ -298,11 +215,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!--fin de toda la pagina wrapper -->
     <!-- ./wrapper -->
+    <!-- jQuery -->
+
+    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+
+    <script src="../../../resource/js/admin/ventas/modal_detalle_venta.js"></script>
 
     <!-- REQUIRED SCRIPTS -->
-
-    <!-- jQuery -->
-    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+       <!-- jQuery -->
+       <script src="../../../resource/js/admin/ventas/alert_registrar_venta1.js"></script>
+    
     <!-- Bootstrap 4 -->
     <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->

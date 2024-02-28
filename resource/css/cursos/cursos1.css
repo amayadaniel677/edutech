@@ -8,118 +8,11 @@ a {
   padding: 0;
   box-sizing: border-box;
 }
-.boton {
-  font-size: 14px;
-  border-radius: 10px;
-  padding: 5px 10px;
-  transition: background-color ease 0.4s;
-  font-weight: normal;
-}
+
 body {
   background-color: rgb(247, 247, 247);
 }
-/* CIERRE MAIN*/
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  letter-spacing: 0.05em;
-  background-color: rgba(176, 238, 212, 0.302);
-}
-
-nav div img {
-  width: 100px;
-}
-nav .nav-contenedor-centro a {
-  margin: 0 15px;
-  padding: 5px 8px;
-  border-bottom: 3px solid transparent;
-  transition: border-color ease 0.7s;
-}
-nav .nav-contenedor-centro a:hover {
-  border-color: rgb(8, 184, 37);
-  background-color: rgba(66, 66, 66, 0.1);
-}
-.boton.login:hover {
-  background-color: rgba(255, 146, 45, 0.795);
-}
-
-.boton.login {
-  background-color: rgba(214, 214, 214, 0.5);
-}
-.container-button{
-  display: flex;
-  justify-content: flex-end;
-
-}
-.button {
-  border-radius: 5px;
-  position: relative;
-  width: 190px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  border: 1px solid #34974d;
-  background-color: #3aa856;
-}
-
-.button, .button__icon, .button__text {
-  transition: all 0.3s;
-}
-
-.button .button__text {
-  transform: translateX(30px);
-  color: #fff;
-  font-weight: 600;
-}
-
-.button .button__icon {
-  position: absolute;
-  transform: translateX(150px);
-  height: 100%;
-  width: 39px;
-  background-color: #34974d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.button .svg {
-  width: 30px;
-  stroke: #fff;
-}
-
-.button:hover {
-  background: #34974d;
-}
-
-.button:hover .button__text {
-  color: transparent;
-}
-
-.button:hover .button__icon {
-  width: 148px;
-  transform: translateX(25px);
-}
-
-.button:active .button__icon {
-  background-color: #2e8644;
-}
-
-.button:active {
-  border: 1px solid #2e8644;
-}
-
-/*RESPONSIVE DEL NAV*/
-@media (max-width: 804px) {
-  /*nav*/
-  nav .nav-contenedor-centro {
-    display: none;
-  }
-}
-/*FIN RESPONSIVE*/
 
 * {
   margin: 0;

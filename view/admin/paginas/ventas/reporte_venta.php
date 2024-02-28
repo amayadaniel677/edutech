@@ -66,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       
       <div class="cuerpo">
       <div class="formulario">
-        <form action="">
+        <form action="" id="reporteForm">
         <label for="fecha-inicio"
             >Fecha inicio del reporte<br /><input
               type="date"
@@ -90,7 +90,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <option value="quimica">Quimica</option>
             </select>
           </label>
-          <input type="submit" value="Generar reporte" class="boton" />
+          <input type="submit" value="Generar reporte" class="boton" id="btn-gen-reporte" />
         </form>
       </div>
       <div class="imagen">
@@ -124,6 +124,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
+<!-- alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- js alert -->
+<script src="../../../resource/js/admin/ventas/alert_reporte.js"> </script>
 
 <!-- jQuery -->
 <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>

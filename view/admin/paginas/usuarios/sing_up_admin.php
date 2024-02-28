@@ -193,7 +193,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
        
         
      </form>
-      <button type="submit" class="btn btn-primary">CREAR CUENTA</button>
+      <button type="submit" class="btn btn-primary" id="btn-reg-user">CREAR CUENTA</button>
  
     </section>
     <!-- /. Maincontent -->
@@ -217,9 +217,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
+<!-- alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- js alert -->
+<script src="../../../resource/js/admin/ventas/alert_registrar_usuario.js"> </script>
 <!-- jQuery -->
 <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+
 <!-- Bootstrap 4 -->
 <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
