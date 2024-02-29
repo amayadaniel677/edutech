@@ -1,6 +1,6 @@
 <?php
 class user_consult{
-    // INICIO DE LOS METODOS PARA REGISTRARSE 
+    // INICIO DE LOS METODOS PARA REGISTRARSE
     private $con;
     public function __construct(){
         $this->con = new mysqli("localhost","root","","edutech");
@@ -39,12 +39,23 @@ class user_consult{
         if($result->num_rows>0){
             $row=$result->fetch_assoc();
             $contrasenia_bd=$row['password'];
+            $rol=$row['rol'];
             if(password_verify($contrasenia,$contrasenia_bd)){
-                header('location:../index.php');
+                return true;
             }
         }
         
 
+    }
+
+    public function obtener_datos($dni){
+        $sql="SELECT * FROM people WHERE dni = $dni";
+        $result=$this->con->query($sql);
+        if($result->num_rows>0){
+            $row=$result->fetch_assoc();
+            return $row;
+        }
+        
     }
 
 }
