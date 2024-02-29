@@ -1,14 +1,17 @@
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../controller_inicio_admin.php" class="nav-link">Inicio</a>
+        <a href="controller_inicio_docente.php" class="nav-link">Inicio</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Perfil</a>
+        <a href="controller_cursos_docente.php" class="nav-link">Cursos</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="controller_pagos_docente.php" class="nav-link">Pagos</a>
       </li>
     </ul>
 
@@ -18,7 +21,7 @@
       
 
       <!-- cerrar sesion Dropdown Menu -->
-      <li class="nav-item dropdown show">
+      <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="true">
           <i class="far fa-user-circle"></i>
           
@@ -33,8 +36,8 @@
                   Brad Diesel
                   <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                 </h3>
-                <p class="text-sm">ADMIN</p>
-                <p class="text-sm">Activo</p>
+                <p class="text-sm">Docente</p>
+                
                 
               </div>
             </div>

@@ -1,14 +1,17 @@
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="../controller_inicio_admin.php" class="nav-link">Inicio</a>
+        <a href="controller_inicio_estudiante.php" class="nav-link">Inicio</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Perfil</a>
+        <a href="controller_cursos_estudiante.php" class="nav-link">Cursos</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="controller_catalogo_estudiante.php" class="nav-link">Catalogo</a>
       </li>
     </ul>
 
@@ -33,7 +36,7 @@
                   Brad Diesel
                   <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                 </h3>
-                <p class="text-sm">ADMIN</p>
+                <p class="text-sm">Estudiante</p>
                 <p class="text-sm">Activo</p>
                 
               </div>

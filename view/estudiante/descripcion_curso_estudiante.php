@@ -1,5 +1,7 @@
+
+
 <?php 
-$urlStarter='../../../view/admin/';  //son desde el controlador
+$urlStarter='../../view/admin/';  //son desde el controlador
 ?>
 
 <!DOCTYPE html>
@@ -16,24 +18,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../view/admin/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
   <!-- CSS CURSOS ADMIN -->
-    <link rel="stylesheet" href="../../../resource/css/cursos/descripcion_curso.css" />
-    <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
-   
+
+    <link rel="icon" href="../../resource/img/icons/logo-kepler-removebg-preview.png" />
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <?php include('../../../view/admin/layouts/nav.php'); ?>
+  <?php include('../../view/layout/nav_top_estudiante.php'); ?>
   <!-- /.navbar -->
 
   <!-- Main Nav Asidebar Container -->
-  <?php include('../../../view/admin/layouts/nav_aside.php'); ?>
+  <?php include('../../view/layout/nav_aside_estudiante.php'); ?>
   <!-- Fin del Main Nav Asidebar Container -->
   
   <!-- TODA LA PAGINA -->
@@ -43,12 +45,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Agregar curso</h1>
+            <h1 class="m-0">Panel Principal </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Agregar curso</li>
+              <li class="breadcrumb-item active">Agregar producto</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -57,9 +59,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.fin titulo de la vista -->
 
     <!-- Contenido principal vista -->
-    <?php include('../../../view/layout/descripcion_curso.php'); ?>
+    <section class="content">
+      <div class="container-fluid">
+        <?php include('../../view/layout/descripcion_curso.php'); ?>
+    </div>
+
+    </section>
     <!-- /. Maincontent -->
-</div>
+  </div> 
   <!-- /.content-wrapper -->
 
   <!-- Controlador del nav aSidebar -->
@@ -73,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?php include('../../../view/admin/layouts/footer.php'); ?>
+  <?php include('../../view/admin/layouts/footer.php'); ?>
   <!--FIN   Main Footer -->
 
 </div> <!--fin de toda la pagina wrapper -->
@@ -82,10 +89,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+<script src="../../view/admin/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+<script src="../../view/admin/dist/js/adminlte.min.js"></script>
 </body>
 </html>
+
+
+
+
