@@ -10,6 +10,7 @@ if($_POST){
 
     $login = new login();
     $login->validar_login($dni,$contrasenia);
+
 }
 
 class login{
@@ -34,9 +35,44 @@ class login{
         }
         if(!$error){
             $consult=new user_consult();
-            $consult->user_exist($dni,$contrasenia);
+            $respuesta=$consult->user_exist($dni,$contrasenia);
+            if($respuesta){
+                $datos_user=$consult->obtener_datos($dni);
+                $this->iniciar_session($datos_user);
+                $rol=$datos_user['rol'];
+                if($rol=="administrador"){
+                    header('location: admin/controller_inicio_admin.php');
+                }  
+                if($rol=="docente"){
+                    header('location: docente/controller_inicio_docente.php');
+                }
+                if($rol=="estudiante"){
+                    header('location: estudiante/controller_inicio_estudiante.php');
+                }
+            }
+            
+            
         }
     }
+
+    public function iniciar_session($datos_user){
+            session_start();
+            $_SESSION['dni_session']=$datos_user['dni'];
+            $_SESSION['name_session']=$datos_user['name'];
+            $_SESSION['lastname_session']=$datos_user['lastname'];
+            $_SESSION['dni_type_session']=$datos_user['dni_type'];
+            $_SESSION['phone_session']=$datos_user['phone'];
+            $_SESSION['city_session']=$datos_user['city'];
+            $_SESSION['birthdate_session']=$datos_user['birthdate'];
+            $_SESSION['address_session']=$datos_user['address'];
+            $_SESSION['sex_session']=$datos_user['sex'];
+            $_SESSION['email_session']=$datos_user['email'];
+            $_SESSION['rol_session']=$datos_user['rol'];
+            $_SESSION['password_session']=$datos_user['password'];
+            $_SESSION['photo_session']=$datos_user['photo']; 
+    }
+
+    
 
 }
 require_once('../view/login.php');
