@@ -23,7 +23,7 @@ header{
 }
 .formulario{
     width: 50%;
-    margin-left: 7%;
+    margin: 0 5%;
 }
 .formulario form{
     display: flex;

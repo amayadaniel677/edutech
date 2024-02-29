@@ -45,7 +45,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Agregar curso</h1>
+            <h1 class="m-0">Reporte</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -66,21 +66,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
       
       <div class="cuerpo">
       <div class="formulario">
-        <form action="" id="reporteForm">
+        <form action="">
         <label for="fecha-inicio"
             >Fecha inicio del reporte<br /><input
               type="date"
               id="fecha-inicio"
-              class="input"
+              class="form-control"
           /></label>
           <label for="fecha-fin"
             >Fecha fin del reporte<br /><input
               type="date"
               id="fecha-fin"
-              class="input"
+              class="form-control"
           /></label>
           <label for="curso"><h3>Seleccionar curso</h3>
-            <select name="curso" id="curso" class='input'>
+            <select name="curso" id="curso" class="form-control">
                 <option value="matematicas">matematicas</option>
                 <option value="ingles">ingles</option>
                 <option value="fisica">fisica</option>
@@ -90,8 +90,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <option value="quimica">Quimica</option>
             </select>
           </label>
-          <input type="submit" value="Generar reporte" class="boton" id="btn-gen-reporte" />
-        </form>
+          <div>
+          <input type="submit" value="Generar" class="btn btn-success" />
+       
+          </div>
+          </form>
       </div>
       <div class="imagen">
         <img src="../../../resource/img/adm_ventas/repventa.png" alt="repventa" />
@@ -124,10 +127,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<!-- alert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- js alert -->
-<script src="../../../resource/js/admin/ventas/alert_reporte.js"> </script>
 
 <!-- jQuery -->
 <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>

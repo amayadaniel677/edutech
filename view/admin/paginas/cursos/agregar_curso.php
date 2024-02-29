@@ -1,7 +1,6 @@
 <?php 
 $urlStarter='../../../view/admin/';  //son desde el controlador
 ?>
-
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -11,8 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EduTech | Add Curso</title>
-
+  <title>AdminLTE 3 | Starter</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -20,20 +18,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
-  <!-- CSS CURSOS ADMIN -->
-    <link rel="stylesheet" href="../../../resource/css/cursos/agregar_curso.css" />
-    <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
+  <!--VISTA BRAYAN INICIO ADMIN -->
+
+  <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <!-- Navbar -->
-    <?php include('../../../view/admin/layouts/nav.php'); ?>
+  <?php include('../../../view/admin/layouts/nav.php'); ?>
   <!-- /.navbar -->
 
   <!-- Main Nav Asidebar Container -->
   <?php include('../../../view/admin/layouts/nav_aside.php'); ?>
   <!-- Fin del Main Nav Asidebar Container -->
+  
+ 
   
   <!-- TODA LA PAGINA -->
   <div class="content-wrapper">
@@ -42,12 +45,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Agregar curso</h1>
+            <h1 class="m-0">Modificar cursos</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Agregar curso</li>
+              <li class="breadcrumb-item active">Starter Page</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -61,31 +64,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
       
       <div class="row">
       
-    <section class="cuerpo">
       <div class="formulario">
         <form action="#">
           <label for="nombre"
-            >Nombre del curso<br />
+            >Nombre del curso <br />
             <input
               type="text"
               id="nombre"
               placeholder="Escriba aqui"
-              class="input"
+              class="form-control"
             />
           </label>
-          <label for="categoria-curso"
-            >Asignar Categoria <br />
-            <select name="categoria-curso" id="categoria-curso" class="input">
-              <option value="Matematicas">Matematicas </option>
-              <option value="Artes">Artes </option>
-              <option value="Talleres"> Talleres </option>
-              <option value="Idiomas"> Idiomas </option>
-              <option value="Otro"> Otro</option>
-            </select>
+          <label for="id"
+            >Confirmar ID <br />
+            <input
+              type="text"
+              id="id"
+              placeholder="Escriba aqui"
+              class="form-control"
+            />
           </label>
           <label for="docente"
-            >Asignas docente <br />
-            <select name="docente" id="docente" class="input">
+            >Asignar docente <br />
+            <select name="docente" id="docente" class="form-control">
               <option value="daniel">Daniel Amaya</option>
               <option value="martin">Brayan Martin</option>
               <option value="stich">Brayan Stich</option>
@@ -93,14 +94,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <option value="pedro">Pedro A Barrera</option>
             </select>
           </label>
-          <label for="imagen"
-            >Insertar Imagen  </br>
-            <input type="file" class="btn btn-success"></input><br />
-            
-          </label>
+          <div>
+            <label>Desvincular docente</label> 
+            <ul>
+              <li>Daniel amaya <a href="#"
+                  ><i class="fas fa-trash-alt"></i>
+                </a></li>
+                
+                
+            </ul>
+    
+          </div>
           <label for="precio"
-            >Precio hora<br />
-            <input type="number" id="precio" value="15000" class="input" />
+            >Precio <br />
+            <input type="number" id="precio" value="15000" class="form-control" />
           </label>
           <label for="descripcion"
             >Descripcion del curso <br />
@@ -108,21 +115,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
               name="descripcion"
               id="descripcion"
               placeholder="Escriba aqui"
+              class="form-control"
             ></textarea>
           </label>
+          <div>
+        <input type="submit" value="confirmar" class="btn btn-success mb-3" />
+      </div>
+   
         </form>
       </div>
-      <div class="imagen">
-        <img src="../../../resource/img/adm_courses/agregar-cursos.png" alt="" />
-      </div>
-    </section>
-    <div class='footer'>
-      <div>
-        <input type="submit" value="Agregar curso" class="btn btn-success" id="btn-add-curso"/>
-      </div>
-
-    </div>
-          
+      
+   
+ 
       </div>
 
     </section>
@@ -148,10 +152,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-<!-- alert -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- js alert -->
-<script src="../../../resource/js/admin/cursos/alert_add_curso.js"> </script>
 
 <!-- jQuery -->
 <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
@@ -161,7 +161,4 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 </body>
 </html>
-
-
-
 

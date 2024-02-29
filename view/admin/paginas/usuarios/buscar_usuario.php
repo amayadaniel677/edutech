@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Agregar curso</h1>
+            <h1 class="m-0">Buscar usuario</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -69,34 +69,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="formulario">
       <form action="">
         <label for="nombre"
-          >Nombre del usuario<br /><input
-            type="text"
-            placeholder="Seleccionar"
-            id="nombre"
-            class="input"
-        /></label>
+          >Nombre del usuario<br /><input type="text" class="form-control" placeholder="Escriba aquí..." aria-label="Username" aria-describedby="basic-addon1"></label>
         <label for="documento"
-          >Numero de documento<br /><input
-            type="text"
-            placeholder="Seleccionar"
-            id="documento"
-            class="input"
-        /></label>
+          >Numero de documento<br /><input type="text" class="form-control" placeholder="Escriba aquí..." aria-label="Username" aria-describedby="basic-addon1"></label>
         <label for="telefono"
-          >Telefono<br /><input
-            type="text"
-            id="telefono"
-            placeholder="Seleccionar"
-            class="input"
-        /></label>
-        <label for="ciudad"
-          >Ciudad<br /><input
-            type="text"
-            id="ciudad"
-            placeholder="Seleccionar"
-            class="input"
-        /></label>
-        <input type="submit" value="Buscar ventas" class="boton" />
+          >Telefono<br /><input type="text" class="form-control" placeholder="Escriba aquí..." aria-label="Username" aria-describedby="basic-addon1"></label>
+    <div>
+    <input type="submit" value="Buscar ventas" class="btn btn-success" />
+  
+    </div>
       </form>
       <div class="imagen">
         <img src="../../../resource/img/adm_users/usuario.png" alt="" />

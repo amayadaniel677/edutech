@@ -69,42 +69,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="cuerpo">
       <div class="formulario">
         <form action="">
-          <label for="id_curso"
-            >ID Curso<br /><input
-              type="text"
-              placeholder="Seleccionar"
-              id="id_curso"
-              class="input"
-          /></label>
-          <label for="curso"
+              <label for="categoria-curso"
             >Nombre del curso<br />
-            <select name="curso" id="curso" class="input">
+            <select name="categoria-curso" id="categoria-curso" class="form-control">
               <option value="matematicas">Matematicas basicas</option>
-              <option value="calculo">calculo</option>
-              <option value="ingles">ingles</option>
-              <option value="lectura rapida">lectura</option>
-              <option value="pre-icfes">pre icfes</option>
+            </select>
+          </label>
+              <label for="nombre-curso"
+            >Nombre del curso<br />
+            <select name="nombre-curso" id="nombre-curso" class="form-control">
+              <option value="matematicas"> Geometría</option>
             </select>
           </label>
           <label for="id_cliente"
-            >ID Cliente<br /><input
-              type="text"
-              id="id_cliente"
-              placeholder="Seleccionar"
-              class="input"
-          /></label>
-          <label for="id_Venta"
-            >ID Venta<br /><input
-              type="text"
-              id="id_Venta"
-              placeholder="Seleccionar"
-              class="input"
-          /></label>
-          <label for="Fecha_Venta"
-            >Fecha Venta<br /><input type="date" id="Fecha_Venta" class="input"
-          /></label>
-          <input type="submit" value="Buscar ventas" class="boton" />
-        </form>
+            >ID Cliente<br/><input type="text" class="form-control" placeholder="Escriba aquí..." aria-label="Username" aria-describedby="basic-addon1"></label>
+          <div>
+          <button type="button" class="btn btn-mg btn-success ">Buscar</button>
+          
+          </div>
+            </form>
       </div>
       <div class="imagen">
         <img src=" ../../../resource/img/adm_ventas/Online store _Two Color 1.png" alt="repventa" />
