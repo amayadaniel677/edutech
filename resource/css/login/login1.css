@@ -1,0 +1,66 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    padding: 40px 25px;
+    background-color:rgb(202, 202, 202);
+}
+.log-container{
+    display:flex;
+    width: 100%;
+
+}
+.cuenta-container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+ h1{
+    color: rgb(42, 91, 156);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 40px;
+}
+.registro-container{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background: rgb(226, 224, 224);
+    border-radius: 6px;
+    width: 365px;
+    height: 50px;
+    margin-top: 5%;
+
+}
+
+
+.registro-container a{
+    
+text-decoration: none;
+font-size: 18px;
+color: rgb(175, 170, 170);
+width: 48%;
+height: 65%;
+margin-top: 5px;
+padding-top: 8px;
+
+
+&:hover{
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    font-weight: bold;
+    font-size: 21px;
+    padding-bottom: 30px;
+}
+}
+.formulario{
+    margin-top: 40px;
+    font-size: 18px;
+}
+.formulario label{
+    display: block;
+    width: 100%;
+    margin-top: 0;
+}

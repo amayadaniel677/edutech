@@ -4,7 +4,7 @@ class RegVenta_consult{
     private $con;
 
     public function __construct(){
-        $this->con = new mysqli("localhost","root","","edutech");
+        $this->con = new mysqli("localhost","root","daniel","edutech_1");
         $this->con->set_charset("utf8");
     }
 

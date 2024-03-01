@@ -14,17 +14,31 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $telefono=str_replace(' ','',$_POST['telefono']);
     $ciudad=strtolower(str_replace(' ','',$_POST['ciudad']));
     $direccion=trim(strtolower($_POST['direccion']));
+    $foto=$_FILES['foto'];
     
-    $new_user=new signup();
-    $new_user->validar($nombres,$apellidos,$tipo_documento,$documento,$sexo,$fecha,$correo,$contrasenia,$confContrasenia,$telefono,$ciudad,$direccion);
+    if(empty($foto)){
+        $new_user=new signup();
+        $foto='resource/img/photosUsers/defaultPhoto.jpg';
+    }else{
+        $new_user=new signup();
+        $foto=$new_user->validarFoto($_FILES['foto'],$documento);
+        
+    }
+
     $msg=$new_user->msg;
+
+    if(empty($msg)){
+        $new_user->validar($nombres,$apellidos,$tipo_documento,$documento,$sexo,$fecha,$correo,$contrasenia,$confContrasenia,$telefono,$ciudad,$direccion,$foto);
+   
+    }
+   
     
 }
 
 
 class signup{   
     public $msg=[];
-    public function validar($nombres,$apellidos,$tipo_documento,$documento,$sexo,$fecha,$correo,$contrasenia,$confContrasenia,$telefono,$ciudad,$direccion){
+    public function validar($nombres,$apellidos,$tipo_documento,$documento,$sexo,$fecha,$correo,$contrasenia,$confContrasenia,$telefono,$ciudad,$direccion,$foto){
         $fecha_hoy=new DateTime();
 
         $error = false; // Inicializar la bandera de error como falsa
@@ -57,8 +71,44 @@ class signup{
         if(!$error){
             $contrasenia_encriptada=password_hash($contrasenia,PASSWORD_DEFAULT,['cost'=>10]);
             $consult=new user_consult;
-            $consult->insertar($nombres,$apellidos,$tipo_documento,$documento,$sexo,$fecha,$correo,$contrasenia_encriptada,$telefono,$ciudad,$direccion); 
+            $consult->insertar($nombres,$apellidos,$tipo_documento,$documento,$sexo,$fecha,$correo,$contrasenia_encriptada,$telefono,$ciudad,$direccion,$foto); 
         }
+    }
+    public function validarFoto($foto,$dni){
+    // VALIDAR TIPO DE IMAGEN
+    $error=false;
+    $tipos_permitidos = ['image/jpeg', 'image/png', 'image/jpg'];
+    $archivo_tipo =$foto['type'];
+
+    if (!in_array($archivo_tipo, $tipos_permitidos)) {
+       $this->msg[]='Error: Solo se permiten archivos JPEG, JPG o PNG';
+      $error=true;
+    }
+
+    // Validar el tamaño del archivo (10 MB en este ejemplo)
+    $tamanio_maximo = 10 * 1024 * 1024; // 10 MB en bytes
+    $archivo_tamanio =$foto['size'];
+
+    if ($archivo_tamanio > $tamanio_maximo) {
+        $this->msg[]='Error: El tamaño del archivo excede el límite de 10 MB.';
+        $error=true;
+    }
+
+    $carpeta_destino='../resource/img/photosUsers/';
+
+    if(!file_exists($carpeta_destino)){
+        mkdir($carpeta_destino,0777,true);
+    }
+
+    $carpeta_destino2='resource/img/photosUsers/';
+    // Construir el nombre del archivo con el id o cédula de la persona
+    $nombre_archivo = $dni . '_' . basename($foto['name']);
+    $ruta_archivo = $carpeta_destino2 . $nombre_archivo;
+    $ruta_archivo_nombre_archivo='../' . $ruta_archivo;
+
+    if (move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_archivo_nombre_archivo)) {
+        return($ruta_archivo);
+    }
     }
 }
 

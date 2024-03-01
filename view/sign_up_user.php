@@ -1,71 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EDUTECH</title>
-    <link rel="stylesheet" href="../resource/css/signUp/sign_up_admin.css">
-</head>
-<body>
-    <div class="log-container">
-    <div class="cuenta-container">
-     <h1> <a href="../index.php"> <img src="../resource/img/updatesale_login_signup/LOGOLOGIN.png" alt=""></a> Crea tu cuenta</h1>
-     <div class="registro-container">
-      <a href="../controller/login_controller.php" >iniciar sesion</a>
-      <a href="">Registrate</a>
-     </div>
-     
-     <div class="formulario">
-     <form action="" method='POST'>
-        <?php 
-        if(isset($msg)){
-            foreach($msg as $i){
-                echo "<h3>$i</h3>";
-            }
+    <link rel="stylesheet" href="../resource/css/signUp/sign_up_admin.cs">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../AdminLTE-3.2.0/plugins/fontawesome-free/css/all.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../view/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../view/admin/dist/css/adminlte.min.css">
+    <style>
+        body {
+            background-color: #f2f2f2; /* Gris pastel suave */
         }
-        
-        
-        ?>
-        <label for="nombres">Nombres</label>
-        <input type="text" id="nombres" name="nombres">
-        <label for="apellidos">Apellidos</label>
-        <input type="text" id="apellidos" name="apellidos" required>
-        <label for='tipo_documento'>Tipo de documento</label>
-        <select name="tipo_documento" id="tipo_documento">
-            <option value="CC"  >Cedula de ciudadania</option>
-            <option value="TI" >tarjeta de identidad</option>
-            <option value="CE" >Cedula de extranjeria</option>
-        </select>
-        <label for="documento">Número de documento</label>
-        <input type="number" id="documento" name="documento"  required>
-        <label for="sexo">Sexo</label>
-        <input type="radio" value='M' id='sexo' name='sexo' >M
-        <input type="radio" value='F' id='sexo' name='sexo' >F
-        <label for="fecha">Fecha de nacimiento</label>
-        <input type="date" id="fecha" name="fecha" required>
-        <label for="correo">correo electronico</label>
-        <input type="email" id="correo" name="correo" required>
-        <label for="contrasenia">Contraseña</label>
-        <input type="password" id="contrasenia" name="contrasenia" required>
-        <label for="conf-contraseña">Confirmar contraseña</label>
-        <input type="password" id="confContrasenia" name="confContrasenia" required>
-        <label for="telefono">Telefono</label>
-        <input type="number" id="telefono" name="telefono" required>
-        <label for="ciudad">Ciudad </label>
-        <input type="text" id="ciudad" name="ciudad" required>
-        <label for="direccion">Dirección </label>
-        <input type="text" id="direccion" name="direccion" required>
-        
-        <button type="submit"> CREAR CUENTA</button>
-     </form>
+    </style>
+</head>
+
+<body>
+
+<div class="card col-md-7 mx-auto mt-5">
+<h1 class="text-center display-8 mt-3">
+        <a href="../index.php" style="text-decoration: none; color: inherit;">
+            <i class="fas fa-arrow-left"></i> <!-- Icono de flecha hacia atrás -->
+            BIENVENIDO A KEPLER
+        </a>
+    </h1>
+            <div class="card-body" style="max-width: 600px; margin: 0 auto;">
+            
+            <div class="registro-container d-flex justify-content-center mb-3">
+        <a href="../controller/login_controller.php" class="btn btn-outline-secondary mr-2">Iniciar Sesión</a>
+        <a href="#" class="btn btn-secondary ">Registrarse</a>
     </div>
-    </div>
- <div class="image">
-        <img src="../resource/img/updatesale_login_signup/imagenlogin.png" alt="">
- </div>
 
 
+                <form action="" method="POST" enctype="multipart/form-data">
+                <?php 
+                if(isset($msg)){
+                    foreach($msg as $i){
+                        echo "<h3>$i</h3>";
+                    }
+                }
+                
+                
+                ?>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" required>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group mb-3">
+                                <select class="form-control" id="tipo_documento" name="tipo_documento">
+                                    <option value="CC">Cédula de ciudadanía</option>
+                                    <option value="TI">Tarjeta de identidad</option>
+                                    <option value="CE">Cédula de extranjería</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" required>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    <div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Correo electrónico" id="correo" name="correo" required>
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono" required>
+        </div>
+    </div>
+   
+</div>
+
+<div class="row">
+<div class="col-md-6 col-sm-12">
+        <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Contraseña" id="contrasenia" name="contrasenia" required>
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Confirmar contraseña" id="confContrasenia" name="confContrasenia" required>
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
+            </div>
+        </div>
     </div>
     
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" required>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Dirección" id="direccion" name="direccion" required>
+        </div>
+    </div>
+</div>
+<label for='foto'>Subir foto:</label>
+<div class="input-group mb-3">
+    <div class="custom-file">
+        <input type="file" class="" id="foto" name="foto" accept='image/*'>
+        <label class="custom-file-label" for="foto">Seleccionar archivo</label>
+  
+    </div>
+</div>
+ <div class="row">
+                        <div class="col-md-6 col-sm-12">
+                        <label for='sexo'>Sexo:</label>
+                        <div class="input-group mb-3">
+                                <div>
+                                    <input type="radio" value="M" id="sexoM" name="sexo">
+                                    <label for="sexoM">M</label>
+                                    <input type="radio" value="F" id="sexoF" name="sexo">
+                                    <label for="sexoF">F</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                        <label for='fecha'>Fecha de Nacimiento</label>
+                            <div class="input-group mb-3">
+                             
+                                <input type="date" class="form-control" placeholder="Fecha de nacimiento" id="fecha" name="fecha" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resto de los campos aquí... -->
+
+                    <div class="row">
+                       
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+                        </div>
+                    </div>
+                </form>
+
+
+              
+            </div>
+            </div>
+    
+    <!-- Bootstrap 4 -->
+    <script src="../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
+
 </html>
