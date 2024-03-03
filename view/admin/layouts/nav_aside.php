@@ -1,3 +1,4 @@
+<?php  ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -10,10 +11,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="<?php if(isset($urlStarter)){echo $urlStarter;};?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="<?php echo $ruta_inicio . $_SESSION['photo_session'] ;?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">ADSO 2615133</a>
+          <a href="<?php if(isset($ruta_inicio)){echo $ruta_inicio;}; ?>controller/admin/perfil/controller_perfil_admin.php" class="d-block"> <?php echo $_SESSION['name_session']; ?> </a>
         </div>
       </div>
 
@@ -36,7 +37,7 @@
                with font-awesome or any other icon font library -->
          
                <li class="nav-item">
-            <a href="<?php if(isset($urlStarter)){echo $urlStarter;}; ?>../../controller/admin/controller_inicio_admin.php"" class="nav-link ">
+            <a href="<?php if(isset($urlStarter)){echo $urlStarter;}; ?>../../controller/admin/controller_inicio_admin.php" class="nav-link ">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Inicio

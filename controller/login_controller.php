@@ -1,5 +1,5 @@
 <?php 
-require_once('../model/user_model.php');
+include_once('../model/user_model.php');
 if(isset($_GET['mensaje'])){
     $mensaje=urldecode($_GET['mensaje']);
 }
@@ -71,6 +71,7 @@ class login{
             $_SESSION['password_session']=$datos_user['password'];
             $_SESSION['photo_session']=$datos_user['photo']; 
     }
+   
 
     
 

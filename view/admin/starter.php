@@ -58,6 +58,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Contenido principal vista -->
     <section class="content">
+    <div class="container mt-5">
+    <h1 class="mb-4">Información de Sesión</h1>
+
+    <ul class="list-group">
+        <li class="list-group-item"><strong>DNI:</strong> <?php echo $_SESSION['dni_session']; ?></li>
+        <li class="list-group-item"><strong>Nombre:</strong> <?php echo $_SESSION['name_session']; ?></li>
+        <li class="list-group-item"><strong>Apellido:</strong> <?php echo $_SESSION['lastname_session']; ?></li>
+        <li class="list-group-item"><strong>Tipo de DNI:</strong> <?php echo $_SESSION['dni_type_session']; ?></li>
+        <li class="list-group-item"><strong>Teléfono:</strong> <?php echo $_SESSION['phone_session']; ?></li>
+        <li class="list-group-item"><strong>Ciudad:</strong> <?php echo $_SESSION['city_session']; ?></li>
+     
+    </ul>
+</div>
       <div class="container-fluid">
       
       <div class="row">

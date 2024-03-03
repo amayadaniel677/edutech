@@ -58,75 +58,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.fin titulo de la vista -->
 
     <!-- Contenido principal vista -->
-    <section class="content">
-      <div class="container-fluid">
-  
-      <div class="row justify-content-center">
-          <div class="col-md-7">
-
-            <!-- Profile Image -->
-            <div class="card card-primary card-outline">
-              <div class="card-body box-profile">
-                <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle"
-                       src="../../dist/img/user4-128x128.jpg"
-                       alt="User profile picture">
-                </div>
-
-                <h3 class="profile-username text-center">Nina Mcintire</h3>
-
-                <p class="text-muted text-center">Docente en matematicas</p>
-
-                
-
-                <a href="editar_perfil.html" class="btn btn-success btn-block"><b>Editar perfil</b></a>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- About Me Box -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Informacion Personal</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Educacion</strong>
-
-                <p class="text-muted">
-                  universidad de los Andes
-                </p>
-
-                <hr>
-
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Ubicacion</strong>
-
-                <p class="text-muted">Tunja, Boyaca</p>
-
-                <hr>
-
-                <strong><i class="fas fa-pencil-alt mr-1"></i> profesion</strong>
-
-                <p class="text-muted">
-                 lic. Matematicas
-                </p>
-
-                <hr>
-
-                
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-         
-          <!-- /.col -->
-        </div>
-
-    </div>
-
-    </section>
+    <?php include('../../view/layout/perfil_usuario.php');
+ ?> 
     <!-- /. Maincontent -->
   </div> 
   <!-- /.content-wrapper -->

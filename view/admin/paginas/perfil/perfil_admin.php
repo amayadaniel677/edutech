@@ -1,7 +1,5 @@
-
-
 <?php 
-$urlStarter='../../view/admin/';  //son desde el controlador
+$urlStarter='../../../view/admin/';  //son desde el controlador
 ?>
 
 <!DOCTYPE html>
@@ -18,22 +16,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="../../view/admin/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <!-- CSS CURSOS ADMIN -->
-    <link rel="stylesheet" href="../../resource/css/addProduct/agregarproducto.css" />
-    <link rel="icon" href="../../resource/img/icons/logo-kepler-removebg-preview.png" />
+    <link rel="stylesheet" href="../../../resource/css/users/gestionar_usuario.css" />
+    <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+
   <!-- Navbar -->
-  <?php include('../../view/layout/nav_top_estudiante.php'); ?>
+    <?php include('../../../view/admin/layouts/nav.php'); ?>
   <!-- /.navbar -->
 
   <!-- Main Nav Asidebar Container -->
-  <?php include('../../view/layout/nav_aside_estudiante.php'); ?>
+  <?php include('../../../view/admin/layouts/nav_aside.php'); ?>
   <!-- Fin del Main Nav Asidebar Container -->
   
   <!-- TODA LA PAGINA -->
@@ -43,22 +42,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Agregar producto</h1>
+            <h1 class="m-0">Agregar curso</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Agregar producto</li>
+              <li class="breadcrumb-item active">Agregar curso</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.fin titulo de la vista -->
-
+  
     <!-- Contenido principal vista -->
-    <?php include('../../view/layout/perfil_usuario.php');
- ?>    <!-- /. Maincontent -->
+    <?php 
+include('../../../view/layout/perfil_usuario.php');
+?>
+    <!-- /. Maincontent -->
   </div> 
   <!-- /.content-wrapper -->
 
@@ -73,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?php include('../../view/admin/layouts/footer.php'); ?>
+  <?php include('../../../view/admin/layouts/footer.php'); ?>
   <!--FIN   Main Footer -->
 
 </div> <!--fin de toda la pagina wrapper -->
@@ -82,11 +83,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="../../view/admin/plugins/jquery/jquery.min.js"></script>
+<script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../view/admin/dist/js/adminlte.min.js"></script>
+<script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 </body>
 </html>
 
