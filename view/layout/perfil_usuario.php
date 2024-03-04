@@ -1,8 +1,18 @@
 <section class="content">
   <div class="container-fluid">
   <div class="errores">
+ 
+
   <?php 
-  
+   // Verifica si hay un mensaje de éxito en la sesión
+if (isset($_SESSION['update-succes'])) {
+  echo '<div class="alert alert-success mt-3" role="alert">';
+  echo $_SESSION['update-succes'];
+  echo '</div>';
+
+  // Limpia la variable de sesión después de mostrar el mensaje
+  unset($_SESSION['update-succes']);
+}
  // Verifica si hay errores en la sesión
 if (isset($_SESSION['errores_foto']) || isset($_SESSION['errores_inputs'])) {
   echo "<div class='alert alert-danger mt-3'>";

@@ -77,17 +77,15 @@ class obtener_datos
         $ruta_default_photo = 'resource/img/photosUsers/defaultPhoto.png';
 
 
-
-        if (move_uploaded_file($new_photo['tmp_name'], $ruta_archivo_nombre_archivo)) {
-            if ($ruta_old_photo != $ruta_default_photo && $old_photo != $foto_actual) {
-                unlink($ruta_old_photo);
+        if($new_photo != false){
+            if (move_uploaded_file($new_photo['tmp_name'], $ruta_archivo_nombre_archivo)) {
+                if ($ruta_old_photo != $ruta_default_photo && $old_photo != $foto_actual) {
+                    unlink($ruta_old_photo);
+                }
             }
-            return true;
-        } else {
-
-            return false;
         }
-    }
+        }
+       
 }
 
 require('../model/update_model.php');
@@ -114,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errores_foto = $validaciones->validar_foto($new_photo, $old_photo, $dni);
         $foto = $validaciones->obtener_ruta_foto($new_photo, $dni, $old_photo);
     } else {
+        $new_photo=false;
         $validaciones = new obtener_datos();
         $errores_foto = false;
         $foto = $old_photo; // O cualquier otra acción que desees tomar
@@ -126,8 +125,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     if (!$errores_foto && !$errores_inputs) {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['update-succes'] = "EN HORA BUENA, INFORMACIÓN ACTUALIZADA CORRECTAMENTE!";
         $actualizar_model = new actualizar_user();
         $actualizar_datos = $actualizar_model->actualizar_datos($dni, $name, $lastname, $dni_type, $birthdate, $email, $phone, $city, $address, $foto, $old_photo, $new_photo);
+         // Redirige a la vista
+         switch ($rol) {
+            case 'docente':
+                header("Location: docente/perfil_docente.php");
+                break;
+            case 'estudiante':
+                header("Location: estudiante/perfil_estudiante.php");
+                break;
+            case 'administrador':
+                header("Location: admin/perfil/controller_perfil_admin.php");
+                break;
+
+            default:
+            header("Location: login_controller.php");
+                break;
+        }
+
     } else {
 
         // Inicia la sesión si no está iniciada
