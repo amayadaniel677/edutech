@@ -27,10 +27,10 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="../../view/admin/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="<?php echo $ruta_inicio . $_SESSION['photo_session'] ; ?>" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                  Brad Diesel
+                   <?php echo $_SESSION['name_session'] ?> 
                   <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                 </h3>
                 <p class="text-sm">ADMIN</p>
@@ -49,7 +49,7 @@
           <div class="dropdown-divider"></div>
           
           <div class="dropdown-divider"></div>
-          <a href="<?php echo $ruta_inicio . 'model/model_cerrar_sesion.php?clickcerrar=' . urlencode(true); ?>" onclick="" class="dropdown-item dropdown-footer">Cerrar sesión</a>
+          <a href="<?php echo $ruta_inicio . 'controller/controller_cerrar_sesion.php?clickcerrar=' . urlencode(true); ?>" onclick="" class="dropdown-item dropdown-footer">Cerrar sesión</a>
 
           </div>
       </li>

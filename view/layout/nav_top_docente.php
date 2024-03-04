@@ -52,7 +52,7 @@
           <div class="dropdown-divider"></div>
           
           <div class="dropdown-divider"></div>
-          <a href="<?php echo $ruta_inicio . 'model/model_cerrar_sesion.php?clickcerrar=' . urlencode(true); ?>" onclick="" class="dropdown-item dropdown-footer">Cerrar sesión</a>
+          <a href="<?php echo $ruta_inicio . 'controller/controller_cerrar_sesion.php?clickcerrar=' . urlencode(true); ?>" onclick="" class="dropdown-item dropdown-footer">Cerrar sesión</a>
 
         </div>
       </li>

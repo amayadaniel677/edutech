@@ -90,6 +90,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <option value="quimica">Quimica</option>
             </select>
           </label>
+          <label for="curso"><h3>Seleccionar curso</h3>
+            <select name="curso" id="curso" class="form-control">
+                <option value="matematicas">matematicas</option>
+                <option value="ingles">ingles</option>
+                <option value="fisica">fisica</option>
+                <option value="lengua">lengua castellana</option>
+                <option value="sociales">Ciencias sociales</option>
+                <option value="naturales">Ciencias naturales</option>
+                <option value="quimica">Quimica</option>
+            </select>
+          </label>
           <div>
           <input type="submit" value="Generar" class="btn btn-success" />
        
