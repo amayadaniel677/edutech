@@ -23,6 +23,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- CSS CURSOS ADMIN -->
     <link rel="stylesheet" href="../../../resource/css/users/gestionar_usuario.css" />
     <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
+    <style> 
+    .custom-file-input {
+  cursor: pointer; /* Cambia el cursor al pasar por encima del botón */
+}
+
+.custom-file-label::after {
+  content: "Elegir archivo"; /* Texto que aparece en el botón */
+}
+
+.custom-file-input:focus ~ .custom-file-label {
+  border-color: #007bff; /* Color del borde cuando el input file está enfocado */
+}
+
+.custom-file-input:disabled ~ .custom-file-label {
+  background-color: #e9ecef; /* Color de fondo cuando el input file está desactivado */
+}
+
+  </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -81,7 +99,7 @@ include('../../../view/layout/perfil_usuario.php');
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- jQuery -->
 <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

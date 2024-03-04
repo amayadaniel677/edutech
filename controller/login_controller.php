@@ -71,7 +71,7 @@ class login{
             $_SESSION['password_session']=$datos_user['password'];
             $_SESSION['photo_session']=$datos_user['photo']; 
     }
-   
+    
 
     
 
