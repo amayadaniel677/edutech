@@ -7,7 +7,7 @@ class actualizar_user{
         // $this->con = new mysqli("localhost","root","","edutech");}
         $this->con->set_charset("utf8");
     }
-    public function actualizar_datos($documento,$nombres,$apellidos,$tipo_documento,$fecha,$correo,$telefono,$ciudad,$direccion,$foto){
+    public function actualizar_datos($documento,$nombres,$apellidos,$tipo_documento,$fecha,$correo,$telefono,$ciudad,$direccion,$foto_actual,$foto_vieja,$foto_file){
    
         $fecha_formateada = $fecha->format('Y-m-d');
         
@@ -20,7 +20,7 @@ class actualizar_user{
         birthdate = '$fecha_formateada',
         `address` = '$direccion',
         dni_type = '$tipo_documento',
-        photo = '$foto'
+        photo = '$foto_actual'
         WHERE dni = $documento "
         ;  
         
@@ -35,8 +35,9 @@ class actualizar_user{
             $_SESSION['birthdate_session']=$fecha_formateada;
             $_SESSION['address_session']=$direccion;
             $_SESSION['email_session']=$correo;
-            $_SESSION['photo_session']=$foto;
-
+            $_SESSION['photo_session']=$foto_actual;
+            $funciones_controlador= new obtener_datos();
+            $funciones_controlador->mover_borrar_foto($documento,$foto_actual,$foto_vieja,$foto_file);
             return true; 
            
             exit();

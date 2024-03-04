@@ -2,13 +2,32 @@
   <div class="container-fluid">
   <div class="errores">
   <?php 
-  // En la página de destino (pagina_destino.php)
-if (isset($_GET['mensaje'])) {
-  $mensaje_recibido = urldecode($_GET['mensaje']);
-  echo "<p>".$mensaje_recibido."</p>";
-  var_dump($mensaje_recibido);
-} else {
-  echo "No se recibió ningún mensaje.";
+  
+ // Verifica si hay errores en la sesión
+if (isset($_SESSION['errores_foto']) || isset($_SESSION['errores_inputs'])) {
+  echo "<div class='alert alert-danger mt-3'>";
+
+  // Muestra errores de la foto
+  if (!empty($_SESSION['errores_foto'])) {
+      echo "<strong>Errores en la foto:</strong><br>";
+      foreach ($_SESSION['errores_foto'] as $error) {
+          echo $error . "<br>";
+      }
+  }
+
+  // Muestra errores de los inputs
+  if (!empty($_SESSION['errores_inputs'])) {
+      echo "<strong>Errores en los inputs:</strong><br>";
+      foreach ($_SESSION['errores_inputs'] as $errors) {
+          echo $errors . "<br>";
+      }
+  }
+
+  echo "</div>";
+
+  // Limpia las variables de sesión después de mostrar los errores
+  unset($_SESSION['errores_foto']);
+  unset($_SESSION['errores_inputs']);
 }
   ?>
   </div>
