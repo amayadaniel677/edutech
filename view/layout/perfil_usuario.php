@@ -1,46 +1,46 @@
 <section class="content">
   <div class="container-fluid">
-  <div class="errores">
- 
+    <div class="errores">
 
-  <?php 
-   // Verifica si hay un mensaje de éxito en la sesión
-if (isset($_SESSION['update-succes'])) {
-  echo '<div class="alert alert-success mt-3" role="alert">';
-  echo $_SESSION['update-succes'];
-  echo '</div>';
 
-  // Limpia la variable de sesión después de mostrar el mensaje
-  unset($_SESSION['update-succes']);
-}
- // Verifica si hay errores en la sesión
-if (isset($_SESSION['errores_foto']) || isset($_SESSION['errores_inputs'])) {
-  echo "<div class='alert alert-danger mt-3'>";
+      <?php
+      // Verifica si hay un mensaje de éxito en la sesión
+      if (isset($_SESSION['update-succes'])) {
+        echo '<div class="alert alert-success mt-3" role="alert">';
+        echo $_SESSION['update-succes'];
+        echo '</div>';
 
-  // Muestra errores de la foto
-  if (!empty($_SESSION['errores_foto'])) {
-      echo "<strong>Errores en la foto:</strong><br>";
-      foreach ($_SESSION['errores_foto'] as $error) {
-          echo $error . "<br>";
+        // Limpia la variable de sesión después de mostrar el mensaje
+        unset($_SESSION['update-succes']);
       }
-  }
+      // Verifica si hay errores en la sesión
+      if (isset($_SESSION['errores_foto']) || isset($_SESSION['errores_inputs'])) {
+        echo "<div class='alert alert-danger mt-3'>";
 
-  // Muestra errores de los inputs
-  if (!empty($_SESSION['errores_inputs'])) {
-      echo "<strong>Errores en los inputs:</strong><br>";
-      foreach ($_SESSION['errores_inputs'] as $errors) {
-          echo $errors . "<br>";
+        // Muestra errores de la foto
+        if (!empty($_SESSION['errores_foto'])) {
+          echo "<strong>Errores en la foto:</strong><br>";
+          foreach ($_SESSION['errores_foto'] as $error) {
+            echo $error . "<br>";
+          }
+        }
+
+        // Muestra errores de los inputs
+        if (!empty($_SESSION['errores_inputs'])) {
+          echo "<strong>Errores:</strong><br>";
+          foreach ($_SESSION['errores_inputs'] as $errors) {
+            echo $errors . "<br>";
+          }
+        }
+
+        echo "</div>";
+
+        // Limpia las variables de sesión después de mostrar los errores
+        unset($_SESSION['errores_foto']);
+        unset($_SESSION['errores_inputs']);
       }
-  }
-
-  echo "</div>";
-
-  // Limpia las variables de sesión después de mostrar los errores
-  unset($_SESSION['errores_foto']);
-  unset($_SESSION['errores_inputs']);
-}
-  ?>
-  </div>
+      ?>
+    </div>
     <div class="row justify-content-center">
       <div class="col-md-7">
         <!-- Profile Image -->
@@ -58,9 +58,10 @@ if (isset($_SESSION['errores_foto']) || isset($_SESSION['errores_inputs'])) {
             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal-datos">
               Editar perfil
             </button>
-
-            <a href="editar_perfil.html" id='datos-modal' class="btn btn-success btn-block"><b>Editar perfil</b></a>
-            <!-- ACA EMPIEZA EL MODAL CERRADO -->
+            <button type="button" class="btn btn-outline-secondary btn-block" data-toggle="modal" data-target="#modal-password">
+              Cambiar contraseña
+            </button>
+            <!-- ACA EMPIEZA EL MODAL EDITAR PERFILCERRADO -->
             <div class="modal" id="modal-datos">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -74,12 +75,12 @@ if (isset($_SESSION['errores_foto']) || isset($_SESSION['errores_inputs'])) {
                   <!-- Cuerpo del Modal -->
                   <div class="modal-body">
                     <form action="<?php echo $ruta_inicio ?>controller/controller_actualizar_usuario.php" method="post" id="datosForm" enctype="multipart/form-data">
-                    <!-- ESTE INPUT ESTÁ OCULTO -->
-                    <input type="text" class="form-control" id="dni" name="dni"  value="<?php echo $_SESSION['dni_session']; ?>"  style="display: none;">
-                    <input type="text" class="form-control" id="old-photo" name="old-photo"  value="<?php echo $_SESSION['photo_session']; ?>"  style="display: none;">
-                    <input type="text" class="form-control" id="rol" name="rol"  value="<?php echo $_SESSION['rol_session']; ?>"  style="display: none;">
-                    <!-- ESTE INPUT ESTÁ OCULTO -->
-                    <div class="form-row">
+                      <!-- ESTE INPUT ESTÁ OCULTO -->
+                      <input type="text" class="form-control" id="dni" name="dni" value="<?php echo $_SESSION['dni_session']; ?>" style="display: none;">
+                      <input type="text" class="form-control" id="old-photo" name="old-photo" value="<?php echo $_SESSION['photo_session']; ?>" style="display: none;">
+                      <input type="text" class="form-control" id="rol" name="rol" value="<?php echo $_SESSION['rol_session']; ?>" style="display: none;">
+                      <!-- ESTE INPUT ESTÁ OCULTO -->
+                      <div class="form-row">
                         <div class="form-group col-md-6">
                           <label for="name">Nombre</label>
                           <input type="text" class="form-control" id="name" name="name" placeholder="Nombre" value="<?php echo $_SESSION['name_session']; ?>">
@@ -142,9 +143,9 @@ if (isset($_SESSION['errores_foto']) || isset($_SESSION['errores_inputs'])) {
                       <!-- Pie del Modal -->
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary" onclick="confirmarActualizacion()">Guardar cambios</button>
+                        <button type="button" class="btn btn-primary" name="submit_form_1" onclick="confirmarActualizacion()">Guardar cambios</button>
                       </div>
-                    </form> 
+                    </form>
                     <script>
                       function confirmarActualizacion() {
                         Swal.fire({
@@ -160,6 +161,95 @@ if (isset($_SESSION['errores_foto']) || isset($_SESSION['errores_inputs'])) {
                           if (result.isConfirmed) {
                             // Si el usuario confirma, envía el formulario
                             document.getElementById('datosForm').submit();
+                          }
+                        });
+                      }
+                    </script>
+                  </div>
+
+
+
+                </div>
+              </div>
+            </div>
+
+            <!-- ACA TERMINA EL MODAL CERRADO -->
+            <!-- ACA EMPIEZA EL MODAL CONTRASEÑA -->
+            <div class="modal" id="modal-password">
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                  <!-- Encabezado del Modal -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Cambiar contraseña</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+
+                  <!-- Cuerpo del Modal -->
+                  <div class="modal-body">
+                    <form action="<?php echo $ruta_inicio ?>controller/controller_actualizar_usuario.php" method="post" id="passwordForm" enctype="multipart/form-data">
+                      <input type="hidden" class="form-control" id="dni" name="dni" value="<?php echo $_SESSION['dni_session']; ?>" style="display: none;">
+                      <input type="hidden" class="form-control" id="rol" name="rol" value="<?php echo $_SESSION['rol_session']; ?>" style="display: none;">
+                      <input type="hidden" class="form-control" id="password-session" name="password-session" value="<?php echo $_SESSION['password_session']; ?>" style="display: none;">
+
+
+                      <!-- /.login-logo -->
+                      <div class="card">
+                        <div class="card-body login-card-body">
+                          <p class="login-box-msg">Recuerda tu contraseña para ingresar la proxima vez!</p>
+
+
+                          <div class="input-group mb-3">
+                            <input type="password" class="form-control" placeholder="Contraseña actual" id='current-password' name='current-password' style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="input-group mb-3">
+                            <input type="password" class="form-control" id='new-password' name='new-password' placeholder="Contraseña nueva" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="input-group mb-3">
+                            <input type="password" class="form-control" id='confirm-new-password' name='confirm-new-password' placeholder="Confirmar nueva contraseña" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+                            <div class="input-group-append">
+                              <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- /.login-card-body -->
+                      </div>
+
+
+                      <!-- Pie del Modal -->
+                      <div class="modal-footer">
+                        <input type="hidden" name="form_id" value="formulario1">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary" name="submit_form_2" onclick="confirmarContraseña()">Guardar cambios</button>
+                      </div>
+                    </form>
+                    <script>
+                      function confirmarContraseña() {
+                        Swal.fire({
+                          title: '¿Estás seguro?',
+                          text: '¿Quieres actualizar tu contraseña?',
+                          icon: 'question',
+                          showCancelButton: true,
+                          confirmButtonColor: '#3085d6',
+                          cancelButtonColor: '#d33',
+                          confirmButtonText: 'Sí, actualizar',
+                          cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            // Si el usuario confirma, envía el formulario
+                            document.getElementById('passwordForm').submit();
                           }
                         });
                       }

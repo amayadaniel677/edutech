@@ -3,6 +3,7 @@
 //PONERLE ESTO A TODOS LOS CONTROLADORES
 
 session_start();
+
 if (!isset( $_SESSION['dni_session'])){
     header('location:../login_controller.php');
     exit();

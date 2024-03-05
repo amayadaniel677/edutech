@@ -58,6 +58,7 @@ class login{
     public function iniciar_session($datos_user){
             session_start();
             $_SESSION['dni_session']=$datos_user['dni'];
+            $_SESSION['id_session']=$datos_user['id'];
             $_SESSION['name_session']=$datos_user['name'];
             $_SESSION['lastname_session']=$datos_user['lastname'];
             $_SESSION['dni_type_session']=$datos_user['dni_type'];
@@ -71,6 +72,7 @@ class login{
             $_SESSION['password_session']=$datos_user['password'];
             $_SESSION['photo_session']=$datos_user['photo']; 
     }
+
     
 
     

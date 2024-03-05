@@ -46,6 +46,18 @@ class actualizar_user{
         }
      
      }
+     public function actualizar_contrasenia($dni,$contrasenia_encriptada){
+        $sql="UPDATE people SET `password`='$contrasenia_encriptada' WHERE dni='$dni'";
+        $result = $this->con->query($sql);
+        if($result){
+            session_start();
+            $_SESSION['password_session']=$contrasenia_encriptada;
+            return 1;
+        }else{
+            return 0;
+        }
+     
+    }
 
 
 }
