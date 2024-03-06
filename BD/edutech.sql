@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
--- Host: localhost    Database: edutech_1
+-- Host: 127.0.0.1    Database: edutech
 -- ------------------------------------------------------
 -- Server version	8.0.33
 
@@ -343,11 +343,13 @@ CREATE TABLE `sales` (
   `id` int NOT NULL AUTO_INCREMENT,
   `price` int NOT NULL,
   `date` datetime NOT NULL,
-  `student` varchar(45) NOT NULL,
   `financial_report_id` int NOT NULL,
+  `people_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_sales_financial_report1_idx` (`financial_report_id`),
-  CONSTRAINT `fk_sales_financial_report1` FOREIGN KEY (`financial_report_id`) REFERENCES `financial_report` (`id`)
+  KEY `fk_sales_people1_idx` (`people_id`),
+  CONSTRAINT `fk_sales_financial_report1` FOREIGN KEY (`financial_report_id`) REFERENCES `financial_report` (`id`),
+  CONSTRAINT `fk_sales_people1` FOREIGN KEY (`people_id`) REFERENCES `people` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -486,4 +488,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-06  7:16:29
+-- Dump completed on 2024-03-06  8:11:46
