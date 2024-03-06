@@ -1,6 +1,38 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Tu código aquí
-    document.getElementById('btn-regventa').addEventListener('click', () => {
+    // ... (tu código anterior)
+
+    // Función para enviar los datos del formulario y los detalles de venta al controlador
+    function enviarVentaAlControlador() {
+        // Obtener el formulario por su ID
+        var formulario = document.getElementById('form-venta');
+
+        // Verificar si el formulario es válido antes de enviarlo
+        if (formulario.checkValidity()) {
+            // Enviar el formulario
+            formulario.submit();
+        } else {
+            // El formulario no es válido, mostrar mensajes de validación HTML5
+            mostrarMensajesValidacionHTML(formulario);
+        }
+    }
+
+    // Función para mostrar mensajes de validación HTML5
+    function mostrarMensajesValidacionHTML(formulario) {
+        var camposInvalidos = formulario.querySelectorAll(':invalid');
+
+        // Iterar sobre los campos inválidos y mostrar mensajes de validación predeterminados
+        camposInvalidos.forEach(function (campo) {
+            var mensajeError = campo.validationMessage;
+            Swal.fire({
+                title: "¡Error!",
+                text: mensajeError,
+                icon: "error"
+            });
+        });
+    }
+
+    // Agregar el evento de clic al botón de registro
+    document.getElementById('btn-regventa').addEventListener('click', function () {
         // Validar si los campos del formulario están llenos
         var nombres = document.getElementById("nombres").value;
         var dni = document.getElementById("dni").value;
@@ -53,9 +85,4 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    // Función para enviar los datos del formulario y los detalles de venta al controlador
-    function enviarVentaAlControlador() {
-        // Aquí puedes enviar los datos del formulario y los detalles de venta al controlador
-    }
 });

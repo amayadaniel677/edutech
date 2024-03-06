@@ -59,14 +59,13 @@ selectCategorias.addEventListener('change', actualizarDatos);
 var inputCantidadHoras = document.getElementById("cantidad-horas");
 inputCantidadHoras.addEventListener('input', function () {
     cantidadHoras = inputCantidadHoras.value;
-    console.log('Cantidad de horas:', cantidadHoras);
+    console.log('Cantidad de horas xdddd:', cantidadHoras);
     actualizarValorTotal();
 });
 
 var inputValorUnidad = document.getElementById("valor-unidad");
 
-// Llamar a la función al cargar la página
-actualizarDatos();
+
 
 //  GUARDAR DETALLE FUNCIONALIDADES
 var detallesVenta = [];
@@ -76,6 +75,7 @@ if (localStorage.getItem('detallesVenta')) {
     detallesVenta = JSON.parse(localStorage.getItem('detallesVenta'));
     // Agregar filas a la tabla por cada detalle guardado en localStorage
     detallesVenta.forEach(agregarFilaDetalle);
+    console.log("holamundo");
 }
 
 var btnGuardarDetalle = document.getElementById("agregar-detalle");
@@ -100,7 +100,7 @@ btnGuardarDetalle.addEventListener("click", function () {
             valorHora: valorHora,
             valorCurso: valorCurso
         });
-
+        calcularValorTotalCursos();
         // Guardar detalles en localStorage
         localStorage.setItem('detallesVenta', JSON.stringify(detallesVenta));
 
@@ -151,6 +151,7 @@ function agregarFilaDetalle(detalle) {
     botonEliminar.addEventListener('click', function () {
         // Lógica para borrar la fila
         eliminarDetalle(detalle, fila);
+        calcularValorTotalCursos();
     });
 
     celdaEditar.appendChild(botonEditar);
@@ -175,6 +176,61 @@ function eliminarDetalle(detalle, fila) {
     }
 }
 
-console.log(detallesVenta);
+// Resto de tu código...
 
+// Variable para almacenar la suma total de valorCurso
+var valorTotalCursos = 0;
 
+// Variable para almacenar la suma total de valorCurso
+var valorTotalCursos = 0;
+
+// Variable para almacenar la suma total de valorCurso
+var valorTotalOriginal = 0;
+
+// Función para calcular la suma total de valorCurso
+function calcularValorTotalCursos() {
+    valorTotalCursos = 0;
+
+    detallesVenta.forEach(function(detalle) {
+        valorTotalCursos += detalle.valorCurso;
+    });
+
+    console.log("La suma de valorCurso es: " + valorTotalCursos);
+
+    // Actualizar el valor del input con ID "valor-total"
+    var inputValorTotal = document.getElementById("valor-total");
+    if (inputValorTotal) {
+        inputValorTotal.value = valorTotalCursos.toFixed(2); // Asegurarse de tener dos decimales
+    }
+
+    // Actualizar el valor total original antes de aplicar el descuento
+    valorTotalOriginal = valorTotalCursos;
+
+    // Restar el descuento si existe
+    restarDescuento();
+}
+
+// Función para restar el descuento del valor total
+function restarDescuento() {
+    var inputDescuento = document.getElementById("descuento");
+    var descuento = parseFloat(inputDescuento.value) || 0;
+
+    // Restar el descuento solo una vez al valor total original
+    var valorTotalConDescuento = valorTotalOriginal - descuento;
+
+    // Actualizar el valor del input con ID "valor-total"
+    var inputValorTotal = document.getElementById("valor-total");
+    if (inputValorTotal) {
+        inputValorTotal.value = valorTotalConDescuento.toFixed(2); // Asegurarse de tener dos decimales
+    }
+}
+
+// Llamada a la función después de cargar la página y cada vez que se actualizan los detalles
+actualizarDatos();
+calcularValorTotalCursos();
+
+// Capturar el valor del input de descuento
+var inputDescuento = document.getElementById("descuento");
+inputDescuento.addEventListener('input', function () {
+    restarDescuento();
+});

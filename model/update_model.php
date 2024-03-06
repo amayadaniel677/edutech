@@ -3,7 +3,7 @@ class actualizar_user{
     // INICIO DE LOS METODOS PARA REGISTRARSE
     private $con;
     public function __construct(){
-        $this->con = new mysqli("localhost","root","daniel","edutech_1");
+        $this->con = new mysqli("localhost","edutech","edutechadso2024","edutech");
         // $this->con = new mysqli("localhost","root","","edutech");}
         $this->con->set_charset("utf8");
     }

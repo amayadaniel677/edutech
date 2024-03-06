@@ -10,7 +10,8 @@ if($_POST){
 
     $login = new login();
     $login->validar_login($dni,$contrasenia);
-
+    $errores=$login->msg;
+    
 }
 
 class login{
@@ -49,6 +50,8 @@ class login{
                 if($rol=="estudiante"){
                     header('location: estudiante/controller_inicio_estudiante.php');
                 }
+            }else{
+                $this->msg[]='Documento o contraseña invalida!';
             }
             
             

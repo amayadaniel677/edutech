@@ -45,8 +45,12 @@
       <p class="login-box-msg">Gracias por volver, ingresa tus credenciales. </p>
 
       <form action="" method="post">
-      <?php if(isset($mensaje)){
-            echo "<h3>$mensaje </h3>";
+        <!-- CAMBIAR ESTO POR SWEET ALERT PARA MANEJAR ERRORES -->
+      <?php if(isset($errores)){
+        foreach($errores as $error){
+          echo "<p>".$error ."</p>";
+        }
+            
         } ?>
         <div class="input-group mb-3">
           <input type="number" id="dni" name="dni" required class="form-control" placeholder="Documento de identidad">

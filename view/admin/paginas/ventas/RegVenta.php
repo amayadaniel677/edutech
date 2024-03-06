@@ -1,3 +1,4 @@
+
 <?php 
 $urlStarter='../../../view/admin/';  //son desde el controlador
 ?>
@@ -8,7 +9,7 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -25,6 +26,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       rel="stylesheet"
       href="../../../view/admin/plugins/fontawesome-free/css/all.min.css"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Theme style -->
     <link
       rel="stylesheet"
@@ -59,13 +62,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">Agregar curso</h1>
+                <h1 class="m-0">Pedidos pendientes</h1>
               </div>
               <!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Agregar curso</li>
+                  <li class="breadcrumb-item active"> Pedidos</li>
                 </ol>
               </div>
               <!-- /.col -->
@@ -79,122 +82,116 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Contenido principal vista -->
         <section class="content">
           
-            <div>
-              <div class="">
+          <div>
+            <div class="">
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-detalle">
-                    Agregar detalle<i class="bi bi-plus-circle"></i>
-                </button>
-                <?php include('modal_add_detalle_venta.php')?>
-              </div>    
-              
-              <form action="" class="row mb-3">
-    <div class="col-md-6 col-12">
-        <label for="nombres" style="display:block;">Nombres cliente</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-            </div>
-            <input required type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombre">
-        </div>
-        <label for="dni" style="display:block;">DNI Cliente</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-            </div>
-            <input required type="text" class="form-control"  id='dni'name="dni" placeholder="DNI">
-        </div>
-        <label for="correo" style="display:block;">Correo</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-            </div>
-            <input required type="email" class="form-control" name="correo" id="correo" placeholder="Correo">
-        </div>
-       
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-detalle">
+                  Agregar detalle<i class="bi bi-plus-circle"></i>
+              </button>
+              <?php include('modal_add_detalle_venta.php')?>
+            </div>    
+            
+            <form action="" class="row mb-3" id='form-venta'>
+  <div class="col-md-6 col-12">
+      <label for="nombres" style="display:block;">Nombres cliente</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
+          </div>
+          <input required type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombre">
+      </div>
+      <label for="dni" style="display:block;">DNI Cliente</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+          </div>
+          <input required type="number" class="form-control"  id='dni'name="dni" placeholder="DNI">
+      </div>
+      <label for="correo" style="display:block;">Correo</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+          </div>
+          <input required type="email" class="form-control" name="correo" id="correo" placeholder="Correo">
+      </div>
+     
 
-        <label for="ciudad" style="display:block;">Ciudad</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-            </div>
-            <input required type="text" class="form-control" id='ciudad' name="ciudad" placeholder="Ciudad">
-        </div>
+      <label for="ciudad" style="display:block;">Ciudad</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa-solid fa-building-user"></i></span>
+          </div>
+          <input required type="text" class="form-control" id='ciudad' name="ciudad" placeholder="Ciudad">
+      </div>
 
-    </div>
+  </div>
 
-    <div class="col-md-6 col-12">
-    <label for="apellidos" style="display:block;">Apellidos cliente</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-            </div>
-            <input required type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Nombre">
-        </div>
-       
+  <div class="col-md-6 col-12">
+  <label for="apellidos" style="display:block;">Apellidos cliente</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
+          </div>
+          <input required type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Nombre">
+      </div>
+     
 
-        
-        <label for="telefono" style="display:block;">Telefono</label>
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-            </div>
-            <input required type="text" class="form-control" name="telefono" id='telefono' placeholder="Telefono">
-        </div>
+      
+      <label for="telefono" style="display:block;">Telefono</label>
+      <div class="input-group mb-2">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fa-solid fa-square-phone"></i></span>
+          </div>
+          <input required type="number" class="form-control" name="telefono" id='telefono' placeholder="Telefono">
+      </div>
 
-        <label for="descuento" class="col-form-label">Descuento:</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-            </div>
-            <input required type="number" class="form-control" id="descuento" name="descuento" placeholder="">
-        </div>
+      <label for="descuento" class="col-form-label">Descuento:</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+          </div>
+          <input required type="number" class="form-control" id="descuento" name="descuento" placeholder="">
+      </div>
 
-        <label for="valor-total" class="col-form-label">Valor total:</label>
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
-            </div>
-            <input required readonly="" type="number" class="form-control" id="valor-total" name="valor-total" value='' placeholder="">
-        </div>
-    </div>
-    <button type="button" class="btn btn-success " id="btn-regventa" value=''>Registrar</button>
+      <label for="valor-total" class="col-form-label">Valor total:</label>
+      <div class="input-group mb-3">
+          <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+          </div>
+          <input required readonly="" type="number" class="form-control" id="valor-total" name="valor-total" value='' placeholder="">
+      </div>
+  </div>
+  <button type="button" class="btn btn-success " id="btn-regventa" value=''>Registrar</button>
 </form>
 <div class="card">
 <div class="card-header">
-           <h2 class="card-title">Detalles de Venta</h2>
-           </div>
-              
-    
-    <div class="card-body table-responsive p-0">
-                <table id="tabla-detalles" class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Categoria</th>
-                      <th>Nombre Curso</th>
-                      <th>Horas</th>
-                      <th>Valor hora</th>
-                      <th>Subtotal</th>
-                      <th>Editar</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                  </tbody>
-                </table>
-              </div>
-
-</div>
-          
-</div>
-             
-              </section>
+         <h2 class="card-title">Detalles de Venta</h2>
+         </div>
             
-          </div>
-          <br>
-       
-          
-        </section>
+  
+  <div class="card-body table-responsive p-0">
+              <table id="tabla-detalles" class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Categoria</th>
+                    <th>Nombre Curso</th>
+                    <th>Horas</th>
+                    <th>Valor hora</th>
+                    <th>Subtotal</th>
+                    <th>Editar</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+            </div>
+
+</div>
+        
+</div>
+           
+            </section>
         <!-- /. Maincontent -->
       </div>
       <!-- /.content-wrapper -->
@@ -215,21 +212,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!--fin de toda la pagina wrapper -->
     <!-- ./wrapper -->
-    <!-- jQuery -->
-
-    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
-
-    <script src="../../../resource/js/admin/ventas/modal_detalle_venta.js"></script>
 
     <!-- REQUIRED SCRIPTS -->
-    <!-- sweet alert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-       <!-- jQuery -->
-       <script src="../../../resource/js/admin/ventas/alert_registrar_venta1.js"></script>
-    
-    <!-- Bootstrap 4 -->
-    <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+  <!-- jQuery -->
+
+  <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+
+<script src="../../../resource/js/admin/ventas/modal_detalle_venta1.js"></script>
+
+<!-- REQUIRED SCRIPTS -->
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <!-- jQuery -->
+   <script src="../../../resource/js/admin/ventas/alert_registrar_venta.js"></script>
+
+<!-- Bootstrap 4 -->
+<script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../../view/admin/dist/js/adminlte.min.js"></script>
   </body>
 </html>
+
+<!-- *********************************************** -->

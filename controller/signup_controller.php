@@ -16,13 +16,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $direccion=trim(strtolower($_POST['direccion']));
     $foto=$_FILES['foto'];
     
-    if(empty($foto)){
-        $new_user=new signup();
-        $foto='resource/img/photosUsers/defaultPhoto.jpg';
-    }else{
-        $new_user=new signup();
-        $foto=$new_user->validarFoto($_FILES['foto'],$documento);
-        
+    if ($foto['error'] == UPLOAD_ERR_NO_FILE) {
+        // No se ha enviado ninguna foto, utiliza la ruta predeterminada
+        $new_user = new signup();
+        $foto = 'resource/img/photosUsers/defaultPhoto.png';
+    } else {
+        // Se ha enviado una foto, valida y guarda la foto
+        $new_user = new signup();
+        $foto = $new_user->validarFoto($_FILES['foto'], $documento);
     }
 
     $msg=$new_user->msg;

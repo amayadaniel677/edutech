@@ -49,6 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode($datosVenta);
         }
         exit;  // Detener la ejecución para evitar imprimir HTML no deseado
+    }if (isset($_POST['dni'])){
+       //HASTA ACÁ SIRVE Y RECIBE EL FORMULARIO.
+       $nombres=$_POST['nombres'];
+       $dni=$_POST['dni'];
+       $correo=$_POST['correo'];
+       $ciudad=$_POST['ciudad'];
+       $apellidos=$_POST['apellidos'];
+       $telefono=$_POST['telefono'];
+       $descuento=$_POST['descuento'];
+       $valor_total=$_POST['valor-total'];
+        
     }
 
 }

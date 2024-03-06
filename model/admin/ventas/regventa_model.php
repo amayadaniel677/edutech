@@ -4,7 +4,7 @@ class RegVenta_consult{
     private $con;
 
     public function __construct(){
-        $this->con = new mysqli("localhost","root","daniel","edutech_1");
+        $this->con = new mysqli("localhost","edutech","edutechadso2024","edutech");
         $this->con->set_charset("utf8");
     }
 
@@ -39,7 +39,6 @@ class RegVenta_consult{
     }
 
     public function nombre_subject($categoria){
-        
         $id=$this->obtenerIdAreas($categoria);
         $sql="SELECT name FROM subjects WHERE areas_id='$id'";
         $result=$this->con->query($sql);
