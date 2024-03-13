@@ -90,36 +90,67 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Cliente</th>
-                      <th>Cantidad</th>
                       <th style="width: 60px">Fecha</th>
                       <th>Precio</th>
                       <th>Opciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>#</td>
-                      <td>Nombre del cliente</td>
-                      <td>12</td>
-                      <td>DD/MM/AAAA </td>
-                      <td>$000.000.00</td>
-                      <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-editar"><i class="bi bi-eye">
-                      </i></button>
-                      
-                      
-                      <button type="button" class="btn btn-danger "
-                      id="btn-eliminar"><i class="bi bi-trash"></i></button>
-                 
- 
-  
-                
-           <!-- Botón para abrir el modal -->
-                    <?php include('../../../view/admin/paginas/ventas/modal_pedidos_pendientes.php');?>
-                      </td>
-                    </tr>
+                    <?php
+                    $n1=1;
+                    $pedidos = array_reverse($pedidos);
+                    foreach ($pedidos as $fila) {
+                      echo '<tr>';
+                      echo '<td>'.$n1.'</td>';
+                      echo '<td>' . htmlspecialchars($fila['student']) . '</td>';
+                      echo '<td>' . date('d/m/Y', strtotime($fila['date'])) . '</td>';
+                      echo '<td>$' . number_format($fila['price'], 2, '.', ',') . '</td>';
+                      echo '<td>';
+                      echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-editar" data-id="'.$fila['id'].'"><i class="bi bi-eye"></i></button>';
+                      echo '<button type="button" class="btn btn-danger" id="btn-eliminar" data-id="'.$fila['id'].'"><i class="bi bi-trash"></i></button>';
+                      // Botón para abrir el modal
+                      include('../../../view/admin/paginas/ventas/modal_pedidos_pendientes.php');
+                      echo '</td>';
+                      echo '</tr>';
+                      $n1+=1;
+                    }
                    
-            
+                  ?>
+                  <script>
+                      document.addEventListener('DOMContentLoaded', function() {
+                          const btnVer = document.querySelectorAll('.btn-primary');
+                          const btnEliminar = document.querySelectorAll('.btn-danger');
+
+                          btnVer.forEach((btn) => {
+                              btn.addEventListener('click', (event) => {
+                                  const idPedidoVer = event.target.getAttribute('data-id');
+                                  enviarIdPedidoPorAjax(idPedidoVer, 'ver');
+                              });
+                          });
+
+                          btnEliminar.forEach((btn) => {
+                              btn.addEventListener('click', (event) => {
+                                  const idPedidoEliminar = event.target.getAttribute('data-id');
+                                  enviarIdPedidoPorAjax(idPedidoEliminar, 'eliminar');
+                              });
+                          });
+
+                          function enviarIdPedidoPorAjax(idPedido, accion) {
+                              $.ajax({
+                                  url: '', 
+                                  method: 'POST',
+                                  data: { pedidoId: idPedido, accion: accion }, 
+                                  success: function(response) {
+                                      console.log('ID del pedido enviado con éxito: ' + idPedido);
+                                  },
+                                  error: function(error) {
+                                      console.error('Error al enviar el ID del pedido: ' + error);
+                                  }
+                              });
+                          }
+                      });
+                  </script>
+
                   </tbody>
                 </table>
               </div>

@@ -11,7 +11,7 @@
                 <div class="invoice p-3 mb-3">
               <!-- title row -->
               <div class="row">
-                <div class="col-12">
+                <div class="col-12"> 
                   <h4>
                     <i class="fas fa-globe"></i> Kepler S.A.S.
                     <small class="float-right">Fecha hoy: DD/MM/AAAA</small>
@@ -60,31 +60,26 @@
                   <table class="table table-striped">
                     <thead>
                     <tr>
-                      <th>Id producto</th>
-                      <th>Nombre</th>
+                      <th>#</th>
                       <th>Horas</th>
                       <th>Valor unitario</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td>1010</td>
-                      <td>Matematicas</td>
-                      <td>40</td>
-                      <td>$60.000</td>
-                    </tr>
-                    <tr>
-                      <td>2456</td>
-                      <td>Ingles</td>
-                      <td>40</td>
-                      <td>$60.000</td>
-                    </tr>
-                    <tr>
-                      <td>3098</td>
-                      <td>Calculo diferencial</td>
-                      <td>100</td>
-                      <td>$80.000</td>
-                    </tr>
+                      <?php
+                        $n1=1;
+                        foreach ($detalles as $indice => $detalle) {
+                            $numero = $indice + 1; // Número de fila (puedes ajustarlo según tus necesidades)
+                            $precioFormateado = '$' . number_format($detalle['price'], 2, '.', ','); // Formatea el precio
+
+                            echo '<tr>';
+                            echo '<td>' . $n1 . '</td>';
+                            echo '<td>' . $detalle['hours'] . '</td>';
+                            echo '<td>' . $precioFormateado . '</td>';
+                            echo '</tr>';
+                            $n1+=1;
+                        }
+                        ?>
                     </tbody>
                   </table>
                 </div>
