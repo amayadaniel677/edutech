@@ -69,6 +69,89 @@ class RegVenta_consult{
             return $precio_area;
         }
     }
+
+    // METODOS PARA AGREGAR LA VENTA
+    public function agregar_venta_completa($nombres,$apellidos,$dni,$correo,$ciudad,$telefono,$descuento,$valor_total){
+    //    si existe el usuario
+    $user_exist=$this->user_exist($dni);
+    if(!$user_exist){
+       $registrar=$this->user_register($nombres,$apellidos,$dni,$correo,$ciudad,$telefono);
+       $user_exist=$this->user_exist($dni);
+    }
+    if($user_exist){
+        $date = date("Y-m-d");
+        $sql="INSERT INTO sales(price,`date`,people_id) VALUES('$valor_total','$date','$user_exist')";
+        $result=$this->con->query($sql);
+        if($result){
+            // Obtener el ID de la última inserción
+            $lastInsertedId = $this->con->insert_id;
+            return $lastInsertedId;
+        }
+        else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+
+
+    }
+    public function user_exist($dni){
+        $sql="SELECT * FROM people WHERE dni='$dni'";
+        $result=$this->con->query($sql);
+        if($result->num_rows>0){
+            $row=$result->fetch_assoc();
+            return  $row['id'];
+        }else{
+            return false;
+        }
+    }
+    public function user_register($nombres,$apellidos,$dni,$correo,$ciudad,$telefono){
+        $contrasenia_encriptada=password_hash($dni,PASSWORD_DEFAULT,['cost'=>10]);
+        $rol='estudiante';
+        $dni_type='NA';
+        $foto='resource/img/photosUsers/defaultPhoto.png';
+        $sql="INSERT INTO people(`name`,lastname,dni,email,city,phone,`password`,rol,dni_type,photo) VALUES('$nombres','$apellidos','$dni','$correo','$ciudad','$telefono','$contrasenia_encriptada','$rol','$dni_type','$foto')";
+        $result=$this->con->query($sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function agregar_detalles_venta($detallesVenta,$sales_id){
+        $cantidadDetalles = count($detallesVenta);
+        $exitoDetalles=0;
+        foreach($detallesVenta as $detalle){
+            $price=$detalle['valorCurso'];
+            $total_hours=$detalle['horas'];
+            $subjects_id=$this->obtener_id_curso($detalle['curso']);
+            $sql="INSERT INTO subject_sale(price,total_hours,subjects_id,sales_id,remaining_hours) VALUES('$price','$total_hours','$subjects_id','$sales_id','$total_hours') ";
+            $result=$this->con->query($sql);
+            if($result){
+                $exitoDetalles += 1;
+            }
+        }
+        if($cantidadDetalles == $exitoDetalles){
+            return true;
+        }else{
+            false;
+        }
+
+    }
+    public function obtener_id_curso($curso){
+        $sql="SELECT id FROM subjects WHERE `name`='$curso' ";
+        $result=$this->con->query($sql);
+        if($result->num_rows>0){
+     // Utilizamos fetch_assoc para obtener un array asociativo
+        $fila = $result->fetch_assoc();
+        // Accedemos al valor de la columna 'id'
+        $id = $fila['id'];
+        return $id;
+        }else{
+            return false;
+        }
+    }
 }
 
 ?>

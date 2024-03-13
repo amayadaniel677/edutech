@@ -91,7 +91,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <?php include('modal_add_detalle_venta.php')?>
             </div>    
             
-            <form action="" class="row mb-3" id='form-venta'>
+            <form action="" method='POST' class="row mb-3" id='form-venta'>
+            <input type="hidden" name="detallesVenta" id="detallesVenta" value="">
+
   <div class="col-md-6 col-12">
       <label for="nombres" style="display:block;">Nombres cliente</label>
       <div class="input-group mb-3">

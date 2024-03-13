@@ -16,6 +16,7 @@ function actualizarValorTotal() {
 // Función para actualizar los datos
 function actualizarDatos() {
     // Enviar el valor al controlador para obtener los cursos
+    
     fetch('controller_regventa.php', {
         method: 'POST',
         headers: {
@@ -234,3 +235,4 @@ var inputDescuento = document.getElementById("descuento");
 inputDescuento.addEventListener('input', function () {
     restarDescuento();
 });
+

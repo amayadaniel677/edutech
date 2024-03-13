@@ -5,10 +5,19 @@ document.addEventListener('DOMContentLoaded', function () {
     function enviarVentaAlControlador() {
         // Obtener el formulario por su ID
         var formulario = document.getElementById('form-venta');
+        // Convertir detallesVenta a una cadena JSON
+        var detallesVentaJSON = JSON.stringify(detallesVenta);
+
+        // Asignar el valor al campo oculto
+        document.getElementById("detallesVenta").value = detallesVentaJSON;
 
         // Verificar si el formulario es válido antes de enviarlo
         if (formulario.checkValidity()) {
-            // Enviar el formulario
+            detallesVenta = [];
+
+            // Limpiar la tabla HTML en la vista principal
+            var tablaDetalles = document.getElementById('tabla-detalles').getElementsByTagName('tbody')[0];
+            tablaDetalles.innerHTML = '';  // Elimina todas las filas de la tabla
             formulario.submit();
         } else {
             // El formulario no es válido, mostrar mensajes de validación HTML5
@@ -45,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!nombres || !dni || !correo || !ciudad || !apellidos || !telefono || !descuento || !valorTotal) {
             Swal.fire({
-                title: "¡Error!",
+                title: "¡Error !",
                 text: "Para registrar la venta, debe completar todos los campos del formulario.",
                 icon: "error"
             });
@@ -56,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         else if (detallesVenta.length === 0) {
             Swal.fire({
                 title: "¡Error!",
-                text: "No hay detalles de venta para registrar.",
+                text: "No hay detalles de venta para registrar 0.",
                 icon: "error"
             });
             return; // Salir de la función si no hay detalles de venta
@@ -64,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Aquí puedes agregar la lógica para enviar los datos de la venta a la base de datos
         Swal.fire({
-            title: "¿Estás seguro de registrar la venta?",
+            title: "¿Estás seguro de registrar la venta xdddfadddd?",
             text: "Este proceso registrará la venta en la base de datos.",
             icon: "info",
             showCancelButton: true,
