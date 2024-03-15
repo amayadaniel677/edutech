@@ -13,7 +13,7 @@ class pedidos_pendientes{
         if($pedidos){
             return $pedidos;
         }else{
-            return 'no existen datos';
+            return false;
         }
     }
     public function datos_detalle_pedidos($id){

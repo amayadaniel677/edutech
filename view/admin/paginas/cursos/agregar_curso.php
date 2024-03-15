@@ -47,7 +47,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Modificar cursos</h1>
+              <h1 class="m-0">Agregar cursos</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -60,83 +60,86 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
       <!-- /.fin titulo de la vista -->
 
-      
+
       <section class="content">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="formulario">
-                                <form action="#">
-                                    <div class="row">
-                                   <div class="col-md-6">
-                                   <div class="form-group">
-                                        <label for="categoria">Categoria </label>
-                                        <select name="categoria" id="categoria" class="form-control">
-                                            <option value="daniel">Categoria</option>
-                
-                                        </select>
-                                    </div>
-                                   </div>
-                                        <div class="col-md-6">
-                                        <div class="form-group">
-                                        <label for="nombre-curso">Nombre curso</label>
-                                        <select name="nombre-curso" id="nombre-curso" class="form-control">
-                                            <option value="daniel">Curso 1</option>
-                                          
-                                        </select>
-                                    </div>
-                                        </div>
-                                       
-                                    </div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="formulario">
+                <form action="#">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="categoria">Categoria </label>
+                        <select name="categoria" id="categoria" class="form-control">
+                          <option value="daniel">Categoria</option>
 
-                                    <div class="form-group">
-                                        <label for="docente">Asignar docente</label>
-                                        <select name="docente" id="docente" class="form-control">
-                                            <option value="daniel">Daniel Amaya</option>
-                                            <option value="martin">Brayan Martin</option>
-                                            <option value="stich">Brayan Stich</option>
-                                            <option value="stiven">Brayan Stiven</option>
-                                            <option value="pedro">Pedro A Barrera</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="precio">Precio</label>
-                                                <input type="number" id="precio" value="15000" class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="descripcion">Descripción del curso</label>
-                                                <textarea name="descripcion" id="descripcion" placeholder="Escriba aquí"
-                                                    class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Desvincular docente</label>
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">Daniel
-                                                Amaya <a href="#"><i class="fas fa-trash-alt"></i></a></li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">Juan
-                                                Pablo <a href="#"><i class="fas fa-trash-alt"></i></a></li>
-                                            <!-- Agrega más elementos de la lista aquí si es necesario -->
-                                        </ul>
-                                    </div>
-
-                                    <!-- Botón -->
-                                    <div class="form-group text-center">
-                                        <input type="submit" value="Confirmar" class="btn btn-success btn-md" />
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        </select>
+                      </div>
                     </div>
-                </div>
-            </section>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="nombre-curso">Nombre curso</label>
+                        <input type="text" class="form-control" placeholder="Nombre del curso" id="nombre-curso" name="nombre-curso" required>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- CODIGO PARA VISTA ADD AREA -->
+                  <!-- <div class="form-group">
+                    <label for="docente">Asignar docente</label>
+                    <select name="docente" id="docente" class="form-control">
+                      <option value="daniel">Daniel Amaya</option>
+                      <option value="martin">Brayan Martin</option>
+                      <option value="stich">Brayan Stich</option>
+                      <option value="stiven">Brayan Stiven</option>
+                      <option value="pedro">Pedro A Barrera</option>
+                    </select>
+                  </div> -->
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label>Agregar foto del curso</label> <br>
+                      <div class="input-group mb-3">
+                        <div class="custom-file">
+                          <input type="file" class="" id="foto" name="foto" accept='image/*'>
+                          <label class="custom-file-label" for="foto">Seleccionar archivo</label>
+                        </div>
+                      </div>
+                    </div>
+                   
+                  </div>
+                  <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="descripcion">Descripción del curso</label>
+                        <textarea  required name="descripcion" id="descripcion" placeholder="Escriba aquí" class="form-control"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- COPIAR ESTE CODIGO PARA AGREGAR AREA -->
+                  <!-- <div class="form-group">
+                
+                    <label>Desvincular docente</label>
+                    <ul class="list-group">
+                      <li class="list-group-item d-flex justify-content-between align-items-center">Daniel
+                        Amaya <a href="#"><i class="fas fa-trash-alt"></i></a></li>
+                      <li class="list-group-item d-flex justify-content-between align-items-center">Juan
+                        Pablo <a href="#"><i class="fas fa-trash-alt"></i></a></li>
+                     
+                    </ul>
+                  </div> -->
+
+                  <!-- Botón -->
+                  <div class="form-group text-center">
+                    <input type="submit" value="confirmar" class="btn btn-success btn-md" />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <style>
         @media (max-width: 768px) {
