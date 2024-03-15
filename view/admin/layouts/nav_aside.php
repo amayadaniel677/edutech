@@ -155,6 +155,36 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Areas
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+              <a href="<?php if(isset($urlStarter)){echo $urlStarter;}; ?>../../controller/admin/areas/controller_agregar_area.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Agregar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php if(isset($urlStarter)){echo $urlStarter;};?>../../controller/admin/areas/controller_vincular_docente.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Vincular docente</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php if(isset($urlStarter)){echo $urlStarter;};?>../../controller/admin/areas/controller_buscar_area.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Buscar area</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

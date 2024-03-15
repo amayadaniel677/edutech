@@ -86,13 +86,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <?php
                 if (isset($pedidos) && !empty($pedidos)){
                   $n1 = 1;
-                  var_dump($pedidos);
+                
                   $pedidos = array_reverse($pedidos);
                   foreach ($pedidos as $fila) {
                     $id=$fila['id'];
                     echo '<tr>';
                     echo '<td>' . $n1 . '</td>';
-                    echo '<td>' . htmlspecialchars($fila['student']) . '</td>';
+                    echo '<td>' . htmlspecialchars($fila['name']) . '</td>';
                     echo '<td>' . date('d/m/Y', strtotime($fila['date'])) . '</td>';
                     echo '<td>$' . number_format($fila['price'], 2, '.', ',') . '</td>';
                     echo '<td>';
