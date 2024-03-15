@@ -68,17 +68,19 @@
                     <tbody>
                       <?php
                         $n1=1;
-                        foreach ($detalles as $indice => $detalle) {
-                            $numero = $indice + 1; // Número de fila (puedes ajustarlo según tus necesidades)
-                            $precioFormateado = '$' . number_format($detalle['price'], 2, '.', ','); // Formatea el precio
+                        if($detalles){
+                            foreach ($detalles as $indice => $detalle) {
+                              $precioFormateado = '$' . number_format($detalle['price'], 2, '.', ','); 
 
-                            echo '<tr>';
-                            echo '<td>' . $n1 . '</td>';
-                            echo '<td>' . $detalle['hours'] . '</td>';
-                            echo '<td>' . $precioFormateado . '</td>';
-                            echo '</tr>';
-                            $n1+=1;
+                              echo '<tr>';
+                              echo '<td>' . $n1 . '</td>';
+                              echo '<td>' . $detalle['hours'] . '</td>';
+                              echo '<td>' . $precioFormateado . '</td>';
+                              echo '</tr>';
+                              $n1+=1;
+                          }
                         }
+                        
                         ?>
                     </tbody>
                   </table>
