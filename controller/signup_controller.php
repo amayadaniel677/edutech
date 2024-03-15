@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $foto = $new_user->validarFoto($_FILES['foto'], $documento);
     }
 
-    $msg=$new_user->msg;
+    $msg=$new_user->msg; 
 
     if(empty($msg)){
         $new_user->validar($nombres,$apellidos,$tipo_documento,$documento,$sexo,$fecha,$correo,$contrasenia,$confContrasenia,$telefono,$ciudad,$direccion,$foto);

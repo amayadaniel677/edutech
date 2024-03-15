@@ -66,5 +66,4 @@ class user_consult{
 }
 
  
-
 ?>

@@ -28,7 +28,7 @@ class pedidos_pendientes{
 
     public function eliminar_pedido($id){
         $consult=new pedidos_pendientes_model();
-        $eliminar=$consult->eliminar_pedidos_orden($id);
+        $eliminar=$consult->eliminar_pedidos_detalle($id);
         if($eliminar){
             return 'Eliminada con exito';
         }else{
@@ -41,22 +41,11 @@ $consult=new pedidos_pendientes();
 $pedidos=$consult->datos_pedidos();
 
 
-if (isset($_POST['pedidoId'])) {
-    $idPedido = $_POST['pedidoId'];
-
-    if (isset($_POST['accion'])) {
-        $accion = $_POST['accion'];
-        
-        if ($accion === 'ver') {
-            $detalle=$consult->datos_detalle_pedidos($idPedido);
-        } elseif ($accion === 'eliminar') {
-            $consult->eliminar_pedido($idPedido);
-        } 
-    }
-}
-
-
-
+if (isset($_GET['idEliminar'])) {
+    $idEliminar = $_GET['idEliminar'];
+    $consult->eliminar_pedido($idEliminar);
+    header("Location: ".$_SERVER['PHP_SELF']);
+} 
 
 include('../../../view/admin/paginas/ventas/pedidos_pendientes.php');
 ?>
