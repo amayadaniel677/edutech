@@ -72,7 +72,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="form-group">
                         <label for="categoria">Categoria </label>
                         <select name="categoria" id="categoria" class="form-control">
-                          <option value="daniel">Categoria</option>
+                        <?php
+                       
+                          if (!empty($areas_bd)) {
+                              
+                              foreach ($areas_bd as $area) {
+                                  
+                                  echo "<option value='" . $area['name'] . "'>" . $area['name'] . "</option>";
+                              }
+                          } else {
+                              
+                              echo "<option value='vacio'>No se encontraron áreas</option>";
+                          }
+                       ?>
 
                         </select>
                       </div>
