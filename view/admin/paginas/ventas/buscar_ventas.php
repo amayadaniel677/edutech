@@ -67,12 +67,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-md-6">
-                <form>
+                <form method="POST">
                   <div class="mb-3">
-                    <input type="text" class="form-control" id="dni" placeholder="Ingrese el DNI">
+                    <input type="text" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-success">Buscar</button>
+                    <?php
+                      if($_SERVER['REQUEST_METHOD'] === 'POST')
+                      echo '<a href="controller_buscar_ventas.php" class="btn btn-outline-primary">Todas las ventas</a>'
+                    ?>
                   </div>
                 </form>
               </div>
