@@ -11,7 +11,9 @@ class pedidos_pendientes_model
 
     public function obtener_pedidos()
     {
-        $sql = 'SELECT * FROM `order`';
+        $sql = 'SELECT o.price, o.date,o.id, p.name
+        FROM `order` AS o
+        INNER JOIN people AS p ON o.people_id = p.id;';
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             $pedidos = array();
