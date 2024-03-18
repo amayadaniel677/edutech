@@ -3,8 +3,8 @@ class user_consult{
     // INICIO DE LOS METODOS PARA REGISTRARSE
     private $con;
     public function __construct(){
-        //$this->con = new mysqli("localhost","edutech","edutechadso2024","edutech");
-        $this->con = new mysqli("localhost","root","","edutech");
+        $this->con = new mysqli("localhost","edutech","edutechadso2024","edutech");
+        // $this->con = new mysqli("localhost","root","","edutech");
         $this->con->set_charset("utf8");
     }
     public function insertar($nombres,$apellidos,$tipo_documento,$documento,$sexo,$fecha,$correo,$contrasenia_encriptada,$telefono,$ciudad,$direccion,$foto){

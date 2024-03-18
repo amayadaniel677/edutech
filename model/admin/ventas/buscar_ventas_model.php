@@ -4,8 +4,8 @@ class buscar_venta_model
     private $con;
     public function __construct()
     {
-        //$this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech");
-        $this->con = new mysqli("localhost","root","","edutech");
+        $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech");
+        // $this->con = new mysqli("localhost","root","","edutech");
         $this->con->set_charset("utf8");
     }
 
@@ -23,14 +23,13 @@ class buscar_venta_model
 
     public function ventas()
     {
-            $sql = $sql = "SELECT p.name AS person_name,
-            s.name AS subject_name,
-            ss.hours AS subject_hours,
+            $sql = $sql = "SELECT
+            p.dni AS person_dni,
+            p.name AS person_name,
             sa.price AS sale_price,
-            sa.date AS sale_date
-            FROM subject_sale ss
-            INNER JOIN sales sa ON ss.sales_id = sa.id
-            INNER JOIN subjects s ON ss.subjects_id = s.id
+            sa.date AS sale_date,
+            sa.id AS sale_id
+            FROM sales sa
             INNER JOIN people p ON sa.people_id = p.id";
 
             $result = $this->con->query($sql);
@@ -46,20 +45,20 @@ class buscar_venta_model
             }
     }
 
-    public function venta($dni)
+    public function venta($dni1)
     {
-        $id_people = $this->user_exist($dni);
+     
+        $id_people = $this->user_exist($dni1);
         if ($id_people) {
-            $sql = $sql = "SELECT p.name AS person_name,
-            s.name AS subject_name,
-            ss.hours AS subject_hours,
+         $sql = "SELECT
+            p.dni  AS person_dni,
+            p.name  AS person_name,
+            sa.id AS sale_id,
             sa.price AS sale_price,
             sa.date AS sale_date
-            FROM subject_sale ss
-            INNER JOIN sales sa ON ss.sales_id = sa.id
-            INNER JOIN subjects s ON ss.subjects_id = s.id
+            FROM sales sa
             INNER JOIN people p ON sa.people_id = p.id
-            WHERE p.id = tu_people_id";
+            WHERE p.dni = '$dni1'";
 
             $result = $this->con->query($sql);
 

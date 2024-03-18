@@ -41,7 +41,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Fin del Main Nav Asidebar Container -->
 
     <!-- TODA LA PAGINA -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="height:auto;">
       <!-- Titulo de la vista -->
       <div class="content-header">
         <div class="container-fluid">
@@ -67,7 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-md-6">
-                <form method="POST">
+                <form method="POST" action='controller_buscar_ventas.php'>
                   <div class="mb-3">
                     <input type="text" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
                   </div>
@@ -84,12 +84,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
           <!-- tabla -->
           <div class="container mt-5">
-            <table id="miTabla" class="table table-striped table-bordered">
+          <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Bordered Table</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              <table id="miTabla" class="table table-striped table-bordered">
               <thead>
                 <tr>
+                   <th scope="col">ID Venta</th>
+                   <th scope="col">dni</th>
                   <th scope="col">Nombre</th>
-                  <th scope="col">Materia</th>
-                  <th scope="col">Horas</th>
                   <th scope="col">Precio</th>
                   <th scope="col">Fecha</th>
                   <th scope="col">Acciones</th>
@@ -97,14 +103,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </thead>
               <tbody>
                 <?php
-                if ($ventas) {
+                if ($ventas_paginadas) {
                   if ($bandera) {
-                    $venta_reverse=array_reverse($venta);
+                    $venta_reverse=array_reverse($ventas_paginadas);
                     foreach ($venta_reverse as $venta) {
+                   
                       echo '<tr>
+                              <td>' . $venta['sale_id'] . '</td>
+                              <td>' . $venta['person_dni'] . '</td>
                               <td>' . $venta['person_name'] . '</td>
-                              <td>' . $venta['subject_name'] . '</td>
-                              <td>' . $venta['subject_hours'] . '</td>
                               <td>' . $venta['sale_price'] . '</td>
                               <td>' . $venta['sale_date'] . '</td>
                               <td>
@@ -114,12 +121,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </tr>';
                     }
                   } else {
-                    $ventas_reverse=array_reverse($ventas);
+                    $ventas_reverse=array_reverse($ventas_paginadas);
                     foreach ($ventas_reverse as $venta) {
                       echo '<tr>
+                      <td>' . $venta['sale_id'] . '</td>
+                              <td>' . $venta['person_dni'] . '</td>
                               <td>' . $venta['person_name'] . '</td>
-                              <td>' . $venta['subject_name'] . '</td>
-                              <td>' . $venta['subject_hours'] . '</td>
                               <td>' . $venta['sale_price'] . '</td>
                               <td>' . $venta['sale_date'] . '</td>
                               <td>
@@ -139,6 +146,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 ?>
               </tbody>
             </table>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+            <?php if ($pagina > 1) : ?>
+                <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina - 1); ?>">«</a></li>
+            <?php endif; ?>
+            <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+                <li class="page-item <?php echo ($pagina == $i) ? 'active' : ''; ?>"><a class="page-link" href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <?php endfor; ?>
+            <?php if ($pagina < $total_paginas) : ?>
+                <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina + 1); ?>">»</a></li>
+            <?php endif; ?>
+        </ul>
+              </div>
+            </div>
+           
           </div>
 
 

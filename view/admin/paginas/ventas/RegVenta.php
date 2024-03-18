@@ -1,5 +1,6 @@
 
 <?php 
+
 $urlStarter='../../../view/admin/';  //son desde el controlador
 ?>
 
@@ -81,7 +82,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         <!-- Contenido principal vista -->
         <section class="content">
+          <?php 
+          if (isset($_GET['mensaje'])) {
+            $mensaje = $_GET['mensaje'];
+            // Ahora puedes utilizar $mensaje como desees, por ejemplo, mostrarlo en la página
+            echo "<div class='alert alert-success'>$mensaje</div>";
+        } elseif (isset($error)) {
+            echo "<div class='alert alert-danger'>$error</div>";
           
+        }
+        
+          ?>
           <div>
             <div class="">
 
@@ -92,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>    
             
             <form action="" method='POST' class="row mb-3" id='form-venta'>
-            <input type="hidden" name="detallesVenta" id="detallesVenta" value="">
+            <input type="hidden" name="detallesVentaInput" id="detallesVentaInput" value="">
 
   <div class="col-md-6 col-12">
       <label for="nombres" style="display:block;">Nombres cliente</label>
@@ -226,7 +237,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- sweet alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <!-- jQuery -->
-   <script src="../../../resource/js/admin/ventas/alert_registrar_venta.js"></script>
+   <script src="../../../resource/js/admin/ventas/alert_registrar_venta1.js"></script>
 
 <!-- Bootstrap 4 -->
 <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -63,38 +63,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $telefono = $_POST['telefono'];
         $descuento = $_POST['descuento'];
         $valor_total = $_POST['valor-total'];
-        $detallesVentaJSON = $_POST['detallesVenta'];
+        $detallesVentaJSON = $_POST['detallesVentaInput'];
         $detallesVenta = json_decode($detallesVentaJSON, true);
         
         // INSERTAR LA VENTA A LA BD
         $modelo = new RegVenta_consult();
         $resultado_modelo_id=$modelo->agregar_venta_completa($nombres,$apellidos,$dni,$correo,$ciudad,$telefono,$descuento,$valor_total);
-        if($resultado_modelo_id){
-            $resultado_detalles=$modelo->agregar_detalles_venta($detallesVenta,$resultado_modelo_id);
-            if($resultado_detalles){
-                echo "VENTA REGISTRADA Y DETALLES: ".$resultado_modelo_id;
+        if ($resultado_modelo_id) {
+            $resultado_detalles = $modelo->agregar_detalles_venta($detallesVenta, $resultado_modelo_id);
+            if ($resultado_detalles) {
+                // Venta y detalles registrados exitosamente
+                $detallesVenta = '';
+                $resultado_modelo_id = '';
+                $url = $_SERVER['REQUEST_URI'] . '&mensaje=Venta registrada exitosamente. ' ;
+                  header('location:'.$url);
                 
-            }else{
-                echo "<h1>perdedores hptas</H1>";
+            } else {
+                // Error al agregar detalles de venta
+                $error= "Error al agregar detalles de venta en la BD.";
             }
-
-        }else{
-            echo "<h1>perdedores hptas</H1>";
-        }
-        
-        // Ahora puedes trabajar con $detallesVenta en PHP
-        foreach ($detallesVenta as $detalle) {
-            // Acceder a los campos del detalle
-            $categoria = $detalle['categoria'];
-            $curso = $detalle['curso'];
-            $horas = $detalle['horas'];
-            $valorHora = $detalle['valorHora'];
-            $valorCurso = $detalle['valorCurso'];
+        } else {
+            // Error al agregar venta completa
+            $error = "Error al agregar la venta completa en la BD.";
             
-            // Puedes hacer lo que necesites con esta información
-            // Por ejemplo, almacenarla en la base de datos
-
         }
+       
+
     }
 }
 

@@ -4,7 +4,7 @@ $consult= new buscar_usuario_controlador();
 $usuarios=$consult->traer_usuarios();
 $bandera= false;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
     $dni=$_POST['dni'];
     $buscar_usuario=$consult->buscar_usuario($dni);
     $mensaje=$consult->mostrarMensajes();
