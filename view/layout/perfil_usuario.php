@@ -1,9 +1,20 @@
 <section class="content">
   <div class="container-fluid">
     <div class="errores">
-
+   
+   
+              <?php
+              if (isset($_GET['mensaje'])) {
+                echo " <div class='container mt-5'> <div class='alert alert-danger' role='alert'>";
+                $mensaje_recibido = $_GET['mensaje'];
+                echo $mensaje_recibido;
+                echo " </div>  </div>";
+            }
+              ?>
+           
 
       <?php
+
       // Verifica si hay un mensaje de éxito en la sesión
       if (isset($_SESSION['update-succes'])) {
         echo '<div class="alert alert-success mt-3" role="alert">';

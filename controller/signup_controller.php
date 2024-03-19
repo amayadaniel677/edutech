@@ -2,6 +2,15 @@
 require('../model/user_model.php');
 
 if($_SERVER['REQUEST_METHOD']=='POST'){
+    if (
+        $_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
+        empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0
+    ) {
+        $mensaje = "El archivo que envió excede nuestros limites, vuelva a intentarlo";
+        $url = $_SERVER['REQUEST_URI'] . "?mensaje=" . urlencode($mensaje);
+        header('location:' . $url);
+        exit();
+    }
     $nombres=ucwords(strtolower((trim($_POST['nombres']))));
     $apellidos=ucwords(strtolower((trim($_POST['apellidos']))));
     $tipo_documento=$_POST['tipo_documento'];

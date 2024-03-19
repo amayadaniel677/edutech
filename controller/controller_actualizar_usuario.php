@@ -113,13 +113,30 @@ class obtener_datos
     public function redirigir_vista($rol){
         switch ($rol) {
             case 'docente':
-                header("Location: docente/perfil_docente.php");
+                header("Location: docente/controller_perfil_docente.php");
                 break;
             case 'estudiante':
-                header("Location: estudiante/perfil_estudiante.php");
+                header("Location: estudiante/controller_perfil_estudiante.php");
                 break;
             case 'administrador':
                 header("Location: admin/perfil/controller_perfil_admin.php");
+                break;
+
+            default:
+                header("Location: login_controller.php");
+                break;
+        }
+    }
+    public function redirigir_vista_msg($rol,$msg){
+        switch ($rol) {
+            case 'docente':
+                header("Location: docente/controller_perfil_docente.php?mensaje=".urlencode($msg));
+                break;
+            case 'estudiante':
+                header("Location: estudiante/controller_perfil_estudiante.php?mensaje=".urlencode($msg));
+                break;
+            case 'administrador':
+                header("Location: admin/perfil/controller_perfil_admin.php?mensaje=".urlencode($msg));
                 break;
 
             default:
@@ -132,6 +149,18 @@ class obtener_datos
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // LOGICA PARA ACTUALIZAR DATOS PERSONAS SIN CONTRASEÑA
+    if (
+        $_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
+        empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0
+    ) {
+        $mensaje = "El archivo que envió excede nuestros limites, vuelva a intentarlo";
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $colapso=new obtener_datos();
+        $rol=$_SESSION['rol_session'];
+        $colapso->redirigir_vista_msg($rol,$mensaje);
+    }
     if (isset($_POST['email'])) {
         $documento = $_POST['dni'];
         $rol = $_POST['rol'];

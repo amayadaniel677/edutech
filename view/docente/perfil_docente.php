@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- jQuery -->
 <script src="../../view/admin/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->

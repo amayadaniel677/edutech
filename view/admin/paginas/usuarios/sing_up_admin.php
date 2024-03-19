@@ -57,174 +57,185 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.fin titulo de la vista -->
 
       <!-- Contenido principal vista -->
-      
-        <h1 class="text-center display-8 mt-1">
-          BIENVENIDO A KEPLER
-        </h1>
-        <div class="card-body" style="max-width: 900px; margin: 0 auto;">
+
+      <h1 class="text-center display-8 mt-1">
+        BIENVENIDO A KEPLER
+      </h1>
+      <div class="card-body" style="max-width: 900px; margin: 0 auto;">
 
 
 
 
-          <form action="" method="POST" enctype="multipart/form-data">
-            <?php
-            if (isset($errores)) {
-              foreach ($errores as $error) {
-                echo "<h3>$error</h3>";
-              }
-            }elseif(isset($mensaje)){
-              echo "<h3>$mensaje</h3>";
+        <form id='form-signup' action="" method="POST" enctype="multipart/form-data">
+          <div class="container mt-5">
+            <div class="alert alert-danger" role="alert">
+              <?php
+              if (isset($_GET['mensaje'])) {
+                $mensaje_recibido = $_GET['mensaje'];
+                echo $mensaje_recibido;
             }
-
-
-            ?>
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-user"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" required>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-user"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ?>
             </div>
+          </div>
+          <?php
 
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3">
-                  <select class="form-control" id="tipo_documento" name="tipo_documento">
-                    <option value="CC">Cédula de ciudadanía</option>
-                    <option value="TI">Tarjeta de identidad</option>
-                    <option value="CE">Cédula de extranjería</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3">
-                  <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" required>
-                </div>
-              </div>
-            </div>
+          if (isset($errores)) {
+            foreach ($errores as $error) {
+              echo "<h3>$error</h3>";
+            }
+          } elseif (isset($mensaje)) {
+            echo "<h3>$mensaje</h3>";
+          }
 
 
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3">
-                  <input type="email" class="form-control" placeholder="Correo electrónico" id="correo" name="correo" required>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-envelope"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3">
-                  <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono" required>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3">
-                  <input type="password" class="form-control" placeholder="Escribir contraseña" id="contrasenia" name="contrasenia" required>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-lock"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3">
-                  <input type="password" class="form-control" placeholder="Confirmar contraseña" id="confContrasenia" name="confContrasenia" required>
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-lock"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" required>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12">
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="Dirección" id="direccion" name="direccion" required>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12 col-sm-12">
+          ?>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <select class="form-control" id="rol" name="rol">
-                  <option value="docente">Docente</option>
-                  <option value="estudiante">Estudiante</option>
+                <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3">
+                <select class="form-control" id="tipo_documento" name="tipo_documento">
+                  <option value="CC">Cédula de ciudadanía</option>
+                  <option value="TI">Tarjeta de identidad</option>
+                  <option value="CE">Cédula de extranjería</option>
                 </select>
               </div>
             </div>
-            <label for='foto'>Subir foto:</label>
-            <div class="input-group mb-3">
-              <div class="custom-file">
-                <input type="file" class="" id="foto" name="foto" accept='image/*'>
-                <label class="custom-file-label" for="foto">Seleccionar archivo</label>
-
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3">
+                <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" required>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6 col-sm-12">
-                <label for='sexo'>Sexo:</label>
-                <div class="input-group mb-3">
-                  <div>
-                    <input type="radio" value="M" id="sexoM" name="sexo">
-                    <label for="sexoM">M</label>
-                    <input type="radio" value="F" id="sexoF" name="sexo">
-                    <label for="sexoF">F</label>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Correo electrónico" id="correo" name="correo" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-sm-12">
-                <label for='fecha'>Fecha de Nacimiento</label>
-                <div class="input-group mb-3">
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3">
+                <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono" required>
+              </div>
+            </div>
 
-                  <input type="date" class="form-control" placeholder="Fecha de nacimiento" id="fecha" name="fecha" required>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Escribir contraseña" id="contrasenia" name="contrasenia" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Confirmar contraseña" id="confContrasenia" name="confContrasenia" required>
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Resto de los campos aquí... -->
+          </div>
 
-            <div class="row">
-
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" required>
               </div>
             </div>
-          </form>
+            <div class="col-md-6 col-sm-12">
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Dirección" id="direccion" name="direccion" required>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <div class="input-group mb-3">
+              <select class="form-control" id="rol" name="rol">
+                <option value="docente">Docente</option>
+                <option value="estudiante">Estudiante</option>
+              </select>
+            </div>
+          </div>
+          <label for='foto'>Subir foto:</label>
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="" id="foto" name="foto" accept='image/*'>
+              <label class="custom-file-label" for="foto">Seleccionar archivo</label>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12">
+              <label for='sexo'>Sexo:</label>
+              <div class="input-group mb-3">
+                <div>
+                  <input type="radio" value="M" id="sexoM" name="sexo">
+                  <label for="sexoM">M</label>
+                  <input type="radio" value="F" id="sexoF" name="sexo">
+                  <label for="sexoF">F</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label for='fecha'>Fecha de Nacimiento</label>
+              <div class="input-group mb-3">
+
+                <input type="date" class="form-control" placeholder="Fecha de nacimiento" id="fecha" name="fecha" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resto de los campos aquí... -->
+
+          <div class="row">
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+            </div>
+          </div>
+        </form>
 
 
 
-        </div>
-     
+      </div>
+
       <!-- /. Maincontent -->
       <!-- /.content-wrapper -->
 
@@ -247,6 +258,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- REQUIRED SCRIPTS -->
     <!-- alert -->
+    <!-- <script>
+    document.getElementById('form-signup').addEventListener('submit', function(event) {
+    var archivo = document.getElementById('foto').files[0];
+    if (archivo.size > 41943040) { // Reemplaza 41943040 con el tamaño máximo permitido en bytes
+        event.preventDefault();
+        alert('El archivo es demasiado grande. El tamaño máximo permitido es de 40 MB.');
+    }
+});
+
+    </script> -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- js alert -->
     <script src="../../../resource/js/admin/ventas/alert_registrar_usuario.js"> </script>

@@ -15,7 +15,6 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Obtener los datos paginados
 
-
 // Número de resultados por página
 $resultados_por_pagina = 5;
 

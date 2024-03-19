@@ -6,8 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
         empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0
     ) {
-       $errores[]="El archivo que envío excede nuestros limites, vuelva a intentarlo";
-       exit();
+        $mensaje = "El archivo que envió excede nuestros limites, vuelva a intentarlo";
+        $url = $_SERVER['REQUEST_URI'] . "?mensaje=" . urlencode($mensaje);
+        header('location:' . $url);
+        exit();
     }
 
     $rol = $_POST['rol'];
