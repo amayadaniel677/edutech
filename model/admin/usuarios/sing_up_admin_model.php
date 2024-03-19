@@ -18,11 +18,9 @@ class sing_up_model
             $sqlInsert = "INSERT INTO people (`name`,`lastname`,`dni_type`,`dni`,`birthdate`,`email`,`password`,`phone`,`city`,`address`,`sex`,`rol`,`photo`) VALUES ('$nombres','$apellidos','$tipo_documento','$documento','$fecha_formateada','$correo','$contrasenia_encriptada','$telefono','$ciudad','$direccion','$sexo','$rol','$foto')";
             $result = $this->con->query($sqlInsert);
             if ($result == 1) {
-                $mensaje = '¡Registro exitoso! Por favor inicia sesión con tus credenciales.';
-                header('location:controller_sing_up_admin.php?mensaje=' . urlencode($mensaje));
-                exit();
+                return true;
             } else {
-                return 'Error al registrar el usuario';
+                return false;
             }
         }
     }

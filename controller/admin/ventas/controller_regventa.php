@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Venta y detalles registrados exitosamente
                 $detallesVenta = '';
                 $resultado_modelo_id = '';
-                $url = $_SERVER['REQUEST_URI'] . '&mensaje=Venta registrada exitosamente. ' ;
+                $url = $_SERVER['REQUEST_URI'] . '?mensaje=Venta registrada exitosamente. ' ;
                   header('location:'.$url);
                 
             } else {

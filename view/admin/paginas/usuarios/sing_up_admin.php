@@ -68,10 +68,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <form action="" method="POST" enctype="multipart/form-data">
             <?php
-            if (isset($msg)) {
-              foreach ($msg as $i) {
-                echo "<h3>$i</h3>";
+            if (isset($errores)) {
+              foreach ($errores as $error) {
+                echo "<h3>$error</h3>";
               }
+            }elseif(isset($mensaje)){
+              echo "<h3>$mensaje</h3>";
             }
 
 
@@ -139,7 +141,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="row">
               <div class="col-md-6 col-sm-12">
                 <div class="input-group mb-3">
-                  <input type="password" class="form-control" placeholder="Contraseña" id="contrasenia" name="contrasenia" required>
+                  <input type="password" class="form-control" placeholder="Escribir contraseña" id="contrasenia" name="contrasenia" required>
                   <div class="input-group-append">
                     <div class="input-group-text">
                       <span class="fas fa-lock"></span>
