@@ -67,24 +67,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         <form id='form-signup' action="" method="POST" enctype="multipart/form-data">
-          <div class="container mt-5">
-            <div class="alert alert-danger" role="alert">
+          
               <?php
               if (isset($_GET['mensaje'])) {
-                $mensaje_recibido = $_GET['mensaje'];
-                echo $mensaje_recibido;
+                echo "<div class='container mt-5'> 
+                      <div class='alert alert-danger' role='alert'>";
+                          $mensaje_recibido = $_GET['mensaje'];
+                            echo $mensaje_recibido;
+                echo "</div>
+                      </div>";
             }
               ?>
-            </div>
-          </div>
+           
           <?php
 
           if (isset($errores)) {
+            echo "
+            <ul class'list-group list-group-flush'>
+            ";
+                
+                
+            
             foreach ($errores as $error) {
-              echo "<h3>$error</h3>";
+              echo "<li class='list-group-item list-group-item-danger'>".$error."</li>";
             }
+            echo "
+            </ul>
+            ";
           } elseif (isset($mensaje)) {
-            echo "<h3>$mensaje</h3>";
+            echo "<div class='container mt-5'> 
+            <div class='alert alert-success' role='alert'>";
+                
+                  echo $mensaje;
+      echo "
+            </div>
+            </div>";
           }
 
 
@@ -92,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres">
+                <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="[a-zA-Z\s]+" required>
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -102,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" required>
+                <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" pattern="[a-zA-Z\s]+" required>
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -124,7 +141,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" required>
+                <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" pattern="\d{5,12}" minlength="5" maxlength="12"  required>
               </div>
             </div>
           </div>
@@ -143,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono" required>
+                <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono"  pattern="\d{7,11}" minlength="7" maxlength="11" required>
               </div>
             </div>
 
@@ -176,7 +193,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" required>
+                <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" pattern="[a-zA-Z\s]+" required >
               </div>
             </div>
             <div class="col-md-6 col-sm-12">

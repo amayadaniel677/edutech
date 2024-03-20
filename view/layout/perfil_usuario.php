@@ -20,7 +20,6 @@
         echo '<div class="alert alert-success mt-3" role="alert">';
         echo $_SESSION['update-succes'];
         echo '</div>';
-
         // Limpia la variable de sesión después de mostrar el mensaje
         unset($_SESSION['update-succes']);
       }

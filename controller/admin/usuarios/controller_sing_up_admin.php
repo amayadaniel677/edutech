@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tipo_documento = $_POST['tipo_documento'];
     $documento = str_replace(' ', '', $_POST['documento']);
     $sexo = isset($_POST['sexo']) ? $_POST['sexo'] : '';
-    $fecha = new DateTime($_POST['fecha']);
+    $fecha =$_POST['fecha'];
     $correo = strtolower(str_replace(' ', '', $_POST['correo']));
     $contrasenia = $_POST['contrasenia'];
     $confContrasenia = $_POST['confContrasenia'];
@@ -42,12 +42,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($msg)) {
         $insertar_modelo = $new_user->validar($rol, $nombres, $apellidos, $tipo_documento, $documento, $sexo, $fecha, $correo, $contrasenia, $confContrasenia, $telefono, $ciudad, $direccion, $foto);
         if (!$insertar_modelo) {
-            $errores = $msg;
+            $errores = $new_user->msg;
         } else {
+            // FUNCIONA
             $mensaje = "Usuario agregado correctamente";
         }
     } else {
+        // FUNCIONA BIEN
         $errores = $msg;
+        var_dump($errores);
     }
 }
 
@@ -62,7 +65,7 @@ class sing_up_admin
 
     public function validar($rol, $nombres, $apellidos, $tipo_documento, $documento, $sexo, $fecha, $correo, $contrasenia, $confContrasenia, $telefono, $ciudad, $direccion, $foto)
     {
-        $fecha_hoy = new DateTime();
+     
 
         $error = false; // Inicializar la bandera de error como falsa
 
@@ -83,13 +86,26 @@ class sing_up_admin
             $this->msg[] = 'Los campos de documento y telefono solo aceptan números!';
             $error = true; // Cambiar la bandera de error a verdadera
         }
-
-        // Validar que la fecha de nacimiento no sea posterior a la fecha actual
-        if ($fecha > $fecha_hoy) {
-            $this->msg[] = 'Fecha de nacimiento inválida!';
-            $error = true; // Cambiar la bandera de error a verdadera
+        if (!preg_match('/^\d{7,11}$/', $telefono)) {
+            $this->msg[] = 'Teléfono inválido. Debe tener entre 7 y 11 dígitos.';
+            $error = true;
         }
+        if (!preg_match('/^\d{5,12}$/', $documento)) {
+            $this->msg[] = 'DNI inválido. Debe tener entre 5 y 12 dígitos.';
+            $error = true;
+        }
+        $fechaNacimiento = new DateTime($fecha);
+        $fechaMinima = new DateTime();
+        $fechaMinima->modify('-2 years');
+        $fechaMinima->modify('+1 day'); // Asegurar que sea al menos 2 años antes de hoy
 
+        // Crear un objeto DateTime para el año 1950
+        $fechaLimite = new DateTime('1950-01-01');
+
+        if ($fechaNacimiento < $fechaMinima || $fechaNacimiento < $fechaLimite) {
+            $this->msg[] = 'La fecha de nacimiento no están en el rango permitido';
+            $error = true;
+        }
         // Si no hay errores, realizar el registro
         if (!$error) {
             $contrasenia_encriptada = password_hash($contrasenia, PASSWORD_DEFAULT, ['cost' => 10]);

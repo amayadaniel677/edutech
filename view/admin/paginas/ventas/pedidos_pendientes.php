@@ -88,7 +88,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   $n1 = 1;
                 
                   $pedidos = array_reverse($pedidos);
+                 
                   foreach ($pedidos as $fila) {
+                  
                     $id=$fila['id'];
                     echo '<tr>';
                     echo '<td>' . $n1 . '</td>';
@@ -96,9 +98,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     echo '<td>' . date('d/m/Y', strtotime($fila['date'])) . '</td>';
                     echo '<td>$' . number_format($fila['price'], 2, '.', ',') . '</td>';
                     echo '<td>';
-                    echo '<a href="controller_pedidos_pendientes.php?idVer=' . $id . '" class="btn btn-primary" data-toggle="modal" data-target="#modal-editar"><i class="bi bi-eye"></i></a>';
+                    echo '<a href="controller_detalles_pedido.php?idPedido=' . $id . '" class="btn btn-primary"><i class="bi bi-eye"></i></a>';
                     echo '<a href="controller_eliminar_pedidos.php?idEliminar=' . $id . '" class="btn btn-danger pedidos" id="btn-eliminar"><i class="bi bi-trash"></i></a>';// Botón para abrir el modal
-                    include('../../../view/admin/paginas/ventas/modal_pedidos_pendientes.php');
+                  
                     echo '</td>';
                     echo '</tr>';
                     $n1 += 1;

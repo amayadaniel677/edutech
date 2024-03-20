@@ -16,15 +16,7 @@ class pedidos_pendientes{
             return false;
         }
     }
-    public function datos_detalle_pedidos($id){
-        $consult=new pedidos_pendientes_model();
-        $detalle=$consult->obtener_detalle_pedidos($id);
-        if($detalle){
-            return $detalle;
-        }else{
-            return false;
-        }
-    }
+   
 
     public function eliminar_pedido($id){
         $consult=new pedidos_pendientes_model();

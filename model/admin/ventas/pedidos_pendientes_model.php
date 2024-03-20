@@ -26,21 +26,6 @@ class pedidos_pendientes_model
         }
     }
 
-    public function obtener_detalle_pedidos($id){
-        $sql="SELECT * FROM `detail_order` WHERE order_id = '$id'";
-        $result=$this->con->query($sql);
-        if ($result->num_rows > 0) {
-            $detalle = array();
-            while ($row = $result->fetch_assoc()) {
-                $detalle[] = $row;
-            }
-            return $detalle;
-        } else {
-            return false;
-        }
-    }
-
-
     public function eliminar_pedidos_detalle($id)
     {
         $sql = "DELETE FROM `detail_order` WHERE order_id= '$id'";
