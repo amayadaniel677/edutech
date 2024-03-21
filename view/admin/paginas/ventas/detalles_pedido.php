@@ -74,7 +74,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="col-12">
                 <h4>
                   <i class="fas fa-globe"></i> Kepler S.A.S.
-                  <small class="float-right">Fecha hoy: DD/MM/AAAA</small>
+                  <?php $fechaHoy = date("Y-m-d"); ?>
+                  <small class="float-right">Fecha hoy: <?php echo $fechaHoy; ?></small>
                 </h4>
               </div>
               <!-- /.col -->
@@ -95,20 +96,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="col-sm-4 invoice-col">
                 Cliente
                 <address>
-                  <strong>Nombre Cliente</strong><br>
-                  <strong>1006416081</strong><br>
-                  Sogamoso,Boyacá<br>
-                  Telefono:3123467007<br>
-                  Correo: john.doe@example.com
-                </address>
-              </div>
-              <!-- /.col -->
-              <div class="col-sm-4 invoice-col">
+                  <?php 
+                if (isset($detalles)){
 
-                <br>
-                <b>ID pedido</b> 4F3S8J<br>
-                <b>Fecha de pedido:</b> 2/22/2014<br>
+                
+                    
+                 echo "<strong>{$detalles[0]['people_name']}{$detalles[0]['people_lastname']}</strong><br>" ;
+                 echo "<strong>DNI:{$detalles[0]['people_dni']}</strong><br>" ;
+                 echo "Ciudad: {$detalles[0]['people_city']}<br>" ;
+                echo " Telefono:{$detalles[0]['people_phone']}<br>" ;
+                 echo " Correo: {$detalles[0]['people_email']}";
+                echo "</address>";
+             echo "</div>" ;
+             //<!-- /.col -->
+            echo "<div class='col-sm-4 invoice-col'> <br>";
 
+               echo "<b>ID pedido</b> {$detalles[0]['order_id']}<br>";
+               echo "<b>Fecha de pedido:</b> {$detalles[0]['date']}<br>"; 
+               
+              }
+                ?>
               </div>
               <!-- /.col -->
             </div>
@@ -121,6 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <thead>
                     <tr>
                       <th>#</th>
+                      <th>Curso</th>
                       <th>Horas</th>
                       <th>Valor unitario</th>
                     </tr>
@@ -136,12 +144,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         echo '<tr>';
                         echo '<td>' . $n1 . '</td>';
+                        echo '<td>' . $detalle['subjects_name'] . '</td>';
                         echo '<td>' . $detalle['hours'] . '</td>';
                         echo '<td>' . $precioFormateado . '</td>';
                         echo '</tr>';
                         $n1 += 1;
                       }
                       $sumaDetalles2 =  number_format($sumaDetalles, 2, '.', ',');
+                      $detallesJson=json_encode($detalles);
                     }
 
                     ?>
@@ -157,7 +167,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <br>
               <form class="form" action='' method='POST'>
                     <!-- input invisible -->
-                   <input type='hidden' class="form-control" id="idPedidoConfirmado" Value='<?php echo $id_pedido; ?>'>     
+                    <input type='hidden' class="form-control" name='detallesJson' id="detallesJson" Value='<?php echo $detallesJson; ?>'> 
+                    
                 <div class="input-group">
                   <label for="subtotal" class="col-sm-2 col-form-label">Subtotal:</label>
                   <div class="input-group-prepend">
@@ -179,7 +190,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input readonly type="number" class="form-control" id="total" Pleaceholder="total">
+                  <input readonly type="number" class="form-control" name='total' id="total" Pleaceholder="total">
                 </div>
 
 
@@ -234,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var subtotal = parseFloat(subtotalInput.value) || 0;
         var descuento = parseFloat(descuentoInput.value) || 0;
         var total = subtotal - descuento;
-        totalInput.value = total.toFixed(2); // Asegúrate de que el total tenga dos decimales
+        totalInput.value = total; // Asegúrate de que el total tenga dos decimales
     }
 
     // Escucha el evento 'input' en el campo de descuento

@@ -26,22 +26,6 @@ class pedidos_pendientes_model
         }
     }
 
-    public function eliminar_pedidos_detalle($id)
-    {
-        $sql = "DELETE FROM `detail_order` WHERE order_id= '$id'";
-        $result = $this->con->query($sql);
-        if ($result) {
-            $orden=$this->eliminar_pedidos_orden($id);
-            if($orden){
-                return true;
-            }else{
-                return false;
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public function eliminar_pedidos_orden($id)
     {

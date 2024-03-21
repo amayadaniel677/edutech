@@ -46,6 +46,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
+              <?php if (!empty($mensaje)) : ?>
+                <div class="alert alert-success" role="alert">
+                  <?php echo $mensaje; ?>
+                </div>
+              <?php endif; ?>
+
+              <?php if (!empty($error)) : ?>
+                <div class="alert alert-danger" role="alert">
+                  <?php echo $error; ?>
+                </div>
+              <?php endif; ?>
               <h1 class="m-0">Pedidos pendientes</h1>
             </div>
             <!-- /.col -->
@@ -84,14 +95,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </thead>
               <tbody>
                 <?php
-                if (isset($pedidos) && !empty($pedidos)){
+                if (isset($pedidos) && !empty($pedidos)) {
                   $n1 = 1;
-                
+
                   $pedidos = array_reverse($pedidos);
-                 
+
                   foreach ($pedidos as $fila) {
-                  
-                    $id=$fila['id'];
+
+                    $id = $fila['id'];
                     echo '<tr>';
                     echo '<td>' . $n1 . '</td>';
                     echo '<td>' . htmlspecialchars($fila['name']) . '</td>';
@@ -99,13 +110,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     echo '<td>$' . number_format($fila['price'], 2, '.', ',') . '</td>';
                     echo '<td>';
                     echo '<a href="controller_detalles_pedido.php?idPedido=' . $id . '" class="btn btn-primary"><i class="bi bi-eye"></i></a>';
-                    echo '<a href="controller_eliminar_pedidos.php?idEliminar=' . $id . '" class="btn btn-danger pedidos" id="btn-eliminar"><i class="bi bi-trash"></i></a>';// Botón para abrir el modal
-                  
+                    echo '<a href="controller_eliminar_pedidos.php?idEliminar=' . $id . '" class="btn btn-danger pedidos" id="btn-eliminar"><i class="bi bi-trash"></i></a>'; // Botón para abrir el modal
+
                     echo '</td>';
                     echo '</tr>';
                     $n1 += 1;
                   }
-  
                 }
 
                 ?>

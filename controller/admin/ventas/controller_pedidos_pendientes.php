@@ -20,11 +20,11 @@ class pedidos_pendientes{
 
     public function eliminar_pedido($id){
         $consult=new pedidos_pendientes_model();
-        $eliminar=$consult->eliminar_pedidos_detalle($id);
+        $eliminar=$consult->eliminar_pedidos_orden($id);
         if($eliminar){
-            return 'Eliminada con exito';
+            return true;
         }else{
-            return 'No pudo ser eliminada';
+            return false;
         }
     }
 
@@ -35,9 +35,22 @@ $pedidos=$consult->datos_pedidos();
 
 if (isset($_GET['idEliminar'])) {
     $idEliminar = $_GET['idEliminar'];
-    $consult->eliminar_pedido($idEliminar);
-    header("Location: ".$_SERVER['PHP_SELF']);
-} 
+    $eliminar_pedido=$consult->eliminar_pedido($idEliminar);
+if($eliminar_pedido){
+    
+    $mensaje = urlencode("Pedido eliminado correctamente!");
+    $error = urlencode("Tu mensaje de error aquí");
+    header("Location: " . $_SERVER['PHP_SELF'] . "?mensaje=$mensaje");
+
+}else{
+    $error = urlencode("No se pudo eliminar el pedido, intente nuevamente más tarde");
+    header("Location: " . $_SERVER['PHP_SELF'] . "?error=$error");
+}
+    
+}
+
+$mensaje = isset($_GET['mensaje']) ? urldecode($_GET['mensaje']) : '';
+$error = isset($_GET['error']) ? urldecode($_GET['error']) : '';
 
 include('../../../view/admin/paginas/ventas/pedidos_pendientes.php');
 ?>
