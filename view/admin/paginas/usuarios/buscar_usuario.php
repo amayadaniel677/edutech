@@ -65,10 +65,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <div class="container">
             <?php
+            // Validar si $mensaje_editar no está vacío
+            if (!empty($mensaje_editar)) {
+              // Mostrar el encabezado con el mensaje y un fondo azul
+              echo '<h5 class="bg-primary text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje_editar . '</h5>';
+            }
+            ?>
+            <?php
             if (isset($mensaje_eliminar)) {
-              echo "<ul class='list-group list-group-danger'>";
-              echo "<li class='list-group-item'>" . $mensaje_eliminar . "</li>";
-              echo "</ul>";
+              echo '<h5 class="bg-danger text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje_eliminar . '</h5>';
             }
             ?>
             <div class="row justify-content-center">
@@ -81,7 +86,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <button type="submit" class="btn btn-success">Buscar</button>
                     <?php
                     if ($_SERVER['REQUEST_METHOD'] === 'POST')
-                      echo '<a href="controller_buscar_usuario.php" class="btn btn-outline-primary">Todas las ventas</a>'
+                      echo '<a href="controller_buscar_usuario.php" class="btn btn-outline-primary">Todos los usuarios</a>'
                     ?>
                   </div>
                 </form>
@@ -123,7 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     echo '<td>' . $usuario['address'] . '</td>';
                     echo '<td>';
                     echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-primary">';
-                    echo '<i class="bi bi-eye"></i>';
+                    echo '<i class="bi bi-pencil-square"></i>';
                     echo '</a>';
                     echo '<a href="controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-danger">';
                     echo '<i class="bi bi-trash"></i>';
@@ -132,7 +137,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     echo '</tr>';
                   }
                 } else {
-                  $usuarios_reverse = array_reverse($usuarios);
+                  $usuarios_reverse = array_reverse($usuarios_paginados);
                   foreach ($usuarios_reverse as $usuario) {
                     echo '<tr>';
                     echo '<td>' . $usuario['rol'] . '</td>';
@@ -161,29 +166,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </tbody>
             </table>
           </div>
-
-
-
-
+          <?php if (!$bandera) : ?>
+            <div class="card-footer clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+                <?php if ($pagina > 1) : ?>
+                  <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina - 1); ?>">«</a></li>
+                <?php endif; ?>
+                <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+                  <li class="page-item <?php echo ($pagina == $i) ? 'active' : ''; ?>"><a class="page-link" href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                <?php endfor; ?>
+                <?php if ($pagina < $total_paginas) : ?>
+                  <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina + 1); ?>">»</a></li>
+                <?php endif; ?>
+              </ul>
+            </div>
         </div>
-      </section>
-      <!-- /. Maincontent -->
+      <?php endif; ?>
+
     </div>
-    <!-- /.content-wrapper -->
+    </section>
+    <!-- /. Maincontent -->
+  </div>
+  <!-- /.content-wrapper -->
 
-    <!-- Controlador del nav aSidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-      <!-- Control sidebar content goes here -->
-      <div class="p-3">
-        <h5>Title</h5>
-        <p>Sidebar content</p>
-      </div>
-    </aside>
-    <!-- /.control-sidebar -->
+  <!-- Controlador del nav aSidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3">
+      <h5>Title</h5>
+      <p>Sidebar content</p>
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
 
-    <!-- Main Footer -->
-    <?php include('../../../view/admin/layouts/footer.php'); ?>
-    <!--FIN   Main Footer -->
+  <!-- Main Footer -->
+  <?php include('../../../view/admin/layouts/footer.php'); ?>
+  <!--FIN   Main Footer -->
 
   </div> <!--fin de toda la pagina wrapper -->
   <!-- ./wrapper -->

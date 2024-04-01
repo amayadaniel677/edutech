@@ -6,7 +6,7 @@ if (isset($_GET['id_usuario'])) {
     $usuario = $consult->traer_usuario($id_ususario);
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id=$_POST['id'];
+    $id = $_POST['id'];
     $nombre = $_POST['name'];
     $apellido = $_POST['lastname'];
     $ciudad = $_POST['city'];
@@ -17,9 +17,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tipo_documento = $_POST['dni_type'];
 
     $consult = new editar_usuario_controller();
-    $validar= $consult->validar_campos($id,$nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento);
-    $mensaje=$consult->mensaje;
-    var_dump($mensaje);
+    $validar = $consult->validar_campos($id, $nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento);
+    if ($validar) {
+        $mensaje = 'El usuario a sido modificado con exito';
+        header("Location: controller_buscar_usuario.php?mensaje=" . urlencode($mensaje));
+    } else {
+        $mensaje = 'No se pudo editar al usuario';
+    }
 }
 
 class editar_usuario_controller
@@ -29,11 +33,11 @@ class editar_usuario_controller
     {
     }
 
-    public function validar_campos($id,$nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento)
+    public function validar_campos($id, $nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento)
     {
         // Validar que no estén vacíos
         if (empty($nombre) || empty($apellido) || empty($ciudad) || empty($direccion) || empty($correo)) {
-            $this->mensaje='por favor valide los campos';
+            $this->mensaje = 'por favor valide los campos';
             exit;
         } else {
 
@@ -59,13 +63,25 @@ class editar_usuario_controller
             $apellido = preg_replace('/[0-9]/', '', $apellido);
             $ciudad = preg_replace('/[0-9]/', '', $ciudad);
 
+            $fechaNacimiento = DateTime::createFromFormat('Y-m-d', $fecha_nacimiento);
 
-            $consult = new editar_usuario_model();
-            $editar=$consult->editar_informacion($id,$nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento);
-            if($editar){
-                $mensaje = 'El usuario a sido editado con exito';
-                return true;
-            }else{
+            $fechaActual = new DateTime();
+
+            $fechaLimite = $fechaActual->modify('-3 years');
+
+            $fechaLimiteInferior = DateTime::createFromFormat('Y-m-d', '1960-01-01');
+
+            if ($fechaNacimiento >= $fechaLimiteInferior && $fechaNacimiento <= $fechaLimite) {
+                $fechaParaMySQL = $fechaNacimiento->format('Y-m-d');
+                $consult = new editar_usuario_model();
+                $editar = $consult->editar_informacion($id, $nombre, $apellido, $ciudad, $direccion, $fechaParaMySQL, $sexo, $correo, $tipo_documento);
+                if ($editar) {
+                    $mensaje = 'El usuario a sido editado con exito';
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
                 return false;
             }
 

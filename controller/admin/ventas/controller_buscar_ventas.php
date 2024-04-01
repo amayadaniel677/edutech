@@ -1,15 +1,16 @@
 <?php
 include('../../../model/admin/ventas/buscar_ventas_model.php');
-$consult= new controlador_buscar_venta();
-$bandera=false;
-if ( $_SERVER['REQUEST_METHOD'] === 'POST') {
-    if(isset($_POST['dni'])){
-        $dni=$_POST['dni'];
-        $ventas=$consult->venta($dni);      
-        $mensaje=$consult->ver_mensaje();
-        $bandera=true;
+$consult = new controlador_buscar_venta();
+$bandera = false;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['dni'])) {
+        $dni = $_POST['dni'];
+        $ventas = $consult->venta($dni);
+        $mensaje = $consult->ver_mensaje();
+        $bandera = true;
+
     }
-}else{
+} else {
     $ventas = $consult->ventas();
 }
 
@@ -33,7 +34,7 @@ $ventas_paginadas = array_slice($ventas, $offset, $resultados_por_pagina);
 
 
 
-    
+
 
 class controlador_buscar_venta
 {
@@ -42,27 +43,28 @@ class controlador_buscar_venta
     {
     }
 
-    public function ventas(){
-        $consult= new buscar_venta_model();
-        $ventas=$consult->ventas();
-        if($ventas){
+    public function ventas()
+    {
+        $consult = new buscar_venta_model();
+        $ventas = $consult->ventas();
+        if ($ventas) {
             return $ventas;
-        }else{
+        } else {
             return false;
         }
-
     }
 
     public function venta($dni)
     {
-                $consult= new buscar_venta_model();
-                $usuario=$consult->user_exist($dni);
-                if($usuario){
-                    $venta=$consult->venta($dni);
-                    return $venta;
-                }else{
-                    $this->mensaje_diagnostico[]='El documento no es valido';
-                }  
+        $dni=trim($dni);
+        $consult = new buscar_venta_model();
+        $usuario = $consult->user_exist($dni);
+        if ($usuario) {
+            $venta = $consult->venta($dni);
+            return $venta;
+        } else {
+            $this->mensaje_diagnostico[] = 'El documento no es valido';
+        }
     }
 
 
@@ -76,4 +78,3 @@ class controlador_buscar_venta
 
 
 include('../../../view/admin/paginas/ventas/buscar_ventas.php');
-?>
