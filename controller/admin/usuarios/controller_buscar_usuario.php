@@ -4,6 +4,17 @@ $consult= new buscar_usuario_controlador();
 $usuarios=$consult->traer_usuarios();
 $bandera= false;
 
+if(isset($_GET['idEliminar'])){
+    $id_eliminar = $_GET['idEliminar'];
+    $eliminar=$consult->eliminar($id_eliminar);
+    if($eliminar){
+        $mensaje_eliminar='Usuario eliminado con exito';
+        header("Location: $archivoActual");
+    }else{
+        $mensaje_eliminar= 'El usuario no pudo ser eliminado';
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
     $dni=$_POST['dni'];
     $buscar_usuario=$consult->buscar_usuario($dni);
@@ -11,7 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
     $bandera=true;
 }
 
-class buscar_usuario_controlador{
+
+
+class buscar_usuario_controlador{ 
     public $mensaje=[];
     public function __construct()
     {
@@ -47,6 +60,18 @@ class buscar_usuario_controlador{
         return $html;
     }
 
+    public function eliminar($id){
+        $consult=new buscar_usuario_model();
+        $eliminar=$consult->eliminar($id);
+        if($eliminar){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+
 }
+
 include('../../../view/admin/paginas/usuarios/buscar_usuario.php');
 ?>

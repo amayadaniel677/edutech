@@ -64,6 +64,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
 
           <div class="container">
+            <?php
+            if (isset($mensaje_eliminar)) {
+              echo "<ul class='list-group list-group-danger'>";
+              echo "<li class='list-group-item'>" . $mensaje_eliminar . "</li>";
+              echo "</ul>";
+            }
+            ?>
             <div class="row justify-content-center">
               <div class="col-md-6">
                 <form method="POST">
@@ -73,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="text-center">
                     <button type="submit" class="btn btn-success">Buscar</button>
                     <?php
-                      if($_SERVER['REQUEST_METHOD'] === 'POST')
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST')
                       echo '<a href="controller_buscar_usuario.php" class="btn btn-outline-primary">Todas las ventas</a>'
                     ?>
                   </div>
@@ -84,9 +91,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- tabla -->
           <div class="container mt-5">
             <?php
-              if($mensaje){
-                echo $mensaje;
-              }
+            if (isset($mensaje)) {
+              echo $mensaje;
+            }
             ?>
             <table id="miTabla" class="table table-striped table-bordered">
               <thead>
@@ -103,54 +110,54 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </thead>
               <tbody>
                 <?php
-                if($bandera){
+                if ($bandera) {
                   header("Location: {$_SERVER['REQUEST_URI']}");
-                    foreach ($buscar_usuario as $usuario) {
-                      echo '<tr>';
-                      echo '<td>' . $usuario['rol'] . '</td>';
-                      echo '<td>' . $usuario['name'] . '</td>';
-                      echo '<td>' . $usuario['lastname'] . '</td>';
-                      echo '<td>' . $usuario['email'] . '</td>';
-                      echo '<td>' . $usuario['dni'] . '</td>'; 
-                      echo '<td>' . $usuario['city'] . '</td>';
-                      echo '<td>' . $usuario['address'] . '</td>';
-                      echo '<td>';
-                      echo '<a href="#" class="btn btn-primary">';
-                      echo '<i class="bi bi-eye"></i>';
-                      echo '</a>';
-                      echo '<a href="#" class="btn btn-danger">';
-                      echo '<i class="bi bi-trash"></i>';
-                      echo '</a>';
-                      echo '</td>';
-                      echo '</tr>';
+                  foreach ($buscar_usuario as $usuario) {
+                    echo '<tr>';
+                    echo '<td>' . $usuario['rol'] . '</td>';
+                    echo '<td>' . $usuario['name'] . '</td>';
+                    echo '<td>' . $usuario['lastname'] . '</td>';
+                    echo '<td>' . $usuario['email'] . '</td>';
+                    echo '<td>' . $usuario['dni'] . '</td>';
+                    echo '<td>' . $usuario['city'] . '</td>';
+                    echo '<td>' . $usuario['address'] . '</td>';
+                    echo '<td>';
+                    echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-primary">';
+                    echo '<i class="bi bi-eye"></i>';
+                    echo '</a>';
+                    echo '<a href="controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-danger">';
+                    echo '<i class="bi bi-trash"></i>';
+                    echo '</a>';
+                    echo '</td>';
+                    echo '</tr>';
                   }
-                }else{
-                    $usuarios_reverse=array_reverse($usuarios);
-                    foreach ($usuarios_reverse as $usuario) {
-                      echo '<tr>';
-                      echo '<td>' . $usuario['rol'] . '</td>';
-                      echo '<td>' . $usuario['name'] . '</td>';
-                      echo '<td>' . $usuario['lastname'] . '</td>';
-                      echo '<td>' . $usuario['email'] . '</td>';
-                      echo '<td>' . $usuario['dni'] . '</td>'; 
-                      echo '<td>' . $usuario['city'] . '</td>';
-                      echo '<td>' . $usuario['address'] . '</td>';
-                      echo '<td>';
-                      echo '<a href="#" class="btn btn-primary">';
-                      echo '<i class="bi bi-eye"></i>';
-                      echo '</a>';
-                      echo '<a href="#" class="btn btn-danger">';
-                      echo '<i class="bi bi-trash"></i>';
-                      echo '</a>';
-                      echo '</td>';
-                      echo '</tr>';
+                } else {
+                  $usuarios_reverse = array_reverse($usuarios);
+                  foreach ($usuarios_reverse as $usuario) {
+                    echo '<tr>';
+                    echo '<td>' . $usuario['rol'] . '</td>';
+                    echo '<td>' . $usuario['name'] . '</td>';
+                    echo '<td>' . $usuario['lastname'] . '</td>';
+                    echo '<td>' . $usuario['email'] . '</td>';
+                    echo '<td>' . $usuario['dni'] . '</td>';
+                    echo '<td>' . $usuario['city'] . '</td>';
+                    echo '<td>' . $usuario['address'] . '</td>';
+                    echo '<td>';
+                    echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-primary">';
+                    echo '<i class="bi bi-eye"></i>';
+                    echo '</a>';
+                    echo '<a href="controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-danger">';
+                    echo '<i class="bi bi-trash"></i>';
+                    echo '</a>';
+                    echo '</td>';
+                    echo '</tr>';
                   }
-                } 
-                
-              
-              echo '</tbody>';
-              echo '</table>';
-               ?>
+                }
+
+
+                echo '</tbody>';
+                echo '</table>';
+                ?>
               </tbody>
             </table>
           </div>
