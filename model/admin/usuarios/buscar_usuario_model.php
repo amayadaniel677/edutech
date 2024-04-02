@@ -40,14 +40,6 @@ class buscar_usuario_model{
         }
     }
 
-    public function eliminar($id){
-        $sql="DELETE FROM people WHERE id='$id'";
-        $result=$this->con->query($sql);
-        if($result){
-            return true;
-        }else{
-            return false;
-        }
-    }
+    
 }
 ?>

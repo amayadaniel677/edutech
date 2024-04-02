@@ -20,16 +20,10 @@ $total_paginas = ceil(count($usuarios) / $resultados_por_pagina);
 $usuarios_paginados = array_slice($usuarios, $offset, $resultados_por_pagina);
 
 
-if(isset($_GET['idEliminar'])){
-    $id_eliminar = $_GET['idEliminar'];
-    $eliminar=$consult->eliminar($id_eliminar);
-    if($eliminar){
-        $mensaje_eliminar='Usuario eliminado con exito';
-        header("Location: $archivoActual");
-    }else{
-        $mensaje_eliminar= 'El usuario no pudo ser eliminado';
-    }
+if(isset($_GET['msj_eliminar'])){
+    $msj_eliminar = $_GET['msj_eliminar'];
 }
+
 if (isset($_GET['mensaje'])) {
     $mensaje_editar = $_GET['mensaje'];
 } 
@@ -80,16 +74,6 @@ class buscar_usuario_controlador{
         return $html;
     }
 
-    public function eliminar($id){
-        $consult=new buscar_usuario_model();
-        $eliminar=$consult->eliminar($id);
-        if($eliminar){
-            return true;
-        }else{
-            return false;
-        }
-        
-    }
 
 }
 

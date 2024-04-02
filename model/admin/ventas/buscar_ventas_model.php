@@ -5,7 +5,7 @@ class buscar_venta_model
     public function __construct()
     {
         //$this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech");
-        $this->con = new mysqli("localhost","root","","edutech");
+        $this->con = new mysqli("localhost", "root", "", "edutech");
         $this->con->set_charset("utf8");
     }
 
@@ -23,7 +23,7 @@ class buscar_venta_model
 
     public function ventas()
     {
-            $sql = $sql = "SELECT
+        $sql = $sql = "SELECT
             p.dni AS person_dni,
             p.name AS person_name,
             sa.price AS sale_price,
@@ -32,25 +32,25 @@ class buscar_venta_model
             FROM sales sa
             INNER JOIN people p ON sa.people_id = p.id";
 
-            $result = $this->con->query($sql);
+        $result = $this->con->query($sql);
 
-            if ($result->num_rows > 0) {
-                $result_array = [];
-                while ($row = $result->fetch_assoc()) {
-                    $result_array[] = $row;
-                }
-                return $result_array;
-            } else {
-                return false;
+        if ($result->num_rows > 0) {
+            $result_array = [];
+            while ($row = $result->fetch_assoc()) {
+                $result_array[] = $row;
             }
+            return $result_array;
+        } else {
+            return false;
+        }
     }
 
     public function venta($dni1)
     {
-     
+
         $id_people = $this->user_exist($dni1);
         if ($id_people) {
-         $sql = "SELECT
+            $sql = "SELECT
             p.dni  AS person_dni,
             p.name  AS person_name,
             sa.id AS sale_id,
@@ -71,8 +71,8 @@ class buscar_venta_model
             } else {
                 return false;
             }
-        }else{
-            return false; 
+        } else {
+            return false;
         }
     }
 }

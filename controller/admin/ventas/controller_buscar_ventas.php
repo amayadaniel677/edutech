@@ -13,6 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     $ventas = $consult->ventas();
 }
+if (isset($_GET['msj_eliminar'])) {
+    $msj_eliminar = $_GET['msj_eliminar'];
+    
+}
 
 // Obtener los datos paginados
 
@@ -30,7 +34,6 @@ $total_paginas = ceil(count($ventas) / $resultados_por_pagina);
 
 // Obtener solo los resultados para la página actual
 $ventas_paginadas = array_slice($ventas, $offset, $resultados_por_pagina);
-
 
 
 

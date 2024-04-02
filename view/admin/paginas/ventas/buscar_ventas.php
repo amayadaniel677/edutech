@@ -65,6 +65,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
 
           <div class="container">
+            <?php
+            if (isset($msj_eliminar)) {
+              echo "<h5 class=' btn-danger text-white p-3 mb-2'>" . $msj_eliminar . "</h5>";
+            }
+            ?>
             <div class="row justify-content-center">
               <div class="col-md-6">
                 <form method="POST" action='controller_buscar_ventas.php'>
@@ -74,7 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="text-center">
                     <button type="submit" class="btn btn-success">Buscar</button>
                     <?php
-                      if($_SERVER['REQUEST_METHOD'] === 'POST')
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST')
                       echo '<a href="controller_buscar_ventas.php" class="btn btn-outline-primary">Todas las ventas</a>'
                     ?>
                   </div>
@@ -84,85 +89,85 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
           <!-- tabla -->
           <div class="container mt-5">
-          <div class="card">
+            <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Bordered Table</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              <table id="miTabla" class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                   <th scope="col">ID Venta</th>
-                   <th scope="col">dni</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Precio</th>
-                  <th scope="col">Fecha</th>
-                  <th scope="col">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                if ($ventas_paginadas) {
-                  if ($bandera) {
-                    $venta_reverse=array_reverse($ventas_paginadas);
-                    foreach ($venta_reverse as $venta) {
-                   
-                      echo '<tr>
+                <table id="miTabla" class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID Venta</th>
+                      <th scope="col">dni</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    if ($ventas_paginadas) {
+                      if ($bandera) {
+                        $venta_reverse = array_reverse($ventas_paginadas);
+                        foreach ($venta_reverse as $venta) {
+
+                          echo '<tr>
                               <td>' . $venta['sale_id'] . '</td>
                               <td>' . $venta['person_dni'] . '</td>
                               <td>' . $venta['person_name'] . '</td>
                               <td>' . $venta['sale_price'] . '</td>
                               <td>' . $venta['sale_date'] . '</td>
                               <td>
-                                <a href="#" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                                <a href="#" class="btn btn-danger"><i class="fas fa-mug-hot"></i></a>
+                                <a href="controller_detalle_ventas.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                <a href="controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                               </td>
                             </tr>';
-                    }
-                  } else {
-                    $ventas_reverse=array_reverse($ventas_paginadas);
-                    foreach ($ventas_reverse as $venta) {
-                      echo '<tr>
+                        }
+                      } else {
+                        $ventas_reverse = array_reverse($ventas_paginadas);
+                        foreach ($ventas_reverse as $venta) {
+                          echo '<tr>
                       <td>' . $venta['sale_id'] . '</td>
                               <td>' . $venta['person_dni'] . '</td>
                               <td>' . $venta['person_name'] . '</td>
                               <td>' . $venta['sale_price'] . '</td>
                               <td>' . $venta['sale_date'] . '</td>
                               <td>
-                                <a href="#" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                                <a href="#" class="btn btn-danger"><i class="fas fa-mug-hot"></i></a>
+                                <a href="controller_detalle_ventas.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                <a href="controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                               </td>
                             </tr>';
+                        }
+                      }
+                    } else {
+                      echo '<tr><td colspan="6">No hay ventas disponibles.</td></tr>';
                     }
-                  }
-                } else {
-                  echo '<tr><td colspan="6">No hay ventas disponibles.</td></tr>';
-                }
 
-                // Cierra la tabla HTML
-                echo '</tbody>
+                    // Cierra la tabla HTML
+                    echo '</tbody>
                         </table>';
-                ?>
-              </tbody>
-            </table>
+                    ?>
+                  </tbody>
+                </table>
               </div>
               <!-- /.card-body -->
               <div class="card-footer clearfix">
-              <ul class="pagination pagination-sm m-0 float-right">
-            <?php if ($pagina > 1) : ?>
-                <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina - 1); ?>">«</a></li>
-            <?php endif; ?>
-            <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
-                <li class="page-item <?php echo ($pagina == $i) ? 'active' : ''; ?>"><a class="page-link" href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-            <?php endfor; ?>
-            <?php if ($pagina < $total_paginas) : ?>
-                <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina + 1); ?>">»</a></li>
-            <?php endif; ?>
-        </ul>
+                <ul class="pagination pagination-sm m-0 float-right">
+                  <?php if ($pagina > 1) : ?>
+                    <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina - 1); ?>">«</a></li>
+                  <?php endif; ?>
+                  <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
+                    <li class="page-item <?php echo ($pagina == $i) ? 'active' : ''; ?>"><a class="page-link" href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                  <?php endfor; ?>
+                  <?php if ($pagina < $total_paginas) : ?>
+                    <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina + 1); ?>">»</a></li>
+                  <?php endif; ?>
+                </ul>
               </div>
             </div>
-           
+
           </div>
 
 

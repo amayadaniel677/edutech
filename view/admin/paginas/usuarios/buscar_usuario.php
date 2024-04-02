@@ -72,8 +72,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }
             ?>
             <?php
-            if (isset($mensaje_eliminar)) {
-              echo '<h5 class="bg-danger text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje_eliminar . '</h5>';
+            if (isset($msj_eliminar)) {
+              echo '<h5 class="bg-danger text-white p-3 mb-2" style="font-size: 1.25rem;">' . $msj_eliminar . '</h5>';
             }
             ?>
             <div class="row justify-content-center">
@@ -128,10 +128,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     echo '<td>' . $usuario['address'] . '</td>';
                     echo '<td>';
                     echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-primary">';
-                    echo '<i class="bi bi-pencil-square"></i>';
+                    echo '<i class="fas fa-edit"></i>';
                     echo '</a>';
                     echo '<a href="controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-danger">';
-                    echo '<i class="bi bi-trash"></i>';
+                    echo '<i class="fas fa-trash"></i>';
                     echo '</a>';
                     echo '</td>';
                     echo '</tr>';
@@ -149,10 +149,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     echo '<td>' . $usuario['address'] . '</td>';
                     echo '<td>';
                     echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-primary">';
-                    echo '<i class="bi bi-eye"></i>';
+                    echo '<i class="fas fa-edit"></i>';
                     echo '</a>';
                     echo '<a href="controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-danger">';
-                    echo '<i class="bi bi-trash"></i>';
+                    echo '<i class="fas fa-trash"></i>';
                     echo '</a>';
                     echo '</td>';
                     echo '</tr>';
