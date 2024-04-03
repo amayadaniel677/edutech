@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Panel Principal </h1>
+            <h1 class="m-0">Panell </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -74,37 +74,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </form>
       </div>
     </figcaption>
-      <div class="categoria-cursos">
-        <div class="titulo">
-          <h2>EN OFERTAS!</h2>
-        </div>
-        <div class="articulos">
-          
-          <article class="materias">
-              <a href="controller_descripcion_curso_estudiante.php">
-              <div>
-              <img src="../../resource/img/adm_courses/oferta.jpeg" alt="" />
+    <div class="categoria-cursos">
+    <?php foreach ($datos_organizados as $area => $cursos_area): ?>
+        <div class="categoria-cursos">
+            <div class="titulo">
+                <h2><?php echo $area; ?></h2> <!-- Mostrar el nombre del área -->
             </div>
-            <div>
-              <h5>jhdsj</h5>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-                vero odio placeat dolorem
-              </p>
-            </div>
-              </a>
-            
-            <div class="adquirir">
-              <a href="#">ADQUIRIR</a>
-              <p class="descuento">20%DTO</p>
-            </div>
-          </article>
-          
-        </div>
-      </div>
-
-  
-
+            <div class="articulos">
+                <?php foreach ($cursos_area as $curso): ?>
+                    <article class="materias">
+                        <a href="controller_descripcion_curso_estudiante.php?id_curso=<?php echo $curso['subject_id']; ?>">
+                        <div style= "height:120px;">
+    <img src="../../<?php echo $curso['photo']; ?>" style= "height:100%;" /> <!-- Mostrar la imagen del curso -->
+</div>
+                            <div>
+                                <h5><?php echo $curso['subject_name']; ?></h5> <!-- Mostrar el nombre del curso -->
+                                <p><?php echo $curso['description']; ?></p> <!-- Mostrar la descripción del curso -->
+                            </div>
+                        </a>
+                        <div class="adquirir">
+                            <a href="controller_descripcion_curso_estudiante.php?id_curso=<?php echo $curso['subject_id']; ?>">ADQUIRIR</a>
+                            <p class="descuento">20%DTO</p>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div> <!-- Cerrar div de artículos -->
+        </div> <!-- Cerrar div de categoría -->
+    <?php endforeach; ?>
+</div>
     </div>
 
     </section>
