@@ -62,10 +62,68 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       <section class="content">
-        <div class="container">
-         <h1>contenido de la vista </h1>
+        <div class="container mt-4">
+          <div class="row justify-content-center align-items-start">
+            <!-- Formulario -->
+            <div class="col-md-6 mb-4">
+              <form action="">
+                <div >
+                  
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="categoria">Seleccione área:</label>
+                      <select name="categoria" id="categoria" class="form-control">
+                        <option value="daniel">Matemáticas</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="nombre-curso">Seleccione docente:</label>
+                      <select name="nombre-curso" id="nombre-curso" class="form-control">
+                        <option value="daniel">Carlos</option>
+                        <option value="maria">Maria</option>
+                      </select>
+                    </div>
+                    <div class="form-group text-center">
+                      <button type="submit" class="btn btn-success btn-md w-50 mt-3">Vincular</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <!-- Tabla -->
+            <div class="container mt-4">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Docente</th>
+                    <th>Area</th>
+                    <th>Desvincular</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Carlos</td>
+                    <td>Área</td>
+                    <td><button class="btn btn-danger btn-sm ml-4"><i class="fas fa-trash"></i></button></td>
+                  </tr>
+                  <tr>
+                    <td>Maria</td>
+                    <td>Área</td>
+                    <td><button class="btn btn-danger btn-sm ml-4"><i class="fas fa-trash"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+          </div>
         </div>
       </section>
+
 
       <style>
         @media (max-width: 768px) {
