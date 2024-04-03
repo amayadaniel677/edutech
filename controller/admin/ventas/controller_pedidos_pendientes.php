@@ -27,7 +27,6 @@ class pedidos_pendientes{
             return false;
         }
     }
-
 }
 $consult=new pedidos_pendientes();
 $pedidos=$consult->datos_pedidos();
