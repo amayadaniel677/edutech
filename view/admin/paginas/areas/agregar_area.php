@@ -28,45 +28,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 <body class="hold-transition sidebar-mini">
-  <div class="wrapper">
+<div class="wrapper">
 
-    <!-- Navbar -->
-    <?php include('../../../view/admin/layouts/nav.php'); ?>
-    <!-- /.navbar -->
+<?php include('../../../view/admin/layouts/nav.php'); ?>
+<?php include('../../../view/admin/layouts/nav_aside.php'); ?>
+<div class="content-wrapper">
 
-    <!-- Main Nav Asidebar Container -->
-    <?php include('../../../view/admin/layouts/nav_aside.php'); ?>
-    <!-- Fin del Main Nav Asidebar Container -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 >AGREGAR AREA</h1>
+        </div><div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Starter Page</li>
+          </ol>
+        </div></div></div></div>
+  <section class="content">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <form action="#">
+            <div class="form-group row">
+              <label for="agregar_area" class="col-sm-4 col-form-label">Agregar Area: </label>
+              <div class="col-sm-8">
+                <input type="text" name="agregar_area" id="agregar_area" placeholder="AREA" class="form-control">
+              </div>
+            </div>
 
+            <div class="form-group row">
+              <label for="precio" class="col-sm-4 col-form-label">Precio: </label>
+              <div class="col-sm-8">
+                <input type="number" id="precio" value="15000" class="form-control">
+              </div>
+            </div>
 
-
-    <!-- TODA LA PAGINA -->
-    <div class="content-wrapper">
-      <!-- Titulo de la vista -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0">Agregar cursos</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.fin titulo de la vista -->
-
-
-      <section class="content">
-        <div class="container">
-         <h1>contenido de la vista </h1>
+            <div class="form-group text-center">
+              <button type="submit" class="btn btn-success btn-md w-50 mt-3"   >Agregar</button>
+            </div>
+          </form>
         </div>
-      </section>
-
+      </div>
+    </div>
       <style>
         @media (max-width: 768px) {
           .col-lg-6 {
@@ -74,11 +78,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
           }
         }
       </style>
-
-
+     </div>
+     
 
       <!-- /. Maincontent -->
-    </div>
+    
     <!-- /.content-wrapper -->
 
     <!-- Controlador del nav aSidebar -->
@@ -108,4 +112,4 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 </body>
 
-</html>
+</html> 

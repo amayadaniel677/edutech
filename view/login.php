@@ -80,7 +80,7 @@
       </form>
 
       <p class="mb-1">
-        <a href="forgot-password.html">Olvidé mi contraseña</a>
+        <a href="recuperar_password/recuperar_controller.php">Olvidé mi contraseña</a>
       </p>
 
     </div>
