@@ -62,25 +62,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       <section class="content">
+        <div class='d-flex justify-content-center'>
+        <?php if (!empty($mensaje)) : ?>
+          <div class="alert alert-success col-md-8 ">
+            <?php echo  $mensaje  ?>
+            <?php $mensaje = ''; ?>
+          </div>
+        <?php endif; ?>
+        <?php if (!empty($error)) : ?>
+          <div class="alert alert-danger col-md-8 ">
+            <?php echo  $error; ?>
+            <?php $error = ''; ?>
+
+          </div>
+        <?php endif; ?>
+        </div>
         <div class="container mt-4">
           <div class="row justify-content-center align-items-start">
             <!-- Formulario -->
             <div class="col-md-6 mb-4">
-              <form action="">
-                <div >
-                  
+              <form action="" method="POST">
+                <div>
+
+
                   <div class="card-body">
                     <div class="form-group">
                       <label for="categoria">Seleccione área:</label>
-                      <select name="categoria" id="categoria" class="form-control">
-                        <option value="daniel">Matemáticas</option>
+                      <select class="form-control" name="area">
+                        <option value='false' selected>Selecciona un área</option>
+                        <?php foreach ($areas as $area) : ?>
+                          <option value="<?php echo $area['id']; ?>"><?php echo $area['name']; ?></option>
+                        <?php endforeach; ?>
                       </select>
                     </div>
                     <div class="form-group">
                       <label for="nombre-curso">Seleccione docente:</label>
-                      <select name="nombre-curso" id="nombre-curso" class="form-control">
-                        <option value="daniel">Carlos</option>
-                        <option value="maria">Maria</option>
+                      <select class="form-control" name="docente">
+                        <option value='false' selected>Selecciona un docente</option>
+                        <?php foreach ($docentes as $docente) : ?>
+                          <option value="<?php echo $docente['id']; ?>"><?php echo $docente['name']; ?></option>
+                        <?php endforeach; ?>
                       </select>
                     </div>
                     <div class="form-group text-center">
@@ -93,32 +114,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Tabla -->
             <div class="container mt-4">
-          <div class="row justify-content-center">
-            <div class="col-lg-8">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Docente</th>
-                    <th>Area</th>
-                    <th>Desvincular</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Carlos</td>
-                    <td>Área</td>
-                    <td><button class="btn btn-danger btn-sm ml-4"><i class="fas fa-trash"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td>Maria</td>
-                    <td>Área</td>
-                    <td><button class="btn btn-danger btn-sm ml-4"><i class="fas fa-trash"></i></button></td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Docente</th>
+                        <th>Area</th>
+                        <th>Desvincular</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                   <?php if (!empty($_SESSION['docentes_vinculados'])) : ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre y Apellido</th>
+                <th>Área</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($_SESSION['docentes_vinculados'] as $people_area) : ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($people_area['name']) . " " . htmlspecialchars($people_area['lastname']); ?></td>
+                    <td><?php echo htmlspecialchars($people_area['area_name']); ?></td>
+                    <td>
+                        <a class="btn btn-danger btn-sm ml-4" href='controller_confirmar_desvinculacion.php?idDesvincular=<?php echo htmlspecialchars($people_area['id']); ?>'>
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php else : ?>
+    <p>No hay docentes vinculados.</p>
+<?php endif; ?>
+                   
+                  </table>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
           </div>
         </div>
