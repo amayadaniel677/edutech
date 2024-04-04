@@ -220,7 +220,158 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                           </div>
 
-                        
+                          <div class="container">
+                            <div class="card card-success mt-4 ml-1 col-md-12">
+                              <div class="col-12">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h3 class="card-title">Registro de Estudiantes</h3>
+                                    <div class="card-tools">
+                                      <div class="input-group input-group-sm">
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                        <div class="input-group-append">
+                                          <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- /.card-header -->
+                                  <div class="card-body table-responsive p-0">
+                                    <table class="table table-head-fixed text-nowrap mx-auto">
+                                      <thead>
+                                        <tr>
+                                          <th>Estudiante</th>
+                                          <th>Tutoria</th>
+                                          <th>Fecha</th>
+                                          <th>Asistencia</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+
+                                          <td>John Doe</td>
+                                          <td>11-7-2014</td>
+                                          <td><span class="tag tag-success">Approved</span></td>
+                                          <td>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 20px;">
+                                              <label class="form-check-label" for="flexCheckDefault">
+                                                Confirmar asistencia
+                                              </label>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+
+                                          <td>Alexander Pierce</td>
+                                          <td>11-7-2014</td>
+                                          <td><span class="tag tag-warning">Pending</span></td>
+                                          <td>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 20px;">
+                                              <label class="form-check-label" for="flexCheckDefault">
+                                                Confirmar asistencia
+                                              </label>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+
+                                          <td>Bob Doe</td>
+                                          <td>11-7-2014</td>
+                                          <td><span class="tag tag-primary">Approved</span></td>
+                                          <td>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 20px;">
+                                              <label class="form-check-label" for="flexCheckDefault">
+                                                Confirmar asistencia
+                                              </label>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+
+                                          <td>Mike Doe</td>
+                                          <td>11-7-2014</td>
+                                          <td><span class="tag tag-danger">Denied</span></td>
+                                          <td>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 20px;">
+                                              <label class="form-check-label" for="flexCheckDefault">
+                                                Confirmar asistencia
+                                              </label>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+
+                                          <td>Jim Doe</td>
+                                          <td>11-7-2014</td>
+                                          <td><span class="tag tag-success">Approved</span></td>
+                                          <td>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 20px;">
+                                              <label class="form-check-label" for="flexCheckDefault">
+                                                Confirmar asistencia
+                                              </label>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+
+                                          <td>Victoria Doe</td>
+                                          <td>11-7-2014</td>
+                                          <td><span class="tag tag-warning">Pending</span></td>
+                                          <td>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 20px;">
+                                              <label class="form-check-label" for="flexCheckDefault">
+                                                Confirmar asistencia
+                                              </label>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+
+                                          <td>Michael Doe</td>
+                                          <td>11-7-2014</td>
+                                          <td><span class="tag tag-primary">Approved</span></td>
+                                          <td>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 20px;">
+                                              <label class="form-check-label" for="flexCheckDefault">
+                                                Confirmar asistencia
+                                              </label>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+
+                                          <td>Rocky Doe</td>
+                                          <td>11-7-2014</td>
+                                          <td><span class="tag tag-danger">Denied</span></td>
+                                          <td>
+                                            <div class="form-check">
+                                              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 20px;">
+                                              <label class="form-check-label" for="flexCheckDefault">
+                                                Confirmar asistencia
+                                              </label>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                                <button type="button" class="btn btn-primary float-left mb-3 ml-3">VOLVER</button>
+                                <button type="button" class="btn btn-success float-right mb-3 mr-3">GUARDAR</button>
+                              </div>
+                            </div>
+                          </div>
 
                         </div>
 
