@@ -37,31 +37,98 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
       </div>
 
       <section class="content">
+        <?php if (!empty($mensaje)) : ?>
+          <div class="alert alert-success">
+            <?php echo  $mensaje  ?>
+          </div>
+        <?php endif; ?>
+        <?php if (!empty($error)) : ?>
+          <div class="alert alert-danger">
+            <?php echo  $error; ?>
+          </div>
+        <?php endif; ?>
         <div class="container">
           <div class="row justify-content-center">
-          <div class="col-md-6">
-          <form action="">
-    <div class="text-center">
-        <div class="card-body">
-            <div class="form-group">
-                <label for="categoria">Seleccione área:</label>
-                <select name="categoria" id="categoria" class="form-control">
-                    <option value="daniel">Matemáticas</option>
-                </select>
-            </div>
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-success btn-md w-50 mt-3 mx-2">Buscar</button>
-                <button type="button" class="btn btn-outline-primary btn-md w-50 mt-3 mx-2">Editar</button>
-            </div>
-        </div>
-    </div>
-</form>
+            <div class="col-md-6">
+              <form action="" method="POST">
+                <div class="text-center">
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label for="categoria">Seleccione área:</label>
+                      <select name="categoria" id="categoria" class="form-control">
+                        <?php
+                        foreach ($areas as $area) {
+                          echo "<option value='" . $area['id'] . "'>" . $area['name'] . "</option>";
+                        }
+                        ?>
+
+                      </select>
+                    </div>
+                    <div class="form-group text-center">
+                      <button type="submit" class="btn btn-success btn-md w-50 mt-3 mx-2">Buscar</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
 
         <div class="container mt-4">
           <div class="row justify-content-center">
+            <div class="col-12">
+              <!-- Título con el nombre de la materia -->
+              <h4><?php if (isset($vinculados[0]['area_name'])) {
+                    echo $vinculados[0]['area_name'];
+                    echo "
+                    <button type='button' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modal-edit-area'>
+                      <i class='fas fa-edit'></i>
+                    ";
+                  } else {
+                    echo "Nombre de la materia";
+                  }; ?>
+              </h4>
+              <!-- modal editar -->
+              <!-- Modal -->
+              <div class="modal fade" id="modal-edit-area" tabindex="-1" role="dialog" aria-labelledby="modalMateriaLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modalMateriaLabel">NOMBRE AREA</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- Aquí puedes incluir el contenido del modal, como formularios para editar la materia -->
+                      <form action="" method='POST' id='form-edit'>
+                        <div class="form-group">
+                          <input required type="hidden" name="idArea" id="idArea" class="form-control" value="<?php if (isset($vinculados)) {
+                                                                                                                echo $vinculados[0]['area_id'];
+                                                                                                              } ?>)">
+                          <label for="nombre">Nombre del area:</label>
+                          <input required type="text" name="nombre" id="nombre" class="form-control" value="<?php if (isset($vinculados)) {
+                                                                                                              echo $vinculados[0]['area_name'];
+                                                                                                            } ?>">
+                        </div>
+                        <div class="form-group">
+                          <label for="nombre">Precio del area:</label>
+                          <input required type="number" name="precio" id="precio" class="form-control" value="<?php if (isset($vinculados)) {
+                                                                                                                echo $vinculados[0]['area_price'];
+                                                                                                              } ?>">
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                          <input type="submit" class="btn btn-primary" id='btn-edit'>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
             <div class="col-lg-8">
               <table class="table table-bordered">
                 <thead>
@@ -72,16 +139,15 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Carlos</td>
-                    <td>Área</td>
-                    <td><button class="btn btn-danger btn-sm ml-4"><i class="fas fa-trash"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td>Maria</td>
-                    <td>Área</td>
-                    <td><button class="btn btn-danger btn-sm ml-4"><i class="fas fa-trash"></i></button></td>
-                  </tr>
+                  <?php
+                  foreach ($vinculados as $vinculado) {
+                    echo "<tr>";
+                    echo "<td>" . $vinculado['people_name'] . "</td>";
+                    echo "<td>" . $vinculado['area_name'] . "</td>";
+                    echo "<td><a href='controller_desvincular_docente.php?id_people_area=" . $vinculado['people_area_id'] . "' class='btn btn-danger btn-sm ml-4'><i class='fas fa-trash'></i></a></td>";
+                    echo "</tr>";
+                  }
+                  ?>
                 </tbody>
               </table>
             </div>
@@ -99,7 +165,24 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
 
     <?php include('../../../view/admin/layouts/footer.php'); ?>
   </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.getElementById('form-edit').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevenir el envío por defecto del formulario
+      Swal.fire({
+        title: '¿Estás seguro de querer editar el área?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, editar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Si el usuario confirma, proceder con el envío del formulario
+          this.submit();
+        }
+      });
+    });
+  </script>
   <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
   <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
