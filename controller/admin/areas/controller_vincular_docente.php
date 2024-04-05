@@ -22,7 +22,7 @@ if (isset($_GET['idDesvincular'])) {
 // Recibir si han enviado un docente para vincular
 if (isset($_GET['mensaje'])) {
     $mensaje = urldecode($_GET['mensaje']);
-    var_dump($mensaje);
+   
 }
 if ($_POST) {
     $id_area = $_POST['area'];
@@ -40,7 +40,7 @@ if ($_POST) {
             header("Location: " . $_SERVER['PHP_SELF'] . "?mensaje=" . urlencode($mensaje));
             exit();
         } else {
-            $mensaje = "Error al vincular el docente";
+            $mensaje = "el docente ya esta vinculado a esta area";
             // Redirigir al usuario a la misma página con un mensaje de error
             header("Location: " . $_SERVER['PHP_SELF'] . "?mensaje=" . urlencode($mensaje));
             exit();

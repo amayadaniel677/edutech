@@ -31,14 +31,24 @@ class buscar_area_model{
             return false;
         }
     }
-
+    // traer area seleccionada
+    public function traer_area($id_area){
+        $sql="SELECT * FROM areas WHERE id = '$id_area'";
+        $result=$this->con->query($sql);
+        if ($result->num_rows > 0) {
+            $result_array = $result->fetch_assoc();
+            return $result_array;
+        } else {
+            return false;
+        }
+    }
     public function traer_vinculados($id_area){
         $sql="SELECT people_area.id AS people_area_id, people.name AS people_name, areas.name AS area_name,
-        areas.price AS area_price, areas.id AS area_id
+        areas.price AS area_price, areas.id AS area_id, areas.status AS area_status
         FROM people_area
         INNER JOIN people ON people_area.people_id = people.id
         INNER JOIN areas ON people_area.areas_id = areas.id
-        WHERE areas.id = '$id_area'";
+        WHERE areas.id = '$id_area' and people_area.status = 'active'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             $result_array = [];
@@ -51,8 +61,8 @@ class buscar_area_model{
         }
     }
 
-    public function editarArea($name,$price,$id){
-        $sql = "UPDATE areas SET name = '$name', price = '$price' WHERE id = '$id'";
+    public function editarArea($name,$price,$id,$status){
+        $sql = "UPDATE areas SET name = '$name', price = '$price', status='$status' WHERE id = '$id'";
         $result = $this->con->query($sql);
         if ($result) {
             return true;

@@ -57,8 +57,10 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                       <label for="categoria">Seleccione área:</label>
                       <select name="categoria" id="categoria" class="form-control">
                         <?php
+                        // agregar un valor por defecto
+                        echo "<option value=''>Seleccionar área</option>";
                         foreach ($areas as $area) {
-                          echo "<option value='" . $area['id'] . "'>" . $area['name'] . "</option>";
+                          echo "<option value='" . $area['id'] . "'>" . $area['id']," ",$area['name'] . "</option>";
                         }
                         ?>
 
@@ -76,18 +78,69 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
 
         <div class="container mt-4">
           <div class="row justify-content-center">
+            <div class="card col-md-9">
+              <div class="card-header">
+                <h2> AREA: <?php if (isset($areaSelect['name']) && !empty($areaSelect['name'])) {
+                      echo $areaSelect['name'];
+                      echo "
+       <button type='button' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modal-edit-area'>
+         <i class='fas fa-edit'></i>
+       ";
+                    } else {
+                      echo "Nombre de la materia";
+                    }; ?>
+                </h2>
+                <h5><?php if (isset($areaSelect['status']) && !empty($areaSelect['status'])) {
+                                  echo "Estado:" . $areaSelect['status'];
+                                } else {
+                                  echo "Estado:";
+                                }; ?>
+                </h5>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-striped table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Docente</th>
+                      <th>Area</th>
+
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    if (isset($vinculados) && (is_array($vinculados) || is_object($vinculados))) {
+                      foreach ($vinculados as $vinculado) {
+                        echo "<tr>";
+                        echo "<td>" . $vinculado['people_name'] . "</td>";
+                        echo "<td>" . $vinculado['area_name'] . "</td>";
+                        echo "<td><a href='controller_desvincular_docente.php?id_people_area=" . $vinculado['people_area_id'] . "' class='btn btn-danger btn-sm ml-4'><i class='fas fa-trash'></i></a></td>";
+                        echo "</tr>";
+                      }
+                    } else {
+                      // Manejar el caso en que $vinculados no es un array o un objeto iterable
+                      echo "No hay docentes vinculados a esta área.";
+                    }
+                    ?>
+
+                  </tbody>
+                </table>
+
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                  <li class="page-item active"><a class="page-link" href="?pagina=1">1</a></li>
+                  <li class="page-item "><a class="page-link" href="?pagina=2">2</a></li>
+                  <li class="page-item "><a class="page-link" href="?pagina=3">3</a></li>
+                  <li class="page-item"><a class="page-link" href="?pagina=2">»</a></li>
+                </ul>
+              </div>
+            </div>
             <div class="col-12">
               <!-- Título con el nombre de la materia -->
-              <h4><?php if (isset($vinculados[0]['area_name'])) {
-                    echo $vinculados[0]['area_name'];
-                    echo "
-                    <button type='button' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modal-edit-area'>
-                      <i class='fas fa-edit'></i>
-                    ";
-                  } else {
-                    echo "Nombre de la materia";
-                  }; ?>
-              </h4>
+
               <!-- modal editar -->
               <!-- Modal -->
               <div class="modal fade" id="modal-edit-area" tabindex="-1" role="dialog" aria-labelledby="modalMateriaLabel" aria-hidden="true">
@@ -103,25 +156,39 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                       <!-- Aquí puedes incluir el contenido del modal, como formularios para editar la materia -->
                       <form action="" method='POST' id='form-edit'>
                         <div class="form-group">
-                          <input required type="hidden" name="idArea" id="idArea" class="form-control" value="<?php if (isset($vinculados)) {
-                                                                                                                echo $vinculados[0]['area_id'];
-                                                                                                              } ?>)">
+                          <input required type="text" name="idArea" id="idArea" class="form-control" value="<?php if (isset($area)) {
+                                                                                                                echo $areaSelect['id'];
+                                                                                                              } ?>">
                           <label for="nombre">Nombre del area:</label>
-                          <input required type="text" name="nombre" id="nombre" class="form-control" value="<?php if (isset($vinculados)) {
-                                                                                                              echo $vinculados[0]['area_name'];
+                          <input required type="text" name="nombre" id="nombre" class="form-control" value="<?php if (isset($area)) {
+                                                                                                              echo $areaSelect['name'];
                                                                                                             } ?>">
                         </div>
                         <div class="form-group">
                           <label for="nombre">Precio del area:</label>
-                          <input required type="number" name="precio" id="precio" class="form-control" value="<?php if (isset($vinculados)) {
-                                                                                                                echo $vinculados[0]['area_price'];
+                          <input required type="number" name="precio" id="precio" class="form-control" value="<?php if (isset($area)) {
+                                                                                                                echo $areaSelect['price'];
                                                                                                               } ?>">
                         </div>
+                        <!-- agregar estado dependiendo de su valor en la BD -->
+                        <div class="form-group
+                        ">
+                          <label for="estado">Estado:</label>
+                          <select  name='status' id="estado" class="form-control">
+                            <!-- agregar selected si  $vinculados[0]['area_status'] es active o inactive -->
+                            <option value="active" <?php if (isset($areaSelect) && $areaSelect['status'] == 'active') {
+                                                      echo 'selected';
+                                                    } ?>>Activo</option>
+                            <option value="inactive" <?php if (isset($areaSelect) && $areaSelect['status'] == 'inactive') {
+                                                        echo 'selected';
+                                                      } ?>>Inactivo</option>
 
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                          <input type="submit" class="btn btn-primary" id='btn-edit'>
-                        </div>
+                          </select>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <input type="submit" class="btn btn-primary" id='btn-edit'>
+                          </div>
                       </form>
                     </div>
                   </div>
@@ -129,28 +196,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
 
               </div>
             </div>
-            <div class="col-lg-8">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Docente</th>
-                    <th>Area</th>
-                    <th>Desvincular</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  foreach ($vinculados as $vinculado) {
-                    echo "<tr>";
-                    echo "<td>" . $vinculado['people_name'] . "</td>";
-                    echo "<td>" . $vinculado['area_name'] . "</td>";
-                    echo "<td><a href='controller_desvincular_docente.php?id_people_area=" . $vinculado['people_area_id'] . "' class='btn btn-danger btn-sm ml-4'><i class='fas fa-trash'></i></a></td>";
-                    echo "</tr>";
-                  }
-                  ?>
-                </tbody>
-              </table>
-            </div>
+
           </div>
         </div>
       </section>

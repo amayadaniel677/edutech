@@ -57,9 +57,23 @@ class vincular_docente_model
     }
 
     public function vincular_docente($id_area,$id_docente){
+        // comprobar vinculacion
+        if($this->comprobar_vinculacion($id_area,$id_docente)){
+            return false;
+        }
         $sql="INSERT INTO people_area (areas_id,people_id) values ('$id_area','$id_docente')";
         $result=$this->con->query($sql);
         if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    // crear funcion comprobar si ya esta el docente vinculado al area
+    public function comprobar_vinculacion($id_area,$id_docente){
+        $sql = "SELECT * FROM people_area WHERE areas_id = '$id_area' AND people_id = '$id_docente' and status = 'active'";
+        $result = $this->con->query($sql);
+        if($result->num_rows > 0){
             return true;
         }else{
             return false;
