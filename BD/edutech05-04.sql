@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: edutech
+-- Host: localhost    Database: edutech
 -- ------------------------------------------------------
 -- Server version	8.0.33
 
@@ -26,6 +26,7 @@ CREATE TABLE `areas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `price` int NOT NULL,
+  `status` set('active','inactive') DEFAULT 'active',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -36,7 +37,7 @@ CREATE TABLE `areas` (
 
 LOCK TABLES `areas` WRITE;
 /*!40000 ALTER TABLE `areas` DISABLE KEYS */;
-INSERT INTO `areas` VALUES (1,'matematicas',22000),(2,'idiomas',15000),(3,'preicfes',15000),(4,'tati',15000),(5,'Asfdasdf',1231),(6,'Asfdasdf',1231),(7,'Asfdasdf',1231),(8,'Asfdasdf',1231),(9,'Artes',15000),(10,'Artes',15000),(11,'Artes',15000),(12,'Mecanica',10000);
+INSERT INTO `areas` VALUES (1,'matematicas',22000,NULL),(2,'idiomas',15000,NULL),(3,'preicfes',15000,NULL),(4,'tati',15000,NULL),(5,'Asfdasdf',1231,NULL),(6,'Asfdasdf',1231,NULL),(7,'Asfdasdf',1231,NULL),(8,'Asfdasdf',1231,NULL),(9,'Artes',15000,NULL),(10,'Artes',15000,NULL),(11,'Artes',15000,NULL),(12,'Mecanica',10000,NULL);
 /*!40000 ALTER TABLE `areas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -512,4 +513,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-05  9:12:47
+-- Dump completed on 2024-04-05  9:51:54
