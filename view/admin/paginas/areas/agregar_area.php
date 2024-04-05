@@ -28,61 +28,78 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
 
-<?php include('../../../view/admin/layouts/nav.php'); ?>
-<?php include('../../../view/admin/layouts/nav_aside.php'); ?>
-<div class="content-wrapper">
+    <?php include('../../../view/admin/layouts/nav.php'); ?>
+    <?php include('../../../view/admin/layouts/nav_aside.php'); ?>
+    <div class="content-wrapper">
 
-  <div class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1 >AGREGAR AREA</h1>
-        </div><div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Starter Page</li>
-          </ol>
-        </div></div></div></div>
-  <section class="content">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-6">
-          <form action="#">
-            <div class="form-group row">
-              <label for="agregar_area" class="col-sm-4 col-form-label">Agregar Area: </label>
-              <div class="col-sm-8">
-                <input type="text" name="agregar_area" id="agregar_area" placeholder="AREA" class="form-control">
-              </div>
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>AGREGAR AREA</h1>
             </div>
-
-            <div class="form-group row">
-              <label for="precio" class="col-sm-4 col-form-label">Precio: </label>
-              <div class="col-sm-8">
-                <input type="number" id="precio" value="15000" class="form-control">
-              </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Starter Page</li>
+              </ol>
             </div>
-
-            <div class="form-group text-center">
-              <button type="submit" class="btn btn-success btn-md w-50 mt-3"   >Agregar</button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
-      <style>
-        @media (max-width: 768px) {
-          .col-lg-6 {
-            width: 100% !important;
-          }
-        }
-      </style>
-     </div>
-     
+      <section class="content">
+        <?php if (!empty($mensaje)) : ?>
+          <div class="alert alert-success">
+            <?php echo  $mensaje  ?>
 
-      <!-- /. Maincontent -->
-    
+          </div>
+        <?php endif; ?>
+        <?php if (!empty($error)) : ?>
+          <div class="alert alert-danger">
+            <?php echo  $error; ?>
+
+          </div>
+        <?php endif; ?>
+
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <form action="#" method='POST'>
+                <div class="form-group row">
+                  <label for="agregar_area" class="col-sm-4 col-form-label">Agregar Area: </label>
+                  <div class="col-sm-8">
+                    <input type="text" name="nombre_area" id="nombre_area" placeholder="Escriba el nombre" name='nombre_area' class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="precio" class="col-sm-4 col-form-label">Precio: </label>
+                  <div class="col-sm-8">
+                    <input type="number" id="precio"  name='precio' placeholder="Escriba el precio" class="form-control">
+                  </div>
+                </div>
+
+                <div class="form-group text-center">
+                  <button type="submit" class="btn btn-success btn-md w-50 mt-3">Agregar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <style>
+          @media (max-width: 768px) {
+            .col-lg-6 {
+              width: 100% !important;
+            }
+          }
+        </style>
+    </div>
+
+
+    <!-- /. Maincontent -->
+
     <!-- /.content-wrapper -->
 
     <!-- Controlador del nav aSidebar -->
