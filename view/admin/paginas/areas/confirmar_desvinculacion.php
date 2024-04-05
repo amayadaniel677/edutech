@@ -85,7 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
               <div class="cuerpo-eliminar text-center float center justify-conten-center mt-4">
                 <a href="controller_vincular_docente.php?idDesvincular=<?php echo $idDesvincular; ?>" class="btn btn-danger ">Confirmar</a>
-                <a href="controller_pedidos_pendientes.php" class="btn btn-success ">Cancelar</a>
+                <a href="controller_vincular_docente.php" class="btn btn-success ">Cancelar</a>
               </div>
 
             </div>

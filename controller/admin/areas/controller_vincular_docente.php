@@ -19,11 +19,16 @@ if (isset($_GET['idDesvincular'])) {
         $mensaje = 'docente desvinculado con exito';
     }
 }
+// Recibir si han enviado un docente para vincular
+if (isset($_GET['mensaje'])) {
+    $mensaje = urldecode($_GET['mensaje']);
+    var_dump($mensaje);
+}
 if ($_POST) {
     $id_area = $_POST['area'];
     $id_docente = $_POST['docente'];
     if ($id_area == 'false' || $id_docente == 'false') {
-        $error = "Seleccione un docente y un area";
+        $mensaje = "Seleccione un docente y un area";
     } else {
         $vincular = $consult->vincular_docente($id_area, $id_docente);
         if ($vincular) {
@@ -35,9 +40,9 @@ if ($_POST) {
             header("Location: " . $_SERVER['PHP_SELF'] . "?mensaje=" . urlencode($mensaje));
             exit();
         } else {
-            $error = "Error al vincular el docente";
+            $mensaje = "Error al vincular el docente";
             // Redirigir al usuario a la misma página con un mensaje de error
-            header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . urlencode($error));
+            header("Location: " . $_SERVER['PHP_SELF'] . "?mensaje=" . urlencode($mensaje));
             exit();
         }
     }

@@ -42,7 +42,7 @@ class vincular_docente_model
 
     public function traer_docentes()
     {
-        $sql = "SELECT * FROM people WHERE `rol`='docente'";
+        $sql = "SELECT * FROM people WHERE `rol`='docente' and `status`='active'";
         $result = $this->con->query($sql);
 
         if ($result->num_rows > 0) {
@@ -70,7 +70,7 @@ class vincular_docente_model
                 FROM people_area
                 INNER JOIN people ON people_area.people_id = people.id
                 INNER JOIN areas ON people_area.areas_id = areas.id
-                WHERE areas_id = '$id_area'";
+                WHERE areas_id = '$id_area' and people_area.status = 'active'";
         $result = $this->con->query($sql);
         if($result->num_rows > 0){
             $result_array = [];

@@ -63,19 +63,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <section class="content">
         <div class='d-flex justify-content-center'>
-        <?php if (!empty($mensaje)) : ?>
-          <div class="alert alert-success col-md-8 ">
-            <?php echo  $mensaje  ?>
-            <?php $mensaje = ''; ?>
-          </div>
-        <?php endif; ?>
-        <?php if (!empty($error)) : ?>
-          <div class="alert alert-danger col-md-8 ">
-            <?php echo  $error; ?>
-            <?php $error = ''; ?>
-
-          </div>
-        <?php endif; ?>
+          <?php if (!empty($mensaje) && $mensaje=='Docente vinculado con exito') : ?>
+            <div class="alert alert-success col-md-8 ">
+              <?php echo $mensaje; ?>
+              <?php $mensaje = ''; ?>
+            </div>
+          <?php elseif(!empty($mensaje)): ?>
+            <div class="alert alert-danger col-md-8 ">
+              <?php echo $mensaje; ?>
+              <?php $mensaje = ''; ?>
+            </div>
+          <?php endif; ?>
         </div>
         <div class="container mt-4">
           <div class="row justify-content-center align-items-start">
@@ -105,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </select>
                     </div>
                     <div class="form-group text-center">
-                      <button type="submit" class="btn btn-success btn-md w-50 mt-3">Vincular</button>
+                      <button type="submit" class="btn btn-success btn-md w-50 mt-3" onclick="showConfirmationDialog(event)">Vincular</button>
                     </div>
                   </div>
                 </div>
@@ -125,34 +123,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </tr>
                     </thead>
                     <tbody>
-                   <?php if (!empty($_SESSION['docentes_vinculados'])) : ?>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre y Apellido</th>
-                <th>Área</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($_SESSION['docentes_vinculados'] as $people_area) : ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($people_area['name']) . " " . htmlspecialchars($people_area['lastname']); ?></td>
-                    <td><?php echo htmlspecialchars($people_area['area_name']); ?></td>
-                    <td>
-                        <a class="btn btn-danger btn-sm ml-4" href='controller_confirmar_desvinculacion.php?idDesvincular=<?php echo htmlspecialchars($people_area['id']); ?>'>
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-<?php else : ?>
-    <p>No hay docentes vinculados.</p>
-<?php endif; ?>
-                   
+                      <?php if (!empty($_SESSION['docentes_vinculados'])) : ?>
+
+                        <?php foreach ($_SESSION['docentes_vinculados'] as $people_area) : ?>
+                          <tr>
+                            <td><?php echo htmlspecialchars($people_area['name']) . " " . htmlspecialchars($people_area['lastname']); ?></td>
+                            <td><?php echo htmlspecialchars($people_area['area_name']); ?></td>
+                            <td>
+                              <a class="btn btn-danger btn-sm ml-4" href='controller_confirmar_desvinculacion.php?idDesvincular=<?php echo htmlspecialchars($people_area['id']); ?>'>
+                                <i class="fas fa-trash"></i>
+                              </a>
+                            </td>
+                          </tr>
+                        <?php endforeach; ?>
+                    </tbody>
                   </table>
+                <?php else : ?>
+                  <p>No hay docentes vinculados.</p>
+                <?php endif; ?>
+
+                </table>
                 </div>
               </div>
             </div>
@@ -194,7 +184,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function showConfirmationDialog(event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Vas a vincular un docente.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, vincular',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // If confirmed, submit the form
+            event.target.form.submit();
+        }
+    });
+}
+</script>
   <!-- jQuery -->
   <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
