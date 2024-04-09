@@ -200,6 +200,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- /.card-body -->
                 <div class="card-footer">
                   <button type="submit" class="btn btn-info"> Confirmar venta</button>
+                  <a href="controller_pedidos_pendientes.php" class="btn btn-danger">volver</a>
                 </div>
                 <!-- /.card-footer -->
               </form>
