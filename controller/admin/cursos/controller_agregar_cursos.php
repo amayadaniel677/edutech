@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset( $_SESSION['dni_session'])){
+    header('location:../../login_controller.php');
+    exit();
+}
+$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
 // capturar el mensaje enviado en get
 
  include('../../../model/admin/cursos/agregar_curso_model.php');

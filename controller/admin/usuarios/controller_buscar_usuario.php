@@ -1,4 +1,10 @@
 <?php 
+session_start();
+if (!isset( $_SESSION['dni_session'])){
+    header('location:../../login_controller.php');
+    exit();
+}
+$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
 include('../../../model/admin/usuarios/buscar_usuario_model.php');
 $consult= new buscar_usuario_controlador();
 $usuarios=$consult->traer_usuarios();

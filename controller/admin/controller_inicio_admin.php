@@ -16,5 +16,3 @@ $ruta_inicio='../../';  //esta ruta se usa para cerrar sesion en el nav
 include('../../view/admin/starter.php');
 
 ?>
-
-

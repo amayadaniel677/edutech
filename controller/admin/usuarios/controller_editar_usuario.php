@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset( $_SESSION['dni_session'])){
+    header('location:../../login_controller.php');
+    exit();
+}
+$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
+
 include('../../../model/admin/usuarios/editar_usuario_model.php');
 if (isset($_GET['id_usuario'])) {
     $id_ususario = $_GET['id_usuario'];

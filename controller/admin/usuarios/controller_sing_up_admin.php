@@ -1,5 +1,10 @@
 <?php
-
+session_start();
+if (!isset( $_SESSION['dni_session'])){
+    header('location:../../login_controller.php');
+    exit();
+}
+$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
 include('../../../model/admin/usuarios/sing_up_admin_model.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (

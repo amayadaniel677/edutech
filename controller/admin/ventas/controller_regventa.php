@@ -1,5 +1,10 @@
 <?php
-
+session_start();
+if (!isset( $_SESSION['dni_session'])){
+    header('location:../../login_controller.php');
+    exit();
+}
+$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
 require_once('../../../model/admin/ventas/regventa_model.php');
 
 class RegVenta
