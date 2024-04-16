@@ -55,7 +55,7 @@
             </a>
             <ul class="nav nav-treeview" style="display: none;">
               <li class="nav-item">
-              <a href="controller_cursos_estudiante.php" class="nav-link">
+              <a href="controller_cursos_activos.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Activos</p>
                 </a>

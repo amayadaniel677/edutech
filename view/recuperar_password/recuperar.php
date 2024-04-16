@@ -45,9 +45,11 @@
                     <input type="number" id="dni" name="dni" class="form-control" placeholder="Identificacion">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Enviar</button>
-                <button type="submit" class="btn btn-success btn-block">Regresar</button>
+               
 
             </form>
+            <br>
+            <a href="../login_controller.php" class="btn btn-success btn-block">Regresar</a>
         </div>
     </div>
 

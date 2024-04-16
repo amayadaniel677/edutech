@@ -2,6 +2,7 @@
 
 <?php 
 $urlStarter='../../view/admin/';  //son desde el controlador
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- CSS CURSOS ADMIN -->
 
     <link rel="icon" href="../../resource/img/icons/logo-kepler-removebg-preview.png" />
+    
+   
 </head>
+
+
+
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
