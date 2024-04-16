@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$ruta_inicio='../../';  //esta ruta se usa para cerrar sesion en el nav
 include('../../model/estudiante/catalogo_estudiante_model.php');
 
 $ver_curso = new ver_curso(); // Crear una instancia de la clase ver_curso

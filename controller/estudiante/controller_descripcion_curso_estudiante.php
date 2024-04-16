@@ -1,5 +1,5 @@
 <?php
-
+$ruta_inicio='../../';  //esta ruta se usa para cerrar sesion en el nav
 include('../../model/estudiante/descripcion_curso_estudiante_model.php');
 
 if (isset($_GET['id_curso'])) {

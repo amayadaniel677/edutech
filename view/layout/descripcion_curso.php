@@ -4,7 +4,7 @@
             <div class="col-12 col-sm-6" >
                 <h3 class="d-inline-block d-sm-none"><?php echo $curso1['subject_name']; ?></h3>
                 <div class="col-12">
-                    <img src="../../<?php echo $curso1['photo']; ?>" class="product-image" alt="Product Image">
+                    <img src="<?php echo $ruta_inicio.$curso1['photo']; ?>" class="product-image" alt="Product Image">
                 </div>
             </div>
             <div class="col-12 col-sm-6">
@@ -54,13 +54,13 @@
             <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Docentes</a>
         </div>
         <div class="tab-content p-3" id="nav-tabContent">
-            <div class="tab-pane fade" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"><?php echo $curso['description']; ?></div>
+            <div class="tab-pane fade" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"><?php echo $curso1['description']; ?></div>
             <div class="tab-pane fade active show" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, non! Quidem labore voluptates aut amet numquam error? Placeat, enim quasi. Optio cumque id, odit dolorum laboriosam velit fugit. Voluptates, voluptatum?</div>
-            <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
+            <div class="tab-pane fade " id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
                 <?php
                 if (!empty($docentes)) {
                     foreach ($docentes as $docente) {
-                        echo "<h5>{$docente['docente']}</h5>"; // Mostrar el nombre del docente
+                        echo "<p>{$docente['docente']}</p>"; // Mostrar el nombre del docente
                     }
                 } else {
                     echo "<h4>No se encontraron docentes vinculados para este curso.</h4>";
