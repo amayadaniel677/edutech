@@ -33,6 +33,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
+<?php if(isset($_SESSION['error_message'])): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $_SESSION['error_message']; ?>
+            </div>
+            <?php unset($_SESSION['error_message']); // Limpiar el mensaje de error después de mostrarlo ?>
+        <?php endif; ?>
   <!-- Navbar -->
     <?php include('../../view/layout/nav_top_estudiante.php'); ?>
   <!-- /.navbar -->

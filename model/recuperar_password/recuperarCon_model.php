@@ -34,7 +34,8 @@ class recuperar_con
         if ($result->num_rows > 0) {
             return $result->fetch_assoc(); // Devuelve el arreglo asociativo con los datos del usuario
         } else {
-            return false; // Devuelve false si el usuario no existe
+            return false;
+             // Devuelve false si el usuario no existe
         }
     }
     

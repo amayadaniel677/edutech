@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $mail->addAddress($email, 'user');
                         $mail->isHTML(true);
                         $mail->Subject = 'RECUPERACION DE CONTRASENIA';
-                        $mail->Body = 'Haz clic en el siguiente enlace para restablecer tu contraseña: <a href="http://localhost/edutech-project/controller/recuperar_password/confirmar_contra_controller.php">Restablecer Contraseña</a>';
+                        $mail->Body = 'Haz clic en el siguiente enlace para restablecer tu contraseña: <a href="http://localhost/edutech/controller/recuperar_password/confirmar_contra_controller.php">Restablecer Contraseña</a>';
 
                         if ($mail->send()) {
                             $errors[] = 'Se ha enviado el correo exitosamente, revise su cuenta.';
