@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hours']) && isset($_P
     $subject_id = $_POST['subject_id'];
     $subject_name = $_POST['subject_name'];
     $price = $_POST['price'];
-    $id_people = $_SESSION['id_sesssion'];
+    $id_people = $_SESSION['id_session'];
 
     // Validar cantidad de horas (debe ser al menos 1)
     if ($hours < 1) {
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hours']) && isset($_P
     $carrito = new Carrito_compras();
 
             // Insertar el curso en la base de datos
-  $carrito->insertar_curso($id_people,$subject_name, $price, $hours);
+  $carrito->insertar_curso($id_people, $price, $hours,$subject_id);
   $cursos_en_carrito = $carrito->Mostrar_curso();
 
     
@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hours']) && isset($_P
             $carrito->vaciar_carrito();
         
         // Redireccionar a la página del catálogo después de vaciar el carrito
+       
         header('Location: controller_catalogo_estudiante.php');
         exit();
     }

@@ -54,7 +54,7 @@
             <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Docentes</a>
         </div>
         <div class="tab-content p-3" id="nav-tabContent">
-            <div class="tab-pane fade" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"><?php echo $curso['description']; ?></div>
+            <div class="tab-pane fade" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"><?php echo $curso1['description']; ?></div>
             <div class="tab-pane fade active show" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, non! Quidem labore voluptates aut amet numquam error? Placeat, enim quasi. Optio cumque id, odit dolorum laboriosam velit fugit. Voluptates, voluptatum?</div>
             <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
                 <?php
@@ -67,8 +67,11 @@
                 }
                 ?>
             </div>
-        </div>
+            </div>
+       
     <?php else : ?>
         <p>No se encontraron detalles para este curso.</p>
     <?php endif; ?>
+   
+    
 </section>
