@@ -109,7 +109,7 @@ $cursos_en_carrito = $carrito->Mostrar_curso();
             $total_pago += $monto_individual; // Sumamos este monto al total de pago
         ?>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <?php echo $curso['name_subject']; ?> - <?php echo $curso['hours']; ?> horas
+                <?php echo $curso['name']; ?> - <?php echo $curso['hours']; ?> horas
                 <p> Precio: <?php echo $curso['price']; ?></p>
                 <p> Monto: <?php echo $monto_individual; ?></p> <!-- Mostramos el monto individual -->
                 <a href="#" class="btn btn-danger btn-sm" onclick="confirmarEliminacion(<?php echo $curso['id']; ?>)">

@@ -67,8 +67,11 @@
                 }
                 ?>
             </div>
-        </div>
+            </div>
+       
     <?php else : ?>
         <p>No se encontraron detalles para este curso.</p>
     <?php endif; ?>
+   
+    
 </section>

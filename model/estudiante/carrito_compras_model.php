@@ -22,25 +22,25 @@ class Carrito_compras{
         $this->con->set_charset("utf8");
     }
 
-    public function insertar_curso($id_people, $subject_name, $price, $hours){ 
+    public function insertar_curso($id_people, $price, $hours, $subject_id){ 
         // Verificar si el curso ya está en el carrito
-        $sql_check = "SELECT id FROM trolley WHERE name_subject = ?";
+        $sql_check = "SELECT id FROM trolley WHERE subjects_id = ?";
         $stmt_check = $this->con->prepare($sql_check);
-        $stmt_check->bind_param('s', $subject_name);
+        $stmt_check->bind_param('i', $subject_id);
         $stmt_check->execute();
         $stmt_check->store_result();
         
         if ($stmt_check->num_rows > 0) {
             
-            $_SESSION['error_message'] = "El curso '$subject_name' ya está en el carrito.";
+            $_SESSION['error_message'] = "    Este  curso  ya está en el carrito.";
            
             return false; // No se inserta el curso
         }
     
         // Si el curso no existe en el carrito, proceder a insertarlo
-        $sql_insert = "INSERT INTO trolley (name_subject, price, hours) VALUES (?, ?, ?)";
+        $sql_insert = "INSERT INTO trolley (price, hours,people_id,subjects_id) VALUES (?, ?, ?,?)";
         $stmt_insert = $this->con->prepare($sql_insert);
-        $stmt_insert->bind_param('siii', $subject_name, $price, $hours, $id_people);
+        $stmt_insert->bind_param('iiii',  $price, $hours, $id_people,$subject_id);
         $stmt_insert->execute();
         
         // Devolver true para indicar que el curso se insertó correctamente
@@ -48,7 +48,10 @@ class Carrito_compras{
     }
     
     public function Mostrar_curso() {
-        $sql = "SELECT id, name_subject, price, hours FROM trolley ";
+        $sql = "SELECT t.id, s.name, t.price, t.hours, t.subjects_id, t.people_id
+        FROM trolley t
+        INNER JOIN subjects s ON t.subjects_id = s.id";
+        
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
