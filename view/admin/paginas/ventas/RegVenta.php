@@ -223,7 +223,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <?php include('../../../view/admin/layouts/footer.php'); ?>
       <!--FIN   Main Footer -->
     </div>
-    <!--fin de toda la pagina wrapper -->
+    <!--fin de toda la pagina wrapper --> 
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
