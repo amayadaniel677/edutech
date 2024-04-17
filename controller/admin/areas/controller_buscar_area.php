@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['categoria']) && $_POST[
     $id_area=$_POST['categoria'];
     // traer area seleccionada
     $areaSelect=$consult->traer_area($id_area);
-    echo "area seleccionada"; var_dump($areaSelect); // Debugging (borrar después de verificar que los datos son correctos
+    
     // traer docentes vinculados
     $vinculados=$consult->traer_vinculados($id_area);
 }
@@ -34,8 +34,7 @@ if ($_POST and isset($_POST['nombre'] ) and isset($_POST['precio']) and isset($_
     $precio = $_POST['precio'];
     $id = $_POST['idArea'];
     $status = $_POST['status'];
-    echo "estado recibido: $status";
-    var_dump($nombre, $precio, $id,$status); // Debugging (borrar después de verificar que los datos son correctos
+    
     $areaModel = new buscar_area_model();
     $areaModel->editarArea($nombre, $precio, $id,$status);
     if($areaModel){
