@@ -135,8 +135,10 @@ DROP TABLE IF EXISTS `modalities`;
 CREATE TABLE `modalities` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `price_student` int NOT NULL,
+  `price_hour_student` int NOT NULL,
   `price_teacher` int NOT NULL,
+  `price_class_student` int NOT NULL,
+  `status` set('active','inactive') DEFAULT 'active',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -147,7 +149,7 @@ CREATE TABLE `modalities` (
 
 LOCK TABLES `modalities` WRITE;
 /*!40000 ALTER TABLE `modalities` DISABLE KEYS */;
-INSERT INTO `modalities` VALUES (1,'presencial',10000,20000),(2,'telepresencial',9000,15000),(3,'virtual',8000,10000),(4,'domicilio',20000,12000);
+INSERT INTO `modalities` VALUES (1,'presencial',10000,20000,0,'active'),(2,'telepresencial',9000,15000,0,'active'),(3,'virtual',8000,10000,0,'active'),(4,'domicilio',20000,12000,0,'active');
 /*!40000 ALTER TABLE `modalities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -570,4 +572,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-17 11:41:42
+-- Dump completed on 2024-04-17 16:38:18
