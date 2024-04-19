@@ -13,7 +13,7 @@
                     <div class="input-group mb-2">
                             <label>Tipo de venta</label>
                             <select class="form-control" id="tipo-venta" name="tipo-venta" style="width: 100%;">
-                            <option value="seleccione">Seleccione una opción</option>
+                            <option value="">Seleccione una opción</option>
                                 <option value="horas" id='horas'>Venta por horas</option>
                                 <option value="clases" id='clases'>Venta por clases</option>
                             </select>
@@ -21,12 +21,12 @@
                         <div class="input-group mb-2">
                             <label>Modalidad</label>
                             <select class="form-control" id="modalidad" name="modalidad" style="width: 100%;">
-                                <option value="seleccione">Seleccione</option>
+                                <option value="">Seleccione</option>
                                 <?php
                                     if(isset($modalidades)){
                                         foreach($modalidades as $modalidad){
                                             // en el option guardar el valor del precio y el id de la modalidad en data-id
-                                            echo "<option value='".$modalidad['id']."' data-pricehour='".$modalidad['price_hour_student']."' data-priceclass='".$modalidad['price_class_student']."'>".$modalidad['name']."</option>";
+                                            echo "<option value='".$modalidad['name']."' data-pricehour='".$modalidad['price_hour_student']."' data-priceclass='".$modalidad['price_class_student']."'>".$modalidad['name']."</option>";
                                             
                                            
                                         }
@@ -44,10 +44,10 @@
                                     echo "<option value='categoria' class='alert alert-danger'>Error: $error_message</option>";
                                 } else {
                                     if (empty($datosParaVista)) {
-                                        echo "<option value='categoria'>modelo existen</option>";
+                                        echo "<option value=''>modelo existen</option>";
                                     } elseif (!isset($datosParaVista)) {
                                         // Agregar el comando echo aquí
-                                        echo "<option value='categoria'>no existe el modelo</option>";
+                                        echo "<option value=''>no existe el modelo</option>";
                                     } else {
                                         foreach ($datosParaVista as $nombre) {
                                             echo "<option value='" . $nombre . "'>" . $nombre . "</option>";
@@ -67,7 +67,7 @@
                         </div>
                         <label for="cantidad-horas-clases" class="col-sm-2 col-form-label">Cantidad horas/clases:</label> <br>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="cantidad-horas" name="cantidad-horas " Pleaceholder="Ingrese la cantidad">
+                            <input type="number" class="form-control" id="cantidad-horas-clases" name="cantidad-horas-clases" Pleaceholder="Ingrese la cantidad">
                         </div>
 
                         <label for="valor-hora-clase" class="col-sm-6 col-form-label">Valor hora/clase:</label>

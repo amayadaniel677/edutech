@@ -26,6 +26,7 @@ CREATE TABLE `areas` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `status` set('active','inactive') DEFAULT 'active',
+  `price` int DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -36,7 +37,7 @@ CREATE TABLE `areas` (
 
 LOCK TABLES `areas` WRITE;
 /*!40000 ALTER TABLE `areas` DISABLE KEYS */;
-INSERT INTO `areas` VALUES (1,'Matematicas','active'),(2,'Idiomas editado','active'),(3,'preicfes','active'),(4,'tati','active'),(5,'Asfdasdf','active'),(6,'Asfdasdf','active'),(7,'Asfdasdf','active'),(8,'Asfdasdf','active'),(9,'Artes plasticas editadas','inactive'),(10,'Artes','active'),(11,'Artes','active'),(12,'Mecanica','active'),(13,'Calculos','active'),(14,'Calculos','active');
+INSERT INTO `areas` VALUES (1,'Matematicas','active',0),(2,'Idiomas editado','active',0),(3,'preicfes','active',0),(4,'tati','active',0),(5,'Asfdasdf','active',0),(6,'Asfdasdf','active',0),(7,'Asfdasdf','active',0),(8,'Asfdasdf','active',0),(9,'Artes plasticas editadas','inactive',0),(10,'Artes','active',0),(11,'Artes','active',0),(12,'Mecanica','active',0),(13,'Calculos','active',0),(14,'Calculos','active',0);
 /*!40000 ALTER TABLE `areas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +150,7 @@ CREATE TABLE `modalities` (
 
 LOCK TABLES `modalities` WRITE;
 /*!40000 ALTER TABLE `modalities` DISABLE KEYS */;
-INSERT INTO `modalities` VALUES (1,'presencial',10000,20000,0,'active'),(2,'telepresencial',9000,15000,0,'active'),(3,'virtual',8000,10000,0,'active'),(4,'domicilio',20000,12000,0,'active');
+INSERT INTO `modalities` VALUES (1,'presencial',11000,11000,20000,'active'),(2,'telepresencial',9000,15000,21000,'active'),(3,'virtual',8000,10000,22000,'active'),(4,'domicilio',20000,12000,15000,'active');
 /*!40000 ALTER TABLE `modalities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -572,4 +573,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-17 16:38:18
+-- Dump completed on 2024-04-19  8:47:57
