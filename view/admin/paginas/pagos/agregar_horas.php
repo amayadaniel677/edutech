@@ -63,9 +63,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <section class="content">
                 <div class='d-flex justify-content-center'>
-                    <?php if (!empty($mensaje) && $mensaje == 'Las horas se agregaron correctamente') : ?>
+                    <?php if (!empty($mensaje_ok)) : ?>
                         <div class="alert alert-success col-md-8 ">
-                            <?php echo $mensaje; ?>
+                            <?php echo $mensaje_ok; ?>
                             <?php $mensaje = ''; ?>
                         </div>
                     <?php elseif (!empty($mensaje)) : ?>
@@ -97,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <input type="number" class="form-control" id="horas" name="horas" min="0" step="1" required>
                                         </div>
                                         <div class="form-group text-center">
-                                            <button type="submit" class="btn btn-success btn-md w-50 mt-3" >Agregar</button>
+                                            <button type="submit" class="btn btn-success btn-md w-50 mt-3" onclick="showConfirmationDialog(event)">Agregar</button>
                                         </div>
                                     </div>
                                 </div>
@@ -105,24 +105,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
 
                         <!-- Tabla -->
-                        <div class="container mt-4">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Docente</th>
-                                                <th>Area</th>
-                                                <th>Desvincular</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                     </div>
                 </div>
@@ -167,12 +150,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             event.preventDefault(); // Prevent the form from submitting immediately
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "Vas a vincular un docente.",
+                text: "Vas a Agregar otra hora.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, vincular',
+                confirmButtonText: 'Sí, agregar',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {

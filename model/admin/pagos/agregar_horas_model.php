@@ -59,11 +59,21 @@ class agregar_horas_model{
         }else{
             $sql="INSERT INTO payments (`total_hours`,`people_id`) VALUES ('$horas','$id_docente')";
             $result=$this->con->query($sql);
-            if($result->num_rows>0){
+            if($result){
                 return true;
             }else{
                 return false;
             }
+        }
+    }
+    public function traer_horas($id_docente){
+        $sql="SELECT total_hours FROM payments WHERE people_id='$id_docente'";
+        $result=$this->con->query($sql);
+        if($result->num_rows>0){
+            $row=$result->fetch_assoc();
+            return $row;
+        }else{
+            return false;
         }
     }
 }
