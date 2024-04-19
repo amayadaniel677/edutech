@@ -519,13 +519,13 @@ CREATE TABLE `trolley` (
   `id` int NOT NULL AUTO_INCREMENT,
   `price` int NOT NULL,
   `hours` int NOT NULL,
-  `people_id` varchar(45) NOT NULL,
+  `people_id` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `subjects_id` int NOT NULL,
-  `name_subject` varchar(45) DEFAULT NULL,
+  `name_subject` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_trolley_subjects1_idx` (`subjects_id`),
   CONSTRAINT `fk_trolley_subjects1` FOREIGN KEY (`subjects_id`) REFERENCES `subjects` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -575,4 +575,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-19 15:36:59
+-- Dump completed on 2024-04-19 15:41:54
