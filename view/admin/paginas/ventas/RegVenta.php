@@ -231,7 +231,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
 
-<script src="../../../resource/js/admin/ventas/modal_detalle_venta1.js"></script>
+<script src="../../../resource/js/admin/ventas/modal_detalle_venta.js"></script>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- sweet alert -->

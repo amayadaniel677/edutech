@@ -41,6 +41,20 @@ class RegVenta_consult{
         }
     
     }
+    public function traer_modalidades(){
+        $sql="SELECT * FROM modalities WHERE status='active'";
+        $result=$this->con->query($sql);
+        if($result->num_rows>0){
+            $modalidades=array();
+            while($row=$result->fetch_assoc()){
+                // guardar en un array cada fila de la consulta
+                $modalidades[]=$row;
+            }
+            return $modalidades;
+        }else{
+            return false;
+        }
+    }
     public function obtenerIdAreas($nombreArea){
         $sql="SELECT id FROM areas Where name='$nombreArea'";
         $result=$this->con->query($sql);

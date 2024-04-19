@@ -1,7 +1,6 @@
 // AGREGAR DETALLE VENTA EN EL MODAL
 
-// Obtener el elemento select por su ID
-var selectCategorias = document.getElementById("categoria-curso");
+
 
 // Variable para almacenar el precio por hora
 var precioPorHora;
@@ -14,7 +13,7 @@ function actualizarValorTotal() {
 }
 
 // Función para actualizar los datos
-function actualizarDatos() {
+function actualizarCursos() {
     // Enviar el valor al controlador para obtener los cursos
     
     fetch('controller_regventa.php', {
@@ -37,25 +36,75 @@ function actualizarDatos() {
                 option.text = data.cursos[i];
                 selectCursos.add(option);
             }
+            
+            // // Acceder al precio por hora y actualizar el valor del input "valor-hora"
+            // precioPorHora = data.precio;
 
-            // Acceder al precio por hora y actualizar el valor del input "valor-hora"
-            precioPorHora = data.precio;
+            // // Actualizar el valor del input "valor-hora"
+            // var inputValorHora = document.getElementById("valor-hora");
+            // inputValorHora.value = precioPorHora;
 
-            // Actualizar el valor del input "valor-hora"
-            var inputValorHora = document.getElementById("valor-hora");
-            inputValorHora.value = precioPorHora;
-
-            // Actualizar el valor total
-            actualizarValorTotal();
+            // // Actualizar el valor total
+            // actualizarValorTotal();
         })
         .catch(error => {
             console.error('Error:', error);
         });
 }
-
+// Obtener el elemento select por su ID
+var selectCategorias = document.getElementById("categoria-curso");
 // Llamar a la función cuando cambie la categoría
-selectCategorias.addEventListener('change', actualizarDatos);
+selectCategorias.addEventListener('change', actualizarCursos);
 
+//obtener el elemento select Modalidaddes por su id
+//llamar a la función cuando cambie la modalidad
+// cuando cambie necesito actualizar el precio por hora
+
+// Definir tipoVenta en un ámbito accesible para ambos manejadores de eventos
+document.addEventListener('DOMContentLoaded', function() {
+    var selectModalidad = document.getElementById("modalidad");
+    var inputValorHora = document.getElementById("valor-hora");
+    var selectTipoVenta = document.getElementById("tipo-venta");
+    var tipoVenta;
+
+    // Función para actualizar los precios
+    function actualizarPrecios() {
+        var modalidadSeleccionada = selectModalidad.value;
+        var precioPorHora = selectModalidad.options[selectModalidad.selectedIndex].dataset.pricehour;
+        var precioPorClase = selectModalidad.options[selectModalidad.selectedIndex].dataset.priceclass;
+        console.log('Precio por hora:', precioPorHora);
+        console.log('Precio por clase:', precioPorClase);
+
+        if(tipoVenta == "clases"){
+            var valorHoraClase = document.getElementById("valor-hora-clase");
+            valorHoraClase.value = precioPorClase;
+        }
+        if(tipoVenta == "horas"){
+            var valorHoraClase = document.getElementById("valor-hora-clase");
+            valorHoraClase.value = precioPorHora;
+        }
+    }
+
+    // Asignar el valor de tipoVenta cuando cambie la selección en selectTipoVenta
+    selectTipoVenta.addEventListener('change', function() {
+        tipoVenta = selectTipoVenta.value;
+        // Actualizar los precios cuando cambia el tipo de venta
+        actualizarPrecios();
+    });
+
+    selectModalidad.addEventListener('change', function () {
+        // Actualizar los precios cuando cambia la modalidad
+        actualizarPrecios();
+    });
+});
+
+
+
+
+
+
+
+// capturar el select
 // Capturar el valor del input de cantidad de horas
 var inputCantidadHoras = document.getElementById("cantidad-horas");
 inputCantidadHoras.addEventListener('input', function () {
@@ -196,7 +245,7 @@ function calcularValorTotalCursos() {
         valorTotalCursos += detalle.valorCurso;
     });
 
-    console.log("La suma de valorCurso es: " + valorTotalCursos);
+    console.log("La suma de valorCurso jajajajaj: " + valorTotalCursos);
 
     // Actualizar el valor del input con ID "valor-total"
     var inputValorTotal = document.getElementById("valor-total");
@@ -227,7 +276,7 @@ function restarDescuento() {
 }
 
 // Llamada a la función después de cargar la página y cada vez que se actualizan los detalles
-actualizarDatos();
+actualizarCursos();
 calcularValorTotalCursos();
 
 // Capturar el valor del input de descuento

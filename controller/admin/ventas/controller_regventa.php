@@ -20,6 +20,12 @@ class RegVenta
         $nombresBd = $consult->nombre_area();
         return $nombresBd;
     }
+    public function modalidades()
+    {
+        $consult = new RegVenta_consult();
+        $modalidades_bd = $consult->traer_modalidades();
+        return $modalidades_bd;
+    }
 
     public function curso($categoria)
     {
@@ -38,7 +44,7 @@ class RegVenta
 
 $consult = new RegVenta();
 $nombresAreas = $consult->areas();
-
+$modalidades = $consult->modalidades();
 $cursos = array(); // Declarar la variable antes del bloque if
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

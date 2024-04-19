@@ -10,6 +10,31 @@
                 <div class="col-10">
                     <br>
                     <form action="" class="form" id="detalle-form">
+                    <div class="input-group mb-2">
+                            <label>Tipo de venta</label>
+                            <select class="form-control" id="tipo-venta" name="tipo-venta" style="width: 100%;">
+                            <option value="seleccione">Seleccione una opción</option>
+                                <option value="horas" id='horas'>Venta por horas</option>
+                                <option value="clases" id='clases'>Venta por clases</option>
+                            </select>
+                            </div>
+                        <div class="input-group mb-2">
+                            <label>Modalidad</label>
+                            <select class="form-control" id="modalidad" name="modalidad" style="width: 100%;">
+                                <option value="seleccione">Seleccione</option>
+                                <?php
+                                    if(isset($modalidades)){
+                                        foreach($modalidades as $modalidad){
+                                            // en el option guardar el valor del precio y el id de la modalidad en data-id
+                                            echo "<option value='".$modalidad['id']."' data-pricehour='".$modalidad['price_hour_student']."' data-priceclass='".$modalidad['price_class_student']."'>".$modalidad['name']."</option>";
+                                            
+                                           
+                                        }
+                                    }
+                                
+                                ?>
+                            </select>
+                            </div>
                         <div class="input-group mb-2">
                             <label>Categoria</label>
                             <select class="form-control" id="categoria-curso" name="categoria-curso" style="width: 100%;">
@@ -32,8 +57,6 @@
                                 ?>
                             </select>
 
-
-
                         </div>
                         <div class="input-group mb-2">
                             <label>Nombre curso</label>
@@ -42,20 +65,20 @@
 
                             </select>
                         </div>
-                        <label for="cantidad-horas" class="col-sm-2 col-form-label">Horas:</label> <br>
+                        <label for="cantidad-horas-clases" class="col-sm-2 col-form-label">Cantidad horas/clases:</label> <br>
                         <div class="input-group">
                             <input type="number" class="form-control" id="cantidad-horas" name="cantidad-horas " Pleaceholder="Ingrese la cantidad">
                         </div>
 
-                        <label for="valor-hora" class="col-sm-6 col-form-label">Valor por hora:</label>
+                        <label for="valor-hora-clase" class="col-sm-6 col-form-label">Valor hora/clase:</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>
                             </div>
-                            <input readonly type="number" class="form-control" id="valor-hora" name='valor-hora' placeholder="">
+                            <input readonly type="number" class="form-control" id="valor-hora-clase" name='valor-hora-clase' placeholder="">
                         </div>
 
-                        <label for="valor-unidad" class="col-sm-6 col-form-label">Valor unitario:</label>
+                        <label for="valor-unidad" class="col-sm-6 col-form-label">Total del curso:</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">$</span>
