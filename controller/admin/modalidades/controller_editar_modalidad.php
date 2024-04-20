@@ -7,8 +7,7 @@ if (isset($_GET['id_modalidad'])) {
     $datos_modalidad = $model->traer_datos_editar($id_modalidad);
 }
 
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
     $price_hour_student = $_POST['price_hour_student'];
     $price_class_student = $_POST['price_class_student'];
@@ -19,22 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $rta_actualizar = $model->actualizar_modalidad($id, $price_hour_student, $price_teacher, $price_class_student);
     if ($rta_actualizar) {
-        $msg = 'Modalidad actualizada con éxito!';
-        echo "<script>
-              Swal.fire({
-                  title: 'Modalidad actualizada con éxito!',
-                  icon: 'success'
-              }).then((result) => {
-                  if (result.isConfirmed) {
-                      window.location.href = 'controller_modalidades.php';
-                  }
-              });
-          </script>";
+        $msg = 'Modalidad actualizada con éxito!!!';
     }
 }
 
-
-
-
 include('../../../view/admin/paginas/modalidades/editar_modalidad.php');
 ?>
+

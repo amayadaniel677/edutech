@@ -72,17 +72,27 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
     <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
     <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             <?php if (isset($msg)) : ?>
             Swal.fire({
-                title: '<?php echo $msg; ?>',
-                icon: 'success'
+                title: '¿Seguro de hacer los cambios?',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                denyButtonText: `No guardar`
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'controller_modalidades.php';
+                    Swal.fire({
+                        title: 'Modalidad actualizada con éxito!',
+                        icon: 'success'
+                    }).then(() => {
+                        window.location.href = 'controller_modalidades.php';
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire('Cambios no guardados', '', 'info');
                 }
             });
             <?php endif; ?>
@@ -91,3 +101,4 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
 </body>
 
 </html>
+
