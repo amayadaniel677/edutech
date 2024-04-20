@@ -185,6 +185,15 @@
              
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="<?php if(isset($urlStarter)){echo $urlStarter;}; ?>../../controller/admin/modalidades/controller_modalidades.php" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Modalidades
+                
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
