@@ -77,28 +77,25 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
     <script>
         $(document).ready(function() {
             <?php if (isset($msg)) : ?>
-            Swal.fire({
-                title: '¿Seguro de hacer los cambios?',
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: 'Guardar',
-                denyButtonText: `No guardar`
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'Modalidad actualizada con éxito!',
-                        icon: 'success'
-                    }).then(() => {
-                        window.location.href = 'controller_modalidades.php';
-                    });
-                } else if (result.isDenied) {
-                    Swal.fire('Cambios no guardados', '', 'info');
-                }
-            });
+                Swal.fire({
+                    title: '¿Seguro de hacer los cambios?',
+                    showCancelButton: true,
+                    confirmButtonText: 'Guardar',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Modalidad actualizada con éxito!',
+                            icon: 'success'
+                        }).then(() => {
+                            window.location.href = 'controller_modalidades.php';
+                        });
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire('Cambios no guardados', '', 'info');
+                    }
+                });
             <?php endif; ?>
         });
     </script>
 </body>
 
 </html>
-
