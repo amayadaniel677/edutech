@@ -41,11 +41,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
             <div class="container mt-4">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
-                        <?php if (isset($msg)) : ?>
-                            <div class="alert alert-success" role="alert">
-                                <?php echo $msg; ?>
-                            </div>
-                        <?php endif; ?>
+
                         <table id="tabla-modalidades" class="table table-bordered">
                             <thead>
                                 <tr>

@@ -32,10 +32,6 @@ try {
 
     $modalidades = $model->traer_modalidad();
 
-    if (isset($_GET['msg'])) {
-        $msg = $_GET['msg'];
-    }
-
     include('../../../view/admin/paginas/modalidades/modalidad_clase.php');
 } catch (Exception $e) {
     echo 'Error: ' . $e->getMessage();

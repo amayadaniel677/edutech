@@ -56,24 +56,38 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                     <input type="hidden" id="id-modalidad" name="id" value="<?php echo $datos_modalidad['id']; ?>"> <!-- Campo oculto -->
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
-                    
             </div>
-
-
-
-            <aside class="control-sidebar control-sidebar-dark">
-                <div class="p-3">
-                    <h5>Title</h5>
-                    <p>Sidebar content</p>
-                </div>
-            </aside>
-
-            <?php include('../../../view/admin/layouts/footer.php'); ?>
         </div>
 
-        <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
-        <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+        <aside class="control-sidebar control-sidebar-dark">
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+
+        <?php include('../../../view/admin/layouts/footer.php'); ?>
+    </div>
+
+    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+    <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <script>
+        $(document).ready(function () {
+            <?php if (isset($msg)) : ?>
+            Swal.fire({
+                title: '<?php echo $msg; ?>',
+                icon: 'success'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'controller_modalidades.php';
+                }
+            });
+            <?php endif; ?>
+        });
+    </script>
 </body>
 
 </html>
