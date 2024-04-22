@@ -22,21 +22,30 @@ class descripcionCurso{
     }
 
     public function descripcion_curso($id) {
-        $sql = "SELECT s.id AS subject_id, s.name AS subject_name, s.description, s.photo, a.name AS area_name
+        $sql = "SELECT s.id AS subject_id, s.name AS subject_name, s.description, s.photo, s.topics,a.id, a.name AS area_name
                 FROM subjects s
                 INNER JOIN areas a ON s.areas_id = a.id
                 WHERE s.id = $id"; // Filtrar por el id del curso específico
         $result = $this->con->query($sql);
     
         if ($result->num_rows == 1) {
-            return $result->fetch_assoc(); // Devuelve los detalles del curso específico
+            $row = $result->fetch_assoc();
+    
+            // Dividir los temas en un array
+            $topics_array = explode(',', $row['topics']);
+    
+            // Agregar el array de temas a la fila
+            $row['topics_array'] = $topics_array;
+    
+            return $row; // Devuelve los detalles del curso específico con el array de temas
         } else {
             return null; // Manejo de caso donde no se encuentra el curso
         }
     }
+    
 
     public function mostrarDocentesPorArea($area) {
-        $sql = "SELECT P.name AS docente, A.name AS area_name
+        $sql = "SELECT P.lastname, P.name AS docente, A.name AS area_name
                 FROM people P
                 INNER JOIN people_area PA ON P.id = PA.people_id
                 INNER JOIN areas A ON PA.areas_id = A.id
@@ -50,6 +59,40 @@ class descripcionCurso{
     
         return $docentes;
     }
+    public function seleccionar_curso($area_id) {
+        $sql = "SELECT s.id AS subject_id, s.name AS subject_name, s.description, s.photo, a.name AS area_name
+                FROM subjects s
+                INNER JOIN areas a ON s.areas_id = a.id
+                WHERE s.areas_id = ?";
+        $stmt = $this->con->prepare($sql);
+        $stmt->bind_param("i", $area_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $datos[] = $row;
+            }
+            return $datos;
+        } else {
+            return null;
+        }
+    }
+    public function mostrar_precio() {
+        $sql = "SELECT id,name,price_hour_student AS p_student,price_class_student AS p_class FROM modalities";
+        $stmt = $this->con->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $datos[] = $row;
+            }
+            return $datos;
+        } else {
+            return null;
+        }
+    }
+
+    
 }
 
 

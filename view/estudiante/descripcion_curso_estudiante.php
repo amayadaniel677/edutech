@@ -27,6 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- CSS CURSOS ADMIN -->
 
     <link rel="icon" href="../../resource/img/icons/logo-kepler-removebg-preview.png" />
+    <link rel="stylesheet" href="../../resource/css/cursos/descripcion_curso.css">
     
    
 </head>
@@ -51,7 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">CURSO</h1>
+            <h1 class="m-0">DESCRIPCION CURSO</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -102,7 +103,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../../view/admin/dist/js/adminlte.min.js"></script>
 </body>
 </html>
-
-
 
 

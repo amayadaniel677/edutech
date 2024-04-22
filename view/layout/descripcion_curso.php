@@ -1,43 +1,59 @@
+
+
+
+
+
+
 <section class="content">
-    <?php if(isset($curso1) && is_array($curso1)) : ?>
+    <?php if (isset($curso1) && is_array($curso1)) : ?>
         <div class="row">
-            <div class="col-12 col-sm-6" >
+            <div class="col-12 col-sm-6">
                 <h3 class="d-inline-block d-sm-none"><?php echo $curso1['subject_name']; ?></h3>
                 <div class="col-12">
-                    <img src="<?php echo $ruta_inicio.$curso1['photo']; ?>" class="product-image" alt="Product Image">
+<<<<<<< Updated upstream
+                    <img src="../../<?php echo $curso1['photo']; ?>" class="product-image" alt="Product Image">
+=======
+                    <img src="<?php echo $ruta_inicio . $curso1['photo']; ?>" class="product-image" alt="Product Image">
+>>>>>>> Stashed changes
                 </div>
             </div>
             <div class="col-12 col-sm-6">
                 <h3 class="my-3"><?php echo $curso1['subject_name']; ?></h3>
                 <p><?php echo $curso1['description']; ?></p>
                 <hr>
-                <h3 class="my-3">Horarios</h3>
-                <p>Días: Lunes a sábado</p>
-                <p>Hora: 8:00 am - 6:00 pm</p>
-                <div class="bg-gray py-2 px-3 mt-4">
-                    <h4 class="mt-0">
-                        <small>Precio por hora: <?php echo $curso1['price']; ?></small>
-                    </h4>
-                </div>
-                <form action="../../controller/estudiante/controller_carrito_compras.php" method="POST">
-                    <!-- Formulario para agregar al carrito -->
-                    <div class="form-group">
-                        <label for="hours">Cantidad de horas: </label>
-                        <div class="input-group">
-                            <input type="number" class="form-control" id="hours" name="hours" min="1">
-                            <input type="hidden" name="subject_id" value="<?php echo $curso1['subject_id']; ?>">
-                            <input type="hidden" name="subject_name" value="<?php echo $curso1['subject_name']; ?>">
-                            <input type="hidden" name="price" value="<?php echo $curso1['price']; ?>"> 
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">
-                            <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                            Agregar al Carrito
-                        </button>
-                    </div>
-                </form>
-
+                <h3 class="my-3">TEMAS</h3>
+                <ul>
+                    <?php foreach ($curso1['topics_array'] as $topic): ?>
+                        <li><?php echo $topic; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php if ($_SESSION['rol_session'] == 'estudiante'): ?>
+                    <form action="../../controller/estudiante/controller_carrito_compras.php" method="POST">
+                        <div class="form-group">
+                            <label for="hours">Cantidad de horas:</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="hours" name="hours" min="1">
+                                <input type="hidden" name="subject_id" value="<?php echo $curso1['subject_id']; ?>">
+                                <input type="hidden" name="subject_name" value="<?php echo $curso1['subject_name']; ?>">
+                               
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
+                                <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                                Agregar al Carrito
+                            </button>
+                        </div>
+                    </form>
+                <?php endif; ?>
+                <a type="button" href='https://wa.me/+573123467007?text=Hola,%20Estoy%20interesado%20en%20sus%20cursos%20'class="btn-animado animacion-cuatro color-instagram">
+                        
+                        <!-- icono whatsapp -->
+                        <i class="fab fa-whatsapp"></i>
+                        <span class="tex-icono">
+                        Chatea con nosotros
+                        </span>
+                    </a>
                 <div class="mt-4 product-share">
                     <a href="#" class="text-gray">
                         <i class="fab fa-facebook-square fa-2x"></i>
@@ -48,30 +64,120 @@
                 </div>
             </div>
         </div>
-        <div class="nav nav-tabs" id="product-tab" role="tablist">
-            <a class="nav-item nav-link" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="false">Descripción</a>
-            <a class="nav-item nav-link active" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="true">Recomendaciones</a>
-            <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Docentes</a>
+   <h3> cursos sugeridos </h3>
+      <!-- Carrusel de cursos relacionados -->
+<!-- Carrusel de cursos relacionados -->
+<div class=" mb-3 col-md-6 p-3 rounded ">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="background-color: #f2f2f2;">
+        <div class="carousel-inner">
+            <?php foreach ($cursos_area as $index => $curso2): ?>
+                <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                    <div class="border p-3 mx-auto curso-container" style="max-width: 300px;  margin-top:5px; margin-bottom: 5px; background: linear-gradient(to bottom, #7FFFD4, #40E0D0);; border-radius:7px;">
+                        <article class="materias">
+                            <a href="controller_descripcion_curso_estudiante.php?id_curso=<?php echo $curso2['subject_id']; ?>">
+                                <div class="curso" style="height: 120px; position: relative; border-radius: 10px; display: flex; align-items: center;">
+                                    <img src="<?php echo $ruta_inicio . $curso2['photo']; ?>" style="height: 100%; object-fit: cover; margin: auto;" alt="Curso Image">
+                                </div>
+                                <h5 class="text-center mt-3"><?php echo $curso2['subject_name']; ?></h5>
+                                
+                                <div class="adquirir-button text-center">
+                                    <a href="controller_descripcion_curso.php?id_curso=<?php echo $curso2['subject_id']; ?>" style="color: white;">ADQUIRIR</a>
+                                    
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
+<<<<<<< Updated upstream
         <div class="tab-content p-3" id="nav-tabContent">
             <div class="tab-pane fade" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"><?php echo $curso1['description']; ?></div>
             <div class="tab-pane fade active show" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, non! Quidem labore voluptates aut amet numquam error? Placeat, enim quasi. Optio cumque id, odit dolorum laboriosam velit fugit. Voluptates, voluptatum?</div>
-            <div class="tab-pane fade " id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
+            <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
                 <?php
                 if (!empty($docentes)) {
                     foreach ($docentes as $docente) {
-                        echo "<p>{$docente['docente']}</p>"; // Mostrar el nombre del docente
+                        echo "<h5>{$docente['docente']}</h5>"; // Mostrar el nombre del docente
                     }
                 } else {
                     echo "<h4>No se encontraron docentes vinculados para este curso.</h4>";
                 }
                 ?>
+=======
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+
+<div class="row mt-4">
+    <nav class="w-100">
+        <div class="nav nav-tabs" id="product-tab" role="tablist">
+            <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Descripción</a>
+            <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Recomendaciones</a>
+            <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Docentes</a>
+            <a class="nav-item nav-link" id="product-price-tab" data-toggle="tab" href="#product-price" role="tab" aria-controls="product-price" aria-selected="false">Precio</a>
+        </div>
+    </nav>
+    <div class="tab-content p-3" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"><?php echo $curso1['description']; ?></div>
+        <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
+            <h3>Recomendaciones para seguir un curso</h3>
+            <ol>
+                <li><strong>Establece objetivos claros:</strong> Antes de comenzar el curso, define qué es lo que esperas lograr al finalizarlo.</li>
+                <!-- Otras recomendaciones -->
+            </ol>
+        </div>
+        <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
+            <div class="text-center">
+                <?php if (!empty($docentes)) : ?>
+                    <h3>Docentes</h3>
+                    <ul class="list-unstyled">
+                        <?php foreach ($docentes as $docente) : ?>
+                            <li><?php echo $docente['docente'] .' '.$docente['lastname'];  ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php else : ?>
+                    <h4>No se encontraron docentes vinculados para este curso.</h4>
+                <?php endif; ?>
+>>>>>>> Stashed changes
             </div>
-            </div>
-       
+        </div>
+        <div class="tab-pane fade" id="product-price" role="tabpanel" aria-labelledby="product-price-tab">
+         
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>TIPO</th>
+                        <th>Precio por hora</th>
+                        <th>Precio por clase</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <!-- Aquí puedes agregar filas con los cursos y sus precios -->
+                <?php foreach($mostrar_precio as $precio) : ?>
+                    <tr>
+                        <td><?php echo $precio['name']; ?> </td>
+                        <td><?php echo $precio['p_student']; ?></td>
+                        <td><?php echo $precio['p_class']; ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                    <!-- Y así sucesivamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+        </div>
     <?php else : ?>
         <p>No se encontraron detalles para este curso.</p>
     <?php endif; ?>
-   
-    
 </section>

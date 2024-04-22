@@ -9,9 +9,12 @@ if (isset($_GET['id_curso'])) {
 
     // Llamar a la función descripcion_curso para obtener los detalles del curso
     $detalle_curso = $curso_model->descripcion_curso($id_curso);
+    $mostrar_precio= $curso_model->mostrar_precio();
 
     if ($detalle_curso) {
-        $area = $detalle_curso['area_name']; // Obtener el nombre del área del curso
+        $area = $detalle_curso['area_name']; 
+        $area_id = $detalle_curso['id']; // Obtener el nombre del área del curso
+        $cursos_area = $curso_model->seleccionar_curso($area_id);// Obtener el nombre del área del curso
 
         // Llamar a la función mostrarDocentesPorArea para obtener los docentes del área específica
         $docentes_area = $curso_model->mostrarDocentesPorArea($area);

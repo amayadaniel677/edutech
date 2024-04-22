@@ -1,4 +1,6 @@
 <?php 
+<<<<<<< Updated upstream
+=======
 session_start();
 if (!isset( $_SESSION['dni_session'])){
     header('location:../../login_controller.php');
@@ -12,13 +14,17 @@ if (isset($_GET['id_curso'])) {
     $id_curso = $_GET['id_curso'];
     // Crear una instancia del modelo para acceder a las funciones
     $curso_model = new descripcionCurso();
-
+   
     // Llamar a la función descripcion_curso para obtener los detalles del curso
     $detalle_curso = $curso_model->descripcion_curso($id_curso);
-
+    $mostrar_precio= $curso_model->mostrar_precio();
+   
     if ($detalle_curso) {
-        $area = $detalle_curso['area_name']; // Obtener el nombre del área del curso
+        $area = $detalle_curso['area_name'];
+        $area_id = $detalle_curso['id']; // Obtener el nombre del área del curso
+        $cursos_area = $curso_model->seleccionar_curso($area_id);
 
+      
         // Llamar a la función mostrarDocentesPorArea para obtener los docentes del área específica
         $docentes_area = $curso_model->mostrarDocentesPorArea($area);
 
@@ -36,5 +42,6 @@ if (isset($_GET['id_curso'])) {
     echo "No se proporcionó un ID de curso válido.";
 }
 
+>>>>>>> Stashed changes
 include('../../../view/admin/paginas/cursos/descripcion_curso.php');
 ?>
