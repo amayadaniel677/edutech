@@ -23,7 +23,7 @@ class eliminar_usuarios_model{
 
 
     public function eliminar_usuario($id){
-        $sql="DELETE FROM people WHERE id='$id'";
+        $sql="update people set status='inactive' where id='$id'";
         $result=$this->con->query($sql);
         if($result){
             return true;
