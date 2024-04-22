@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $msg = $new_user->msg;
 
-    session_start();
+
     if (empty($msg)) {
         $insertar_modelo = $new_user->validar($rol, $nombres, $apellidos, $tipo_documento, $documento, $sexo, $fecha, $correo, $contrasenia, $confContrasenia, $telefono, $ciudad, $direccion, $foto);
         if (!$insertar_modelo) {
@@ -107,8 +107,11 @@ class sing_up_admin
         // Crear un objeto DateTime para el año 1950
         $fechaLimite = new DateTime('1950-01-01');
 
-        if ($fechaNacimiento < $fechaMinima || $fechaNacimiento < $fechaLimite) {
-            $this->msg[] = 'La fecha de nacimiento no están en el rango permitido';
+        if ($fechaNacimiento > $fechaMinima || $fechaNacimiento < $fechaLimite) {
+            // var_dump($fechaNacimiento);
+            var_dump($fechaMinima);
+            // var_dump($fechaLimite);
+            $this->msg[] = 'Edad del usuario no valida: <br> Debe haber nacido después de 1950 <br>Debe tener minimo dos años de edad';
             $error = true;
         }
         // Si no hay errores, realizar el registro

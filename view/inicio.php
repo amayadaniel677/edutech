@@ -18,7 +18,7 @@
   </head>
   <body>
   <a href="https://www.youtube.com/watch?v=fVeGYX6GWMU" class="whatsaap-btn" targer="_blank">
-      <i class="bi bi-what  sapp"></i>
+  <i class="fa-brands fa-whatsapp"></i>
       <div class="joinchat__tooltip"><i class="bi bi-person-circle"></i>
       <div class="text">¿Podemos ayudarte?
 
