@@ -17,6 +17,14 @@
     <script src="https://kit.fontawesome.com/1165876da6.js" crossorigin="anonymous"></script>
   </head>
   <body>
+  <a href="https://www.youtube.com/watch?v=fVeGYX6GWMU" class="whatsaap-btn" targer="_blank">
+      <i class="bi bi-what  sapp"></i>
+      <div class="joinchat__tooltip"><i class="bi bi-person-circle"></i>
+      <div class="text">¿Podemos ayudarte?
+
+      </div>
+    </div>
+    </a>
     <?php require_once('view/layout/nav.php');?>
     <section class="section-inicio" id='section-inicio'>
       <div class="contenedor-frase">
@@ -111,6 +119,39 @@
       </article>
       <a class="boton ver" href='../controller/cursos_controller.php'>VER TODOS LOS CURSOS</a>
     </section>
+    
+    <section class="">
+      <h2 class="h2sub">TIPO DE CLASES DISPONIBLES</h2>
+      <article class="contenedor-populares">
+      <div class="card" onmouseover="this.style.backgroundColor='#8AE96E ';" onmouseout="this.style.backgroundColor='';">
+          <div class="popular-img">
+            <img src="resource/img/inicio/videollamada.png"width="100" alt="" />
+          </div>
+          <div class="popular-txt">
+            <h4>virtual</h4>
+          
+          </div>
+        </div>
+        <div class="card" onmouseover="this.style.backgroundColor='#8AE96E ';" onmouseout="this.style.backgroundColor='';">
+          <div class="popular-img">
+            <img src="resource/img/inicio/educacion.png" width="100" alt="" />
+          </div>
+          <div class="popular-txt">
+            <h4>presencial</h4>
+          </div>
+        </div>
+        <div class="card" onmouseover="this.style.backgroundColor='#8AE96E ';" onmouseout="this.style.backgroundColor='';">
+          <div class="popular-img">
+            <img src="resource/img/inicio/casa.png" width="100" alt="" />
+          </div>
+          <div class="popular-txt">
+            <h4>domicilio</h4>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    
     <section class="section-ofrece">
       <h2 class="h2sub">LO QUE TE OFRECEMOS EN KEPLER</h2>
       <article class="container-ofrece">
