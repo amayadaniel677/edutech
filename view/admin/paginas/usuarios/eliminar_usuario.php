@@ -87,6 +87,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="cuerpo-eliminar text-center float center justify-conten-center mt-4">
                   <form action="" method="POST">
                     <input type="hidden" name="id_usuario_post" value="<?php echo $id_usuario;?>">
+                    <input type="hidden" name="tipo_usuario_post" value="<?php echo $tipo_usuario;?>">
                     <input type="submit" value="Confirmar" class="btn btn-danger ">
                     <a href="controller_buscar_usuario.php" class="btn btn-success ">Cancelar</a>
                   </form>

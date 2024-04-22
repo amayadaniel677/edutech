@@ -33,6 +33,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
+<?php if(isset($_SESSION['error_message'])): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $_SESSION['error_message']; ?>
+            </div>
+            <?php unset($_SESSION['error_message']); // Limpiar el mensaje de error después de mostrarlo ?>
+        <?php endif; ?>
   <!-- Navbar -->
     <?php include('../../view/layout/nav_top_estudiante.php'); ?>
   <!-- /.navbar -->
@@ -85,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <article class="materias">
                         <a href="controller_descripcion_curso_estudiante.php?id_curso=<?php echo $curso['subject_id']; ?>">
                         <div style= "height:120px;">
-    <img src="../../<?php echo $curso['photo']; ?>" style= "height:100%;" /> <!-- Mostrar la imagen del curso -->
+    <img src="<?php echo $ruta_inicio.$curso['photo']; ?>" style= "height:100%;" /> <!-- Mostrar la imagen del curso -->
 </div>
                             <div>
                                 <h5><?php echo $curso['subject_name']; ?></h5> <!-- Mostrar el nombre del curso -->

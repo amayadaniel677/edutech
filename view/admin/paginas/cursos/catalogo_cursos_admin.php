@@ -50,7 +50,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Agregar curso</li>
+              <li class="breadcrumb-item active">catalogo curso</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -61,14 +61,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Contenido principal vista -->
     <section class="content">
     <div class="container-button">
-      <a type="button" class="button" href='controller_agregar_cursos.php'>
+      <a type="button" class="button btn btn-outline-success" href='controller_agregar_cursos.php'>
         <span class="button__text">Agregar curso</span>
         <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
       </a>
       </div>
     <br>
 
-    <section class="content">
+    <?php if(isset($_SESSION['error_message'])): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $_SESSION['error_message']; ?>
+            </div>
+            <?php unset($_SESSION['error_message']); // Limpiar el mensaje de error después de mostrarlo ?>
+        <?php endif; ?>
+
+        <section class="content">
       <div class="container-fluid">
       <figcaption class="buscador">
       <div>
@@ -80,37 +87,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </form>
       </div>
     </figcaption>
-      <div class="categoria-cursos">
-        <div class="titulo">
-          <h2>EN OFERTAS!</h2>
-        </div>
-        <div class="articulos">
-          
-          <article class="materias">
-              <a href="controller_descripcion_curso.php">
-              <div>
-              <img src="../../../resource/img/adm_courses/oferta.jpeg" alt="" />
+    <div class="categoria-cursos">
+    <?php foreach ($datos_organizados as $area => $cursos_area): ?>
+        <div class="categoria-cursos">
+            <div class="titulo">
+                <h2><?php echo $area; ?></h2> <!-- Mostrar el nombre del área -->
             </div>
-            <div>
-              <h5>jhdsj</h5>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi
-                vero odio placeat dolorem
-              </p>
-            </div>
-              </a>
-            
-            <div class="adquirir">
-              <a href="#">ADQUIRIR</a>
-              <p class="descuento">20%DTO</p>
-            </div>
-          </article>
-          
-        </div>
-      </div>
-
-  
-
+            <div class="articulos">
+                <?php foreach ($cursos_area as $curso): ?>
+                    <article class="materias">
+                        <a href="controller_descripcion_curso.php?id_curso=<?php echo $curso['subject_id']; ?>">
+                        <div style= "height:120px;">
+    <img src="<?php echo $ruta_inicio.$curso['photo']; ?>" style= "height:100%;" /> <!-- Mostrar la imagen del curso -->
+</div>
+                            <div>
+                                <h5><?php echo $curso['subject_name']; ?></h5> <!-- Mostrar el nombre del curso -->
+                                <p><?php echo $curso['description']; ?></p> <!-- Mostrar la descripción del curso -->
+                            </div>
+                        </a>
+                        <div class="adquirir">
+                            <a href="controller_descripcion_curso.php?id_curso=<?php echo $curso['subject_id']; ?>">ADQUIRIR</a>
+                            <p class="descuento">20%DTO</p>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div> <!-- Cerrar div de artículos -->
+        </div> <!-- Cerrar div de categoría -->
+    <?php endforeach; ?>
+</div>
     </div>
 
     </section>

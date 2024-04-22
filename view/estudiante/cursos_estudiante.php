@@ -1,7 +1,8 @@
 
 
 <?php 
-$urlStarter='../../view/admin/';  //son desde el controlador
+$urlStarter='../../view/admin/'; 
+ //son desde el controlador
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +37,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Main Nav Asidebar Container -->
   <?php include('../../view/layout/nav_aside_estudiante.php'); ?>
+  <script>
+    function agregarHoras(nombreCurso, horas) {
+        // Realizar una solicitud AJAX al servidor
+        $.ajax({
+            type: "POST",
+            url: "../../controller/estudiante/controller_carrito_compras.php",
+            data: { nombre_curso: nombreCurso, horas: horas },
+            dataType: 'json',
+            success: function(data) {
+                // Actualizar la tabla con los datos actualizados recibidos del servidor
+                if (data) {
+                    // Encontrar la fila correspondiente al curso
+                    var filaCurso = $('tr').filter(function() {
+                        return $(this).find('td:first').text() === nombreCurso;
+                    });
+
+                    // Actualizar el número de horas en la fila
+                    filaCurso.find('td:nth-child(3)').text(data.hours);
+                }
+
+                // Mostrar mensaje de éxito o error si lo hay
+                if (data.success_message) {
+                    alert(data.success_message);
+                } else if (data.error_message) {
+                    alert(data.error_message);
+                }
+            },
+            error: function(xhr, status, error) {
+                // Manejar el error de la solicitud AJAX
+                alert("Error al agregar horas: " + error);
+            }
+        });
+    }
+</script>
+
   <!-- Fin del Main Nav Asidebar Container -->
   
   <!-- TODA LA PAGINA -->
@@ -82,15 +118,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- /.col -->
               </div>
               <!-- info row -->
+              <?php if(isset($_SESSION['error_message'])): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $_SESSION['error_message']; ?>
+            </div>
+            <?php unset($_SESSION['error_message']); // Limpiar el mensaje de error después de mostrarlo ?>
+        <?php endif; ?>
               <div class="row invoice-info">
                 <div class="col-sm-4 invoice-col">
                 
                   <address>
-                    <h3>GABRIEL ENRIQUE HERNANDEZ</h3>
-                   <b>CC :</b> 12345678<br>
-                    <b>Lugar de residencia: </b>Sogamoso<br>
-                    <b>Phone:</b> (804) 123-5432<br>
-                    <b> Email:</b> info@almasaeedstudio.com
+                    <h3> <?php echo $_SESSION['name_session'] ?></h3>
+                   <b>CC :</b> <?php echo $_SESSION['dni_session'] ?><br>
+                    <b>Lugar de residencia: </b><?php echo $_SESSION['address_session'] ?><br>
+                    <b>telefono:</b><?php echo $_SESSION['phone_session'] ?><br>
+                    <b> Email:</b> <?php echo $_SESSION['email_session'] ?>
                   </address>
     
                 </div>
@@ -102,75 +144,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- Table row -->
               <div class="row">
                 <div class="col-10 table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                    <tr>
-                    
-                      <th>Nombre Curso</th>
-                      <th>Total de horas</th>
-                      <th>Horas restantes</th>
-                      <th> Comprar mas Horas</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                     
-                     
-                      
-                      <td>filosofia</td>
-                      <td>$64.50</td>
-                      <td>17hr</td>
-                      <td><button type="button" class="btn btn-primary float-center" style="margin-left: 5px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-check" viewBox="0 0 16 16">
-                            <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
-                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                          </svg>
-                          <a href="comprar_horas.html" style="color:white;"></a>                   </button></td>
-                    </tr>
-                    <tr>
-                     
-                      
-                      
-                      <td>estadistica</td>
-                      <td>$50.00</td>
-                      <td>17hr</td>
-                      <td><button type="button" class="btn btn-primary float-center" style="margin-left: 5px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-check" viewBox="0 0 16 16">
-                            <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
-                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                          </svg>
-                          <a href="comprar_horas.html" style="color:white;"></a>                   </button></td>
-                    </tr>
-                    <tr>
-                    
-                    
-                      
-                      <td>fisica cuantica</td>
-                      <td>$10.70</td>
-                      <td>17hr</td>
-                      <td><button type="button" class="btn btn-primary float-center" style="margin-left: 5px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-check" viewBox="0 0 16 16">
-                            <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
-                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                          </svg>
-                          <a href="comprar_horas.html" style="color:white;"></a>                   </button></td>
-                    </tr>
-                    <tr>
-                      
-                   
-                      
-                      <td>Tousled lomo letterpress</td>
-                      <td>$25.99</td>
-                      <td>17hr</td>
-                      <td><button type="button" class="btn btn-primary float-center" style="margin-left: 5px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-check" viewBox="0 0 16 16">
-                            <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
-                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                          </svg>
-                          <a href="comprar_horas.html" style="color:white;"></a>                   </button></td>
-                    </tr>
-                    </tbody>
-                  </table>
+                <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre Curso</th>
+            <th>Precio</th>
+            <th>Total Horas </th>
+            <th> Comprar mas Horas</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if( isset($orden_cursos_activos)) : ?>
+            <?php foreach($orden_cursos_activos as $curso_act): ?>
+                <tr>
+                    <td><?php echo $curso_act['name_subject']; ?></td>
+                    <td><?php echo $curso_act['price']; ?></td>
+                    <td><?php echo isset($datos_curso_activo[$curso_act['name_subject']]) ? $datos_curso_activo[$curso_act['name_subject']]['hours'] : $curso_act['hours']; ?></td>
+                    <td>
+    <button type="button" class="btn btn-primary float-center" style="margin-left: 5px;" onclick="agregarHoras('<?php echo $curso_act['name_subject']; ?>', <?php echo $curso_act['hours']; ?>)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-check" viewBox="0 0 16 16">
+            <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
+            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+        </svg>
+    </button>
+</td>
+
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <h2> No hay cursos activos  </h2>
+        <?php endif; ?>
+    </tbody>
+</table>
                 </div>
                 <!-- /.col -->
               </div>
@@ -206,45 +211,53 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </section>
-    <section class="content">
-      <div class="row justify-content-center">
-        <div class="col-sm-3  ">
-          <div class="card card-success">
-            <div class="card-header">
-              <h3 class="card-title">Agregar Horas</h3>
+    
+    
+</div>
+<!-- Modal para agregar horas -->
+<div class="modal fade" id="comprarhoras" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Contenido del modal -->
+    <form id="formAgregarHoras" method="POST">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <!-- Contenido del formulario -->
+            <div class="modal-content">
+                <!-- Cabecera del modal -->
+                <div class="modal-header">
+                    <!-- Contenido de la cabecera -->
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <h3 class="card-title">Agregar Horas</h3>
+                            <div class="card-tools">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Cuerpo del modal -->
+                <div class="modal-body">
+                    <!-- Contenido del cuerpo -->
+                    <div class="form-group">
+                        <label for="inputName">Nombre del curso</label>
+                        <input type="text" id="inputName" class="form-control" name="nombre_curso" style="width: 100%; text-align: center;" placeholder="Ingrese el nombre del curso">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription">Cantidad de horas:</label>
+                        <input id="inputDescription" class="form-control" type="number" style="width: 100%; text-align: center;" placeholder="Ingrese la cantidad de horas" name="horas">
+                    </div>
+                </div>
+                <!-- Pie del modal -->
+                <div class="modal-footer">
+                    <!-- Contenido del pie -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="inputName">Nombre del curso</label>
-                <input type="text" id="inputName" class="form-control" value="Nombre curso">
-              </div>
-              <div class="form-group">
-                <label for="inputDescription"> cantidad de horas : </label>
-                <input id="inputDescription" class="form-control" rows="4" type="number" placeholder="cantidad de horas">
-              </div>
-             
-              
-              <a href="#" class="btn btn-secondary">Cancelar</a>
-              <input type="submit" value="comprar" class="btn btn-primary float-right">
-            </div>
-            <!-- /.card-body -->
-           
-          </div>
-         
-          <!-- /.card -->
-        </div>
-        </div>
-        
-    </section>
-    <!-- /. Maincontent -->
-  </div> 
-  <!-- /.content-wrapper -->
+
+
 
   <!-- Controlador del nav aSidebar -->
   <aside class="control-sidebar control-sidebar-dark">
@@ -271,6 +284,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../view/admin/dist/js/adminlte.min.js"></script>
+
+
 </body>
 </html>
 

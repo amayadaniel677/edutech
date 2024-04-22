@@ -1,9 +1,9 @@
 <?php
+$ruta_inicio='../../';  //esta ruta se usa para cerrar sesion en el nav
 include('../../model/estudiante/descripcion_curso_estudiante_model.php');
 
 if (isset($_GET['id_curso'])) {
     $id_curso = $_GET['id_curso'];
-
     // Crear una instancia del modelo para acceder a las funciones
     $curso_model = new descripcionCurso();
 
@@ -17,16 +17,18 @@ if (isset($_GET['id_curso'])) {
         $docentes_area = $curso_model->mostrarDocentesPorArea($area);
 
         // Pasar los detalles del curso y los docentes a la vista
-        $curso = $detalle_curso;
+        $curso1 = $detalle_curso;
+        
         $docentes = $docentes_area; // Asignar los docentes del área al arreglo de docentes
 
         // Incluir la vista y pasar los detalles del curso y los docentes como datos
-        include('../../view/estudiante/descripcion_curso_estudiante.php');
+        
     } else {
         echo "No se encontraron detalles para este curso.";
     }
 } else {
     echo "No se proporcionó un ID de curso válido.";
 }
-?>
 
+
+include('../../view/estudiante/descripcion_curso_estudiante.php');

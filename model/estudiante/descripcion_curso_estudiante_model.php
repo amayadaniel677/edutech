@@ -22,7 +22,7 @@ class descripcionCurso{
     }
 
     public function descripcion_curso($id) {
-        $sql = "SELECT s.id AS subject_id, s.name AS subject_name, s.description, s.photo, a.name AS area_name, a.price
+        $sql = "SELECT s.id AS subject_id, s.name AS subject_name, s.description, s.photo, a.name AS area_name
                 FROM subjects s
                 INNER JOIN areas a ON s.areas_id = a.id
                 WHERE s.id = $id"; // Filtrar por el id del curso específico

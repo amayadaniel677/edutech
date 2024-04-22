@@ -124,6 +124,12 @@
                   <p>Historial</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?php if(isset($urlStarter)){echo $urlStarter;};?>../../controller/admin/pagos/controller_agregar_horas.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Agregar Horas</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">

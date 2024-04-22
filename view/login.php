@@ -48,10 +48,18 @@
         <!-- CAMBIAR ESTO POR SWEET ALERT PARA MANEJAR ERRORES -->
       <?php if(isset($errores)){
         foreach($errores as $error){
-          echo "<p>".$error ."</p>";
+          echo '<div class="alert alert-danger">' . urldecode($error) . '</div>';
         }
             
         } ?>
+      <?php if(isset($_GET['mensaje'])){
+        $mensaje = urldecode($_GET['mensaje']);
+        echo '<div class="alert alert-info">' . $mensaje . '</div>';
+      }    
+        ?>       
+        
+            
+        
         <div class="input-group mb-3">
           <input type="number" id="dni" name="dni" required class="form-control" placeholder="Documento de identidad">
           <div class="input-group-append">

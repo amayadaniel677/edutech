@@ -24,14 +24,16 @@ class agregar_curso_model
 
     public function insertar_curso($categoria, $nombre, $descripcion, $foto)
     {
-        if ($this->user_repeat($nombre)) {
+        echo "llegó al modelo: ".$categoria." ".$nombre." ".$descripcion." ".$foto;
+        if ($this->subject_repeat($nombre)) {
             return false;
         } else {
-            $id_area = $this->id_area($categoria);
+            $id_area = $categoria;
+            echo "id_area: ".$id_area;
             if ($id_area) {
-                $sql = "INSERT INTO subjects (`name`,`photo`,`description`,`area_id`) values('$nombre','$foto','$descripcion','$id_area')";
+                $sql = "INSERT INTO subjects (`name`,`photo`,`description`,`areas_id`) values('$nombre','$foto','$descripcion','$id_area')";
                 $result = $this->con->query($sql);
-                if ($result->num_rows > 0) {
+                if ($result) {
                     return true;
                 }
             } else {
@@ -40,22 +42,22 @@ class agregar_curso_model
         }
     }
 
-    public function id_area($nombre)
-    {
-        $sql = "SELECT * FROM area WHERE name='$nombre'";
-        $result = $this->con->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $id_area = $row['id'];
-            return $id_area;
-        } else {
-            return false;
-        }
-    }
+    // public function id_area($nombre)
+    // {
+    //     $sql = "SELECT * FROM area WHERE name='$nombre'";
+    //     $result = $this->con->query($sql);
+    //     if ($result->num_rows > 0) {
+    //         $row = $result->fetch_assoc();
+    //         $id_area = $row['id'];
+    //         return $id_area;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     public function traer_areas()
     {
-        $sql = "SELECT `name` FROM areas";
+        $sql = "SELECT `name`,`id` FROM areas WHERE status='active'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             $result_array = [];
@@ -68,7 +70,7 @@ class agregar_curso_model
         }
     }
 
-    public function user_repeat($nombre)
+    public function subject_repeat($nombre)
     {
         $sql = "SELECT * FROM subjects WHERE name='$nombre'";
         $result = $this->con->query($sql);

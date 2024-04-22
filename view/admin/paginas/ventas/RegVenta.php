@@ -186,10 +186,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <table id="tabla-detalles" class="table table-hover">
                 <thead>
                   <tr>
+                    <th>Tipo venta</th>
+                    <th>Modalidad</th>
                     <th>Categoria</th>
                     <th>Nombre Curso</th>
                     <th>Horas</th>
-                    <th>Valor hora</th>
+                    <th>Valor hora/clase</th>
                     <th>Subtotal</th>
                     <th>Editar</th>
                   </tr>
@@ -223,7 +225,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <?php include('../../../view/admin/layouts/footer.php'); ?>
       <!--FIN   Main Footer -->
     </div>
-    <!--fin de toda la pagina wrapper -->
+    <!--fin de toda la pagina wrapper --> 
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
@@ -231,7 +233,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
 
-<script src="../../../resource/js/admin/ventas/modal_detalle_venta1.js"></script>
+<script src="../../../resource/js/admin/ventas/modal_detalle_venta2.js"></script>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- sweet alert -->

@@ -65,6 +65,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
+           
+                        <?php
+                        if (isset($mensaje)) {
+                            echo '<h5 class="bg-danger text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje . '</h5>';
+                        }
+                        ?>
                 <div class="d-flex justify-content-center">
 
                     <!-- Contenido del modal -->

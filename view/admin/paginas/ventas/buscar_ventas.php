@@ -70,28 +70,62 @@ scratch. This page gets rid of all links and provides the needed markup only.
               echo "<h5 class=' btn-danger text-white p-3 mb-2'>" . $msj_eliminar . "</h5>";
             }
             ?>
-            <div class="row justify-content-center">
-              <div class="col-md-6">
-                <form method="POST" action='controller_buscar_ventas.php'>
-                  <div class="mb-3">
-                    <input type="text" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
+
+            <form method="POST" action='controller_ventas_filtradas.php'>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label><b>DNI Cliente</b></label>
+                    <input value='<?php if (isset($_POST['dni'])) {
+                                    echo $_POST['dni'];
+                                  } ?>' type="text" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
                   </div>
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-success">Buscar</button>
+
+                </div>
+                <div class="col-md-3">
+
+
+                  <div class="form-group">
+                    <label><b>Del Dia</b></label>
+                    <input type="date" name="from_date" value="<?php if (isset($_POST['from_date'])) {
+                                                                  echo $_POST['from_date'];
+                                                                } ?>" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label><b> Hasta el Dia</b></label>
+                    <input type="date" name="to_date" value="<?php if (isset($_POST['to_date'])) {
+                                                                echo $_POST['to_date'];
+                                                              } ?>" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label><b><br></b></label> <br>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
                     <?php
-                    if ($_SERVER['REQUEST_METHOD'] === 'POST')
-                      echo '<a href="controller_buscar_ventas.php" class="btn btn-outline-primary">Todas las ventas</a>'
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST' || isset($ventas_paginadas)){
+                      
+                      echo '<a href="controller_buscar_ventas.php?mostrarTotales=true" class="btn btn-outline-primary">Todas las ventas</a>';}
                     ?>
                   </div>
-                </form>
+
+                </div>
               </div>
-            </div>
+              <br>
+            </form>
+
           </div>
           <!-- tabla -->
           <div class="container mt-5">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Bordered Table</h3>
+                <!-- agregar un aparte para filtrar la tabla por from_date hasta to_date -->
+                <!--  -->
+                <h3 class="card-title">LISTADO DE VENTAS</h3>
+
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -108,25 +142,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </thead>
                   <tbody>
                     <?php
-                    if ($ventas_paginadas) {
-                      if ($bandera) {
-                        $venta_reverse = array_reverse($ventas_paginadas);
-                        foreach ($venta_reverse as $venta) {
-
-                          echo '<tr>
-                              <td>' . $venta['sale_id'] . '</td>
-                              <td>' . $venta['person_dni'] . '</td>
-                              <td>' . $venta['person_name'] . '</td>
-                              <td>' . $venta['sale_price'] . '</td>
-                              <td>' . $venta['sale_date'] . '</td>
-                              <td>
-                                <a href="controller_detalle_ventas.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                                <a href="controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                              </td>
-                            </tr>';
-                        }
-                      } else {
-                        $ventas_reverse = array_reverse($ventas_paginadas);
+                    if (isset($ventas_paginadas)) {
+                    
+                        $ventas_reverse = $ventas_paginadas;
                         foreach ($ventas_reverse as $venta) {
                           echo '<tr>
                       <td>' . $venta['sale_id'] . '</td>
@@ -140,7 +158,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               </td>
                             </tr>';
                         }
-                      }
+                      
                     } else {
                       echo '<tr><td colspan="6">No hay ventas disponibles.</td></tr>';
                     }
@@ -155,7 +173,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- /.card-body -->
               <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
-                  <?php if ($pagina > 1) : ?>
+                  <!-- si existen las variables $pagina $total_paginas -->
+                  <!--  -->
+                  <?php
+                  // Asegurarse de que las variables existan antes de usarlas
+                  $pagina = isset($pagina) ? $pagina : 1; // Si $pagina no está definida, se usa 1 como valor predeterminado
+                  $total_paginas = isset($total_paginas) ? $total_paginas : 1; // Si $total_paginas no está definida, se usa 1 como valor predeterminado
+
+                  // Ahora puedes usar $pagina y $total_paginas con seguridad
+                  if ($pagina > 1) : ?>
                     <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina - 1); ?>">«</a></li>
                   <?php endif; ?>
                   <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
