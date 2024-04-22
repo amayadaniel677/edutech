@@ -104,7 +104,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>";
           }
 
-
+          function getFieldValue($field_name)
+          {
+              return isset($_POST[$field_name]) ? $_POST[$field_name] : '';
+          }
           ?>
           <div class="row">
             <div class="col-md-6 col-sm-12">
