@@ -1,3 +1,7 @@
+
+
+
+
 <?php
 $urlStarter = '../../../view/admin/';  //son desde el controlador
 ?>
@@ -10,210 +14,152 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EduTech | Add Curso</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EduTech | Add Curso</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
-  <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
-  <!-- CSS CURSOS ADMIN -->
-  <link rel="stylesheet" href="../../../resource/css/users/buscar_usuario1.css" />
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
+    <!-- CSS CURSOS ADMIN -->
+    <link rel="stylesheet" href="../../../resource/css/users/buscar_usuario1.css" />
 
 
-  <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
+    <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
 </head>
 
 <body class="hold-transition sidebar-mini">
-  <div class="wrapper">
+    <div class="wrapper">
 
-    <!-- Navbar -->
-    <?php include('../../../view/admin/layouts/nav.php'); ?>
-    <!-- /.navbar -->
+        <!-- Navbar -->
+        <?php include('../../../view/admin/layouts/nav.php'); ?>
+        <!-- /.navbar -->
 
-    <!-- Main Nav Asidebar Container -->
-    <?php include('../../../view/admin/layouts/nav_aside.php'); ?>
-    <!-- Fin del Main Nav Asidebar Container -->
+        <!-- Main Nav Asidebar Container -->
+        <?php include('../../../view/admin/layouts/nav_aside.php'); ?>
+        <!-- Fin del Main Nav Asidebar Container -->
 
-    <!-- TODA LA PAGINA -->
-    <div class="content-wrapper">
-      <!-- Titulo de la vista -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0">Buscar usuario</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Agregar curso</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.fin titulo de la vista -->
+        <!-- TODA LA PAGINA -->
+        <div class="content-wrapper">
+            <!-- Titulo de la vista -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Buscar usuario</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Agregar curso</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.fin titulo de la vista -->
 
-      <!-- Contenido principal vista -->
-      <section class="content">
-        <div class="container-fluid">
+            <!-- Contenido principal vista -->
+            <section class="content">
+            <div class="row">
+          <div class="col-md-3 col-sm-6 col-12">
+            <a class="info-box bg-info" href='controller_usuarios_totales.php?tipo_usuario=docente'>
+              <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
 
-          <div class="container">
-            <?php
-            // Validar si $mensaje_editar no está vacío
-            if (!empty($mensaje_editar)) {
-              // Mostrar el encabezado con el mensaje y un fondo azul
-              echo '<h5 class="bg-primary text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje_editar . '</h5>';
-            }
-            ?>
-            <?php
-            if (isset($msj_eliminar)) {
-              echo '<h5 class="bg-danger text-white p-3 mb-2" style="font-size: 1.25rem;">' . $msj_eliminar . '</h5>';
-            }
-            ?>
-            <div class="row justify-content-center">
-              <div class="col-md-6">
-                <form method="POST">
-                  <div class="mb-3">
-                    <input type="text" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
-                  </div>
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-success">Buscar</button>
-                    <?php
-                    if ($_SERVER['REQUEST_METHOD'] === 'POST')
-                      echo '<a href="controller_buscar_usuario.php" class="btn btn-outline-primary">Todos los usuarios</a>'
-                    ?>
-                  </div>
-                </form>
+              <div class="info-box-content">
+                <h5 class="info-box-text">Ver Docentes</h5>
+                <span class="info-box-number">48</span>
+
+                <div class="progress">
+                  <div class="progress-bar" style="width: 70%"></div>
+                </div>
+                <span class="progress-description">
+                  70% Increase in 30 Days
+                </span>
               </div>
-            </div>
+              <!-- /.info-box-content -->
+            </a>
+            <!-- /.info-box -->
           </div>
-          <!-- tabla -->
-          <div class="container mt-5">
-            <?php
-            if (isset($mensaje)) {
-              echo $mensaje;
-            }
-            ?>
-            <table id="miTabla" class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">Rol</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Apellido</th>
-                  <th scope="col">Correo</th>
-                  <th scope="col"># Documento</th>
-                  <th scope="col">Ciudad</th>
-                  <th scope="col">Direccion</th>
-                  <th scope="col">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                if ($bandera) {
-                  header("Location: {$_SERVER['REQUEST_URI']}");
-                  foreach ($buscar_usuario as $usuario) {
-                    echo '<tr>';
-                    echo '<td>' . $usuario['rol'] . '</td>';
-                    echo '<td>' . $usuario['name'] . '</td>';
-                    echo '<td>' . $usuario['lastname'] . '</td>';
-                    echo '<td>' . $usuario['email'] . '</td>';
-                    echo '<td>' . $usuario['dni'] . '</td>';
-                    echo '<td>' . $usuario['city'] . '</td>';
-                    echo '<td>' . $usuario['address'] . '</td>';
-                    echo '<td>';
-                    echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-primary">';
-                    echo '<i class="fas fa-edit"></i>';
-                    echo '</a>';
-                    echo '<a href="controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-danger">';
-                    echo '<i class="fas fa-trash"></i>';
-                    echo '</a>';
-                    echo '</td>';
-                    echo '</tr>';
-                  }
-                } else {
-                  $usuarios_reverse = array_reverse($usuarios_paginados);
-                  foreach ($usuarios_reverse as $usuario) {
-                    echo '<tr>';
-                    echo '<td>' . $usuario['rol'] . '</td>';
-                    echo '<td>' . $usuario['name'] . '</td>';
-                    echo '<td>' . $usuario['lastname'] . '</td>';
-                    echo '<td>' . $usuario['email'] . '</td>';
-                    echo '<td>' . $usuario['dni'] . '</td>';
-                    echo '<td>' . $usuario['city'] . '</td>';
-                    echo '<td>' . $usuario['address'] . '</td>';
-                    echo '<td>';
-                    echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-primary">';
-                    echo '<i class="fas fa-edit"></i>';
-                    echo '</a>';
-                    echo '<a href="controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '" class="btn btn-danger">';
-                    echo '<i class="fas fa-trash"></i>';
-                    echo '</a>';
-                    echo '</td>';
-                    echo '</tr>';
-                  }
-                }
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+            <a class="info-box bg-success"  href='controller_usuarios_totales.php?tipo_usuario=estudiante'>
+              <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
 
+              <div class="info-box-content">
+                <h5 class="info-box-text">Ver estudiantes</h5>
+                <span class="info-box-number">120</span>
 
-                echo '</tbody>';
-                echo '</table>';
-                ?>
-              </tbody>
-            </table>
+                <div class="progress">
+                  <div class="progress-bar" style="width: 70%"></div>
+                </div>
+                <span class="progress-description">
+                  70% Increase in 30 Days
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </a>
+            <!-- /.info-box -->
           </div>
-          <?php if (!$bandera) : ?>
-            <div class="card-footer clearfix">
-              <ul class="pagination pagination-sm m-0 float-right">
-                <?php if ($pagina > 1) : ?>
-                  <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina - 1); ?>">«</a></li>
-                <?php endif; ?>
-                <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
-                  <li class="page-item <?php echo ($pagina == $i) ? 'active' : ''; ?>"><a class="page-link" href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                <?php endfor; ?>
-                <?php if ($pagina < $total_paginas) : ?>
-                  <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina + 1); ?>">»</a></li>
-                <?php endif; ?>
-              </ul>
-            </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+            <a class="info-box bg-warning"  href='controller_usuarios_totales.php?tipo_usuario=todos'>
+              <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+
+              <div class="info-box-content">
+                <h5 class="info-box-text">Ver todos </h5>
+                <span class="info-box-number">41,410</span>
+
+                <div class="progress">
+                  <div class="progress-bar" style="width: 70%"></div>
+                </div>
+                <span class="progress-description">
+                  Listado usuarios
+                </span>
+              </div>
+              <!-- /.info-box-content -->
+            </a>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          
+          <!-- /.col -->
         </div>
-      <?php endif; ?>
-
+        </section>
+        <!-- /. Maincontent -->
     </div>
-    </section>
-    <!-- /. Maincontent -->
-  </div>
-  <!-- /.content-wrapper -->
+    <!-- /.content-wrapper -->
 
-  <!-- Controlador del nav aSidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
+    <!-- Controlador del nav aSidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+        <div class="p-3">
+            <h5>Title</h5>
+            <p>Sidebar content</p>
+        </div>
+    </aside>
+    <!-- /.control-sidebar -->
 
-  <!-- Main Footer -->
-  <?php include('../../../view/admin/layouts/footer.php'); ?>
-  <!--FIN   Main Footer -->
+    <!-- Main Footer -->
+    <?php include('../../../view/admin/layouts/footer.php'); ?>
+    <!--FIN   Main Footer -->
 
-  </div> <!--fin de toda la pagina wrapper -->
-  <!-- ./wrapper -->
+    </div> <!--fin de toda la pagina wrapper -->
+    <!-- ./wrapper -->
 
-  <!-- REQUIRED SCRIPTS -->
+    <!-- REQUIRED SCRIPTS -->
 
-  <!-- jQuery -->
-  <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+    <!-- jQuery -->
+    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 </body>
 
 </html>
+

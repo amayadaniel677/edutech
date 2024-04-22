@@ -20,8 +20,17 @@ class buscar_usuario_model{
         $this->con->set_charset("utf8");
     }
 
-    public function traer_usuarios(){
-        $sql="SELECT * FROM people WHERE rol !='administrador'";
+    public function traer_usuarios($tipo_usuario){
+        if($tipo_usuario=='todos'){
+            // entro al modelo traer todos
+           
+            $sql="SELECT * FROM people WHERE rol !='administrador' AND status='active'";
+        }else{
+            // entro al modelo traer por tipo de usuario
+           
+            $sql="SELECT * FROM people WHERE rol='$tipo_usuario'";
+        }
+
         $result=$this->con->query($sql);
         if ($result->num_rows > 0) {
             $result_array = [];
