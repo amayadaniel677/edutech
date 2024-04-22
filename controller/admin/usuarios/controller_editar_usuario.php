@@ -1,11 +1,21 @@
 <?php
+session_start();
+if (!isset( $_SESSION['dni_session'])){
+    header('location:../../login_controller.php');
+    exit();
+}
+$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
+
 include('../../../model/admin/usuarios/editar_usuario_model.php');
 if (isset($_GET['id_usuario'])) {
-    $id_ususario = $_GET['id_usuario'];
+    $id_usuario = $_GET['id_usuario'];
+    $tipo_usuario = $_GET['tipo_usuario'];
     $consult = new editar_usuario_model();
-    $usuario = $consult->traer_usuario($id_ususario);
+    $usuario = $consult->traer_usuario($id_usuario);
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
     $id = $_POST['id'];
     $nombre = $_POST['name'];
     $apellido = $_POST['lastname'];
@@ -19,10 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $consult = new editar_usuario_controller();
     $validar = $consult->validar_campos($id, $nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento);
     if ($validar) {
-        $mensaje = 'El usuario a sido modificado con exito';
-        header("Location: controller_buscar_usuario.php?mensaje=" . urlencode($mensaje));
+        $mensaje = 'El usuario ha sido modificado con exito';
+        header("Location: controller_usuarios_totales.php?mensaje=" . urlencode($mensaje) . "&tipo_usuario=" . $tipo_usuario);
+
     } else {
-        $mensaje = 'No se pudo editar al usuario';
+    $mensaje = $consult->mensaje;
     }
 }
 
@@ -37,10 +48,11 @@ class editar_usuario_controller
     {
         // Validar que no estén vacíos
         if (empty($nombre) || empty($apellido) || empty($ciudad) || empty($direccion) || empty($correo)) {
-            $this->mensaje = 'por favor valide los campos';
+           
+            $this->mensaje = 'por favor complete los campos vacíos';
             exit;
         } else {
-
+          
             // Eliminar espacios en blanco al principio y al final
             $nombre = trim($nombre);
             $apellido = trim($apellido);
@@ -72,16 +84,19 @@ class editar_usuario_controller
             $fechaLimiteInferior = DateTime::createFromFormat('Y-m-d', '1960-01-01');
 
             if ($fechaNacimiento >= $fechaLimiteInferior && $fechaNacimiento <= $fechaLimite) {
+               
                 $fechaParaMySQL = $fechaNacimiento->format('Y-m-d');
                 $consult = new editar_usuario_model();
                 $editar = $consult->editar_informacion($id, $nombre, $apellido, $ciudad, $direccion, $fechaParaMySQL, $sexo, $correo, $tipo_documento);
                 if ($editar) {
+                   
                     $mensaje = 'El usuario a sido editado con exito';
                     return true;
                 } else {
                     return false;
                 }
             } else {
+               $this->mensaje='La fecha de nacimiento no es válida';
                 return false;
             }
 

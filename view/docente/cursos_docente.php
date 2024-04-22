@@ -167,17 +167,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- /.tab-pane -->
 
                     <div class="tab-pane" id="settings">
-                      <form class="form-horizontal">
+                      <form class="form-horizontal" method="POST">
                         <div class="form-group row">
                           <label for="inputName" class="col-sm-2 col-form-label">Tutoria</label>
                           <div class="col-sm-10">
-                            <select id="inputStatus" class="form-control custom-select">
+                            <select id="inputStatus" class="form-control custom-select" name="materia">
                               <?php if (isset($am['materia_nombre'])) { ?>
                                 <?php foreach ($areas_materias as $am) { ?>
 
 
 
-                                  <option><?= $am['materia_nombre'] ?></option>
+                                  <option value="<?php $am['materia_id']?>"><?= $am['materia_nombre'] ?></option>
 
                                 <?php } ?>
                               <?php } else { ?>
@@ -190,24 +190,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </select>
                           </div>
                         </div>
+                        
                         <div class="form-group row">
-                          <label for="inputEmail" class="col-sm-2 col-form-label">Fecha</label>
+                          <label for="inputName2" class="col-sm-2 col-form-label">Hora</label>
                           <div class="col-sm-10">
-                            <input type="date" class="form-control" id="inputEmail" placeholder="Fecha">
+                            <select class="form-control" id="inputName2" name="hora">
+                              <option value="7">07:00</option>
+                              <option value="8">08:00</option>
+                              <option value="9">09:00</option>
+                              <option value="10">10:00</option>
+                              <option value="11">11:00</option>
+                              <option value="12">12:00</option>
+                              <option value="13">13:00</option>
+                              <option value="14">14:00</option>
+                              <option value="15">15:00</option>
+                              <option value="16">16:00</option>
+                              <option value="17">17:00</option>
+                              <option value="18">18:00</option>
+                              <option value="19">19:00</option>
+                              <option value="20">20:00</option>
+                            </select>
                           </div>
                         </div>
-                        <div class="form-group row">
-                          <label for="inputName2" class="col-sm-2 col-form-label">Hora </label>
-                          <div class="col-sm-10">
-                            <input type="time" class="form-control" id="inputName2" placeholder="Name">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="inputExperience" class="col-sm-2 col-form-label">Temas a tratar</label>
-                          <div class="col-sm-10">
-                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                          </div>
-                        </div>
+
 
                         <div class="form-group row">
                           <div class="offset-sm-2 col-sm-10">
@@ -220,7 +225,67 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                           </div>
 
-                        
+                          <div class="container">
+                            <div class="card card-success mt-4 ml-1 col-md-12">
+                              <div class="col-12">
+                                <div class="card">
+                                  <div class="card-header">
+                                    <h3 class="card-title">Registro de Estudiantes</h3>
+                                    <div class="card-tools">
+                                      <div class="input-group input-group-sm">
+                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                        <div class="input-group-append">
+                                          <button type="submit" class="btn btn-default">
+                                            <i class="fas fa-search"></i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- /.card-header -->
+                                  <div class="card-body table-responsive p-0">
+    <table class="table table-head-fixed text-nowrap mx-auto">
+        <thead>
+            <tr>
+                <th>Estudiante</th>
+                <th>Tutoria</th>
+                <th>Fecha</th>
+                <th>Asistencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($subjects)) : ?>
+                <?php foreach ($subjects as $subject) : ?>
+                    <tr>
+                        <td><?php echo $subject['student_name']; ?></td>
+                        <td><?php echo $subject['tutoria_date']; ?></td>
+                        <td><?php echo $subject['tutoria_status']; ?></td>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" style="width: 20px;">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Confirmar asistencia
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <tr>
+                    <td colspan="4">No se encontraron estudiantes</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+                                  <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                                <button type="button" class="btn btn-primary float-left mb-3 ml-3">VOLVER</button>
+                                <button type="button" class="btn btn-success float-right mb-3 mr-3">GUARDAR</button>
+                              </div>
+                            </div>
+                          </div>
 
                         </div>
 

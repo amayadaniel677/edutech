@@ -62,29 +62,77 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       <section class="content">
+        <?php
+        if (isset($mensajeColapso)) {
+          echo " <div class='container mt-5'> <div class='alert alert-danger' role='alert'>";
+          echo $mensajeColapso;
+          echo " </div>  </div>";
+        }
+        ?>
+
+
+        <?php
+
+        // Verifica si hay un mensaje de éxito en la sesión
+        if (isset($mensajeExito)) {
+          echo '<div class="alert alert-success mt-3" role="alert">';
+          echo $mensajeExito;
+          echo '</div>';
+        }
+        
+        if (isset($errores_foto) || isset($errores_inputs)) {
+          if (is_array($errores_foto) || is_array($errores_inputs)) {
+              echo "<div class='alert alert-danger mt-3'>";
+      
+              // Muestra errores de la foto
+              if (!empty($errores_foto)) {
+                  echo "<strong>Errores en la foto:</strong><br>";
+                  foreach ($errores_foto as $error) {
+                      echo $error . "<br>";
+                  }
+              }
+      
+              // Muestra errores de los inputs
+              if (!empty($errores_inputs)) {
+                  echo "<strong>Errores:</strong><br>";
+                  foreach ($errores_inputs as $errors) {
+                      echo $errors . "<br>";
+                  }
+              }
+      
+              echo "</div>";
+          }
+          else{
+           
+          }
+      }else{
+       
+      }
+        ?>
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-6">
               <div class="formulario">
-                <form action="#">
+                <form action="" method='POST' enctype="multipart/form-data">
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="categoria">Categoria </label>
                         <select name="categoria" id="categoria" class="form-control">
-                        <?php
-                       
+                          <option value="0">Seleccione una categoría</option>
+                          <?php
+
                           if (!empty($areas_bd)) {
-                              
-                              foreach ($areas_bd as $area) {
-                                  
-                                  echo "<option value='" . $area['name'] . "'>" . $area['name'] . "</option>";
-                              }
+
+                            foreach ($areas_bd as $area) {
+
+                              echo "<option value='" . $area['id'] . "'>" . $area['name'] . "</option>";
+                            }
                           } else {
-                              
-                              echo "<option value='vacio'>No se encontraron áreas</option>";
+
+                            echo "<option value='vacio'>No se encontraron áreas</option>";
                           }
-                       ?>
+                          ?>
 
                         </select>
                       </div>
@@ -97,17 +145,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
 
                   </div>
-                  <!-- CODIGO PARA VISTA ADD AREA -->
-                  <!-- <div class="form-group">
-                    <label for="docente">Asignar docente</label>
-                    <select name="docente" id="docente" class="form-control">
-                      <option value="daniel">Daniel Amaya</option>
-                      <option value="martin">Brayan Martin</option>
-                      <option value="stich">Brayan Stich</option>
-                      <option value="stiven">Brayan Stiven</option>
-                      <option value="pedro">Pedro A Barrera</option>
-                    </select>
-                  </div> -->
 
                   <div class="row">
                     <div class="col-md-12">
@@ -119,28 +156,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                       </div>
                     </div>
-                   
+
                   </div>
                   <div class="row">
-                  <div class="col-md-12">
+                    <div class="col-md-12">
                       <div class="form-group">
                         <label for="descripcion">Descripción del curso</label>
-                        <textarea  required name="descripcion" id="descripcion" placeholder="Escriba aquí" class="form-control"></textarea>
+                        <textarea required name="descripcion" id="descripcion" placeholder="Escriba aquí" class="form-control"></textarea>
                       </div>
                     </div>
                   </div>
-                  <!-- COPIAR ESTE CODIGO PARA AGREGAR AREA -->
-                  <!-- <div class="form-group">
-                
-                    <label>Desvincular docente</label>
-                    <ul class="list-group">
-                      <li class="list-group-item d-flex justify-content-between align-items-center">Daniel
-                        Amaya <a href="#"><i class="fas fa-trash-alt"></i></a></li>
-                      <li class="list-group-item d-flex justify-content-between align-items-center">Juan
-                        Pablo <a href="#"><i class="fas fa-trash-alt"></i></a></li>
-                     
-                    </ul>
-                  </div> -->
 
                   <!-- Botón -->
                   <div class="form-group text-center">

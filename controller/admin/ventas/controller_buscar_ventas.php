@@ -1,39 +1,41 @@
 <?php
+session_start();
+if (!isset( $_SESSION['dni_session'])){
+    header('location:../../login_controller.php');
+    exit();
+}
+$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
+
 include('../../../model/admin/ventas/buscar_ventas_model.php');
 $consult = new controlador_buscar_venta();
-$bandera = false;
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['dni'])) {
-        $dni = $_POST['dni'];
-        $ventas = $consult->venta($dni);
-        $mensaje = $consult->ver_mensaje();
-        $bandera = true;
-
-    }
-} else {
-    $ventas = $consult->ventas();
-}
 if (isset($_GET['msj_eliminar'])) {
     $msj_eliminar = $_GET['msj_eliminar'];
-    
 }
 
-// Obtener los datos paginados
+$ventasFiltradas = $consult->ventas();
+// echo "ventas filtradas: ".$ventasFiltradas;
+if(isset($ventasFiltradas)){
+    // pintar la longitud de la consulta
+    
+    echo "cantidad ventas filtradas". count($ventasFiltradas);
+    $ventas = $ventasFiltradas; 
+    // Número de resultados por página
+    $resultados_por_pagina = 10;
+echo "resultados por pagina: ".$resultados_por_pagina;
+    // Obtener la página actual
+    $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
+    echo "pagina actual: ".$pagina;
+    // Calcular el offset para la consulta SQL
+    $offset = ($pagina - 1) * $resultados_por_pagina;
+    echo "offset: ".$offset;
 
-// Número de resultados por página
-$resultados_por_pagina = 5;
+    // Calcular el número total de páginas
+    $total_paginas = ceil(count($ventas) / $resultados_por_pagina);
+echo "total paginas: ".$total_paginas;
+    // Obtener solo los resultados para la página actual
+    $ventas_paginadas = array_slice($ventas, $offset, $resultados_por_pagina);
+}
 
-// Obtener la página actual
-$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-
-// Calcular el offset para la consulta SQL
-$offset = ($pagina - 1) * $resultados_por_pagina;
-
-// Calcular el número total de páginas
-$total_paginas = ceil(count($ventas) / $resultados_por_pagina);
-
-// Obtener solo los resultados para la página actual
-$ventas_paginadas = array_slice($ventas, $offset, $resultados_por_pagina);
 
 
 
@@ -57,18 +59,7 @@ class controlador_buscar_venta
         }
     }
 
-    public function venta($dni)
-    {
-        $dni=trim($dni);
-        $consult = new buscar_venta_model();
-        $usuario = $consult->user_exist($dni);
-        if ($usuario) {
-            $venta = $consult->venta($dni);
-            return $venta;
-        } else {
-            $this->mensaje_diagnostico[] = 'El documento no es valido';
-        }
-    }
+    
 
 
     function ver_mensaje()

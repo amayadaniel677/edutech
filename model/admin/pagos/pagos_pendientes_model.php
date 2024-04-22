@@ -20,6 +20,24 @@ class pagos_pendientes_model{
     
         $this->con->set_charset("utf8");
     }
+
+    public function traer_pagos(){
+        $sql="SELECT payments.*, people.name, people.lastname
+        FROM payments
+        INNER JOIN people ON payments.people_id = people.id
+        WHERE payments.total_hours>0";
+        $result=$this->con->query($sql);
+        if ($result->num_rows > 0) {
+            $result_array = [];
+            while ($row = $result->fetch_assoc()) {
+                $result_array[] = $row;
+            }
+            return $result_array;
+        } else {
+            return false;
+        }
+
+    }
     
 }
 

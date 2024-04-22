@@ -41,6 +41,20 @@ class RegVenta_consult{
         }
     
     }
+    public function traer_modalidades(){
+        $sql="SELECT * FROM modalities WHERE status='active'";
+        $result=$this->con->query($sql);
+        if($result->num_rows>0){
+            $modalidades=array();
+            while($row=$result->fetch_assoc()){
+                // guardar en un array cada fila de la consulta
+                $modalidades[]=$row;
+            }
+            return $modalidades;
+        }else{
+            return false;
+        }
+    }
     public function obtenerIdAreas($nombreArea){
         $sql="SELECT id FROM areas Where name='$nombreArea'";
         $result=$this->con->query($sql);
@@ -138,9 +152,19 @@ class RegVenta_consult{
         $exitoDetalles=0;
         foreach($detallesVenta as $detalle){
             $price=$detalle['valorCurso'];
-            $total_hours=$detalle['horas'];
+           
+            var_dump($detalle);
+            $modality=$detalle['modalidad'];
+            $tipo_venta=$detalle['tipoVenta'];
+            if($tipo_venta=='horas'){
+                $total_hours=$detalle['cantidad_horas_clases'];
+                $total_classes=0;
+            }elseif($tipo_venta=='clases'){
+                $total_classes=$detalle['cantidad_horas_clases'];
+                $total_hours=0;
+            }
             $subjects_id=$this->obtener_id_curso($detalle['curso']);
-            $sql="INSERT INTO subject_sale(price,total_hours,subjects_id,sales_id,remaining_hours) VALUES('$price','$total_hours','$subjects_id','$sales_id','$total_hours') ";
+            $sql="INSERT INTO subject_sale(price,total_hours,subjects_id,sales_id,remaining_hours,modality,quantity_type,total_classes,remaining_classes) VALUES('$price','$total_hours','$subjects_id','$sales_id','$total_hours','$modality','$tipo_venta','$total_classes','$total_classes') ";
             $result=$this->con->query($sql);
             if($result){
                 $exitoDetalles += 1;

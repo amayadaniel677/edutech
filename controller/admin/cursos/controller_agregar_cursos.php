@@ -1,31 +1,64 @@
 <?php
+session_start();
+if (!isset( $_SESSION['dni_session'])){
+    header('location:../../login_controller.php');
+    exit();
+}
+$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
+// capturar el mensaje enviado en get
+
  include('../../../model/admin/cursos/agregar_curso_model.php');
+if(isset($_GET['mensajeExito'])){
+    $mensajeExito=$_GET['mensajeExito'];
+}
+    if ($_SERVER['REQUEST_METHOD']=='POST') {
 
-    if ($_SERVER['request_method' == 'POST']) {
-    $categoria = $POST['categoria'];
-    $nombre_curso = $POST['nombre-curso'];
-    $descripcion = $POST['descripcion'];
+    $id_categoria = $_POST['categoria'];
 
+    $nombre_curso= ucwords(strtolower((trim($_POST['nombre-curso']))));
+    $nombre_curso = preg_replace('/\s+/', ' ', $nombre_curso);
+   
+    $descripcion = $_POST['descripcion'];
+   
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-        $foto_post = $FILE['foto'];
+        $foto_post = $_FILES['foto'];
         $consult = new agregar_curso_controller();
-        $foto = $consult->validar_foto($foto_post, $nombre_curso);
-        $validar=$consult->validar_campos($categoria, $nombre_curso, $descripcion, $foto);
-        if ($validar) {
-            $mensaje = 'Se creo el curso con EXITO';
-        } else {
-            $mensaje = 'Error no se ingreso el curso';
-        }
+        $errores_foto_2 = $consult->validar_foto($foto_post);
+        $nombre_curso_espacios = str_replace(' ', '_', $nombre_curso);
+        $foto=$consult->obtener_ruta_foto($foto_post, $nombre_curso_espacios);
     } else {
-        $foto = 'resource/img/photosUsers/defaultPhoto.png';
         $consult = new agregar_curso_controller();
-        $validar=$consult->validar_campos($categoria, $nombre_curso, $descripcion, $foto);
-        if ($validar) {
-            $mensaje = 'Se creo el curso con EXITO';
-        } else {
-            $mensaje = 'Error no se ingreso el curso';
-        }
+        $errores_foto_2 = false;
+        $foto = 'resource/img/photosSubjects/defaultPhoto.jpg';
     }
+    $errores_inputs_2=$consult->validar_campos($id_categoria);
+    
+  
+    if (!$errores_inputs_2 && !$errores_foto_2) {
+        echo "entro a insertar en controller";
+        $model = new agregar_curso_model();
+        $result_model=$model->insertar_curso($id_categoria, $nombre_curso, $descripcion, $foto);
+        if ($result_model) {
+            $consult->mover_borrar_foto($foto_post,$foto);
+            $mensajeExito = 'Se creo el curso con EXITO'; 
+            // redirigir a la misma pagina pero con el mensajeexito
+            header('Location: controller_agregar_cursos.php?mensajeExito='.$mensajeExito);
+            // leer el mensaje de get y capturarlo, solo si existe , si no guardarlo como vacio
+          
+            
+        
+        } else {
+            $errores_inputs[] = 'Error no se ingreso el curso';
+          
+        }
+        
+       
+    } else{
+        $mensajeExito=null;
+        $errores_inputs = (array) $consult->errores_inputs;
+        $errores_foto = (array) $consult->errores_foto;
+    }
+   
 }
 
 $consult_previa=new agregar_curso_controller();
@@ -34,23 +67,25 @@ $areas_bd=$consult_previa->traer_areas();
 
 class agregar_curso_controller
 {
-    public $array_errores = [];
+    public $errores_inputs = [];
     public $errores_foto = [];
     public function __construct()
     {
     }
-    public function validar_campos($categoria, $nombre, $descripcion, $foto)
+    public function validar_campos($id_categoria)
     {
+        $error = false;
         
-        if (empty($nombre_curso) || empty($categoria) || empty($descripcion)) {
-            $this->array_errores = 'VALIDE LOS CAMPOS';
-        } else {
-            $model = new agregar_curso_model();
-            $model->insertar_curso($categoria, $nombre, $descripcion, $foto);
-        }
+       
+        if ($id_categoria=='0') {
+            
+            $this->errores_inputs = 'Error, seleccione una categoria';
+            $error=true;
+        } 
+        return $error;
     }
 
-    public function validar_foto($foto, $dni)
+    public function validar_foto($foto)
     {
         // VALIDAR TIPO DE IMAGEN
         $error = false;
@@ -62,7 +97,6 @@ class agregar_curso_controller
             $error = true;
         }
 
-        // Validar el tamaño del archivo (10 MB en este ejemplo)
         $tamanio_maximo = 10 * 1024 * 1024; // 10 MB en bytes
         $archivo_tamanio = $foto['size'];
 
@@ -70,23 +104,44 @@ class agregar_curso_controller
             $this->errores_foto[] = 'Error: El tamaño del archivo excede el límite de 10 MB.';
             $error = true;
         }
+        return $error;
+    }
+    public function obtener_ruta_foto($foto, $nombre_curso)
+    {
+        $carpeta_destino = 'resource/img/photosSubjects/';
+        // Construir el nombre del archivo con el id o cédula de la persona
+        $nombre_archivo = $nombre_curso . '_' . basename($foto['name']);
+        $ruta_archivo = $carpeta_destino . $nombre_archivo;
+        return $ruta_archivo;
+        // esto devuelve resource/img/photosUsers/dni_foto.png
 
-        $carpeta_destino = '../resource/img/photosUsers/';
+    }
+
+    public function mover_borrar_foto($foto_file,$ruta_photo)
+    {
+
+        $carpeta_destino = '../../../resource/img/photosSubjects/';
 
         if (!file_exists($carpeta_destino)) {
             mkdir($carpeta_destino, 0777, true);
         }
 
-        $carpeta_destino2 = 'resource/img/photosUsers/';
-        // Construir el nombre del archivo con el id o cédula de la persona
-        $nombre_archivo = $dni . '_' . basename($foto['name']);
-        $ruta_archivo = $carpeta_destino2 . $nombre_archivo;
-        $ruta_archivo_nombre_archivo = '../' . $ruta_archivo;
 
-        if (move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_archivo_nombre_archivo)) {
-            return ($ruta_archivo);
+        $ruta_archivo_nombre_archivo = '../../../' . $ruta_photo;
+
+        // borrar foto
+        
+
+        if($ruta_photo!='resource/img/photosSubjects/defaultPhoto.jpg'){
+            if (move_uploaded_file($foto_file['tmp_name'], $ruta_archivo_nombre_archivo)) {
+                return true;
+            } else {
+                return false;                
+            }
+        
         }
-    }
+}
+    
 
     public function traer_areas(){
         $consult= new agregar_curso_model();
