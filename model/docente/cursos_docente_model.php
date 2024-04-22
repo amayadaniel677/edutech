@@ -36,7 +36,7 @@ public function getAreasAndSubjectsFromSession() {
     }
     $docente_id = $_SESSION['id_session'];
 
-    $query = "SELECT a.id AS area_id, a.name AS area_nombre, s.name AS materia_nombre,
+    $query = "SELECT a.id AS area_id, a.name AS area_nombre, s.name AS materia_nombre,s.id AS materia_id,
               pa.people_id
               FROM areas a 
               INNER JOIN subjects s ON a.id = s.areas_id 
@@ -60,4 +60,30 @@ public function getAreasAndSubjectsFromSession() {
     return $areas_materias;
 }
 
+public function getStudentsBySubjectId($subjectId) {
+
+    $sql = "SELECT people.name
+    FROM subjects
+    JOIN subject_sale ON subjects.id = subject_sale.subjects_id
+    JOIN sales ON subject_sale.sales_id = sales.id
+    JOIN people ON sales.people_id = people.id
+    WHERE subjects.id ='$subjectId'
+    AND sales.status = 'active'
+    AND subject_sale.remaining_hours > 0";
+    $result=$this->con->query($sql);
+
+    if ($result->num_rows > 0) {
+        $result_array = [];
+        while ($row = $result->fetch_assoc()) {
+            $result_array[] = $row;
+        }
+        return $result_array;
+    } else {
+        return false;
+    }
 }
+
+
+}
+
+
