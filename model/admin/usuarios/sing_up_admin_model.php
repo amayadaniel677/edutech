@@ -26,7 +26,8 @@ class sing_up_model
         if ($this->user_repeat($documento, $this->con)) {
             return 'Error! el usuario ya está registrado';
         } else {
-            $fecha_formateada = $fecha->format('Y-m-d');
+            $fecha = strtotime($fecha);
+            $fecha_formateada = date('Y-m-d', $fecha);
             $sqlInsert = "INSERT INTO people (`name`,`lastname`,`dni_type`,`dni`,`birthdate`,`email`,`password`,`phone`,`city`,`address`,`sex`,`rol`,`photo`) VALUES ('$nombres','$apellidos','$tipo_documento','$documento','$fecha_formateada','$correo','$contrasenia_encriptada','$telefono','$ciudad','$direccion','$sexo','$rol','$foto')";
             $result = $this->con->query($sqlInsert);
             if ($result == 1) {
