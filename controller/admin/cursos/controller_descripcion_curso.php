@@ -1,6 +1,6 @@
 <?php 
-<<<<<<< Updated upstream
-=======
+
+
 session_start();
 if (!isset( $_SESSION['dni_session'])){
     header('location:../../login_controller.php');
@@ -42,6 +42,6 @@ if (isset($_GET['id_curso'])) {
     echo "No se proporcionó un ID de curso válido.";
 }
 
->>>>>>> Stashed changes
+
 include('../../../view/admin/paginas/cursos/descripcion_curso.php');
 ?>
