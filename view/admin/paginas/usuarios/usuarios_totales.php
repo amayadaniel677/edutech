@@ -12,7 +12,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EduTech | Add Curso</title>
+    <title>KEPLER | LISTADO DE USUARIOS </title>
+    <!-- LINKS DataTables -->
+    <link rel="stylesheet" href="../../../view/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../../view/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../../view/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -69,52 +73,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
+                <!-- mostrar errores  -->
                 <div class="container-fluid">
-
-                    <div class="container">
-                        <?php
-                        // Validar si $mensaje_editar no está vacío
-                        if (!empty($mensaje_editar)) {
-                            // Mostrar el encabezado con el mensaje y un fondo azul
-                            echo '<h5 class="bg-primary text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje_editar . '</h5>';
-                        }
-                        ?>
-                        <?php
-                        if (isset($msj_eliminar) && !empty($msj_eliminar)) {
-                            echo '<h5 class="bg-danger text-white p-3 mb-2" style="font-size: 1.25rem;">' . $msj_eliminar . '</h5>';
-                        }
-                        ?>
-                        <div class="row justify-content-center">
-                            <div class="col-md-6">
-                                <form method="POST">
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-success">Buscar</button>
-                                        <?php
-                                        if ($_SERVER['REQUEST_METHOD'] === 'POST')
-                                            echo '<a href="controller_usuarios_totales.php?tipo_usuario=' . $tipo_usuario . '" class="btn btn-outline-primary">Ver todos</a>'
-                                        ?>
-                                    </div>
-                                </form>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert" role="alert">
+                                <?php
+                                // Validar si $mensaje_editar no está vacío
+                                if (!empty($mensaje_editar)) {
+                                    // Mostrar el encabezado con el mensaje y un fondo azul
+                                    echo '<h5 class="bg-primary text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje_editar . '</h5>';
+                                }
+                                ?>
+                                <?php
+                                if (isset($msj_eliminar) && !empty($msj_eliminar)) {
+                                    echo '<h5 class="bg-warning text-white p-3 mb-2" style="font-size: 1.25rem;">' . $msj_eliminar . '</h5>';
+                                }
+                                ?>
+                                <?php
+                                if (isset($mensaje)) {
+                                    echo $mensaje;
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
-                    <!-- tabla -->
-                    <div class="container mt-5">
-                        <?php
-                        if (isset($mensaje)) {
-                            echo $mensaje;
-                        }
-                        ?>
-                        <div class="table-responsive">
-                            <table id="miTabla" class="table table-striped table-bordered">
+                </div>
+                <div class="container-fluid col-md-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">DataTable with default features</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">Rol</th>
                                         <th scope="col">Nombres</th>
-                                       
                                         <th scope="col">Correo</th>
                                         <th scope="col"># Documento</th>
                                         <th scope="col">Ciudad</th>
@@ -129,13 +126,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         foreach ($usuario_filtrado as $usuario) {
                                             echo '<tr>';
                                             echo '<td>' . $usuario['rol'] . '</td>';
-                                            echo '<td>' . $usuario['name']. " ".$usuario['lastname'] . '</td>';
+                                            echo '<td>' . $usuario['name'] . " " . $usuario['lastname'] . '</td>';
                                             echo '<td>' . $usuario['email'] . '</td>';
                                             echo '<td>' . $usuario['dni'] . '</td>';
                                             echo '<td>' . $usuario['city'] . '</td>';
                                             echo '<td>' . $usuario['address'] . '</td>';
                                             echo '<td>';
-                                           
+
                                             echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '" class="btn btn-primary">';
                                             echo '<i class="fas fa-edit"></i>';
                                             echo '</a>';
@@ -149,7 +146,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         foreach ($usuarios as $usuario) {
                                             echo '<tr>';
                                             echo '<td>' . $usuario['rol'] . '</td>';
-                                            echo '<td>' . $usuario['name']. " ".$usuario['lastname'] . '</td>';
+                                            echo '<td>' . $usuario['name'] . " " . $usuario['lastname'] . '</td>';
                                             echo '<td>' . $usuario['email'] . '</td>';
                                             echo '<td>' . $usuario['dni'] . '</td>';
                                             echo '<td>' . $usuario['city'] . '</td>';
@@ -167,21 +164,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     }
 
 
-                                    echo '</tbody>';
-                                    echo '</table>';
+
                                     ?>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th scope="col">Rol</th>
+                                        <th scope="col">Nombres</th>
+
+                                        <th scope="col">Correo</th>
+                                        <th scope="col"># Documento</th>
+                                        <th scope="col">Ciudad</th>
+                                        <th scope="col">Direccion</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
-
+                        <!-- /.card-body -->
                     </div>
-                    <?php if (!$bandera) : ?>
-
                 </div>
-            <?php endif; ?>
+
 
         </div>
         </section>
+
         <!-- /. Maincontent -->
     </div>
     <!-- /.content-wrapper -->
@@ -209,8 +216,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../../view/admin/plugins/jszip/jszip.min.js"></script>
+    <script src="../../../view/admin/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../../../view/admin/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+
 </body>
 
 </html>

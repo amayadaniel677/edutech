@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $modelo = new RegVenta_consult();
         $resultado_modelo_id=$modelo->agregar_venta_completa($nombres,$apellidos,$dni,$correo,$ciudad,$telefono,$descuento,$valor_total);
         if ($resultado_modelo_id) {
-            $resultado_detalles = $modelo->agregar_detalles_venta($detallesVenta, $resultado_modelo_id);
+            $resultado_detalles = $modelo->agregar_detalles_venta($detallesVenta, $resultado_modelo_id,$dni);
             if ($resultado_detalles) {
                 // Venta y detalles registrados exitosamente
                 $detallesVenta = '';
