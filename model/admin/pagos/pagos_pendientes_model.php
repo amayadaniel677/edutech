@@ -46,7 +46,7 @@ class pagos_pendientes_model
         $sql = "SELECT total_hours FROM payments WHERE id='$id_pago'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+            $row= $result->fetch_assoc();
             return $row;
         } else {
             return false;
@@ -57,8 +57,8 @@ class pagos_pendientes_model
     {
         $restar = $this->restar_horas($payments_id, $total_hours);
         if ($restar) {
-            $$date = date("Y-m-d");
-            $sql = "INSERT INTO payment_history (`date`,`total_hours`,`price_hour`,`total_price`,`payments_id`) VALUES ('$date','$total_hours','$price_hour'.'$total_price','$payments_id')";
+            $date = date("Y-m-d");
+            $sql = "INSERT INTO payment_history (`date`,`total_hours`,`price_hour`,`total_price`,`payments_id`) VALUES ('$date','$total_hours','$price_hour','$total_price','$payments_id')";
             $result=$this->con->query($sql);
             if($result){
                 return true;

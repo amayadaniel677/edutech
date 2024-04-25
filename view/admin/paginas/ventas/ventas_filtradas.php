@@ -16,7 +16,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>EduTech | Buscar</title>
-
+     <!-- LINKS DataTables -->
+    <link rel="stylesheet" href="../../../view/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../../view/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../../view/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
@@ -80,39 +83,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <form method="POST" action='controller_ventas_filtradas.php'>
 
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label><b>DNI Cliente</b></label>
-                                        <input value='<?php if (isset($dni)) {
-                                                            echo $dni;
-                                                        } ?>' type="text" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
-                                    </div>
-
-                                </div>
-                                <div class="col-md-3">
-
-
-                                    <div class="form-group">
-                                        <label><b>Del Dia</b></label>
-                                        <input type="date" name="from_date" value="<?php if (isset($from_date)) {
-                                                                                        echo $from_date;
-                                                                                    } ?>" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label><b> Hasta el Dia</b></label>
-                                        <input type="date" name="to_date" value="<?php if (isset($to_date)) {
-                                                                                        echo $to_date;
-                                                                                    } ?>" class="form-control">
-                                    </div>
-                                </div>
+                                
+                             
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label><b><br></b></label> <br>
-                                        <button type="submit" class="btn btn-primary">Buscar</button>
+                                    
                                         <?php
-                                        echo '<a href="controller_buscar_ventas.php" class="btn btn-outline-primary">Todas las ventas</a>';
+                                        echo '<a href="controller_buscar_ventas.php" class="btn btn-outline-primary">Volver a todas las ventas</a>';
                                         ?>
                                     </div>
 
@@ -123,20 +101,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     </div>
                     <!-- tabla -->
-                    <div class="container mt-5">
+                    <div class="container mt-2">
+                       
                         <div class="card">
-                            <div class="card-header">
-                                <!-- agregar un aparte para filtrar la tabla por from_date hasta to_date -->
-                                <!--  -->
-                                <h3 class="card-title">LISTADO DE VENTAS</h3>
-
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body">
-                                <!-- agregarle scroll a la tabla despues de unos 15 resultados -->
-                                <div class="table-responsive">
-                                    <table id="miTabla" class="table table-striped table-bordered">
-                                        <thead>
+              <div class="card-header">
+                <h3 class="card-title">Ventas realizadas</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                <thead>
                                             <tr>
                                                 <th scope="col">ID Venta</th>
                                                 <th scope="col">dni</th>
@@ -173,19 +147,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                             ?>
                                         </tbody>
-                                    </table>
-                                </div>
 
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer clearfix">
-                                <ul class="pagination pagination-sm m-0 float-right">
-
-
-                                </ul>
-                            </div>
-                        </div>
-
+                  <tfoot>
+                  <tr>
+                                                <th scope="col">ID Venta</th>
+                                                <th scope="col">dni</th>
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Precio</th>
+                                                <th scope="col">Fecha</th>
+                                                <th scope="col">Acciones</th>
+                                            </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
                     </div>
 
 
@@ -221,8 +197,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="../../../view/admin/plugins/jszip/jszip.min.js"></script>
+    <script src="../../../view/admin/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../../../view/admin/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../../dist/js/demo.js"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 </body>
 
 </html>

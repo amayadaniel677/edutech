@@ -176,8 +176,10 @@ class RegVenta_consult
                     $result = $this->con->query($sql);
                 }
                 else{
-                     $this->crearRegistroAsistencia($tipo_venta, $total_quantity); 
-
+                     //traerme el id de la ultima insercion
+                        $lastInsertedId = $this->con->insert_id;   
+                        $this->crearRegistroAsistencia($tipo_venta, $total_quantity);
+                         
                 }
                 // falta agregar en la nueva tabla de remaining_units la nueva cantidad de horas restantes
                 //falta validar si existe otro detalle que pertenezca a la misma persona y con el mismo curso y el mismo tipo (horas-clases)

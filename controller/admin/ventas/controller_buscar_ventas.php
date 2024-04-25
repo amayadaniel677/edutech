@@ -12,29 +12,9 @@ if (isset($_GET['msj_eliminar'])) {
     $msj_eliminar = $_GET['msj_eliminar'];
 }
 
-$ventasFiltradas = $consult->ventas();
+$ventas_paginadas = $consult->ventas();
 // echo "ventas filtradas: ".$ventasFiltradas;
-if(isset($ventasFiltradas)){
-    // pintar la longitud de la consulta
-    
-    echo "cantidad ventas filtradas". count($ventasFiltradas);
-    $ventas = $ventasFiltradas; 
-    // Número de resultados por página
-    $resultados_por_pagina = 10;
-echo "resultados por pagina: ".$resultados_por_pagina;
-    // Obtener la página actual
-    $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 1;
-    echo "pagina actual: ".$pagina;
-    // Calcular el offset para la consulta SQL
-    $offset = ($pagina - 1) * $resultados_por_pagina;
-    echo "offset: ".$offset;
 
-    // Calcular el número total de páginas
-    $total_paginas = ceil(count($ventas) / $resultados_por_pagina);
-echo "total paginas: ".$total_paginas;
-    // Obtener solo los resultados para la página actual
-    $ventas_paginadas = array_slice($ventas, $offset, $resultados_por_pagina);
-}
 
 
 

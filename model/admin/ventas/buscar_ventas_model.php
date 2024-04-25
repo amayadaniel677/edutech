@@ -64,7 +64,7 @@ class buscar_venta_model
         // $id_people = $this->user_exist($dni1);
         // if ($id_people) {
         // validar si enviaron las fechas o solo el dni
-        echo "variables recibidas: " . $dni1 . " " . $from_date . " " . $to_date;
+       
         if ($from_date != "" && $to_date != "" && $dni1 != "") {
             $sql = "SELECT
                 p.dni  AS person_dni,
@@ -76,7 +76,7 @@ class buscar_venta_model
                 INNER JOIN people p ON sa.people_id = p.id
                 WHERE p.dni = '$dni1' AND sa.date BETWEEN '$from_date' AND '$to_date' ORDER BY sa.date DESC";
         } elseif ($from_date != "" && $to_date != "" && $dni1 == "") {
-            echo "entró al segundo elseif";
+       
             $sql = "SELECT
                 p.dni  AS person_dni,
                 p.name  AS person_name,
@@ -109,7 +109,7 @@ class buscar_venta_model
             return $result_array;
         } else {
             // no devolvio la cantidad de filas esperadas
-            echo "no devolvio la cantidad de filas esperadas";
+           
             return false;
         }
     }
