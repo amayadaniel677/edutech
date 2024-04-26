@@ -16,6 +16,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EduTech | Buscar</title>
+  <!-- LINKS DataTables -->
+  <link rel="stylesheet" href="../../../view/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../../view/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../../view/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -72,18 +76,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             ?>
 
             <form method="POST" action='controller_ventas_filtradas.php'>
-
+              <input value='<?php if (isset($_POST['dni'])) {
+                              echo $_POST['dni'];
+                            } ?>' type="hidden" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
               <div class="row">
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <label><b>DNI Cliente</b></label>
-                    <input value='<?php if (isset($_POST['dni'])) {
-                                    echo $_POST['dni'];
-                                  } ?>' type="text" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
-                  </div>
 
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
 
 
                   <div class="form-group">
@@ -93,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                                 } ?>" class="form-control">
                   </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <div class="form-group">
                     <label><b> Hasta el Dia</b></label>
                     <input type="date" name="to_date" value="<?php if (isset($_POST['to_date'])) {
@@ -105,11 +103,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="form-group">
                     <label><b><br></b></label> <br>
                     <button type="submit" class="btn btn-primary">Buscar</button>
-                    <?php
-                    if ($_SERVER['REQUEST_METHOD'] === 'POST' || isset($ventas_paginadas)){
-                      
-                      echo '<a href="controller_buscar_ventas.php?mostrarTotales=true" class="btn btn-outline-primary">Todas las ventas</a>';}
-                    ?>
                   </div>
 
                 </div>
@@ -119,17 +112,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           </div>
           <!-- tabla -->
-          <div class="container mt-5">
+          <div class="container mt-2">
+            
+
             <div class="card">
               <div class="card-header">
-                <!-- agregar un aparte para filtrar la tabla por from_date hasta to_date -->
-                <!--  -->
-                <h3 class="card-title">LISTADO DE VENTAS</h3>
-
+                <h3 class="card-title">Ventas realizadas</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="miTabla" class="table table-striped table-bordered">
+                <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th scope="col">ID Venta</th>
@@ -143,10 +135,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <tbody>
                     <?php
                     if (isset($ventas_paginadas)) {
-                    
-                        $ventas_reverse = $ventas_paginadas;
-                        foreach ($ventas_reverse as $venta) {
-                          echo '<tr>
+
+                      $ventas_reverse = $ventas_paginadas;
+                      foreach ($ventas_reverse as $venta) {
+                        echo '<tr>
                       <td>' . $venta['sale_id'] . '</td>
                               <td>' . $venta['person_dni'] . '</td>
                               <td>' . $venta['person_name'] . '</td>
@@ -157,41 +149,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <a href="controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                               </td>
                             </tr>';
-                        }
-                      
+                      }
                     } else {
                       echo '<tr><td colspan="6">No hay ventas disponibles.</td></tr>';
                     }
 
                     // Cierra la tabla HTML
-                    echo '</tbody>
-                        </table>';
+                    
                     ?>
                   </tbody>
+                  <tfoot>
+                  <tr>
+                      <th scope="col">ID Venta</th>
+                      <th scope="col">dni</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
               <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                  <!-- si existen las variables $pagina $total_paginas -->
-                  <!--  -->
-                  <?php
-                  // Asegurarse de que las variables existan antes de usarlas
-                  $pagina = isset($pagina) ? $pagina : 1; // Si $pagina no está definida, se usa 1 como valor predeterminado
-                  $total_paginas = isset($total_paginas) ? $total_paginas : 1; // Si $total_paginas no está definida, se usa 1 como valor predeterminado
-
-                  // Ahora puedes usar $pagina y $total_paginas con seguridad
-                  if ($pagina > 1) : ?>
-                    <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina - 1); ?>">«</a></li>
-                  <?php endif; ?>
-                  <?php for ($i = 1; $i <= $total_paginas; $i++) : ?>
-                    <li class="page-item <?php echo ($pagina == $i) ? 'active' : ''; ?>"><a class="page-link" href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                  <?php endfor; ?>
-                  <?php if ($pagina < $total_paginas) : ?>
-                    <li class="page-item"><a class="page-link" href="?pagina=<?php echo ($pagina + 1); ?>">»</a></li>
-                  <?php endif; ?>
-                </ul>
-              </div>
             </div>
 
           </div>
@@ -229,8 +208,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../../../view/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="../../../view/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="../../../view/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="../../../view/admin/plugins/jszip/jszip.min.js"></script>
+  <script src="../../../view/admin/plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="../../../view/admin/plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="../../../dist/js/demo.js"></script>
+  <!-- Page specific script -->
+  <script>
+    $(function() {
+      $("#example1").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
 </body>
 
 </html>

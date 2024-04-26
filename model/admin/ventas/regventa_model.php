@@ -153,7 +153,7 @@ class RegVenta_consult
             return false;
         }
     }
-    public function agregar_detalles_venta($detallesVenta, $sales_id)
+    public function agregar_detalles_venta($detallesVenta, $sales_id, $dni)
     {
         $cantidadDetalles = count($detallesVenta);
         $exitoDetalles = 0;
@@ -162,12 +162,25 @@ class RegVenta_consult
             $modality = $detalle['modalidad'];
             $tipo_venta = $detalle['tipoVenta'];
             $total_quantity = $detalle['cantidad_horas_clases'];
-
             $subjects_id = $this->obtener_id_curso($detalle['curso']);
+
             $sql = "INSERT INTO subject_sale(price,subjects_id,sales_id,modality,quantity_type,total_quantity) VALUES('$price','$subjects_id','$sales_id','$modality','$tipo_venta','$total_quantity') ";
             $result = $this->con->query($sql);
+
             if ($result) {
                 $exitoDetalles += 1;
+                $remaining_units_id =$this->verificarDetalleIgual($subjects_id, $modality, $dni, $tipo_venta);
+                if ($remaining_units_id !== null) {
+                    //actualizar la cantidad de horas restantes
+                    $sql = "UPDATE remaining_units SET total_units = total_units + $total_quantity WHERE id = $remaining_units_id";
+                    $result = $this->con->query($sql);
+                }
+                else{
+                     //traerme el id de la ultima insercion
+                        $lastInsertedId = $this->con->insert_id;   
+                        $this->crearRegistroAsistencia($tipo_venta, $total_quantity);
+                         
+                }
                 // falta agregar en la nueva tabla de remaining_units la nueva cantidad de horas restantes
                 //falta validar si existe otro detalle que pertenezca a la misma persona y con el mismo curso y el mismo tipo (horas-clases)
                 //si pertenece a la misma persona y mismo curso entonces se usa la misma fk de remaining_units
@@ -179,6 +192,29 @@ class RegVenta_consult
         } else {
             false;
         }
+    }
+    public function verificarDetalleIgual($people_id, $modality, $subjects_id, $quantity_type)
+    {
+        // verificar si existe un detalla con mismo dni mismo tipocantidad(horas,clases) y misma modalidad
+        $sql = "SELECT ds.remaining_units_id FROM detail_sale ds
+        JOIN sales s ON ds.sales_id = s.id
+        WHERE ds.modality = '$modality'
+        AND ds.subject_id = $subjects_id
+        AND ds.quantity_type = '$quantity_type'
+        AND s.people_id = $people_id
+        LIMIT 1";
+        $resultado = $this->con->query($sql);
+
+        if ($resultado->num_rows > 0) {
+            $fila = $resultado->fetch_assoc();
+            return $fila['remaining_units_id'];
+        } else {
+            return null;
+        }
+        // si no existe se crea un nuevo registro de asistencia
+    }
+    public function crearRegistroAsistencia($tipo_venta, $total_quantity)
+    {
     }
     public function obtener_id_curso($curso)
     {

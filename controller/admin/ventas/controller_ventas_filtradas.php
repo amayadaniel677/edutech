@@ -20,15 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $dni = $_POST['dni'];
         $from_date = $_POST['from_date'];
         $to_date = $_POST['to_date'];
-        echo "variables recibidas post: " . $dni . " " . $from_date . " " . $to_date;
+       
        
         if (($from_date == '' and $to_date != '') || ($from_date != '' and $to_date == '')) {
-            echo "no ingreso a hacer la consulta porque llegaron vacias";
+           
             $mensaje = "Debe ingresar ambas fechas";
         } else {
-            echo "ingresó";
+            
             $ventasFiltradas = $consult->ventas_filtradas($dni, $from_date, $to_date);
-            var_dump($ventasFiltradas);
+           
             $mensaje = $consult->ver_mensaje();
         }
     }
