@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (is_numeric($horas) && $horas == (int)$horas) {
             $pago=$consult2->realizar_pago($docente,$horas);
             if($pago){
+                $msj_eliminar='';
                 $cant_horas=$consult2->traer_horas($docente);
                 $mensaje_editar='Las horas se agregaron correctamente ahora suman: '. $cant_horas['total_hours'];
                 // refrescar la pagina para que se actualice la tabla

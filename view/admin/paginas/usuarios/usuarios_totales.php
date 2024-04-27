@@ -13,6 +13,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KEPLER | LISTADO DE USUARIOS </title>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../../view/admin/plugins/toastr/toastr.min.css">
     <!-- LINKS DataTables -->
     <link rel="stylesheet" href="../../../view/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../../view/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -36,6 +41,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
             /* Ajusta este valor según tus necesidades */
             overflow-y: auto;
             /* Habilita el desplazamiento vertical */
+        }
+
+        .mi-clase-personalizada .swal2-popup {
+            font-size: 16px !important;
+            height: 70px !important;
+
+
+        }
+
+        .swal2-popup h2 {
+            margin-top: 8px !important;
+            font-size: 18px !important;
         }
     </style>
 </head>
@@ -78,34 +95,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="row">
                         <div class="col-md-12">
                             <div class="alert" role="alert">
-                              <!-- Botón con la clase swalDefaultSuccess -->
-<button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display: none">
-    Launch Success Toast
-</button>
-
-
-<!-- Script para mostrar la alerta de éxito -->
-
-                                <?php
-
-
-
-                                // Validar si $mensaje_editar no está vacío
-                                if (!empty($mensaje_editar)) {
-                                    // Mostrar el encabezado con el mensaje y un fondo azul
-                                    echo '<h5 class="bg-success text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje_editar . '</h5>';
-                                }
-                                ?>
-                                <?php
-                                if (isset($msj_eliminar) && !empty($msj_eliminar)) {
-                                    echo '<h5 class="bg-warning text-white p-3 mb-2" style="font-size: 1.25rem;">' . $msj_eliminar . '</h5>';
-                                }
-                                ?>
-                                <?php
-                                if (isset($mensaje)) {
-                                    echo $mensaje;
-                                }
-                                ?>
+                                <!-- Botón con la clase swalDefaultSuccess -->
+                                <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
+                                    Launch Success Toast
+                                </button>
+                                <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+                                    error
+                                </button>                  
                             </div>
                         </div>
                     </div>
@@ -146,7 +142,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '" class="btn btn-primary">';
                                             echo '<i class="fas fa-edit"></i>';
                                             echo '</a>';
-                                            echo '<a href="controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '" class="btn btn-danger" id="desactivarUsuario">';
+                                            
+                                            echo '<a href="#" onclick="confirmarEliminarUsuario(\'' . 'controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '\')" class="btn btn-danger" id="desactivarUsuario">';
 
                                             echo '<i class="fas fa-trash"></i>';
                                             echo '</a>';
@@ -186,7 +183,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <div class="col-md-10 mt-3 mb-5">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                 <button id="btnPagar" class="btn btn-primary">Pagar</button>
-                                                               
+
                                                             </div>
                                                         </div>
                                                     </form>
@@ -253,9 +250,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- sweet alert -->
     <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
-   
+    <!-- Toastr -->
+    <script src="../../../view/admin/plugins/toastr/toastr.min.js"></script>
+
     <script>
         $(document).ready(function() {
             // Escuchar el click del botón "Pagar"
@@ -281,10 +284,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
         });
     </script>
-    <!-- jQuery -->
-    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
     <!-- DataTables  & Plugins -->
     <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -300,30 +300,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../../dist/js/demo.js"></script>
+
     <!-- Page specific script -->
-     <!-- Script para mostrar la alerta de confirmación -->
-    <!-- Script para mostrar la alerta de confirmación -->
+   
+    <!-- Script de las alertas de mensajes-->
+    <?php
+$mensaje_editar = $mensaje_editar ?? ''; // Asegura que $mensaje_editar esté definido
+$msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
+?>
     <script>
         $(function() {
             var Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000
+                timer: 400000,
+                width: '80%',
+                customClass: {
+                    container: 'mi-clase-personalizada'
+                }
+
+            
             });
 
             $('.swalDefaultSuccess').click(function() {
                 Toast.fire({
                     icon: 'success',
-                    title: '<?php echo $mensaje_editar; ?>'
+                    title:'<?php echo $mensaje_editar; ?>'
+                    
                 })
             });
             $('.swalDefaultInfo').click(function() {
                 Toast.fire({
                     icon: 'info',
-                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                    title: '<?php echo $msj_eliminar; ?>'
                 })
             });
             $('.swalDefaultError').click(function() {
@@ -344,182 +354,205 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
                 })
             });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Verificar si la variable $mensaje_editar está definida
+            <?php if (isset($mensaje_editar) && !empty($mensaje_editar)) : ?>
+                // Simular un clic en el botón para activar el SweetAlert
+                $('#btnSuccess').click();
+            <?php endif; ?>
+            <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
+                // Simular un clic en el botón para activar el SweetAlert
+                
+             console.log('entro');
+                $('#btnInfo').click();
 
-            $('.toastrDefaultSuccess').click(function() {
-                toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-            });
-            $('.toastrDefaultInfo').click(function() {
-                toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-            });
-            $('.toastrDefaultError').click(function() {
-                toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-            });
-            $('.toastrDefaultWarning').click(function() {
-                toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-            });
+               
+                
+            <?php endif; ?>
+           
+            
+        });
+    </script>
+    <script>
+// Función para confirmar la eliminación de un usuario
+function confirmarEliminarUsuario(url) {
+    Swal.fire({
+        title: "¿Estás seguro de inactivar el usuario?",
+        text: "Esto podría afectar sus cursos activos",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, inactivar",
+        cancelButtonText: "Cancelar",
+        reverseButtons: true,
+        dangerMode: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = url;
+        }
+    });
+}
 
-            $('.toastsDefaultDefault').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultTopLeft').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    position: 'topLeft',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultBottomRight').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    position: 'bottomRight',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultBottomLeft').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    position: 'bottomLeft',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultAutohide').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    autohide: true,
-                    delay: 750,
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultNotFixed').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    fixed: false,
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultFull').click(function() {
-                $(document).Toasts('create', {
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    icon: 'fas fa-envelope fa-lg',
-                })
-            });
-            $('.toastsDefaultFullImage').click(function() {
-                $(document).Toasts('create', {
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    image: '../../dist/img/user3-128x128.jpg',
-                    imageAlt: 'User Picture',
-                })
-            });
-            $('.toastsDefaultSuccess').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-success',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultInfo').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-info',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultWarning').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-warning',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultDanger').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-danger',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultMaroon').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-maroon',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
+// Función para confirmar el envío del formulario de pago
+$(document).ready(function() {
+    $('#btnPagar').click(function(e) {
+        e.preventDefault();
+        swal({
+            title: "¿Estás seguro?",
+            text: "Esta acción no se puede deshacer.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willSubmit) => {
+            if (willSubmit) {
+                $('#formPagar').submit();
+            }
+        });
+    });
+});
+</script>
+
+
+
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
             });
         });
     </script>
-<script>
-$(document).ready(function() {
-    // Verificar si la variable $mensaje_editar está definida
-    <?php if (isset($mensaje_editar) && !empty($mensaje_editar)) : ?>
-        // Simular un clic en el botón para activar el SweetAlert
-        $('#btnSuccess').click();
-    <?php endif; ?>
-});
-</script>
-<script>
-  
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('btnPagar').addEventListener('click', function(event) {
-        // Prevenir el comportamiento predeterminado del botón
-        event.preventDefault();
+    <script class="alertas-opcionales">
+        //     $('.toastrDefaultSuccess').click(function() {
+        //         toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+        //     });
+        //     $('.toastrDefaultInfo').click(function() {
+        //         toastr.info('informacion relevante.', '', {
+        //             timeOut: 30000
+        //         });
+        //     });
+        //     $('.toastrDefaultError').click(function() {
+        //         toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+        //     });
+        //     $('.toastrDefaultWarning').click(function() {
+        //         toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+        //     });
 
-        // Mostrar la alerta de confirmación
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "No podrás revertir esto!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, pagar!',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Si el usuario confirma, proceder a enviar el formulario
-                document.getElementById('formPagar').submit();
-            }
-        })
-    });
-    document.getElementById('desactivarUsuario').addEventListener('click', function(event) {
-        // Prevenir el comportamiento predeterminado del enlace
-        event.preventDefault();
-
-        // Mostrar la alerta de confirmación
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "No podrás revertir esto!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, desactivar!',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Si el usuario confirma, proceder a redirigir a la URL de desactivación
-                window.location.href = this.href;
-            }
-        })
-    });
-
-});
-</script>
-
-
-
-
+        //     $('.toastsDefaultDefault').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultTopLeft').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             position: 'topLeft',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultBottomRight').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             position: 'bottomRight',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultBottomLeft').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             position: 'bottomLeft',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultAutohide').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             autohide: true,
+        //             delay: 750,
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultNotFixed').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             fixed: false,
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultFull').click(function() {
+        //         $(document).Toasts('create', {
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             icon: 'fas fa-envelope fa-lg',
+        //         })
+        //     });
+        //     $('.toastsDefaultFullImage').click(function() {
+        //         $(document).Toasts('create', {
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             image: '../../dist/img/user3-128x128.jpg',
+        //             imageAlt: 'User Picture',
+        //         })
+        //     });
+        //     $('.toastsDefaultSuccess').click(function() {
+        //         $(document).Toasts('create', {
+        //             class: 'bg-success',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultInfo').click(function() {
+        //         $(document).Toasts('create', {
+        //             class: 'bg-info',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultWarning').click(function() {
+        //         $(document).Toasts('create', {
+        //             class: 'bg-warning',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultDanger').click(function() {
+        //         $(document).Toasts('create', {
+        //             class: 'bg-danger',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultMaroon').click(function() {
+        //         $(document).Toasts('create', {
+        //             class: 'bg-maroon',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        // });
+    </script>
 
 </body>
 
