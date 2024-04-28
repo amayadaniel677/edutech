@@ -17,7 +17,7 @@ plantilla para alertas.
         .mi-clase-personalizada .swal2-popup {
             font-size: 16px !important;
             height: 70px !important;
-
+            /* ejemplo para tati */
 
         }
 
