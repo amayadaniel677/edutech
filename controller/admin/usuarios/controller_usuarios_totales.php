@@ -12,7 +12,7 @@ if (isset($_GET['tipo_usuario'])) {
     $tipo_usuario = $_GET['tipo_usuario'];
     $consult= new buscar_usuario_model();
     $usuarios=$consult->traer_usuarios($tipo_usuario);
-    $bandera= false;
+    $bandera= true;
 }
 
 
@@ -24,15 +24,33 @@ if (isset($_GET['mensaje'])) {
     $mensaje_editar = $_GET['mensaje'];
 } 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
-    $msj_eliminar='';
-    $mensaje_editar='';
-    $dni=$_POST['dni'];
-    $usuario_filtrado=$consult->buscar_usuario($dni);
-    $consult= new buscar_usuario_controlador();
-    $mensaje=$consult->mostrarMensajes();
-    $bandera=true;
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $consult2=new buscar_usuario_model();
+    $horas =$_POST['horas'];
+    $docente =$_POST['docente_id'];
+    
+    if(empty($horas)){
+        $mensaje='por favor valide los campos';
+    }else{
+        if (is_numeric($horas) && $horas == (int)$horas) {
+            $pago=$consult2->realizar_pago($docente,$horas);
+            if($pago){
+                $cant_horas=$consult2->traer_horas($docente);
+                $mensaje_editar='Las horas se agregaron correctamente ahora suman: '. $cant_horas['total_hours'];
+                // refrescar la pagina para que se actualice la tabla
+                header('refresh:4;url=controller_usuarios_totales.php?tipo_usuario='.$tipo_usuario);
+            }else{
+                $mensaje_eliminar='No se agregaron las horas';
+            }
+        } else {
+            $mensaje_eliminar= 'Las horas ingresadas deben ser numericas';
+        }
+    }
+    
 }
+
 
 
 

@@ -61,7 +61,49 @@ class buscar_usuario_model{
             return false;
         }
     }
+    // logica de agregar horas pagadas al docente
+    
+    public function payment_exist($id_docente){
+        $sql="SELECT * FROM payments WHERE people_id='$id_docente'";
+        $result=$this->con->query($sql);
+        if($result->num_rows>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
+    public function realizar_pago($id_docente,$horas){
+        if($this->payment_exist($id_docente)){
+            $sql="UPDATE payments
+            SET total_hours = total_hours + $horas
+            WHERE people_id = $id_docente";
+            $result=$this->con->query($sql);
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            $sql="INSERT INTO payments (`total_hours`,`people_id`) VALUES ('$horas','$id_docente')";
+            $result=$this->con->query($sql);
+            if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    public function traer_horas($id_docente){
+        $sql="SELECT total_hours FROM payments WHERE people_id='$id_docente'";
+        $result=$this->con->query($sql);
+        if($result->num_rows>0){
+            $row=$result->fetch_assoc();
+            return $row;
+        }else{
+            return false;
+        }
+    }
     
 }
 ?>
