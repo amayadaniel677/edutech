@@ -15,6 +15,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>KEPLER | LISTADO DE USUARIOS </title>
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../../view/admin/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../view/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
     <!-- Toastr -->
     <link rel="stylesheet" href="../../../view/admin/plugins/toastr/toastr.min.css">
@@ -46,8 +49,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         .mi-clase-personalizada .swal2-popup {
             font-size: 16px !important;
             height: 70px !important;
-
-
         }
 
         .swal2-popup h2 {
@@ -90,6 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
+
                 <!-- mostrar errores  -->
                 <div class="container-fluid">
                     <div class="row">
@@ -101,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </button>
                                 <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
                                     error
-                                </button>                  
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -142,7 +144,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '" class="btn btn-primary">';
                                             echo '<i class="fas fa-edit"></i>';
                                             echo '</a>';
-                                            
+
                                             echo '<a href="#" onclick="confirmarEliminarUsuario(\'' . 'controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '\')" class="btn btn-danger" id="desactivarUsuario">';
 
                                             echo '<i class="fas fa-trash"></i>';
@@ -150,6 +152,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             if ($usuario['rol'] == 'docente') {
                                                 $usuario_id = $usuario['id'];
                                                 echo "  <a href='#' class='btn btn-primary abrir-modal' data-toggle='modal' data-target='#miModal' data-id='$usuario_id' data-toggle='tooltip' data-placement='top' title='sumar horas trabajadas'><i class='fas fa-clock'></i></a>";
+                                            } else {
+                                                $usuario_id = $usuario['id'];
+                                                echo "  <a href='#' class='btn btn-success abrir-modal' data-toggle='modal' data-target='#modalEstudiante' data-id-estudiante='$usuario_id' data-toggle='tooltip' data-placement='top' title='agregar horas al estudiante'><i class='fas fa-clock'></i></a>";
                                             }
                                             echo "";
                                             echo '</td>';
@@ -161,7 +166,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     ?>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="
+                                    " tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -178,7 +184,50 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <input type="hidden" name="docente_id" id="docente_id">
                                                             <div class="col-md-12 mt-3">
                                                                 <label for="horas">Cantidad de horas trabajadas:</label> <br>
-                                                                <input required type="number" name="horas" id="horas" class="form-control" placeholder="Cantidad horas">
+                                                                <input type="number" name="horas" id="horas" class="form-control" placeholder="Cantidad horas">
+                                                            </div>
+                                                            <div class="col-md-10 mt-3 mb-5">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                <button id="btnPagar" class="btn btn-primary">Pagar</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modalEstudiante"  role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="miModalLabel">Pagos docente</h3>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- Aquí irá el contenido dinámico del modal -->
+                                                    <!-- Agrega el ID "formPagar" al formulario -->
+                                                    <form id="formPagar" method="POST" action="">
+                                                        <div class="">
+                                                            <input type="hidden" name="estudiante_id" id="estudiante_id">
+                                                            <div class="col-md-12 mt-3">
+                                                                <label for="horas">Cantidad de horas trabajadas:</label> <br>
+                                                                <div class="form-group">
+                                                                    <label>Minimal</label>
+                                                                    <select class="form-control select2" id="miSelect2" style="width: 100%;">
+                                                                        <option selected="selected">Alabama</option>
+                                                                        <option>Alaska</option>
+                                                                        <option>California</option>
+                                                                        <option>Delaware</option>
+                                                                        <option>Tennessee</option>
+                                                                        <option>Texas</option>
+                                                                        <option>Washington</option>
+                                                                    </select>
+                                                                </div>
                                                             </div>
                                                             <div class="col-md-10 mt-3 mb-5">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -254,6 +303,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="../../../view/admin/plugins/select2/js/select2.full.min.js"></script>
+    <script>
+        $(function() {
+
+            $('#modalEstudiante').on('shown.bs.modal', function() {
+                setTimeout(function() {
+                    $('#miSelect2').select2();
+                }, 100); // Ajusta el tiempo según sea necesario
+            });
+
+            // Opcional: Inicializar Select2 solo para elementos con la clase .select2
+            // $('.select2').select2();
+
+            // Opcional: Inicializar Select2 solo para elementos con la clase .select2bs4 y tema Bootstrap 4
+            // $('.select2bs4').select2({ theme: 'bootstrap4' });
+        });
+    </script>
     <!-- sweet alert -->
     <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- Toastr -->
@@ -302,12 +369,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 
     <!-- Page specific script -->
-   
+
     <!-- Script de las alertas de mensajes-->
     <?php
-$mensaje_editar = $mensaje_editar ?? ''; // Asegura que $mensaje_editar esté definido
-$msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
-?>
+    $mensaje_editar = $mensaje_editar ?? ''; // Asegura que $mensaje_editar esté definido
+    $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
+    ?>
     <script>
         $(function() {
             var Toast = Swal.mixin({
@@ -320,14 +387,14 @@ $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté defini
                     container: 'mi-clase-personalizada'
                 }
 
-            
+
             });
 
             $('.swalDefaultSuccess').click(function() {
                 Toast.fire({
                     icon: 'success',
-                    title:'<?php echo $mensaje_editar; ?>'
-                    
+                    title: '<?php echo $mensaje_editar; ?>'
+
                 })
             });
             $('.swalDefaultInfo').click(function() {
@@ -365,55 +432,55 @@ $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté defini
             <?php endif; ?>
             <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
                 // Simular un clic en el botón para activar el SweetAlert
-                
-             console.log('entro');
+
+                console.log('entro');
                 $('#btnInfo').click();
 
-               
-                
+
+
             <?php endif; ?>
-           
-            
+
+
         });
     </script>
     <script>
-// Función para confirmar la eliminación de un usuario
-function confirmarEliminarUsuario(url) {
-    Swal.fire({
-        title: "¿Estás seguro de inactivar el usuario?",
-        text: "Esto podría afectar sus cursos activos",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Sí, inactivar",
-        cancelButtonText: "Cancelar",
-        reverseButtons: true,
-        dangerMode: true,
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = url;
+        // Función para confirmar la eliminación de un usuario
+        function confirmarEliminarUsuario(url) {
+            Swal.fire({
+                title: "¿Estás seguro de inactivar el usuario?",
+                text: "Esto podría afectar sus cursos activos",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, inactivar",
+                cancelButtonText: "Cancelar",
+                reverseButtons: true,
+                dangerMode: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
         }
-    });
-}
 
-// Función para confirmar el envío del formulario de pago
-$(document).ready(function() {
-    $('#btnPagar').click(function(e) {
-        e.preventDefault();
-        swal({
-            title: "¿Estás seguro?",
-            text: "Esta acción no se puede deshacer.",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willSubmit) => {
-            if (willSubmit) {
-                $('#formPagar').submit();
-            }
+        // Función para confirmar el envío del formulario de pago
+        $(document).ready(function() {
+            $('#btnPagar').click(function(e) {
+                e.preventDefault();
+                swal({
+                        title: "¿Estás seguro?",
+                        text: "Esta acción no se puede deshacer.",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willSubmit) => {
+                        if (willSubmit) {
+                            $('#formPagar').submit();
+                        }
+                    });
+            });
         });
-    });
-});
-</script>
+    </script>
 
 
 
@@ -436,6 +503,7 @@ $(document).ready(function() {
             });
         });
     </script>
+
     <script class="alertas-opcionales">
         //     $('.toastrDefaultSuccess').click(function() {
         //         toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
