@@ -22,13 +22,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css" />
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css" />
 
   <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
-
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" /> <!-- necesario para el tamaño de mensajes alerta  -->
 
 </head>
 
@@ -68,16 +70,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Contenido principal vista -->
       <section class="content">
-        <?php
-        if (isset($_GET['mensaje'])) {
-          $mensaje = $_GET['mensaje'];
-          // Ahora puedes utilizar $mensaje como desees, por ejemplo, mostrarlo en la página
-          echo "<div class='alert alert-success'>$mensaje</div>";
-        } elseif (isset($error)) {
-          echo "<div class='alert alert-danger'>$error</div>";
-        }
-
-        ?>
+        <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
+          
+        </button>
+        <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+          
+        </button>
+       
         <div>
           <div class="">
 
@@ -202,11 +201,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
 
           </div>
-            
+
         </div>
 
       </section>
-      
+
       <!-- /. Maincontent -->
     </div>
     <!-- /.content-wrapper -->
@@ -228,18 +227,94 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!--fin de toda la pagina wrapper -->
   <!-- ./wrapper -->
 
-  <!-- REQUIRED SCRIPTS -->
-  <!-- jQuery -->
-
-  <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+  
+                                <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- sweet alert -->
+    <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../../../view/admin/plugins/toastr/toastr.min.js"></script>
 
   <script src="../../../resource/js/admin/ventas/modal_detalle_venta2.js"></script>
-
-  <!-- REQUIRED SCRIPTS -->
-  <!-- sweet alert -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <!-- jQuery -->
+  <!-- alert registrar venta -->
   <script src="../../../resource/js/admin/ventas/alert_registrar_venta1.js"></script>
+  <!-- scripts para mostrar alertas de exito o error -->
+  <?php
+    $mensaje = $mensaje ?? ''; // Asegura que $mensaje esté definido
+    $error = $error ?? ''; // Asegura que $mensaje esté definido
+    ?>
+        <script>
+            $(function() {
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 400000,
+                    width: '80%',
+                    customClass: {
+                        container: 'mi-clase-personalizada'
+                    }
+    
+                
+                });
+    
+                $('.swalDefaultSuccess').click(function() {
+                    Toast.fire({
+                        icon: 'success',
+                        title:'<?php echo $mensaje; ?>'
+                        
+                    })
+                });
+                $('.swalDefaultInfo').click(function() {
+                    Toast.fire({
+                        icon: 'info',
+                        title: '<?php echo $error; ?>'
+                    })
+                });
+                $('.swalDefaultError').click(function() {
+                    Toast.fire({
+                        icon: 'error',
+                        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                    })
+                });
+                $('.swalDefaultWarning').click(function() {
+                    Toast.fire({
+                        icon: 'warning',
+                        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                    })
+                });
+                $('.swalDefaultQuestion').click(function() {
+                    Toast.fire({
+                        icon: 'question',
+                        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                    })
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                // Verificar si la variable $mensaje está definida
+                <?php if (isset($mensaje) && !empty($mensaje)) : ?>
+                    // Simular un clic en el botón para activar el SweetAlert
+                    $('#btnSuccess').click();
+                <?php endif; ?>
+                <?php if (isset($error) && !empty($error)) : ?>
+                    // Simular un clic en el botón para activar el SweetAlert
+                    
+                 console.log('entro');
+                    $('#btnInfo').click();
+    
+                   
+                    
+                <?php endif; ?>
+               
+                
+            });
+        </script>
+
 
   <!-- Bootstrap 4 -->
   <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

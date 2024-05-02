@@ -26,6 +26,8 @@ plantilla para alertas.
             font-size: 18px !important;
         }
     </style>
+  <link rel="icon" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />   <!-- necesario para el tamaño de mensajes alerta  -->
+
 
     <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
                                     Launch Success Toast

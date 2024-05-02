@@ -135,7 +135,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <th>Materia</th>
                                                             <th>Precio</th>
                                                             <th>Horas Totales</th>
-                                                            <th>Horas Restantes</th>
+                                                           
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -143,8 +143,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <tr>
                                                                 <td><?php echo htmlspecialchars($detalle['name']); ?></td>
                                                                 <td><?php echo htmlspecialchars($detalle['price']); ?></td>
-                                                                <td><?php echo htmlspecialchars($detalle['total_hours']); ?></td>
-                                                                <td><?php echo htmlspecialchars($detalle['remaining_hours']); ?></td>
+                                                                <td><?php echo htmlspecialchars($detalle['total_quantity']); ?></td>
+                                                             
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>

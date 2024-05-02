@@ -155,6 +155,7 @@ class RegVenta_consult
     }
     public function agregar_detalles_venta($detallesVenta, $sales_id, $dni)
     {
+        $people_id = $this->user_exist($dni);
         $cantidadDetalles = count($detallesVenta);
         $exitoDetalles = 0;
         foreach ($detallesVenta as $detalle) {
@@ -171,16 +172,16 @@ class RegVenta_consult
                 $lastInsertedIdSS = $this->con->insert_id;   
                 $exitoDetalles += 1;
 
-                //validar si existe otro detalle que pertenezca a la misma persona y con el mismo curso y el mismo tipo (horas-clases)
+                //valecidar si existe otro detalle que pertenezca a la misma persona y con el mismo curso y el mismo tipo (horas-clases)
 
-                $remaining_units_id =$this->verificarDetalleIgual($subjects_id, $modality, $dni, $tipo_venta);
+                $remaining_units_id =$this->verificarDetalleIgual($people_id,$subjects_id, $modality , $tipo_venta,$lastInsertedIdSS);
                 if ($remaining_units_id !== null) {
                     //actualizar la cantidad de horas restantes
-                    $sql = "UPDATE remaining_units SET total_units = total_units + $total_quantity, WHERE id = $remaining_units_id";
+                    $sql = "UPDATE remaining_units SET total_units = total_units + $total_quantity WHERE id = '$remaining_units_id'";
                     $result = $this->con->query($sql);
-                    if($result){
-                    
-                    }
+                    // if($result){
+                    //     echo "remaining_units editado".$remaining_units_id;
+                    // }
                     
                 }
                 else{
@@ -190,15 +191,13 @@ class RegVenta_consult
                         $remaining_units_id=$this->crearRegistroAsistencia($total_quantity);
                 }
 
-                echo "id del nuevo subject sale: ".$lastInsertedIdSS;
-                echo "id del remaining_units: ".$remaining_units_id;
+                // echo "id del nuevo subject sale: ".$lastInsertedIdSS;
+                // echo "id del remaining_units: ".$remaining_units_id;
                 //si pertenece a la misma persona y mismo curso entonces se usa la misma fk de remaining_units
                 //si no pertenece a la misma persona y mismo curso entonces se crea un nuevo registro en remaining_units y se optiene ese id para ponerlo en subject_sale
                 $sql="UPDATE subject_sale SET remaining_units_id = $remaining_units_id WHERE id = $lastInsertedIdSS";
                 $result2 = $this->con->query($sql);
-                if($result2){
-                    echo "se actualizo el campo remaining_units_id del SS:".$remaining_units_id;
-                }
+               
             }
         }
         if ($cantidadDetalles == $exitoDetalles) {
@@ -207,41 +206,46 @@ class RegVenta_consult
             false;
         }
     }
-    public function verificarDetalleIgual($people_id, $modality, $subjects_id, $quantity_type)
+    public function verificarDetalleIgual($people_id, $subjects_id,$modality, $quantity_type,$lastInsertedIdSS)
     {
+        // echo "datos recibidos en verificar Igual: peopleId".$people_id.' , modalidad='.$modality."subjects_id".$subjects_id."quantity_type".$quantity_type;
         // verificar si existe un detalla con mismo dni mismo tipocantidad(horas,clases) y misma modalidad
-        $sql = "SELECT ss.remaining_units_id FROM subject_sale ss
+        $sql = "SELECT ss.id, ss.remaining_units_id, ss.modality, ss.subjects_id, ss.quantity_type, s.people_id FROM subject_sale ss
         JOIN sales s ON ss.sales_id = s.id
         WHERE ss.modality = '$modality'
         AND ss.subjects_id = $subjects_id
         AND ss.quantity_type = '$quantity_type'
-        AND s.people_id = $people_id
+        AND s.people_id = '$people_id'
+        AND ss.id != '$lastInsertedIdSS'
         LIMIT 1";
         $resultado = $this->con->query($sql);
 
         if ($resultado->num_rows > 0) {
-            echo "existe un detalle igual";
+            
             $fila = $resultado->fetch_assoc();
+            // echo "</br> existe un detalle igual: </br>";
+            
+            
             return $fila['remaining_units_id'];
         } else {
-            echo "no existe un detalle igual";
+            // echo "no existe un detalle igual";
             return null;
         }
         // si no existe se crea un nuevo registro de asistencia
     }
     public function crearRegistroAsistencia( $total_quantity)
     {
-        echo "crear registro de asistencia nuevo";
+        // echo "crear registro de asistencia nuevo";
 
         $sql="INSERT INTO remaining_units(total_units) values('$total_quantity')";
         $result=$this->con->query($sql);
         if($result){
-            echo "crear registro asistencia exitoso";
+            // echo "crear registro asistencia exitoso";
             //devuelve el id de la insercion
             return $this->con->insert_id;
         }
         else{
-            echo "crear registro asistencia fallido";
+            // echo "crear registro asistencia fallido";
         }
     }
     public function obtener_id_curso($curso)
