@@ -151,10 +151,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             echo '</a>';
                                             if ($usuario['rol'] == 'docente') {
                                                 $usuario_id = $usuario['id'];
-                                                echo "  <a href='#' class='btn btn-primary abrir-modal' data-toggle='modal' data-target='#miModal' data-id='$usuario_id' data-toggle='tooltip' data-placement='top' title='sumar horas trabajadas'><i class='fas fa-clock'></i></a>";
+                                                echo "  <a href='#' class='btn btn-primary abrir-modal-docente' data-toggle='modal' data-target='#modalDocente' data-id='$usuario_id' data-toggle='tooltip' data-placement='top' title='sumar horas trabajadas'><i class='fas fa-clock'></i></a>";
                                             } else {
                                                 $usuario_id = $usuario['id'];
-                                                echo "  <a href='#' class='btn btn-success abrir-modal' data-toggle='modal' data-target='#modalEstudiante' data-id-estudiante='$usuario_id' data-toggle='tooltip' data-placement='top' title='agregar horas al estudiante'><i class='fas fa-clock'></i></a>";
+                                                echo "  <a href='#' class='btn btn-success abrir-modal-estudiante' data-toggle='modal' data-target='#modalEstudiante' data-id-estudiante='$usuario_id' data-toggle='tooltip' data-placement='top' title='agregar horas al estudiante'><i class='fas fa-clock'></i></a>";
                                             }
                                             echo "";
                                             echo '</td>';
@@ -166,8 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     ?>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="
-                                    " tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="modalDocente" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -181,7 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <!-- Agrega el ID "formPagar" al formulario -->
                                                     <form id="formPagar" method="POST" action="">
                                                         <div class="">
-                                                            <input type="hidden" name="docente_id" id="docente_id">
+                                                            <input type="text" name="docente_id" id="docente_id">
                                                             <div class="col-md-12 mt-3">
                                                                 <label for="horas">Cantidad de horas trabajadas:</label> <br>
                                                                 <input type="number" name="horas" id="horas" class="form-control" placeholder="Cantidad horas">
@@ -199,11 +198,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </div>
                                     </div>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="modalEstudiante"  role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="modalEstudiante" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h3 class="modal-title" id="miModalLabel">Pagos docente</h3>
+                                                    <h3 class="modal-title" id="miModalLabel">Asistencia estudiante</h3>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -213,9 +212,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <!-- Agrega el ID "formPagar" al formulario -->
                                                     <form id="formPagar" method="POST" action="">
                                                         <div class="">
-                                                            <input type="hidden" name="estudiante_id" id="estudiante_id">
+                                                            <input type="text" name="estudiante_id" id="estudiante_id">
                                                             <div class="col-md-12 mt-3">
-                                                                <label for="horas">Cantidad de horas trabajadas:</label> <br>
+                                                                <label for="horas">Cantidad de horas asistidas:</label> <br>
                                                                 <div class="form-group">
                                                                     <label>Minimal</label>
                                                                     <select class="form-control select2" id="miSelect2" style="width: 100%;">
@@ -242,19 +241,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </div>
                                     </div>
                                 </tbody>
-                                <script>
-                                    // Captura el evento de hacer clic en el enlace
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        const abrirModalButtons = document.querySelectorAll('.abrir-modal');
 
-                                        abrirModalButtons.forEach(function(button) {
-                                            button.addEventListener('click', function() {
-                                                const docenteId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
-                                                document.getElementById('docente_id').value = docenteId; // Asigna el valor al input
-                                            });
-                                        });
-                                    });
-                                </script>
+
+
+
                                 <tfoot>
                                     <tr>
                                         <th scope="col">Rol</th>
@@ -299,8 +289,115 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
+    <!-- <script>
+        // Captura el evento de hacer clic en el enlace
+        document.addEventListener('DOMContentLoaded', function() {
+            const abrirModalButtons = document.querySelectorAll('.abrir-modal-docente');
+
+            abrirModalButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const docenteId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
+                    document.getElementById('docente_id').value = docenteId; // Asigna el valor al input
+                });
+            });
+
+            const abrirModalEstudianteButtons = document.querySelectorAll('.abrir-modal-estudiante');
+
+            abrirModalEstudianteButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    console.log("sirve la funcion");
+                    document.getElementById('estudiante_id').value = '';
+
+                    console.log("se borró el valor id de input");
+
+                    const estudianteId = this.getAttribute('data-id-estudiante'); // Obtiene el valor del atributo data-id
+
+                    console.log("nuevo id del estudiante:", estudianteId)
+
+                    document.getElementById('estudiante_id').value = estudianteId; // Asigna el valor al input
+
+                    console.log("actualizado el id del input");
+                    // empieza el ajax
+
+                    let data = {
+                        'estudiante_id': estudianteId
+                    }
+
+                    //realizar la solicitud 
+                    $.ajax({
+
+                        url: 'controller_usuarios_totales.php',
+                        type: 'POST',
+                        data: data,
+                        success: function(response) {
+                            console.log(response);
+                        }
+                    })
+
+                });
+            });
+        });
+    </script> -->
+    
     <!-- jQuery -->
     <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- capturar el id del usuario -->
+    <script>
+        $(document).ready(function() {
+    // Adjunta el evento de clic a los botones que abren modales de docentes
+    $(document).on('click', '.abrir-modal-docente', function() {
+        const docenteId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
+        document.getElementById('docente_id').value = docenteId; // Asigna el valor al input
+    });
+
+    // Adjunta el evento de clic a los botones que abren modales de estudiantes
+    $(document).on('click', '.abrir-modal-estudiante', function() {
+        console.log("sirve la funcion");
+        document.getElementById('estudiante_id').value = '';
+
+        console.log("se borró el valor id de input");
+
+        const estudianteId = this.getAttribute('data-id-estudiante'); // Obtiene el valor del atributo data-id
+
+        console.log("nuevo id del estudiante:", estudianteId);
+
+        document.getElementById('estudiante_id').value = estudianteId; // Asigna el valor al input
+
+         // Empieza el AJAX
+         let data = {
+            'estudiante_id': estudianteId
+        };
+        console.log("actualizado el id del input");
+       
+        $.ajax({
+            url: 'controller_usuarios_totales.php',
+            type: 'POST',
+            data: data,
+            success: function(response) {
+       console.log('respuesta de controller:',response);
+       var selectElement = document.getElementById('miSelect2');
+        selectElement.innerHTML = ''; // Limpiar el select
+
+        // Iterar sobre la respuesta y generar las opciones
+        for (var i = 0; i < response.length; i++) {
+            var curso = response[i];
+            var option = document.createElement('option');
+            option.value = curso.id; // Usar el ID como valor de la opción
+            option.text = curso.subject_name + ' - ' + curso.modality + ' (' + curso.quantity_type + ')';
+            selectElement.appendChild(option);
+        } 
+    }
+        });
+
+
+
+    });
+});
+
+    </script>
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- Bootstrap 4 -->
     <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Select2 -->
