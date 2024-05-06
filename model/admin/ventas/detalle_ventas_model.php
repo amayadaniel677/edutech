@@ -36,10 +36,11 @@ class detalle_ventas_model{
     }
 
     public function detalle_ventas($id_venta){
-        $sql="SELECT subjects.name, subject_sale.id, subject_sale.price, subject_sale.total_hours, subject_sale.remaining_hours
+        $sql="SELECT subjects.name, subject_sale.id, subject_sale.price, subject_sale.total_quantity,ru.total_units, ru.attended_units
         FROM sales
         INNER JOIN subject_sale ON sales.id = subject_sale.sales_id
         INNER JOIN subjects ON subject_sale.subjects_id = subjects.id
+        INNER JOIN remaining_units as ru ON subject_sale.remaining_units_id =ru.id
         WHERE sales.id = '$id_venta'";
         $result=$this->con->query($sql);
         if ($result->num_rows > 0) {

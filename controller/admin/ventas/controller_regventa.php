@@ -86,11 +86,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Venta y detalles registrados exitosamente
                 $detallesVenta = '';
                 $resultado_modelo_id = '';
-                $url = $_SERVER['REQUEST_URI'] . '?mensaje=Venta registrada exitosamente. ' ;
-                  header('location:'.$url);
+                $mensaje='Venta registrada exitosamente';
+                header('refresh:5;url=controller_regventa.php');
                 
             } else {
                 // Error al agregar detalles de venta
+               
                 $error= "Error al agregar detalles de venta en la BD.";
             }
         } else {

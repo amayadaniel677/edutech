@@ -846,6 +846,67 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <!-- Botón para abrir el modal -->
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#miModal">
+  Abrir Modal
+ </button>
+ 
+ <!-- Modal -->
+ <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="miModalLabel">Título del Modal</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+        <div class="form-group">
+          <label>Minimal</label>
+          <select class="form-control select2" style="width: 100%;">
+              <option >Alabama</option>
+              <option>Alaska</option>
+              <option>California</option>
+              <option>Delaware</option>
+              <option>Tennessee</option>
+              <option>Texas</option>
+              <option>Washington</option>
+          </select>
+      </div>
+        <form id="formPagar" method="POST" action="">
+          <div class="">
+              <input type="hidden" name="estudiante_id" id="estudiante_id">
+              <div class="col-md-12 mt-3">
+                  <label for="horas">Cantidad de horas trabajadas:</label> <br>
+                  <div class="form-group">
+                      <label>Minimal</label>
+                      <select class="form-control select2" style="width: 100%;">
+                          <option >Alabama</option>
+                          <option>Alaska</option>
+                          <option>California</option>
+                          <option>Delaware</option>
+                          <option>Tennessee</option>
+                          <option>Texas</option>
+                          <option>Washington</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-md-10 mt-3 mb-5">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button id="btnPagar" class="btn btn-primary">Pagar</button>
+
+              </div>
+          </div>
+      </form>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+         <button type="button" class="btn btn-primary">Guardar cambios</button>
+       </div>
+     </div>
+  </div>
+ </div>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -1763,7 +1824,7 @@
   })
   // BS-Stepper Init
   document.addEventListener('DOMContentLoaded', function () {
-    window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+    // window.stepper = new Stepper(document.querySelector('.bs-stepper'))
   })
 
   // DropzoneJS Demo Code Start

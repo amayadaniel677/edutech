@@ -13,6 +13,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KEPLER | LISTADO DE USUARIOS </title>
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="../../../view/admin/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="../../../view/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+    <!-- Toastr -->
+    <link rel="stylesheet" href="../../../view/admin/plugins/toastr/toastr.min.css">
     <!-- LINKS DataTables -->
     <link rel="stylesheet" href="../../../view/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../../view/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -36,6 +44,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
             /* Ajusta este valor según tus necesidades */
             overflow-y: auto;
             /* Habilita el desplazamiento vertical */
+        }
+
+        .mi-clase-personalizada .swal2-popup {
+            font-size: 16px !important;
+            height: 70px !important;
+        }
+
+        .swal2-popup h2 {
+            margin-top: 8px !important;
+            font-size: 18px !important;
         }
     </style>
 </head>
@@ -73,39 +91,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
+
                 <!-- mostrar errores  -->
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="alert" role="alert">
-                              <!-- Botón con la clase swalDefaultSuccess -->
-<button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display: none">
-    Launch Success Toast
-</button>
-
-
-<!-- Script para mostrar la alerta de éxito -->
-
-                                <?php
-
-
-
-                                // Validar si $mensaje_editar no está vacío
-                                if (!empty($mensaje_editar)) {
-                                    // Mostrar el encabezado con el mensaje y un fondo azul
-                                    echo '<h5 class="bg-success text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje_editar . '</h5>';
-                                }
-                                ?>
-                                <?php
-                                if (isset($msj_eliminar) && !empty($msj_eliminar)) {
-                                    echo '<h5 class="bg-warning text-white p-3 mb-2" style="font-size: 1.25rem;">' . $msj_eliminar . '</h5>';
-                                }
-                                ?>
-                                <?php
-                                if (isset($mensaje)) {
-                                    echo $mensaje;
-                                }
-                                ?>
+                                <!-- Botón con la clase swalDefaultSuccess -->
+                                <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
+                                    Launch Success Toast
+                                </button>
+                                <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+                                    error
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -146,13 +144,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '" class="btn btn-primary">';
                                             echo '<i class="fas fa-edit"></i>';
                                             echo '</a>';
-                                            echo '<a href="controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '" class="btn btn-danger" id="desactivarUsuario">';
+
+                                            echo '<a href="#" onclick="confirmarEliminarUsuario(\'' . 'controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '\')" class="btn btn-danger" id="desactivarUsuario">';
 
                                             echo '<i class="fas fa-trash"></i>';
                                             echo '</a>';
                                             if ($usuario['rol'] == 'docente') {
                                                 $usuario_id = $usuario['id'];
-                                                echo "  <a href='#' class='btn btn-primary abrir-modal' data-toggle='modal' data-target='#miModal' data-id='$usuario_id' data-toggle='tooltip' data-placement='top' title='sumar horas trabajadas'><i class='fas fa-clock'></i></a>";
+                                                echo "  <a href='#' class='btn btn-primary abrir-modal-docente' data-toggle='modal' data-target='#modalDocente' data-id='$usuario_id' data-toggle='tooltip' data-placement='top' title='sumar horas trabajadas'><i class='fas fa-clock'></i></a>";
+                                            } else {
+                                                $usuario_id = $usuario['id'];
+                                                echo "  <a href='#' class='btn btn-success abrir-modal-estudiante' data-toggle='modal' data-target='#modalEstudiante' data-id-estudiante='$usuario_id' data-toggle='tooltip' data-placement='top' title='agregar horas al estudiante'><i class='fas fa-clock'></i></a>";
                                             }
                                             echo "";
                                             echo '</td>';
@@ -164,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     ?>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="modalDocente" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -178,15 +180,58 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <!-- Agrega el ID "formPagar" al formulario -->
                                                     <form id="formPagar" method="POST" action="">
                                                         <div class="">
-                                                            <input type="hidden" name="docente_id" id="docente_id">
+                                                            <input type="text" name="docente_id" id="docente_id">
                                                             <div class="col-md-12 mt-3">
                                                                 <label for="horas">Cantidad de horas trabajadas:</label> <br>
-                                                                <input required type="number" name="horas" id="horas" class="form-control" placeholder="Cantidad horas">
+                                                                <input type="number" name="horas" id="horas" class="form-control" placeholder="Cantidad horas">
                                                             </div>
                                                             <div class="col-md-10 mt-3 mb-5">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                 <button id="btnPagar" class="btn btn-primary">Pagar</button>
-                                                               
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="modalEstudiante" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="miModalLabel">Asistencia estudiante</h3>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- Aquí irá el contenido dinámico del modal -->
+                                                    <!-- Agrega el ID "formPagar" al formulario -->
+                                                    <form id="formPagar" method="POST" action="">
+                                                        <div class="">
+                                                            <input type="text" name="estudiante_id" id="estudiante_id">
+                                                            <div class="col-md-12 mt-3">
+                                                                <label for="horas">Cantidad de horas asistidas:</label> <br>
+                                                                <div class="form-group">
+                                                                    <label>Minimal</label>
+                                                                    <select class="form-control select2" id="miSelect2" style="width: 100%;">
+                                                                        <option selected="selected">Alabama</option>
+                                                                        <option>Alaska</option>
+                                                                        <option>California</option>
+                                                                        <option>Delaware</option>
+                                                                        <option>Tennessee</option>
+                                                                        <option>Texas</option>
+                                                                        <option>Washington</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-10 mt-3 mb-5">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                <button id="btnPagar" class="btn btn-primary">Pagar</button>
+
                                                             </div>
                                                         </div>
                                                     </form>
@@ -196,19 +241,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </div>
                                     </div>
                                 </tbody>
-                                <script>
-                                    // Captura el evento de hacer clic en el enlace
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        const abrirModalButtons = document.querySelectorAll('.abrir-modal');
 
-                                        abrirModalButtons.forEach(function(button) {
-                                            button.addEventListener('click', function() {
-                                                const docenteId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
-                                                document.getElementById('docente_id').value = docenteId; // Asigna el valor al input
-                                            });
-                                        });
-                                    });
-                                </script>
+
+
+
                                 <tfoot>
                                     <tr>
                                         <th scope="col">Rol</th>
@@ -253,9 +289,140 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
+    <!-- <script>
+        // Captura el evento de hacer clic en el enlace
+        document.addEventListener('DOMContentLoaded', function() {
+            const abrirModalButtons = document.querySelectorAll('.abrir-modal-docente');
+
+            abrirModalButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const docenteId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
+                    document.getElementById('docente_id').value = docenteId; // Asigna el valor al input
+                });
+            });
+
+            const abrirModalEstudianteButtons = document.querySelectorAll('.abrir-modal-estudiante');
+
+            abrirModalEstudianteButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    console.log("sirve la funcion");
+                    document.getElementById('estudiante_id').value = '';
+
+                    console.log("se borró el valor id de input");
+
+                    const estudianteId = this.getAttribute('data-id-estudiante'); // Obtiene el valor del atributo data-id
+
+                    console.log("nuevo id del estudiante:", estudianteId)
+
+                    document.getElementById('estudiante_id').value = estudianteId; // Asigna el valor al input
+
+                    console.log("actualizado el id del input");
+                    // empieza el ajax
+
+                    let data = {
+                        'estudiante_id': estudianteId
+                    }
+
+                    //realizar la solicitud 
+                    $.ajax({
+
+                        url: 'controller_usuarios_totales.php',
+                        type: 'POST',
+                        data: data,
+                        success: function(response) {
+                            console.log(response);
+                        }
+                    })
+
+                });
+            });
+        });
+    </script> -->
+    
+    <!-- jQuery -->
+    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- capturar el id del usuario -->
+    <script>
+        $(document).ready(function() {
+    // Adjunta el evento de clic a los botones que abren modales de docentes
+    $(document).on('click', '.abrir-modal-docente', function() {
+        const docenteId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
+        document.getElementById('docente_id').value = docenteId; // Asigna el valor al input
+    });
+
+    // Adjunta el evento de clic a los botones que abren modales de estudiantes
+    $(document).on('click', '.abrir-modal-estudiante', function() {
+        console.log("sirve la funcion");
+        document.getElementById('estudiante_id').value = '';
+
+        console.log("se borró el valor id de input");
+
+        const estudianteId = this.getAttribute('data-id-estudiante'); // Obtiene el valor del atributo data-id
+
+        console.log("nuevo id del estudiante:", estudianteId);
+
+        document.getElementById('estudiante_id').value = estudianteId; // Asigna el valor al input
+
+         // Empieza el AJAX
+         let data = {
+            'estudiante_id': estudianteId
+        };
+        console.log("actualizado el id del input");
+       
+        $.ajax({
+            url: 'controller_usuarios_totales.php',
+            type: 'POST',
+            data: data,
+            success: function(response) {
+       console.log('respuesta de controller:',response);
+       var selectElement = document.getElementById('miSelect2');
+        selectElement.innerHTML = ''; // Limpiar el select
+
+        // Iterar sobre la respuesta y generar las opciones
+        for (var i = 0; i < response.length; i++) {
+            var curso = response[i];
+            var option = document.createElement('option');
+            option.value = curso.id; // Usar el ID como valor de la opción
+            option.text = curso.subject_name + ' - ' + curso.modality + ' (' + curso.quantity_type + ')';
+            selectElement.appendChild(option);
+        } 
+    }
+        });
+
+
+
+    });
+});
+
+    </script>
+    <!-- ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Select2 -->
+    <script src="../../../view/admin/plugins/select2/js/select2.full.min.js"></script>
+    <script>
+        $(function() {
+
+            $('#modalEstudiante').on('shown.bs.modal', function() {
+                setTimeout(function() {
+                    $('#miSelect2').select2();
+                }, 100); // Ajusta el tiempo según sea necesario
+            });
+
+            // Opcional: Inicializar Select2 solo para elementos con la clase .select2
+            // $('.select2').select2();
+
+            // Opcional: Inicializar Select2 solo para elementos con la clase .select2bs4 y tema Bootstrap 4
+            // $('.select2bs4').select2({ theme: 'bootstrap4' });
+        });
+    </script>
     <!-- sweet alert -->
     <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
-   
+    <!-- Toastr -->
+    <script src="../../../view/admin/plugins/toastr/toastr.min.js"></script>
+
     <script>
         $(document).ready(function() {
             // Escuchar el click del botón "Pagar"
@@ -281,10 +448,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
         });
     </script>
-    <!-- jQuery -->
-    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
     <!-- DataTables  & Plugins -->
     <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -300,30 +464,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../../dist/js/demo.js"></script>
+
     <!-- Page specific script -->
-     <!-- Script para mostrar la alerta de confirmación -->
-    <!-- Script para mostrar la alerta de confirmación -->
+
+    <!-- Script de las alertas de mensajes-->
+    <?php
+    $mensaje_editar = $mensaje_editar ?? ''; // Asegura que $mensaje_editar esté definido
+    $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
+    ?>
     <script>
         $(function() {
             var Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 3000
+                timer: 400000,
+                width: '80%',
+                customClass: {
+                    container: 'mi-clase-personalizada'
+                }
+
+
             });
 
             $('.swalDefaultSuccess').click(function() {
                 Toast.fire({
                     icon: 'success',
                     title: '<?php echo $mensaje_editar; ?>'
+
                 })
             });
             $('.swalDefaultInfo').click(function() {
                 Toast.fire({
                     icon: 'info',
-                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                    title: '<?php echo $msj_eliminar; ?>'
                 })
             });
             $('.swalDefaultError').click(function() {
@@ -344,182 +518,206 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
                 })
             });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Verificar si la variable $mensaje_editar está definida
+            <?php if (isset($mensaje_editar) && !empty($mensaje_editar)) : ?>
+                // Simular un clic en el botón para activar el SweetAlert
+                $('#btnSuccess').click();
+            <?php endif; ?>
+            <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
+                // Simular un clic en el botón para activar el SweetAlert
 
-            $('.toastrDefaultSuccess').click(function() {
-                toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-            });
-            $('.toastrDefaultInfo').click(function() {
-                toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-            });
-            $('.toastrDefaultError').click(function() {
-                toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-            });
-            $('.toastrDefaultWarning').click(function() {
-                toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-            });
+                console.log('entro');
+                $('#btnInfo').click();
 
-            $('.toastsDefaultDefault').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
+
+
+            <?php endif; ?>
+
+
+        });
+    </script>
+    <script>
+        // Función para confirmar la eliminación de un usuario
+        function confirmarEliminarUsuario(url) {
+            Swal.fire({
+                title: "¿Estás seguro de inactivar el usuario?",
+                text: "Esto podría afectar sus cursos activos",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, inactivar",
+                cancelButtonText: "Cancelar",
+                reverseButtons: true,
+                dangerMode: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
             });
-            $('.toastsDefaultTopLeft').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    position: 'topLeft',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultBottomRight').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    position: 'bottomRight',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultBottomLeft').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    position: 'bottomLeft',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultAutohide').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    autohide: true,
-                    delay: 750,
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultNotFixed').click(function() {
-                $(document).Toasts('create', {
-                    title: 'Toast Title',
-                    fixed: false,
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultFull').click(function() {
-                $(document).Toasts('create', {
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    icon: 'fas fa-envelope fa-lg',
-                })
-            });
-            $('.toastsDefaultFullImage').click(function() {
-                $(document).Toasts('create', {
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    image: '../../dist/img/user3-128x128.jpg',
-                    imageAlt: 'User Picture',
-                })
-            });
-            $('.toastsDefaultSuccess').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-success',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultInfo').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-info',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultWarning').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-warning',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultDanger').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-danger',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.toastsDefaultMaroon').click(function() {
-                $(document).Toasts('create', {
-                    class: 'bg-maroon',
-                    title: 'Toast Title',
-                    subtitle: 'Subtitle',
-                    body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
+        }
+
+        // Función para confirmar el envío del formulario de pago
+        $(document).ready(function() {
+            $('#btnPagar').click(function(e) {
+                e.preventDefault();
+                swal({
+                        title: "¿Estás seguro?",
+                        text: "Esta acción no se puede deshacer.",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                    .then((willSubmit) => {
+                        if (willSubmit) {
+                            $('#formPagar').submit();
+                        }
+                    });
             });
         });
     </script>
-<script>
-$(document).ready(function() {
-    // Verificar si la variable $mensaje_editar está definida
-    <?php if (isset($mensaje_editar) && !empty($mensaje_editar)) : ?>
-        // Simular un clic en el botón para activar el SweetAlert
-        $('#btnSuccess').click();
-    <?php endif; ?>
-});
-</script>
-<script>
-  
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('btnPagar').addEventListener('click', function(event) {
-        // Prevenir el comportamiento predeterminado del botón
-        event.preventDefault();
-
-        // Mostrar la alerta de confirmación
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "No podrás revertir esto!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, pagar!',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Si el usuario confirma, proceder a enviar el formulario
-                document.getElementById('formPagar').submit();
-            }
-        })
-    });
-    document.getElementById('desactivarUsuario').addEventListener('click', function(event) {
-        // Prevenir el comportamiento predeterminado del enlace
-        event.preventDefault();
-
-        // Mostrar la alerta de confirmación
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "No podrás revertir esto!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, desactivar!',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Si el usuario confirma, proceder a redirigir a la URL de desactivación
-                window.location.href = this.href;
-            }
-        })
-    });
-
-});
-</script>
 
 
 
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 
+    <script class="alertas-opcionales">
+        //     $('.toastrDefaultSuccess').click(function() {
+        //         toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+        //     });
+        //     $('.toastrDefaultInfo').click(function() {
+        //         toastr.info('informacion relevante.', '', {
+        //             timeOut: 30000
+        //         });
+        //     });
+        //     $('.toastrDefaultError').click(function() {
+        //         toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+        //     });
+        //     $('.toastrDefaultWarning').click(function() {
+        //         toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+        //     });
+
+        //     $('.toastsDefaultDefault').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultTopLeft').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             position: 'topLeft',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultBottomRight').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             position: 'bottomRight',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultBottomLeft').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             position: 'bottomLeft',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultAutohide').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             autohide: true,
+        //             delay: 750,
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultNotFixed').click(function() {
+        //         $(document).Toasts('create', {
+        //             title: 'Toast Title',
+        //             fixed: false,
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultFull').click(function() {
+        //         $(document).Toasts('create', {
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             icon: 'fas fa-envelope fa-lg',
+        //         })
+        //     });
+        //     $('.toastsDefaultFullImage').click(function() {
+        //         $(document).Toasts('create', {
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             image: '../../dist/img/user3-128x128.jpg',
+        //             imageAlt: 'User Picture',
+        //         })
+        //     });
+        //     $('.toastsDefaultSuccess').click(function() {
+        //         $(document).Toasts('create', {
+        //             class: 'bg-success',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultInfo').click(function() {
+        //         $(document).Toasts('create', {
+        //             class: 'bg-info',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultWarning').click(function() {
+        //         $(document).Toasts('create', {
+        //             class: 'bg-warning',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultDanger').click(function() {
+        //         $(document).Toasts('create', {
+        //             class: 'bg-danger',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        //     $('.toastsDefaultMaroon').click(function() {
+        //         $(document).Toasts('create', {
+        //             class: 'bg-maroon',
+        //             title: 'Toast Title',
+        //             subtitle: 'Subtitle',
+        //             body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        //         })
+        //     });
+        // });
+    </script>
 
 </body>
 

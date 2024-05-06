@@ -104,6 +104,43 @@ class buscar_usuario_model{
             return false;
         }
     }
+
+    public function traer_cursos_activos($people_id){
+        //traerlos de la tabla remaining_units
+        $sql="SELECT 
+        RU.id,
+        RU.total_units,
+        RU.attended_units,
+        SS.quantity_type,
+        SS.modality,
+        subjects.name AS subject_name
+    FROM 
+        REMAINING_UNITS AS RU
+    JOIN 
+        SUBJECT_SALE AS SS ON RU.id = SS.remaining_units_id
+    JOIN 
+        subjects ON SS.subjects_id = subjects.id
+    JOIN
+        SALES AS S ON SS.sales_id = S.id
+    JOIN 
+        PEOPLE AS P ON S.people_id = P.id
+    WHERE 
+        P.id ='$people_id'
+    GROUP BY 
+        RU.id, SS.subjects_id, SS.quantity_type, SS.modality;
+    ";
+    $result=$this->con->query($sql);
+    if($result->num_rows>0){
+        $result_array = [];
+        while ($row = $result->fetch_assoc()) {
+            $result_array[] = $row;
+        }
+        return $result_array;
+    }
+    else{
+        return false;
+    }
+    }
     
 }
 ?>
