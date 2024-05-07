@@ -17,8 +17,10 @@ if(isset($_GET['mensajeExito'])){
 
     $nombre_curso= ucwords(strtolower((trim($_POST['nombre-curso']))));
     $nombre_curso = preg_replace('/\s+/', ' ', $nombre_curso);
+    
    
     $descripcion = $_POST['descripcion'];
+    $temas=$_POST['temas'];
    
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $foto_post = $_FILES['foto'];
@@ -35,9 +37,8 @@ if(isset($_GET['mensajeExito'])){
     
   
     if (!$errores_inputs_2 && !$errores_foto_2) {
-        echo "entro a insertar en controller";
-        $model = new agregar_curso_model();
-        $result_model=$model->insertar_curso($id_categoria, $nombre_curso, $descripcion, $foto);
+          $model = new agregar_curso_model();
+        $result_model=$model->insertar_curso($id_categoria, $nombre_curso, $descripcion, $foto,$temas);
         if ($result_model) {
             $consult->mover_borrar_foto($foto_post,$foto);
             $mensajeExito = 'Se creo el curso con EXITO'; 
