@@ -195,6 +195,17 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+          <a href="<?php if(isset($urlStarter)){echo $urlStarter . '#';}; ?>" class="nav-link">
+
+
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+               Backup
+                
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
