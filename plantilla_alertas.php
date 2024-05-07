@@ -1,38 +1,20 @@
-plantilla para alertas.
 
 <!-- SweetAlert2 -->
     <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
     <!-- Toastr -->
     <link rel="stylesheet" href="../../../view/admin/plugins/toastr/toastr.min.css">
-
- <style>
-        .table-responsive {
-            max-height: 400px;
-            /* Ajusta este valor según tus necesidades */
-            overflow-y: auto;
-            /* Habilita el desplazamiento vertical */
-        }
-
-        .mi-clase-personalizada .swal2-popup {
-            font-size: 16px !important;
-            height: 70px !important;
-            /* ejemplo para tati */
-
-        }
-
-        .swal2-popup h2 {
-            margin-top: 8px !important;
-            font-size: 18px !important;
-        }
-    </style>
-  <link rel="icon" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />   <!-- necesario para el tamaño de mensajes alerta  -->
+<!-- css alertas mensajes -->
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />   <!-- necesario para el tamaño de mensajes alerta  -->
 
 
     <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
                                     Launch Success Toast
                                 </button>
                                 <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+                                    error
+                                </button> 
+                                <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
                                     error
                                 </button> 
 

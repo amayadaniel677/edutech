@@ -8,15 +8,10 @@ $ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
 include('../../../model/admin/ventas/eliminar_venta_model.php');
 if (isset($_GET['id_venta'])) {
     $id_venta = $_GET['id_venta'];
-    
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id_venta_post=$_POST['id_venta'];
     $consult = new eliminar_venta();
-    $eliminar=$consult->eliminar($id_venta_post);
+    $eliminar=$consult->eliminar($id_venta);
     if($eliminar){
-        $msj_eliminar='La venta a sido eliminada con exito';
+        $msj_eliminar='La venta ha sido eliminada con exito';
         header("Location: controller_buscar_ventas.php?msj_eliminar=" . urlencode($msj_eliminar));
 
     }else{
@@ -24,7 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: controller_buscar_ventas.php?msj_eliminar=" . urlencode($msj_eliminar));
 
     } 
+
+    
 }
+
 class eliminar_venta{
     public function __construct()
     {
@@ -41,5 +39,5 @@ class eliminar_venta{
         }
     }
 }
-include('../../../view/admin/paginas/ventas/eliminar_venta.php');
+// include('../../../view/admin/paginas/ventas/eliminar_venta.php');
 ?>

@@ -21,6 +21,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../../../view/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../../../view/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 
+  <!-- SweetAlert2 -->
+  <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -31,6 +34,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- CSS CURSOS ADMIN -->
   <link rel="stylesheet" href="../../../resource/css/sales/buscar_ventas.css" />
   <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
+  <!-- css alertas mensajes -->
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" /> <!-- necesario para el tamaño de mensajes alerta  -->
+
+  <style>
+    .mi-clase-personalizada .swal2-popup {
+      font-size: 16px !important;
+      height: auto !important;
+      padding-bottom: 4px !important;
+    }
+
+    .swal2-popup h2 {
+      margin-top: 8px !important;
+      font-size: 18px !important;
+    }
+  </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -66,14 +84,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Contenido principal vista -->
       <section class="content">
+  <!-- Enlace que mostrará el SweetAlert -->
+
+<a id="btn-eliminarVentass" href="#">Haz clic aquí para probar SweetAlert</a>
+
+        <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
+          Launch Success Toast
+        </button>
+        <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+          error
+        </button>
+        <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
+          error
+        </button>
+
         <div class="container-fluid">
 
           <div class="container">
-            <?php
-            if (isset($msj_eliminar)) {
-              echo "<h5 class=' btn-danger text-white p-3 mb-2'>" . $msj_eliminar . "</h5>";
-            }
-            ?>
+
 
             <form method="POST" action='controller_ventas_filtradas.php'>
               <input value='<?php if (isset($_POST['dni'])) {
@@ -113,7 +141,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
           <!-- tabla -->
           <div class="container mt-2">
-            
+
 
             <div class="card">
               <div class="card-header">
@@ -141,12 +169,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         echo '<tr>
                       <td>' . $venta['sale_id'] . '</td>
                               <td>' . $venta['person_dni'] . '</td>
-                              <td>' . $venta['person_name'] . '</td>
+                              <td>' . $venta['person_name']," ",$venta['person_lastname'] . '</td>
                               <td>' . $venta['sale_price'] . '</td>
                               <td>' . $venta['sale_date'] . '</td>
                               <td>
                                 <a href="controller_detalle_ventas.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                                <a href="controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                              <a href="#" onclick="confirmarEliminarVenta(\'' . 'controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '\')" class="btn btn-danger" id="desactivarVenta"><i class="fas fa-trash"></i></a>
+                               
+
                               </td>
                             </tr>';
                       }
@@ -155,11 +185,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     }
 
                     // Cierra la tabla HTML
-                    
+
                     ?>
+                    
+
                   </tbody>
                   <tfoot>
-                  <tr>
+                    <tr>
                       <th scope="col">ID Venta</th>
                       <th scope="col">dni</th>
                       <th scope="col">Nombre</th>
@@ -204,10 +236,116 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- REQUIRED SCRIPTS -->
 
+
+
+
   <!-- jQuery -->
   <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- sweet alert -->
+  <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+  
+  <?php
+  $mensaje_editar = $mensaje_editar ?? ''; // Asegura que $mensaje_editar esté definido
+  $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
+  ?>
+  <script>
+    $(function() {
+      var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000,
+        width: '80%',
+        customClass: {
+          container: 'mi-clase-personalizada'
+        }
+      });
+
+      $('.swalDefaultSuccess').click(function() {
+        Toast.fire({
+          icon: 'success',
+          title: '<?php echo $mensaje_editar; ?>'
+
+        })
+      });
+      $('.swalDefaultInfo').click(function() {
+        Toast.fire({
+          icon: 'info',
+          title: '<?php echo $msj_eliminar; ?>'
+        })
+      });
+      $('.swalDefaultError').click(function() {
+        Toast.fire({
+          icon: 'error',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultWarning').click(function() {
+        Toast.fire({
+          icon: 'warning',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultQuestion').click(function() {
+        Toast.fire({
+          icon: 'question',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+
+      <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
+        // Simular un clic en el botón para activar el SweetAlert
+
+
+        $('#btnInfo').click();
+
+
+
+      <?php endif; ?>
+      // crear confirmacion con sweet alert al dar click en boton-eliminarVenta
+     
+    });
+      </script>
+      <!-- script de sweet alert eliminar -->
+      <script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('btn-eliminarVenta').addEventListener('click', function(e) {
+        e.preventDefault(); // Evita que el enlace se siga por defecto
+
+        Swal.fire({
+            title: '¡Atención!',
+            text: 'Has hecho clic en el enlace. ¿Deseas continuar?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, continuar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Continuado',
+                    'Has continuado con éxito.',
+                    'success'
+                )
+            } else if (
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                Swal.fire(
+                    'Cancelado',
+                    'Has cancelado la acción.',
+                    'error'
+                )
+            }
+        })
+    });
+});
+</script>
   <!-- DataTables  & Plugins -->
   <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -223,8 +361,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../../dist/js/demo.js"></script>
+
+  <script>
+        // Función para confirmar la eliminación de un usuario
+        function confirmarEliminarVenta(url) {
+            Swal.fire({
+                title: "¿Estás seguro de inactivar la venta?",
+                text: "Esto podría restar las horas compradas",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, inactivar",
+                cancelButtonText: "Cancelar",
+                reverseButtons: true,
+                dangerMode: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        }
+
+    </script>
   <!-- Page specific script -->
   <script>
     $(function() {

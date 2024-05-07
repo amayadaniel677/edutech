@@ -28,7 +28,7 @@ class buscar_usuario_model{
         }else{
             // entro al modelo traer por tipo de usuario
            
-            $sql="SELECT * FROM people WHERE rol='$tipo_usuario'";
+            $sql="SELECT * FROM people WHERE rol='$tipo_usuario' AND status='active' order by id desc";
         }
 
         $result=$this->con->query($sql);
@@ -106,6 +106,7 @@ class buscar_usuario_model{
     }
 
     public function traer_cursos_activos($people_id){
+        
         //traerlos de la tabla remaining_units
         $sql="SELECT 
         RU.id,
@@ -141,6 +142,28 @@ class buscar_usuario_model{
         return false;
     }
     }
-    
+    public function agregarHorasAsistidas($horasAsistidas,$cursoSeleccionado){
+        // validar que las horas asistidas sean menores o igual al total de horas
+        $sql2="SELECT attended_units,total_units FROM remaining_units WHERE id='$cursoSeleccionado'";
+        $result2=$this->con->query($sql2);
+        $row=$result2->fetch_assoc();
+        $horasRestantes=$row['total_units']-$row['attended_units'];
+        if($horasAsistidas>$horasRestantes){
+            // devolver un arreglo con el error
+            $error=array("horasRestantes"=>$horasRestantes);
+            return $error;
+        }
+
+        $horasAsistidas = $_POST['horasAsistidas'];
+        $cursoSeleccionado = $_POST['cursoSeleccionado'];
+        $sql="UPDATE remaining_units SET attended_units = attended_units + $horasAsistidas WHERE id='$cursoSeleccionado'";
+        $result=$this->con->query($sql);
+        if($result){
+            
+            return $horasRestantes-$horasAsistidas;
+        }else{
+            return false;
+        }
+    }
 }
 ?>
