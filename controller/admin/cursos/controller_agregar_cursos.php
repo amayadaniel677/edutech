@@ -21,6 +21,7 @@ if(isset($_GET['mensajeExito'])){
    
     $descripcion = $_POST['descripcion'];
     $temas=$_POST['temas'];
+    $temas=preg_match('/\s{2,}/', $temas);
    
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $foto_post = $_FILES['foto'];
