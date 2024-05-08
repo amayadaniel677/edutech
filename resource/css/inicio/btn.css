@@ -1,0 +1,76 @@
+.btn-animado {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 260px;
+  padding: 8px 15px 8px 15px;
+  border-radius: 20px;
+  box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  border: 2px solid #2ca8b0;
+  cursor: pointer;
+  transition: all ease-in 150ms;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 14px;
+}
+.btn-animado i {
+  font-weight: lighter;
+  vertical-align: middle;
+  margin-right: 0.7rem;
+  font-size: 1.7rem;
+  opacity: 1;
+}
+
+.btn-animado:active {
+  background-color: #22848a;
+}
+
+.color-instagram {
+  width: 20px;
+  border: 2px solid #20c53c;
+  color: #fff;
+  background: linear-gradient(#27bb2e, #04ff50);
+  /* agregar sombra al texto para que se vea */
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.color-instagram .tex-icono {
+  color: #ffffff;
+}
+.color-instagram:hover {
+  background: linear-gradient(#2bb132, #04ff50);
+  color: #fff;
+  width: 280px;
+  padding-left: 25px;
+  font-size: 15px;
+}
+.color-instagram:active {
+  background: linear-gradient(#2fc737, #04ff50);
+}
+.color-instagram:hover .tex-icono {
+  color: #fff;
+}
+
+.btn-animado.animacion-cuatro:hover i {
+  animation: anim-cuatro 250ms ease-in normal both;
+  transform: scale(0) rotate(0deg);
+}
+@keyframes anim-cuatro {
+  from {
+    transform: scale(0) rotate(0deg) translateX(0);
+  }
+  to {
+    transform: scale(2.1) rotate(-10deg) translateX(-0.1rem);
+  }
+}
+
+.boton-comprar {
+  padding: 5px;
+
+  background: orange;
+  color: white;
+  border-radius: 5px;
+  &:hover {
+    color: black;
+  }
+}

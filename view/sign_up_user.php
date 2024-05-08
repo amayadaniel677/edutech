@@ -27,7 +27,7 @@
     <div class="card col-md-7 mx-auto mt-5">
         <h1 class="text-center display-8 mt-3">
             <a href="../index.php" style="text-decoration: none; color: inherit;">
-                <i class="fas fa-arrow-left"></i> <!-- Icono de flecha hacia atrás -->
+                <i class="fas fa-arrow-left" value = "volver"></i> <!-- Icono de flecha hacia atrás -->
                 BIENVENIDO A KEPLER
             </a>
         </h1>
