@@ -62,7 +62,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       <section class="content">
-        <div class='d-flex justify-content-center'>
+        <div class='container-fluid'  style="max-width:1000px;">
           <?php if (!empty($mensaje) && $mensaje=='Docente vinculado con exito') : ?>
             <div class="alert alert-success col-md-8 ">
               <?php echo $mensaje; ?>

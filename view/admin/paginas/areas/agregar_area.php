@@ -63,8 +63,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
         <?php endif; ?>
 
-        <div class="container">
-          <div class="row justify-content-center">
+        <div class="container-fluid"  style="max-width:1000px;">
+          <div class="row">
             <div class="col-lg-6">
               <form action="#" method='POST'>
                 <div class="form-group row">

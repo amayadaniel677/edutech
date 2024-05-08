@@ -76,7 +76,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?= $error ?>
           </div>
         <?php endif; ?>
-        <div class="container-fluid">
+        <div class="container-fluid"  style="max-width:1000px;">
 
           <!-- /.card-body -->
           <div class="card">

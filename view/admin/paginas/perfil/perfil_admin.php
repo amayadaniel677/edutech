@@ -74,6 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.fin titulo de la vista -->
   
     <!-- Contenido principal vista -->
+  
     <?php 
 include('../../../view/layout/perfil_usuario.php');
 ?>

@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             echo '<h5 class="bg-danger text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje . '</h5>';
                         }
                         ?>
-                <div class="d-flex justify-content-center">
+                <div class="container-fluid"  style="max-width:1000px;">
 
                     <!-- Contenido del modal -->
                     <div class="invoice p-3 mb-3 col-md-8">

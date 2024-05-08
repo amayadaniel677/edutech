@@ -57,8 +57,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.fin titulo de la vista -->
 
       <!-- Contenido principal vista -->
-
-      <h1 class="text-center display-8 mt-1">
+   <section class="content">
+    <div class="container-fluid">
+    <h1 class="text-center display-8 mt-1">
         BIENVENIDO A KEPLER
       </h1>
       <div class="card-body" style="max-width: 900px; margin: 0 auto;">
@@ -255,6 +256,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       </div>
+    </div>
+  </section>
+      
 
       <!-- /. Maincontent -->
       <!-- /.content-wrapper -->

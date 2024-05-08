@@ -37,8 +37,8 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                     </div>
                 </div>
             </div>
-            <div class="container">
-
+            <section class="content">
+             <div class="container-fluid"  style="max-width:1000px;">
                 <h2>Modalidad <?php echo $datos_modalidad['name']; ?></h2> <!-- Título del formulario -->
                 <form method="POST" action="">
                     <div class="form-group">
@@ -56,9 +56,9 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                     <input type="hidden" id="id-modalidad" name="id" value="<?php echo $datos_modalidad['id']; ?>"> <!-- Campo oculto -->
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
-            </div>
+            </section>
         </div>
-
+        </div>
         <aside class="control-sidebar control-sidebar-dark">
             <div class="p-3">
                 <h5>Title</h5>
