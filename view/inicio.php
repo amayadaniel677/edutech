@@ -1,3 +1,7 @@
+<style type="text/css">
+
+
+</style>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,12 +15,14 @@
     <link rel="stylesheet" href="resource/css/inicio/niveles.css" />
     <link rel="stylesheet" href="resource/css/inicio/preguntas.css" />
     <link rel="stylesheet" href="resource/css/layouts/footer2.css" />
-    <link rel="stylesheet" href="resource/css/inicio/nav.css" />
+    <link rel="stylesheet" href="resource/css/inicio/btn.css" />
+    <!-- <link rel="stylesheet" href="resource/css/inicio/nav.css" /> -->
     <title>Document</title>
     
     <script src="https://kit.fontawesome.com/1165876da6.js" crossorigin="anonymous"></script>
   </head>
   <body>
+  <?php require_once('view/layout/nav.php');?>
   <a href="https://www.youtube.com/watch?v=fVeGYX6GWMU" class="whatsaap-btn" targer="_blank">
   <i class="fa-brands fa-whatsapp"></i>
       <div class="joinchat__tooltip"><i class="bi bi-person-circle"></i>
@@ -25,7 +31,7 @@
       </div>
     </div>
     </a>
-    <?php require_once('view/layout/nav.php');?>
+   
     <section class="section-inicio" id='section-inicio'>
       <div class="contenedor-frase">
         <p class="frase">
@@ -41,7 +47,11 @@
         <div class="destacados_texto">
           <h4>Nuestros cursos más destacados</h4>
           <p>Te gustaría adquirir alguno de ellos?</p>
-          <a class="boton contactanos">CONTACTANOS</a>
+          <a type="button" href='https://wa.me/+573123467007?text=Hola,%20Estoy%20interesado%20en%20sus%20cursos%20'class="btn-animado animacion-cuatro color-instagram" style="text-decoration:none;">
+                    <!-- icono whatsapp -->
+                    <i class="fab fa-whatsapp"></i>
+                    <span class="tex-icono">Chatea con nosotros</span>
+                </a>
         </div>
         <div class="destacados_banners">
           <div class="destacado_banner shadow-drop-center ">
@@ -54,7 +64,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore
               </p>
-              <a href class="boton comprar">COMPRAR</a>
+              <a href="https://wa.me/+573123467007?text=Hola,%20Estoy%20interesado%20en%20sus%20cursos%20" class="boton-comprar" style="text-decoration:none;">COMPRAR</a>
             </div>
           </div>
           <div class="destacado_banner">
@@ -67,7 +77,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore
               </p>
-              <a href class="boton comprar">COMPRAR</a>
+              <a href="https://wa.me/+573123467007?text=Hola,%20Estoy%20interesado%20en%20sus%20cursos%20" class="boton-comprar" style="text-decoration:none;">COMPRAR</a>
             </div>
           </div>
           <div class="destacado_banner">
@@ -80,7 +90,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore
               </p>
-              <a href class="boton comprar">COMPRAR</a>
+              <a href="https://wa.me/+573123467007?text=Hola,%20Estoy%20interesado%20en%20sus%20cursos%20" class="boton-comprar" style="text-decoration:none;">COMPRAR</a>
             </div>
           </div>
         </div>
@@ -95,7 +105,7 @@
           </div>
           <div class="popular-txt">
             <h4>Inglés</h4>
-            <span>Ver cursos <img src="resource/img/inicio/right.png" alt="" /> </span>
+            
           </div>
         </div>
         <div class="popular">
@@ -104,7 +114,7 @@
           </div>
           <div class="popular-txt">
             <h4>Preicfes</h4>
-            <span>Ver cursos <img src="resource/img/inicio/right.png" alt="" /> </span>
+           
           </div>
         </div>
         <div class="popular">
@@ -113,11 +123,11 @@
           </div>
           <div class="popular-txt">
             <h4>Ciencias</h4>
-            <span>Ver cursos <img src="resource/img/inicio/right.png" alt="" /> </span>
+            
           </div>
         </div>
       </article>
-      <a class="boton ver" href='../controller/cursos_controller.php'>VER TODOS LOS CURSOS</a>
+      <a class="boton ver" href='controller/invitado/controller_cursos_inicio.php' style="text-decoration:none;">VER TODOS LOS CURSOS</a>
     </section>
     
     <section class="">

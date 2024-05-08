@@ -25,11 +25,10 @@
    
     <div class="log-container">
     <div class="cuenta-container">
-     <h1>  <a href="../index.php" style="text-decoration: none; color: inherit;">
-            <i class="fas fa-arrow-left"></i> <!-- Icono de flecha hacia atrás -->
+     <h1>   <!-- Icono de flecha hacia atrás -->
             KEPLER <br> EDUCATION
             
-        </a></h1>
+        </h1>
      
      <div class="formulario">
      
@@ -76,13 +75,13 @@
             </div>
           </div>
         </div>
-        <div class="row">
-         
-          <!-- /.col -->
-          <div class="col-4 mb-3">
+        <div class="row justify-content-between">
+          <div class="col-5 mb-3">
             <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
           </div>
-          <!-- /.col -->
+          <div class="col-5 mb-3 text-right">
+            <a href="../index.php" class="btn btn-success btn-block" style="text-decoration: none; color:white;">Volver</a>
+          </div>
         </div>
       
       </form>
