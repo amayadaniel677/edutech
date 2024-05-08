@@ -1,7 +1,7 @@
 <?php
 $urlStarter = '../../../view/admin/';  //son desde el controlador
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -163,6 +163,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="form-group">
                         <label for="descripcion">Descripción del curso</label>
                         <textarea required name="descripcion" id="descripcion" placeholder="Escriba aquí" class="form-control"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="descripcion">Temas</label>
+                        <textarea required name="temas" id="temas" placeholder="Escriba aquí" class="form-control"></textarea>
                       </div>
                     </div>
                   </div>
