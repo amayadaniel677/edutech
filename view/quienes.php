@@ -1,3 +1,4 @@
+<?php $ruta_inicio="../"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../resource/css/quienes/quien.css">
     <link rel="stylesheet" href="../resource/css/inicio/nav.css" />
+  
     <title>Document</title>
 </head>
 <body>
   
   <?php 
-  $url='../';
   
-  include_once('layout/nav.php');
+  
+   require_once('layout/nav.php');
   
   ?>
     <h1 class="ales">¿QUIÉNES SOMOS?</h1>
