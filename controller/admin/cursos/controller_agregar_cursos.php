@@ -2,7 +2,7 @@
 session_start();
 if (!isset( $_SESSION['dni_session'])){
     header('location:../../login_controller.php');
-    exit();
+    exit(); 
 }
 $ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
 // capturar el mensaje enviado en get
@@ -21,7 +21,6 @@ if(isset($_GET['mensajeExito'])){
    
     $descripcion = $_POST['descripcion'];
     $temas=$_POST['temas'];
-    $temas=preg_match('/\s{2,}/', $temas);
    
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $foto_post = $_FILES['foto'];
