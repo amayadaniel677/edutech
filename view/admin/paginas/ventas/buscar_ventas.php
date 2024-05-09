@@ -84,21 +84,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Contenido principal vista -->
       <section class="content">
-  <!-- Enlace que mostrará el SweetAlert -->
-
-<a id="btn-eliminarVentass" href="#">Haz clic aquí para probar SweetAlert</a>
-
-        <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
-          Launch Success Toast
-        </button>
-        <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
-          error
-        </button>
-        <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
-          error
-        </button>
-
-        <div class="container-fluid">
+  
 
           <div class="container">
 
