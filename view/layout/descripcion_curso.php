@@ -60,7 +60,7 @@
     <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
         <div class="border p-3 mx-auto curso-container" style="max-width: 300px; margin-top:5px; margin-bottom: 5px; background: linear-gradient(to bottom, #7FFFD4, #40E0D0); border-radius:7px;">
             <article class="materias">
-                <a href="controller_descripcion_curso_estudiante.php?id_curso=<?php echo $curso2['subject_id']; ?>">
+                <a href="controller_descripcion_curso.php?id_curso=<?php echo $curso2['subject_id']; ?>">
                     <div class="curso" style="height: 120px; position: relative; border-radius: 10px; display: flex; align-items: center;">
                         <img src="<?php echo $ruta_inicio . $curso2['photo']; ?>" style="height: 100%; object-fit: cover; margin: auto;" alt="Curso Image">
                     </div>
