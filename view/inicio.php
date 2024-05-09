@@ -309,5 +309,7 @@
       </div>
     </section>
     <?php require_once('view/layout/footer.php');?>
+    class
+    <heard><script src="https://cdn.userway.org/widget.js" data-account="oPQTiY7D0x"></script></heard>
   </body>
 </html>
