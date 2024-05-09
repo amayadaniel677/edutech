@@ -60,24 +60,14 @@
                   <p>Registrar </p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="<?php if(isset($urlStarter)){echo $urlStarter;};?>../../controller/admin/ventas/controller_reporte_venta.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Reportes</p>
-                </a>
-              </li>
+             
               <li class="nav-item">
               <a href="<?php if(isset($urlStarter)){echo $urlStarter;}; ?>../../controller/admin/ventas/controller_buscar_ventas.php" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Buscar</p>
                 </a>
               </li>
-              <li class="nav-item">
-              <a href="<?php if(isset($urlStarter)){echo $urlStarter;}; ?>../../controller/admin/ventas/controller_pedidos_pendientes.php" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pedidos</p>
-                </a>
-              </li>
+             
             </ul>
           </li>
           <li class="nav-item">

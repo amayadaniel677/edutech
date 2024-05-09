@@ -43,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="content-wrapper">
             <!-- Titulo de la vista -->
             <div class="content-header">
-                <div class="container-fluid">
+                <div class="container-fluid"  >
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0">Detalles del pedido</h1>
@@ -65,7 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
-                <div class="d-flex justify-content-center">
+                <div class="container-fluid"  style="max-width:1000px;">
 
                     <!-- Contenido del modal -->
                     <div class="invoice p-3 mb-3 col-md-8">

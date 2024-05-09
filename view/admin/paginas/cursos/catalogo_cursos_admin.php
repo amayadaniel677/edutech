@@ -66,18 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
       </a>
       </div>
-    <br>
-
-    <?php if(isset($_SESSION['error_message'])): ?>
-            <div class="alert alert-danger" role="alert">
-                <?php echo $_SESSION['error_message']; ?>
-            </div>
-            <?php unset($_SESSION['error_message']); // Limpiar el mensaje de error después de mostrarlo ?>
-        <?php endif; ?>
-
-        <section class="content">
-      <div class="container-fluid">
-      <figcaption class="buscador">
+      <figcaption class="buscador mt-3">
       <div>
         <h2>CURSOS</h2>
       </div>
@@ -87,6 +76,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </form>
       </div>
     </figcaption>
+    <br>
+
+    <?php if(isset($_SESSION['error_message'])): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $_SESSION['error_message']; ?>
+            </div>
+            <?php unset($_SESSION['error_message']); // Limpiar el mensaje de error después de mostrarlo ?>
+        <?php endif; ?>
+  
+        <section class="content">
+      <div class="container-fluid"  style="max-width:1000px;">
+      
     <div class="categoria-cursos">
     <?php foreach ($datos_organizados as $area => $cursos_area): ?>
         <div class="categoria-cursos">
