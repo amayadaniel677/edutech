@@ -84,8 +84,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Contenido principal vista -->
       <section class="content">
-  
-
           <div class="container">
 
 
