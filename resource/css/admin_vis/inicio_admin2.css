@@ -1,6 +1,10 @@
 a.ingresarBtn{
-    color:black !important;
+    color:rgba(27, 27, 27, 0.89) !important;
     text-decoration: none !important;
+}
+a.ingresarBtn i{
+    color:rgba(27, 27, 27, 0.723) !important;
+    
 }
 /* PERTENECE AL CSS MAIN*/
 
@@ -123,8 +127,9 @@ a.ingresarBtn{
 .botones{
     width:70px;
     border-radius: 10px;
+    border-color:#5f6466af;
     height: 90%;
-    background-color: rgba(254, 254, 254,0.65);
+    background-color: rgba(254, 254, 254,0.4);
 }
 .botones img{
     width: 30px;

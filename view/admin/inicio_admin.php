@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
     <!--VISTA BRAYAN INICIO ADMIN -->
-    <link rel='stylesheet' href="../../resource/css/admin_vis/vista_admin.css">
+    <link rel='stylesheet' href="../../resource/css/admin_vis/inicio_admin2.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
 </head>
@@ -45,12 +45,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Starter Page</h1>
+                            <h1 class="m-0">Inicio Administrador</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Starter Page</li>
+                                <li class="breadcrumb-item active">Inicio administrador</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -73,11 +72,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             Gestionar ventas
                                         </h5>
                                         <p>
-                                            Registar, generar reporte,buscar.
+                                            Registar, buscar, eliminar
                                         </p>
                                     </div>
                                     <div>
-                                        <button type="button" id="bt1" class="botones"><a class='ingresarBtn' href="ventas/controller_ventas.php"><img src="../../resource/img/admin_img/ingresar.png" alt=""><br>Ingresar</a></button>
+                                        <button type="button" id="bt1" class="botones"><a class='ingresarBtn' href="ventas/controller_ventas.php"><i class="fas fa-shopping-cart"></i> <br>Ingresar</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -94,12 +93,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </h5>
 
                                             <p>
-                                                Add usuario, modificar,eliminar.
+                                                Registrar, modificar, buscar
                                             </p>
                                         </div>
 
                                         <div>
-                                            <button type="button" id="bt2" class="botones"><a class='ingresarBtn' href="usuarios/controller_usuario.php"><img src="../../resource/img/admin_img/usuario.png" alt=""><br>Ingresar</a></button>
+                                            <button type="button" id="bt2" class="botones"><a class='ingresarBtn' href="usuarios/controller_usuario.php"><i class="fas fa-user"></i><br>Ingresar</a></button>
                                         </div>
                                     </div>
 
@@ -125,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </p>
                                     </div>
                                     <div>
-                                        <button type="button" id="bt3" class="botones"><a class='ingresarBtn' href="pagos/controller_pagos.php"><img src="../../resource/img/admin_img/pagos.png" alt=""><br>Ingresar</button></a>
+                                        <button type="button" id="bt3" class="botones"><a class='ingresarBtn' href="pagos/controller_pagos.php"><i class="far fa-credit-card"></i><br>Ingresar</button></a>
                                     </div>
                                 </div>
 
@@ -146,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </p>
                                     </div>
                                     <div>
-                                        <button type="button" id="bt4" class="botones"><a class='ingresarBtn' href="cursos/controller_gestionar_cursos.php"><img src="../../resource/img/admin_img/ingresar.png" alt=""><br>Ingresar</button></a>
+                                        <button type="button" id="bt4" class="botones"><a class='ingresarBtn' href="cursos/controller_gestionar_cursos.php"><i class="fas fa-graduation-cap"></i> <br>Ingresar</button></a>
                                     </div>
                                 </div>
                             </div>

@@ -80,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </svg>
                 </div>
                 <div class="text-center mt-4 ">
-                  <h5>¿Estas seguro de desvincular este docente?</h5>
+                  <h5>¿Estás seguro de desvincular este docente?</h5>
                 </div>
 
                 <div class="cuerpo-eliminar text-center float center justify-conten-center mt-4">

@@ -54,8 +54,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Agregar curso</li>
+                            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="./controller_usuario.php">Usuarios</a></li>
+                <li class="breadcrumb-item active">Buscar usuarios</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -65,10 +66,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
-            <div class="row">
+            <div class="row justify-content-center">
           <div class="col-md-3 col-sm-6 col-12">
             <a class="info-box bg-info" href='controller_usuarios_totales.php?tipo_usuario=docente'>
-              <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+              <span class="info-box-icon"><i class="fas fa-chalkboard-teacher"></i></span>
 
               <div class="info-box-content">
                 <h5 class="info-box-text">Ver Docentes</h5>
@@ -78,7 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="progress-bar" style="width: 70%"></div>
                 </div>
                 <span class="progress-description">
-                  70% Increase in 30 Days
+                  Lista docentes activos
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -88,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
             <a class="info-box bg-success"  href='controller_usuarios_totales.php?tipo_usuario=estudiante'>
-              <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
+              <span class="info-box-icon"><i class="fas fa-graduation-cap"></i></span>
 
               <div class="info-box-content">
                 <h5 class="info-box-text">Ver estudiantes</h5>
@@ -98,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="progress-bar" style="width: 70%"></div>
                 </div>
                 <span class="progress-description">
-                  70% Increase in 30 Days
+                  estudiantes activos
                 </span>
               </div>
               <!-- /.info-box-content -->
@@ -108,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
             <a class="info-box bg-warning"  href='controller_usuarios_totales.php?tipo_usuario=todos'>
-              <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+              <span class="info-box-icon"><i class="fas fa-users"></i> </span>
 
               <div class="info-box-content">
                 <h5 class="info-box-text">Ver todos </h5>
@@ -118,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="progress-bar" style="width: 70%"></div>
                 </div>
                 <span class="progress-description">
-                  Listado usuarios
+                  Listado usuarios activos
                 </span>
               </div>
               <!-- /.info-box-content -->

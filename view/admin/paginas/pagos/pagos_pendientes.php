@@ -49,12 +49,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0"> Pagos pendientes</h1>
+              <h1 class="m-0"> Pagos Pendientes</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active"> Pendientes</li>
+              <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="./controller_pagos.php">Gestionar pagos</a></li>
+                <li class="breadcrumb-item active">Pagos pendientes</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->

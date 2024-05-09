@@ -26,19 +26,20 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Modalidades</h1>
+                            <h1 class="m-0">Ver Modalidades</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Starter Page</li>
+                            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="#">Modalidades</a></li>
+                <li class="breadcrumb-item active">ver modalidades</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="container mt-4">
+<section class="content">
+ <div class="container-fluid mt-4" style='max-width:1200px;'>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
 
@@ -76,6 +77,8 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                     </div>
                 </div>
             </div>
+</section>
+           
         </div>
 
         <aside class="control-sidebar control-sidebar-dark">
