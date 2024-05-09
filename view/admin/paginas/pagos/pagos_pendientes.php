@@ -53,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="./controller_pagos.php">Gestionar pagos</a></li>
                 <li class="breadcrumb-item active">Pagos pendientes</li>
               </ol>
@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?= $error ?>
           </div>
         <?php endif; ?>
-        <div class="container-fluid"  style="max-width:1000px;">
+        <div class="container-fluid" style="max-width:1000px;">
 
           <!-- /.card-body -->
           <div class="card">
@@ -95,76 +95,75 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </tr>
                 </thead>
                 <tbody>
-    <?php foreach ($pagos as $index => $pago) : ?>
-        <tr class="odd">
-            <td><?= $index + 1 ?></td>
-            <td><?= $pago['name'] . ' ' . $pago['lastname'] ?></td>
-            <td><?= $pago['last_pay'] ?></td>
-            <td><?= $pago['total_hours'] ?></td>
-            <td>
-                <!-- Crear un botón Bootstrap llamado pagar -->
-                <a href="#" class="btn btn-primary abrir-modal" data-toggle="modal" data-target="#miModal" data-id="<?= $pago['id'] ?>" data-toggle="tooltip" data-placement="top" title="pagar al docente"><i class="fas fa-dollar-sign"></i></a>
-               
-              </td>
-        </tr>
-    <?php endforeach; ?>
+                  <?php foreach ($pagos as $index => $pago) : ?>
+                    <tr class="odd">
+                      <td><?= $index + 1 ?></td>
+                      <td><?= $pago['name'] . ' ' . $pago['lastname'] ?></td>
+                      <td><?= $pago['last_pay'] ?></td>
+                      <td><?= $pago['total_hours'] ?></td>
+                      <td>
+                        <!-- Crear un botón Bootstrap llamado pagar -->
+                        <a href="#" class="btn btn-primary abrir-modal" data-toggle="modal" data-target="#miModal" data-id="<?= $pago['id'] ?>" data-toggle="tooltip" data-placement="top" title="pagar al docente"><i class="fas fa-dollar-sign"></i></a>
 
-    <!-- Modal -->
-    <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="miModalLabel">Pagos docente</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Aquí irá el contenido dinámico del modal -->
-                    <form method="POST" action="">
-                        <div class="">
+                      </td>
+                    </tr>
+                  <?php endforeach; ?>
 
-                            <input type="hidden" name="pago_id" id="pago_id">
+                  <!-- Modal -->
+                  <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title" id="miModalLabel">Pagos docente</h3>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- Aquí irá el contenido dinámico del modal -->
+                          <form method="POST" action="">
+                            <div class="">
 
-                            <div class="col-md-12 mt-3">
+                              <input type="hidden" name="pago_id" id="pago_id">
+
+                              <div class="col-md-12 mt-3">
                                 <label for="cantidad">Cantidad de horas trabajadas:</label> <br>
                                 <input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Cantidad horas">
-                            </div>
-                            <div class="col-md-12 mt-3">
+                              </div>
+                              <div class="col-md-12 mt-3">
                                 <label for="valor_horas">Precio por hora:</label> <br>
                                 <input type="number" name="valor_horas" id="valor_horas" class="form-control" placeholder="Valor horas">
-                            </div>
-                            <div class="col-md-12 mt-3">
+                              </div>
+                              <div class="col-md-12 mt-3">
                                 <label for="valor_total">Valor total a pagar:</label> <br>
-                                <input readonly type="number" name="valor_total"  id="valor_total" class="form-control" placeholder="Valor total">
-                            </div>
-                            <div class="col-md-10 mt-3 mb-5">
+                                <input readonly type="number" name="valor_total" id="valor_total" class="form-control" placeholder="Valor total">
+                              </div>
+                              <div class="col-md-10 mt-3 mb-5">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Pagar</button>
+                              </div>
                             </div>
+                          </form>
+
                         </div>
-                    </form>
+                      </div>
+                    </div>
+                  </div>
+                </tbody>
 
-                </div>
-            </div>
-        </div>
-    </div>
-</tbody>
+                <script>
+                  // Captura el evento de hacer clic en el enlace
+                  document.addEventListener('DOMContentLoaded', function() {
+                    const abrirModalButtons = document.querySelectorAll('.abrir-modal');
 
-<script>
-    // Captura el evento de hacer clic en el enlace
-    document.addEventListener('DOMContentLoaded', function() {
-        const abrirModalButtons = document.querySelectorAll('.abrir-modal');
-
-        abrirModalButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                const pagoId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
-                document.getElementById('pago_id').value = pagoId; // Asigna el valor al input
-            });
-        });
-    });
-  
-</script>
+                    abrirModalButtons.forEach(function(button) {
+                      button.addEventListener('click', function() {
+                        const pagoId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
+                        document.getElementById('pago_id').value = pagoId; // Asigna el valor al input
+                      });
+                    });
+                  });
+                </script>
 
                 <tfoot>
                   <tr>
@@ -252,30 +251,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
   <!-- script de la pagiana  calcular valor total-->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Selecciona los campos de entrada
-    const cantidadInput = document.getElementById('cantidad');
-    const valorHorasInput = document.getElementById('valor_horas');
-    const valorTotalInput = document.getElementById('valor_total');
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Selecciona los campos de entrada
+      const cantidadInput = document.getElementById('cantidad');
+      const valorHorasInput = document.getElementById('valor_horas');
+      const valorTotalInput = document.getElementById('valor_total');
 
-    // Función para calcular el valor total
-    function calcularValorTotal() {
+      // Función para calcular el valor total
+      function calcularValorTotal() {
         const cantidad = parseFloat(cantidadInput.value) || 0;
         const valorHoras = parseFloat(valorHorasInput.value) || 0;
         const valorTotal = cantidad * valorHoras;
         valorTotalInput.value = valorTotal;
-    }
+      }
 
-    // Escucha los eventos de cambio en los campos de entrada
-    cantidadInput.addEventListener('input', calcularValorTotal);
-    valorHorasInput.addEventListener('input', calcularValorTotal);
+      // Escucha los eventos de cambio en los campos de entrada
+      cantidadInput.addEventListener('input', calcularValorTotal);
+      valorHorasInput.addEventListener('input', calcularValorTotal);
 
-    // Calcula el valor total inicialmente
-    calcularValorTotal();
-});
-
-</script>
+      // Calcula el valor total inicialmente
+      calcularValorTotal();
+    });
+  </script>
 </body>
 
 </html>
