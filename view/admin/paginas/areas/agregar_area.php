@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                 </div>
 
-                <div class="form-group text-center">
+                <div class="form-group ">
                   <button type="submit" class="btn btn-success btn-md w-50 mt-3">Agregar</button>
                 </div>
               </form>

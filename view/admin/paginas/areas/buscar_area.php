@@ -52,7 +52,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
           <div class="row">
             <div class="col-md-6">
               <form action="" method="POST">
-                <div class="text-center">
+                <div class="">
                   <div class="card-body">
                     <div class="form-group">
                       <label for="categoria">Seleccione área:</label>
@@ -67,8 +67,8 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
 
                       </select>
                     </div>
-                    <div class="form-group text-center">
-                      <button type="submit" class="btn btn-success btn-md w-50 mt-3 mx-2">Buscar</button>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-success btn-md w-50 mt-3 ">Buscar</button>
                     </div>
                   </div>
                 </div>
