@@ -69,7 +69,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="botones">
         <a href="controller_buscar_ventas.php">Buscar Venta</a>
         <a href="controller_regventa.php">Registrar Venta</a>
-        <a href="controller_reporte_venta.php">Reporte Ventas</a>
       </div>
     </div>
           
