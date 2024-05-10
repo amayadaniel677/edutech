@@ -1,5 +1,5 @@
 <?php
-$urlStarter = '../../view/admin/';  //son desde el controlador
+$ruta_inicio = '../../';  //son desde el controlador
 ?>
 
 <!DOCTYPE html>
@@ -167,11 +167,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        <?php include('layouts/footer.php'); ?>
+       
         <!--FIN   Main Footer -->
 
     </div> <!--fin de toda la pagina wrapper -->
     <!-- ./wrapper -->
+    <?php include('layouts/footer.php'); ?>
 
     <!-- REQUIRED SCRIPTS -->
 
