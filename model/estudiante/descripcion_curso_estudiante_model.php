@@ -6,7 +6,7 @@ class descripcionCurso{
         mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ERROR);
     
         try {
-            $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech");
+            $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech"); 
         } catch (mysqli_sql_exception $e) {
             // Intenta conectar con la segunda opción si la primera falla
             try {
@@ -15,7 +15,7 @@ class descripcionCurso{
                 // Maneja el error de conexión aquí
                 echo "Error al conectar: " . $e->getMessage();
                 // Considera lanzar una excepción o manejar el error de otra manera
-            }
+            } 
         }
     
         $this->con->set_charset("utf8");
@@ -89,6 +89,17 @@ class descripcionCurso{
             return $datos;
         } else {
             return null;
+        }
+    }
+
+    public function traer_cursos($id){
+        $sql="SELECT * FROM subjects WHERE id='$id' AND `status`='active'";
+        $result=$this->con->query($sql);
+        if($result->num_rows>0){
+            $row=$result->fetch_assoc();
+            return $row;
+        }else{
+            return false;
         }
     }
 

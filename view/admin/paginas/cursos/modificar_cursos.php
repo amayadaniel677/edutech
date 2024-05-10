@@ -51,7 +51,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="./controller_gestionar_cursos">Cursos</a></li>
                 <li class="breadcrumb-item active">Modificar curso</li>
               </ol>
@@ -61,84 +61,60 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </div>
       <!-- /.fin titulo de la vista -->
 
-      
+
       <section class="content">
-                <!-- <div class="container-fluid"  style="max-width:1000px;"> -->
-                <div class="container-fluid">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="formulario">
-                                <form action="#">
-                                    <div class="row">
-                                   <div class="col-md-6">
-                                   <div class="form-group">
-                                        <label for="categoria">Categoria </label>
-                                        <select name="categoria" id="categoria" class="form-control">
-                                            <option value="daniel">Categoria</option>
-                
-                                        </select>
-                                    </div>
-                                   </div>
-                                        <div class="col-md-6">
-                                        <div class="form-group">
-                                        <label for="nombre-curso">Nombre curso</label>
-                                        <select name="nombre-curso" id="nombre-curso" class="form-control">
-                                            <option value="daniel">Curso 1</option>
-                                          
-                                        </select>
-                                    </div>
-                                        </div>
-                                       
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="docente">Asignar docente</label>
-                                        <select name="docente" id="docente" class="form-control">
-                                            <option value="daniel">Daniel Amaya</option>
-                                            <option value="martin">Brayan Martin</option>
-                                            <option value="stich">Brayan Stich</option>
-                                            <option value="stiven">Brayan Stiven</option>
-                                            <option value="pedro">Pedro A Barrera</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="precio">Precio</label>
-                                                <input type="number" id="precio" value="15000" class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="descripcion">Descripción del curso</label>
-                                                <textarea name="descripcion" id="descripcion" placeholder="Escriba aquí"
-                                                    class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Desvincular docente</label>
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">Daniel
-                                                Amaya <a href="#"><i class="fas fa-trash-alt"></i></a></li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">Juan
-                                                Pablo <a href="#"><i class="fas fa-trash-alt"></i></a></li>
-                                            <!-- Agrega más elementos de la lista aquí si es necesario -->
-                                        </ul>
-                                    </div>
-
-                                    <!-- Botón -->
-                                    <div class="form-group text-center">
-                                        <input type="submit" value="Confirmar" class="btn btn-success btn-md" />
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+        <!-- <div class="container-fluid"  style="max-width:1000px;"> -->
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="formulario">
+                <form action="#">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="nombre-curso">Nombre curso</label>
+                        <input type="text" name="nombre_curso" class="form-control">
+                      </div>
                     </div>
-                </div>
-            </section>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="docente">Asignar docente</label>
+                    <select name="docente" id="docente" class="form-control">
+                      <option value="daniel">Daniel Amaya</option>
+                      <option value="martin">Brayan Martin</option>
+                      <option value="stich">Brayan Stich</option>
+                      <option value="stiven">Brayan Stiven</option>
+                      <option value="pedro">Pedro A Barrera</option>
+                    </select>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="precio">Precio</label>
+                        <input type="number" id="precio" value="15000" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="descripcion">Descripción del curso</label>
+                        <textarea name="descripcion" id="descripcion" placeholder="Escriba aquí" class="form-control"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Botón -->
+                  <div class="form-group text-center">
+                    <a href="controller_descripcion_curso.php?id_curso=<?php echo $id_curso; ?>" class="btn btn-primary btn-md">Volver</a>
+                    <input type="submit" value="Confirmar" class="btn btn-success btn-md" />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <style>
         @media (max-width: 768px) {
