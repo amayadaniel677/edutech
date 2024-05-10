@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="col-12">
                                 <h4>
                                     <i class="fas fa-globe"></i> Kepler S.A.S.
-                                    <small class="float-right">Fecha hoy: <?php echo date('d/m/Y'); ?></small>
+                                    <small class="float-right">Fecha de hoy: <?php echo date('d/m/Y'); ?></small>
                                 </h4>
                             </div>
                             <!-- /.col -->
@@ -103,19 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <?php
                             if ($usuario) {
                             ?>
-                                <div class="col-sm-4 invoice-col">
-                                    Cliente
-                                    <address>
-                                        <div class="form-group">
-                                            <strong><?php echo htmlspecialchars($usuario['name']); ?></strong>
-                                            <strong class="ml-2"><?php echo htmlspecialchars($usuario['lastname']); ?></strong>
-                                            <br>
-                                        </div> <strong><?php echo htmlspecialchars($usuario['dni']); ?></strong><br>
-                                        <?php echo htmlspecialchars($usuario['city']); ?><br>
-                                        Telefono: <?php echo htmlspecialchars($usuario['phone']); ?><br>
-                                        Correo: <?php echo htmlspecialchars($usuario['email']); ?>
-                                    </address>
-                                </div>
+                                
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
                                     <br>

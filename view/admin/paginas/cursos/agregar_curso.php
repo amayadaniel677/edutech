@@ -110,8 +110,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
        
       }
         ?>
-        <div class="container-fluid" style="max-width: 1000px;">
-          <div class="row ">
+        <!-- <div class="container-fluid" style="max-width: 1000px;"> -->
+          <div class="container-fluid">
+          <div class="row justify-content-center ">
             <div class="col-lg-6">
               <div class="formulario">
                 <form action="" method='POST' enctype="multipart/form-data">

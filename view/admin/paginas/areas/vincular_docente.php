@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                           <?php endforeach; ?>
                         </select>
                       </div>
-                      <div class="form-group text-center">
+                      <div class="form-group">
                         <button type="submit" class="btn btn-success btn-md w-50 mt-3" onclick="showConfirmationDialog(event)">Vincular</button>
                       </div>
                     </div>

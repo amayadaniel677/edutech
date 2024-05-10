@@ -85,6 +85,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Contenido principal vista -->
       <section class="content">
+      <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+                                    error
+                                </button> 
         <div class="container-fluid" style="max-width:1000px;">
 
           <div class="container">

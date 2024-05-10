@@ -64,8 +64,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
         <?php endif; ?>
 
-        <div class="container-fluid"  style="max-width:1000px;">
-          <div class="row">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
             <div class="col-lg-6">
               <form action="#" method='POST'>
                 <div class="form-group row">
@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                 </div>
 
-                <div class="form-group text-center">
+                <div class="form-group text-center ">
                   <button type="submit" class="btn btn-success btn-md w-50 mt-3">Agregar</button>
                 </div>
               </form>
