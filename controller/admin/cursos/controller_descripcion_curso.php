@@ -16,8 +16,10 @@ if (isset($_GET['id_curso'])) {
     $curso_model = new descripcionCurso();
    
     // Llamar a la función descripcion_curso para obtener los detalles del curso
-    $detalle_curso = $curso_model->descripcion_curso($id_curso);
+    $detalle_curso = $curso_model->descripcion_curso($id_curso); 
     $mostrar_precio= $curso_model->mostrar_precio();
+
+    $curso=$curso_model->traer_cursos($id_curso);
    
     if ($detalle_curso) {
         $area = $detalle_curso['area_name'];
