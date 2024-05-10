@@ -143,9 +143,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
                 <select class="form-control" id="tipo_documento" name="tipo_documento">
-                  <option value="CC">Cédula de ciudadanía</option>
-                  <option value="TI">Tarjeta de identidad</option>
-                  <option value="CE">Cédula de extranjería</option>
+                  <option value="CC" <?php echo (getFieldValue('tipo_documento') == 'CC') ? 'selected' : ''; ?>>Cédula de ciudadanía</option>
+                  <option value="TI" <?php echo (getFieldValue('tipo_documento') == 'TI') ? 'selected' : ''; ?>>Tarjeta de identidad</option>
+                  <option value="CE" <?php echo (getFieldValue('tipo_documento') == 'CE') ? 'selected' : ''; ?>>Cédula de extranjería</option>
                 </select>
               </div>
             </div>
