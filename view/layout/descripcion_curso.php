@@ -41,14 +41,12 @@
                     <i class="fab fa-whatsapp"></i>
                     <span class="tex-icono">Chatea con nosotros</span>
                 </a>
-                <br>
-                <a class="learn-more" href="#" data-toggle="modal" data-target="#miModal">
-                    <span class="circle" aria-hidden="true">
-                        <span class="icon arrow"></span>
-                    </span>
-                    <span class="button-text">Modificar curso</span>
-                </a>
-
+                <?php
+                if($_SESSION['rol_session'] == 'administrador'){
+                   echo ' <br>'; 
+                   echo '<a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#miModal"><i class="fas fa-edit"></i> Modificar curso</a>';
+                }    
+                ?>
                 <!-- Modal  modificar cursos-->
                 <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
