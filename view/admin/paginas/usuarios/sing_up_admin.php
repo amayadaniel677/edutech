@@ -12,17 +12,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EduTech | Add Curso</title>
+  <title>EduTech | Registrar</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
+ <!-- SwadeetAlert2 -->
+ <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../../resource/css/users/signup_admin.css" />
   <!-- CSS CURSOS ADMIN -->
   <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
+  <!-- css alertas mensajes -->
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />   <!-- necesario para el tamaño de mensajes alerta  -->
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -43,12 +49,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Gestionar usuario</h1>
+              <h1 class="m-0"> Registrar Usuario</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Gestionar usuario</li>
+              <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="./controller_usuario.php">Gestionar usuarios</a></li>
+                <li class="breadcrumb-item active">Registrar usuario </li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -57,8 +64,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.fin titulo de la vista -->
 
       <!-- Contenido principal vista -->
-
-      <h1 class="text-center display-8 mt-1">
+   <section class="content">
+    <div class="container-fluid">
+    <h1 class="text-center display-8 mt-1">
         BIENVENIDO A KEPLER
       </h1>
       <div class="card-body" style="max-width: 900px; margin: 0 auto;">
@@ -78,23 +86,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </div>";
             }
               ?>
-           
-          <?php
+         
 
-          if (isset($errores)) {
-            echo "
-            <ul class'list-group list-group-flush'>
-            ";
-                
-                
-            
-            foreach ($errores as $error) {
-              echo "<li class='list-group-item list-group-item-danger'>".$error."</li>";
-            }
-            echo "
-            </ul>
-            ";
-          } elseif (isset($mensaje)) {
+<?php if (isset($errores)): ?>
+  <div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h5><i class="icon fas fa-ban"></i> Errores</h5>
+    <ul class="list-group list-group-flush pl-3">
+      <?php foreach ($errores as $error): ?>
+        <li class=""><?php echo $error; ?></li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+<?php endif; ?>
+  
+<?php
+ if (isset($mensaje)) {
             echo "<div class='container mt-5'> 
             <div class='alert alert-success' role='alert'>";
                 
@@ -112,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="[a-zA-Z\s]+" required>
+                <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="[a-zA-Z\s]+" value="<?php echo  getFieldValue('nombres') ; ?>" required>
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -122,7 +129,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" pattern="[a-zA-Z\s]+" required>
+                <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" pattern="[a-zA-Z\s]+"  value="<?php echo  getFieldValue('apellidos') ; ?>"required>
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -136,15 +143,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
                 <select class="form-control" id="tipo_documento" name="tipo_documento">
-                  <option value="CC">Cédula de ciudadanía</option>
-                  <option value="TI">Tarjeta de identidad</option>
-                  <option value="CE">Cédula de extranjería</option>
+                  <option value="CC" <?php echo (getFieldValue('tipo_documento') == 'CC') ? 'selected' : ''; ?>>Cédula de ciudadanía</option>
+                  <option value="TI" <?php echo (getFieldValue('tipo_documento') == 'TI') ? 'selected' : ''; ?>>Tarjeta de identidad</option>
+                  <option value="CE" <?php echo (getFieldValue('tipo_documento') == 'CE') ? 'selected' : ''; ?>>Cédula de extranjería</option>
                 </select>
               </div>
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" pattern="\d{5,12}" minlength="5" maxlength="12"  required>
+                <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" pattern="\d{5,12}" minlength="5" maxlength="12"  required value="<?php echo  getFieldValue('documento') ; ?>">
               </div>
             </div>
           </div>
@@ -153,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Correo electrónico" id="correo" name="correo" required>
+                <input type="email" class="form-control" placeholder="Correo electrónico" id="correo" name="correo" required value="<?php echo  getFieldValue('correo') ; ?>">
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-envelope"></span>
@@ -163,7 +170,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono"  pattern="\d{7,11}" minlength="7" maxlength="11" required>
+                <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono"  pattern="\d{7,11}" minlength="7" maxlength="11" required value="<?php echo  getFieldValue('telefono') ; ?>">
               </div>
             </div>
 
@@ -172,7 +179,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Escribir contraseña" id="contrasenia" name="contrasenia" required>
+                <input type="password" class="form-control" placeholder="Escribir contraseña" id="contrasenia" name="contrasenia" required value="<?php echo  getFieldValue('contrasenia') ; ?>">
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-lock"></span>
@@ -182,7 +189,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Confirmar contraseña" id="confContrasenia" name="confContrasenia" required>
+                <input type="password" class="form-control" placeholder="Confirmar contraseña" id="confContrasenia" name="confContrasenia" required value="<?php echo  getFieldValue('confContrasenia') ; ?>">
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-lock"></span>
@@ -196,20 +203,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" pattern="[a-zA-Z\s]+" required >
+                <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" pattern="[a-zA-Z\s]+" required value="<?php echo  getFieldValue('ciudad') ; ?>" >
               </div>
             </div>
             <div class="col-md-6 col-sm-12">
               <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Dirección" id="direccion" name="direccion" required>
+                <input type="text" class="form-control" placeholder="Dirección" id="direccion" name="direccion" required value="<?php echo  getFieldValue('direccion') ; ?>">
               </div>
             </div>
           </div>
           <div class="col-md-12 col-sm-12">
             <div class="input-group mb-3">
               <select class="form-control" id="rol" name="rol">
-                <option value="docente">Docente</option>
-                <option value="estudiante">Estudiante</option>
+              <option value="docente" <?php echo (getFieldValue('rol') == 'docente') ? 'selected' : ''; ?>>Docente</option>
+  <option value="estudiante" <?php echo (getFieldValue('rol') == 'estudiante') ? 'selected' : ''; ?>>Estudiante</option>
               </select>
             </div>
           </div>
@@ -217,19 +224,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="input-group mb-3">
             <div class="custom-file">
               <input type="file" class="" id="foto" name="foto" accept='image/*'>
-              <label class="custom-file-label" for="foto">Seleccionar archivo</label>
-
             </div>
+          
           </div>
           <div class="row">
             <div class="col-md-6 col-sm-12">
               <label for='sexo'>Sexo:</label>
               <div class="input-group mb-3">
                 <div>
-                  <input type="radio" value="M" id="sexoM" name="sexo">
-                  <label for="sexoM">M</label>
-                  <input type="radio" value="F" id="sexoF" name="sexo">
-                  <label for="sexoF">F</label>
+                <input type="radio" value="M" id="sexoM" name="sexo" <?php echo (getFieldValue('sexo') === 'M') ? 'checked' : ''; ?>>
+<label for="sexoM">M</label>
+<input type="radio" value="F" id="sexoF" name="sexo" <?php echo (getFieldValue('sexo') === 'F') ? 'checked' : ''; ?>>
+<label for="sexoF">F</label>
+
                 </div>
               </div>
             </div>
@@ -237,7 +244,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <label for='fecha'>Fecha de Nacimiento</label>
               <div class="input-group mb-3">
 
-                <input type="date" class="form-control" placeholder="Fecha de nacimiento" id="fecha" name="fecha" required>
+                <input type="date" class="form-control" placeholder="Fecha de nacimiento" id="fecha" name="fecha" required value="<?php echo  getFieldValue('fecha') ; ?>">
               </div>
             </div>
           </div>
@@ -255,6 +262,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       </div>
+    </div>
+  </section>
+      
 
       <!-- /. Maincontent -->
       <!-- /.content-wrapper -->

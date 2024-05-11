@@ -46,13 +46,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Detalles del pedido</h1>
+                            <h1 class="m-0">Editar Usuario  </h1>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active"> Pedidos</li>
+                            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="./controller_usuario.php">Usuarios</a></li>
+                <li class="breadcrumb-item"><a href="./controller_buscar_usuario.php">Buscar usuario</a></li>
+                <li class="breadcrumb-item active">Editar usuarios</li>
                             </ol>
                         </div>
                         <!-- /.col -->
@@ -71,7 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             echo '<h5 class="bg-danger text-white p-3 mb-2" style="font-size: 1.25rem;">' . $mensaje . '</h5>';
                         }
                         ?>
-                <div class="d-flex justify-content-center">
+                <div class="container-fluid"  style="max-width:1000px;">
 
                     <!-- Contenido del modal -->
                     <div class="invoice p-3 mb-3 col-md-8">
@@ -80,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="col-12">
                                 <h4>
                                     <i class="fas fa-globe"></i> Kepler S.A.S.
-                                    <small class="float-right">Fecha hoy: <?php echo date('d/m/Y'); ?></small>
+                                    <small class="float-right">Fecha de hoy: <?php echo date('d/m/Y'); ?></small>
                                 </h4>
                             </div>
                             <!-- /.col -->
@@ -101,19 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <?php
                             if ($usuario) {
                             ?>
-                                <div class="col-sm-4 invoice-col">
-                                    Cliente
-                                    <address>
-                                        <div class="form-group">
-                                            <strong><?php echo htmlspecialchars($usuario['name']); ?></strong>
-                                            <strong class="ml-2"><?php echo htmlspecialchars($usuario['lastname']); ?></strong>
-                                            <br>
-                                        </div> <strong><?php echo htmlspecialchars($usuario['dni']); ?></strong><br>
-                                        <?php echo htmlspecialchars($usuario['city']); ?><br>
-                                        Telefono: <?php echo htmlspecialchars($usuario['phone']); ?><br>
-                                        Correo: <?php echo htmlspecialchars($usuario['email']); ?>
-                                    </address>
-                                </div>
+                                
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
                                     <br>

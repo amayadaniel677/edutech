@@ -26,19 +26,20 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Modalidades</h1>
+                            <h1 class="m-0">Editar Modalidad</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Starter Page</li>
+                            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="#">Modalidades</a></li>
+                <li class="breadcrumb-item active">Editar modalidad</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container">
-
+            <section class="content">
+             <div class="container-fluid"  style="max-width:1000px;">
                 <h2>Modalidad <?php echo $datos_modalidad['name']; ?></h2> <!-- Título del formulario -->
                 <form method="POST" action="">
                     <div class="form-group">
@@ -56,9 +57,9 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                     <input type="hidden" id="id-modalidad" name="id" value="<?php echo $datos_modalidad['id']; ?>"> <!-- Campo oculto -->
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
-            </div>
+            </section>
         </div>
-
+        </div>
         <aside class="control-sidebar control-sidebar-dark">
             <div class="p-3">
                 <h5>Title</h5>

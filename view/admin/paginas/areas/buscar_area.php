@@ -24,12 +24,13 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Vincular Area </h1>
+              <h1 class="m-0">Buscar Area </h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
+                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="#">Areas</a></li>
+                <li class="breadcrumb-item active">Buscar area</li>
               </ol>
             </div>
           </div>
@@ -47,11 +48,11 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
             <?php echo  $error; ?>
           </div>
         <?php endif; ?>
-        <div class="container">
-          <div class="row justify-content-center">
+        <div class="container-fluid" style='max-width:1000px;'>
+          <div class="row">
             <div class="col-md-6">
               <form action="" method="POST">
-                <div class="text-center">
+                <div class="">
                   <div class="card-body">
                     <div class="form-group">
                       <label for="categoria">Seleccione área:</label>
@@ -60,14 +61,14 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                         // agregar un valor por defecto
                         echo "<option value=''>Seleccionar área</option>";
                         foreach ($areas as $area) {
-                          echo "<option value='" . $area['id'] . "'>" . $area['id']," ",$area['name'] . "</option>";
+                          echo "<option value='" . $area['id'] . "'>" . $area['id'], " ", $area['name'] . "</option>";
                         }
                         ?>
 
                       </select>
                     </div>
-                    <div class="form-group text-center">
-                      <button type="submit" class="btn btn-success btn-md w-50 mt-3 mx-2">Buscar</button>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-success btn-md w-50 mt-3 ">Buscar</button>
                     </div>
                   </div>
                 </div>
@@ -76,25 +77,25 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
           </div>
         </div>
 
-        <div class="container mt-4">
-          <div class="row justify-content-center">
+        <div class="container-fluid mt-4" style='max-width:1000px;'>
+          <div class="row">
             <div class="card col-md-9">
               <div class="card-header">
                 <h2> AREA: <?php if (isset($areaSelect['name']) && !empty($areaSelect['name'])) {
-                      echo $areaSelect['name'];
-                      echo "
+                              echo $areaSelect['name'];
+                              echo "
        <button type='button' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modal-edit-area'>
          <i class='fas fa-edit'></i>
        ";
-                    } else {
-                      echo "Nombre de la materia";
-                    }; ?>
+                            } else {
+                              echo "Nombre de la materia";
+                            }; ?>
                 </h2>
                 <h5><?php if (isset($areaSelect['status']) && !empty($areaSelect['status'])) {
-                                  echo "Estado:" . $areaSelect['status'];
-                                } else {
-                                  echo "Estado:";
-                                }; ?>
+                      echo "Estado:" . $areaSelect['status'];
+                    } else {
+                      echo "Estado:";
+                    }; ?>
                 </h5>
               </div>
               <!-- /.card-header -->
@@ -157,8 +158,8 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                       <form action="" method='POST' id='form-edit'>
                         <div class="form-group">
                           <input required type="text" name="idArea" id="idArea" class="form-control" value="<?php if (isset($area)) {
-                                                                                                                echo $areaSelect['id'];
-                                                                                                              } ?>">
+                                                                                                              echo $areaSelect['id'];
+                                                                                                            } ?>">
                           <label for="nombre">Nombre del area:</label>
                           <input required type="text" name="nombre" id="nombre" class="form-control" value="<?php if (isset($area)) {
                                                                                                               echo $areaSelect['name'];
@@ -174,7 +175,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                         <div class="form-group
                         ">
                           <label for="estado">Estado:</label>
-                          <select  name='status' id="estado" class="form-control">
+                          <select name='status' id="estado" class="form-control">
                             <!-- agregar selected si  $vinculados[0]['area_status'] es active o inactive -->
                             <option value="active" <?php if (isset($areaSelect) && $areaSelect['status'] == 'active') {
                                                       echo 'selected';

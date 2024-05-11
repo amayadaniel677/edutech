@@ -56,12 +56,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Buscar ventas</h1>
+                            <h1 class="m-0">Ventas filtradas</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Buscar venta</li>
+                            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="./controller_ventas.php">Ventas</a></li>
+                <li class="breadcrumb-item"><a href="./controller_buscar_ventas.php">Buscar ventas</a></li>
+               <li class="breadcrumb-item active">Ventas filtradas</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -71,7 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
-                <div class="container-fluid">
+                <div class="container-fluid"   style="max-width:1000px;" >
 
                     <div class="container">
                         <?php

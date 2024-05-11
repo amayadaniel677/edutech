@@ -1,5 +1,5 @@
 <section class="content">
-  <div class="container-fluid">
+  <div class="container-fluid"  style="max-width:1000px;">
     <div class="errores">
    
    

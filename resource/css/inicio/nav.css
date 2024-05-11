@@ -1,74 +1,71 @@
 /* PERTENECE AL CSS MAIN hola*/
 a {
   text-decoration: none;
-   
- }
- * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
- }
- .boton {
-   font-size: 14px;
-   border-radius: 10px;
-   padding: 5px 10px;
-   transition: background-color ease 0.3s;
-   font-weight: normal;
- }
- body {
-   background-color: rgb(247, 247, 247);
- }
- /* CIERRE MAIN*/
- 
- nav {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   letter-spacing: 0.05em;
-   background-color: rgba(176, 238, 212, 0.302);
- }
- nav a{
-   color: #426142;
- }
- 
- nav div img {
-   width: 120px;
- }
- nav .nav-contenedor-centro a {
-   margin: 0 15px;
-   padding: 5px 8px;
-   border-bottom: 3px solid transparent;
-   transition: border-color ease 0.7s;
- }
- nav .nav-contenedor-centro a:hover {
-   border-color: rgb(8, 184, 37);
-   background-color: rgba(66, 66, 66, 0.1);
- }
- .boton.login:hover {
-   background-color: rgb(44 41 39 / 80%);
- }
- 
- .boton.login {
-   
- padding:8px;
-   
- background-color: #eb9924c9;
-   
- color:#ffffff;
- }
- .boton.login:nth-child(2){
-   background-color:#489d4e;
- }
- .boton.login:ntc-child(1){
-   background-color:#bd6e2a;
- }
- 
- /*RESPONSIVE DEL NAV*/
- @media (max-width: 804px) {
-   /*nav*/
-   nav .nav-contenedor-centro {
-     display: none;
-   }
- }
- /*FIN RESPONSIVE*/
- 
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.boton {
+  font-size: 14px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  transition: background-color ease 0.3s;
+  font-weight: normal;
+}
+body {
+  background-color: rgb(247, 247, 247);
+}
+/* CIERRE MAIN*/
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  letter-spacing: 0.05em;
+  background-color: rgba(176, 238, 212, 0.302);
+}
+nav a {
+  color: #426142;
+}
+
+nav div img {
+  width: 120px;
+}
+nav .nav-contenedor-centro a {
+  margin: 0 15px;
+  padding: 5px 8px;
+  border-bottom: 3px solid transparent;
+  transition: border-color ease 0.7s;
+}
+nav .nav-contenedor-centro a:hover {
+  border-color: rgb(8, 184, 37);
+  background-color: rgba(66, 66, 66, 0.1);
+}
+.boton.login:hover {
+  background-color: rgb(44 41 39 / 80%);
+}
+
+.boton.login {
+  padding: 8px;
+
+  background-color: #eb9924c9;
+
+  color: #ffffff;
+}
+.boton.login:nth-child(2) {
+  background-color: #489d4e;
+}
+.boton.login:ntc-child(1) {
+  background-color: #bd6e2a;
+}
+
+/*RESPONSIVE DEL NAV*/
+@media (max-width: 804px) {
+  /*nav*/
+  nav .nav-contenedor-centro {
+    display: none;
+  }
+}
+/*FIN RESPONSIVE*/

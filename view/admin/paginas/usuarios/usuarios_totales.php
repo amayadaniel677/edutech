@@ -39,16 +39,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
     <style>
-        .table-responsive {
-            max-height: 400px;
-            /* Ajusta este valor según tus necesidades */
-            overflow-y: auto;
-            /* Habilita el desplazamiento vertical */
-        }
 
         .mi-clase-personalizada .swal2-popup {
             font-size: 16px !important;
-            height: 70px !important;
+            height: auto !important;
         }
 
         .swal2-popup h2 {
@@ -76,12 +70,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Buscar usuario</h1>
+                            <h1 class="m-0">Lista <?php echo $tipo_usuario;?>s</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Agregar curso</li>
+                            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="./controller_usuario.php">Usuarios</a></li>
+                <li class="breadcrumb-item"><a href="./controller_buscar_usuario.php">Buscar usuarios</a></li>
+                <li class="breadcrumb-item active"><?php echo $tipo_usuario;?>s</li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -93,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <section class="content">
 
                 <!-- mostrar errores  -->
-                <div class="container-fluid">
+                <div class="container-fluid"  style="max-width:1000px;">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="alert" role="alert">
@@ -102,6 +98,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Launch Success Toast
                                 </button>
                                 <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+                                    info
+                                </button>
+                                <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
                                     error
                                 </button>
                             </div>
@@ -154,7 +153,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 echo "  <a href='#' class='btn btn-primary abrir-modal-docente' data-toggle='modal' data-target='#modalDocente' data-id='$usuario_id' data-toggle='tooltip' data-placement='top' title='sumar horas trabajadas'><i class='fas fa-clock'></i></a>";
                                             } else {
                                                 $usuario_id = $usuario['id'];
-                                                echo "  <a href='#' class='btn btn-success abrir-modal-estudiante' data-toggle='modal' data-target='#modalEstudiante' data-id-estudiante='$usuario_id' data-toggle='tooltip' data-placement='top' title='agregar horas al estudiante'><i class='fas fa-clock'></i></a>";
+                                                echo "  <a href='#' class='btn btn-success abrir-modal-estudiante' data-toggle='modal' data-target='#modalEstudiante' data-id-estudiante='$usuario_id' data-toggle='tooltip' data-placement='top' title='agregar horas al estudiante'><i class='fas fa-clipboard-check'></i>
+                                                </a>";
                                             }
                                             echo "";
                                             echo '</td>';
@@ -210,24 +210,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <div class="modal-body">
                                                     <!-- Aquí irá el contenido dinámico del modal -->
                                                     <!-- Agrega el ID "formPagar" al formulario -->
-                                                    <form id="formPagar" method="POST" action="">
+                                                    <form id="formAsistencia" method="POST" action="">
                                                         <div class="">
-                                                            <input type="text" name="estudiante_id" id="estudiante_id">
+                                                            <input type="text" name="estudiante_id_form" id="estudiante_id_form">
                                                             <div class="col-md-12 mt-3">
-                                                                <label for="horas">Cantidad de horas asistidas:</label> <br>
+                                                                
+                                                              
                                                                 <div class="form-group">
-                                                                    <label>Minimal</label>
-                                                                    <select class="form-control select2" id="miSelect2" style="width: 100%;">
-                                                                        <option selected="selected">Alabama</option>
-                                                                        <option>Alaska</option>
-                                                                        <option>California</option>
-                                                                        <option>Delaware</option>
-                                                                        <option>Tennessee</option>
-                                                                        <option>Texas</option>
-                                                                        <option>Washington</option>
+                                                                    <label>Seleccione un curso</label>
+                                                                    <select name='cursoSeleccionado' class="form-control select2" id="miSelect2" style="width: 100%;">
+                                                                        <option selected="selected">Seleccione uno</option>
+                                                                       
                                                                     </select>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-12 mt-3">
+                                                                <label for="horasAsistidas">Cantidad de horas asistidas:</label> <br>
+                                                                <input required type="number" name="horasAsistidas" id="horasAsistidas" class="form-control" placeholder="Cantidad horas">
+                                                            </div>
+                                                            
                                                             <div class="col-md-10 mt-3 mb-5">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                                                 <button id="btnPagar" class="btn btn-primary">Pagar</button>
@@ -289,55 +290,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-    <!-- <script>
-        // Captura el evento de hacer clic en el enlace
-        document.addEventListener('DOMContentLoaded', function() {
-            const abrirModalButtons = document.querySelectorAll('.abrir-modal-docente');
-
-            abrirModalButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    const docenteId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
-                    document.getElementById('docente_id').value = docenteId; // Asigna el valor al input
-                });
-            });
-
-            const abrirModalEstudianteButtons = document.querySelectorAll('.abrir-modal-estudiante');
-
-            abrirModalEstudianteButtons.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    console.log("sirve la funcion");
-                    document.getElementById('estudiante_id').value = '';
-
-                    console.log("se borró el valor id de input");
-
-                    const estudianteId = this.getAttribute('data-id-estudiante'); // Obtiene el valor del atributo data-id
-
-                    console.log("nuevo id del estudiante:", estudianteId)
-
-                    document.getElementById('estudiante_id').value = estudianteId; // Asigna el valor al input
-
-                    console.log("actualizado el id del input");
-                    // empieza el ajax
-
-                    let data = {
-                        'estudiante_id': estudianteId
-                    }
-
-                    //realizar la solicitud 
-                    $.ajax({
-
-                        url: 'controller_usuarios_totales.php',
-                        type: 'POST',
-                        data: data,
-                        success: function(response) {
-                            console.log(response);
-                        }
-                    })
-
-                });
-            });
-        });
-    </script> -->
     
     <!-- jQuery -->
     <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
@@ -353,7 +305,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     // Adjunta el evento de clic a los botones que abren modales de estudiantes
     $(document).on('click', '.abrir-modal-estudiante', function() {
         console.log("sirve la funcion");
-        document.getElementById('estudiante_id').value = '';
+        document.getElementById('estudiante_id_form').value = '';
 
         console.log("se borró el valor id de input");
 
@@ -361,7 +313,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         console.log("nuevo id del estudiante:", estudianteId);
 
-        document.getElementById('estudiante_id').value = estudianteId; // Asigna el valor al input
+        document.getElementById('estudiante_id_form').value = estudianteId; // Asigna el valor al input
 
          // Empieza el AJAX
          let data = {
@@ -471,6 +423,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <?php
     $mensaje_editar = $mensaje_editar ?? ''; // Asegura que $mensaje_editar esté definido
     $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
+    $msj_error = $msj_error ?? ''; // Asegura que $mensaje_editar esté definido
     ?>
     <script>
         $(function() {
@@ -478,7 +431,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 400000,
+                timer: 4000,
                 width: '80%',
                 customClass: {
                     container: 'mi-clase-personalizada'
@@ -503,7 +456,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             $('.swalDefaultError').click(function() {
                 Toast.fire({
                     icon: 'error',
-                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                    title: '<?php echo $msj_error; ?>'
                 })
             });
             $('.swalDefaultWarning').click(function() {
@@ -530,8 +483,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
                 // Simular un clic en el botón para activar el SweetAlert
 
-                console.log('entro');
+            
                 $('#btnInfo').click();
+
+
+
+            <?php endif; ?>
+            <?php if (isset($msj_error) && !empty($msj_error)) : ?>
+                // Simular un clic en el botón para activar el SweetAlert
+
+            
+                $('#btnError').click();
 
 
 

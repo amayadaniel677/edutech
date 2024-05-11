@@ -47,12 +47,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Agregar cursos</h1>
+              <h1 class="m-0">Vincular docente</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
+                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="#">Areas</a></li>
+                <li class="breadcrumb-item active">Vincular docente</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -62,93 +63,96 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       <section class="content">
-        <div class='d-flex justify-content-center'>
-          <?php if (!empty($mensaje) && $mensaje=='Docente vinculado con exito') : ?>
+        <div class='container-fluid' style="max-width:1000px;">
+          <?php if (!empty($mensaje) && $mensaje == 'Docente vinculado con exito') : ?>
             <div class="alert alert-success col-md-8 ">
               <?php echo $mensaje; ?>
               <?php $mensaje = ''; ?>
             </div>
-          <?php elseif(!empty($mensaje)): ?>
+          <?php elseif (!empty($mensaje)) : ?>
             <div class="alert alert-danger col-md-8 ">
               <?php echo $mensaje; ?>
               <?php $mensaje = ''; ?>
             </div>
           <?php endif; ?>
-        </div>
-        <div class="container mt-4">
-          <div class="row justify-content-center align-items-start">
-            <!-- Formulario -->
-            <div class="col-md-6 mb-4">
-              <form action="" method="POST">
-                <div>
+          <div class="container mt-4">
+            <div class="row  align-items-start">
+              <!-- Formulario -->
+              <div class="col-md-6 mb-4">
+                <form action="" method="POST">
+                  <div>
 
 
-                  <div class="card-body">
-                    <div class="form-group">
-                      <label for="categoria">Seleccione área:</label>
-                      <select class="form-control" name="area">
-                        <option value='false' selected>Selecciona un área</option>
-                        <?php foreach ($areas as $area) : ?>
-                          <option value="<?php echo $area['id']; ?>"><?php echo $area['name']; ?></option>
-                        <?php endforeach; ?>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="nombre-curso">Seleccione docente:</label>
-                      <select class="form-control" name="docente">
-                        <option value='false' selected>Selecciona un docente</option>
-                        <?php foreach ($docentes as $docente) : ?>
-                          <option value="<?php echo $docente['id']; ?>"><?php echo $docente['name']; ?></option>
-                        <?php endforeach; ?>
-                      </select>
-                    </div>
-                    <div class="form-group text-center">
-                      <button type="submit" class="btn btn-success btn-md w-50 mt-3" onclick="showConfirmationDialog(event)">Vincular</button>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="categoria">Seleccione área:</label>
+                        <select class="form-control" name="area">
+                          <option value='false' selected>Selecciona un área</option>
+                          <?php foreach ($areas as $area) : ?>
+                            <option value="<?php echo $area['id']; ?>"><?php echo $area['name']; ?></option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="nombre-curso">Seleccione docente:</label>
+                        <select class="form-control" name="docente">
+                          <option value='false' selected>Selecciona un docente</option>
+                          <?php foreach ($docentes as $docente) : ?>
+                            <option value="<?php echo $docente['id']; ?>"><?php echo $docente['name']; ?></option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-md w-50 mt-3" onclick="showConfirmationDialog(event)">Vincular</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </form>
-            </div>
+                </form>
+              </div>
 
-            <!-- Tabla -->
-            <div class="container mt-4">
-              <div class="row justify-content-center">
-                <div class="col-lg-8">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Docente</th>
-                        <th>Area</th>
-                        <th>Desvincular</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php if (!empty($_SESSION['docentes_vinculados'])) : ?>
+              <!-- Tabla -->
+              <div class="container mt-4">
+                <div class="row ">
+                  <div class="col-lg-8">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Docente</th>
+                          <th>Area</th>
+                          <th>Desvincular</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php if (!empty($_SESSION['docentes_vinculados'])) : ?>
 
-                        <?php foreach ($_SESSION['docentes_vinculados'] as $people_area) : ?>
-                          <tr>
-                            <td><?php echo htmlspecialchars($people_area['name']) . " " . htmlspecialchars($people_area['lastname']); ?></td>
-                            <td><?php echo htmlspecialchars($people_area['area_name']); ?></td>
-                            <td>
-                              <a class="btn btn-danger btn-sm ml-4" href='controller_confirmar_desvinculacion.php?idDesvincular=<?php echo htmlspecialchars($people_area['id']); ?>'>
-                                <i class="fas fa-trash"></i>
-                              </a>
-                            </td>
-                          </tr>
-                        <?php endforeach; ?>
-                    </tbody>
+                          <?php foreach ($_SESSION['docentes_vinculados'] as $people_area) : ?>
+                            <tr>
+                              <td><?php echo htmlspecialchars($people_area['name']) . " " . htmlspecialchars($people_area['lastname']); ?></td>
+                              <td><?php echo htmlspecialchars($people_area['area_name']); ?></td>
+                              <td>
+                                <a class="btn btn-danger btn-sm ml-4" href='controller_confirmar_desvinculacion.php?idDesvincular=<?php echo htmlspecialchars($people_area['id']); ?>'>
+                                  <i class="fas fa-trash"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  <?php else : ?>
+                    <p>No hay docentes vinculados.</p>
+                  <?php endif; ?>
+
                   </table>
-                <?php else : ?>
-                  <p>No hay docentes vinculados.</p>
-                <?php endif; ?>
-
-                </table>
+                  </div>
                 </div>
               </div>
-            </div>
 
+            </div>
           </div>
+
+
         </div>
+
       </section>
 
 
@@ -184,11 +188,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  function showConfirmationDialog(event) {
-    event.preventDefault(); // Prevent the form from submitting immediately
-    Swal.fire({
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function showConfirmationDialog(event) {
+      event.preventDefault(); // Prevent the form from submitting immediately
+      Swal.fire({
         title: '¿Estás seguro?',
         text: "Vas a vincular un docente.",
         icon: 'warning',
@@ -197,14 +201,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         cancelButtonColor: '#d33',
         confirmButtonText: 'Sí, vincular',
         cancelButtonText: 'Cancelar'
-    }).then((result) => {
+      }).then((result) => {
         if (result.isConfirmed) {
-            // If confirmed, submit the form
-            event.target.form.submit();
+          // If confirmed, submit the form
+          event.target.form.submit();
         }
-    });
-}
-</script>
+      });
+    }
+  </script>
   <!-- jQuery -->
   <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->

@@ -39,11 +39,12 @@ class buscar_venta_model
         $sql = $sql = "SELECT
             p.dni AS person_dni,
             p.name AS person_name,
+            p.lastname AS person_lastname,
             sa.price AS sale_price,
             sa.date AS sale_date,
             sa.id AS sale_id
             FROM sales sa
-            INNER JOIN people p ON sa.people_id = p.id  ORDER BY sa.date DESC";
+            INNER JOIN people p ON sa.people_id = p.id  WHERE sa.status='active' ORDER BY sa.date DESC ";
 
         $result = $this->con->query($sql);
 

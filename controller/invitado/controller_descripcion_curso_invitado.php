@@ -1,32 +1,21 @@
-<?php 
-
-
-session_start();
-if (!isset( $_SESSION['dni_session'])){
-    header('location:../../login_controller.php');
-    exit();
-}
-$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
-
-include('../../../model/estudiante/descripcion_curso_estudiante_model.php');
+<?php
+$ruta_inicio='../../';  //esta ruta se usa para cerrar sesion en el nav
+include('../../model/estudiante/descripcion_curso_estudiante_model.php');
 
 if (isset($_GET['id_curso'])) {
     $id_curso = $_GET['id_curso'];
     // Crear una instancia del modelo para acceder a las funciones
     $curso_model = new descripcionCurso();
-   
+
     // Llamar a la función descripcion_curso para obtener los detalles del curso
-    $detalle_curso = $curso_model->descripcion_curso($id_curso); 
+    $detalle_curso = $curso_model->descripcion_curso($id_curso);
     $mostrar_precio= $curso_model->mostrar_precio();
 
-    $curso=$curso_model->traer_cursos($id_curso);
-   
     if ($detalle_curso) {
-        $area = $detalle_curso['area_name'];
+        $area = $detalle_curso['area_name']; 
         $area_id = $detalle_curso['id']; // Obtener el nombre del área del curso
-        $cursos_area = $curso_model->seleccionar_curso($area_id);
+        $cursos_area = $curso_model->seleccionar_curso($area_id);// Obtener el nombre del área del curso
 
-      
         // Llamar a la función mostrarDocentesPorArea para obtener los docentes del área específica
         $docentes_area = $curso_model->mostrarDocentesPorArea($area);
 
@@ -45,5 +34,4 @@ if (isset($_GET['id_curso'])) {
 }
 
 
-include('../../../view/admin/paginas/cursos/descripcion_curso.php');
-?>
+include('../../view/invitado/descripcion_curso_invitado.php');

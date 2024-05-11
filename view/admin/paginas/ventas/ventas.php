@@ -43,12 +43,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Agregar curso</h1>
+            <h1 class="m-0">Gestionar ventas </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Agregar curso</li>
+            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+               <li class="breadcrumb-item active">Gestionar ventas</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -58,7 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Contenido principal vista -->
     <section class="content">
-      <div class="container-fluid">
+      <div class="container-fluid"  style="max-width:1000px;">
       
       <div class="">
       
@@ -69,7 +69,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="botones">
         <a href="controller_buscar_ventas.php">Buscar Venta</a>
         <a href="controller_regventa.php">Registrar Venta</a>
-        <a href="controller_reporte_venta.php">Reporte Ventas</a>
       </div>
     </div>
           

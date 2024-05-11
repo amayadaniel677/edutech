@@ -38,12 +38,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1>AGREGAR AREA</h1>
+              <h1>Agregar area</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
+                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="#">Areas</a></li>
+                <li class="breadcrumb-item active">Agregar area</li>
               </ol>
             </div>
           </div>
@@ -63,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
         <?php endif; ?>
 
-        <div class="container">
+        <div class="container-fluid">
           <div class="row justify-content-center">
             <div class="col-lg-6">
               <form action="#" method='POST'>
@@ -81,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                 </div>
 
-                <div class="form-group text-center">
+                <div class="form-group text-center ">
                   <button type="submit" class="btn btn-success btn-md w-50 mt-3">Agregar</button>
                 </div>
               </form>

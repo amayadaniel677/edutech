@@ -43,16 +43,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="content-wrapper">
             <!-- Titulo de la vista -->
             <div class="content-header">
-                <div class="container-fluid">
+                <div class="container-fluid"  >
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Detalles del pedido</h1>
+                            <h1 class="m-0">Detalles de venta</h1>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active"> Detalle ventas</li>
+                            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="./controller_ventas.php">Ventas</a></li>
+                <li class="breadcrumb-item"><a href="./controller_buscar_ventas.php">Buscar ventas</a></li>
+               <li class="breadcrumb-item active">Detalles de venta</li>
                             </ol>
                         </div>
                         <!-- /.col -->
@@ -65,7 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
-                <div class="d-flex justify-content-center">
+                <div class="container-fluid"  style="max-width:1000px;">
 
                     <!-- Contenido del modal -->
                     <div class="invoice p-3 mb-3 col-md-8">

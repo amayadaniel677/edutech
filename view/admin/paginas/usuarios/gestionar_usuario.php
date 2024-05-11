@@ -48,8 +48,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Gestionar usuario</li>
+            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item active">Gestionar usuarios</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -61,7 +61,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <section class="content">
       
       
-    <div class="row">
+    <div class="container-fluid"  style="max-width:1000px;">
       
     <div class="cuerpo">
       <div class="imagen">

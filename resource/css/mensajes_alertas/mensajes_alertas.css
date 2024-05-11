@@ -1,14 +1,9 @@
 
-.table-responsive {
-    max-height: 400px;
-    /* Ajusta este valor según tus necesidades */
-    overflow-y: auto;
-    /* Habilita el desplazamiento vertical */
-}
 
 .mi-clase-personalizada .swal2-popup {
     font-size: 16px !important;
-    height: 70px !important;
+    height: auto !important;
+    padding-bottom: 4px !important;
     /* ejemplo para tati */
 
 }

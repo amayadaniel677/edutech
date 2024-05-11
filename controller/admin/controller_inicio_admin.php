@@ -13,6 +13,6 @@ $ruta_inicio='../../';  //esta ruta se usa para cerrar sesion en el nav
 
 //PONERLE ESTO A TODOS LOS CONTROLADORES
 
-include('../../view/admin/starter.php');
+include('../../view/admin/inicio_admin.php');
 
 ?>

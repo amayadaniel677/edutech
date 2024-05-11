@@ -38,20 +38,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['docente_id'])) {
             $pago = $consult2->realizar_pago($docente, $horas);
             if ($pago) {
                 $msj_eliminar = '';
+                $msj_error='';
                 $cant_horas = $consult2->traer_horas($docente);
                 $mensaje_editar = 'Las horas se agregaron correctamente ahora suman: ' . $cant_horas['total_hours'];
                 // refrescar la pagina para que se actualice la tabla
                 header('refresh:4;url=controller_usuarios_totales.php?tipo_usuario=' . $tipo_usuario);
             } else {
-                $mensaje_eliminar = 'No se agregaron las horas';
+                $msj_eliminar = 'No se agregaron las horas';
             }
         } else {
-            $mensaje_eliminar = 'Las horas ingresadas deben ser numericas';
+            $msj_eliminar = 'Las horas ingresadas deben ser numericas';
         }
     }
 }
 
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['estudiante_id_form'])) {
+    $consult3 = new buscar_usuario_model();
+    $horasAsistidas = $_POST['horasAsistidas'];
+    $cursoSeleccionado = $_POST['cursoSeleccionado'];
+    // enviar al modelo para registrarhorasasistidas
+    $asistenciaHoras = $consult3->agregarHorasAsistidas($horasAsistidas,$cursoSeleccionado);
+    if(is_array($asistenciaHoras)){
+        $msj_error='Error de cantidad:'.$horasAsistidas." ingresadas de ".$asistenciaHoras['horasRestantes']." disponibles" ;
+    }
+    elseif($asistenciaHoras){
+        $mensaje_editar = 'Operación exitosa. Horas restantes del estudiante: '.$asistenciaHoras;
+        header('refresh:4;url=controller_usuarios_totales.php?tipo_usuario=' . $tipo_usuario);
+}
+}
 
 
 

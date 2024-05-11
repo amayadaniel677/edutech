@@ -1,7 +1,7 @@
 <?php
 class agregar_curso_model
 {
-
+ 
     private $con;
     public function __construct() {
         mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ERROR);
@@ -22,7 +22,7 @@ class agregar_curso_model
         $this->con->set_charset("utf8");
     }
 
-    public function insertar_curso($categoria, $nombre, $descripcion, $foto)
+    public function insertar_curso($categoria, $nombre, $descripcion, $foto,$temas)
     {
         echo "llegó al modelo: ".$categoria." ".$nombre." ".$descripcion." ".$foto;
         if ($this->subject_repeat($nombre)) {
@@ -31,7 +31,7 @@ class agregar_curso_model
             $id_area = $categoria;
             echo "id_area: ".$id_area;
             if ($id_area) {
-                $sql = "INSERT INTO subjects (`name`,`photo`,`description`,`areas_id`) values('$nombre','$foto','$descripcion','$id_area')";
+                $sql = "INSERT INTO subjects (`name`,`photo`,`description`,`areas_id`,`topics`) values('$nombre','$foto','$descripcion','$id_area','$temas')";
                 $result = $this->con->query($sql);
                 if ($result) {
                     return true;

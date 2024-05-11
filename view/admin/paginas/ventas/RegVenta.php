@@ -51,13 +51,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Pedidos pendientes</h1>
+              <h1 class="m-0">Registrar Venta </h1>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active"> Pedidos</li>
+              <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="./controller_ventas.php">Ventas</a></li>
+               <li class="breadcrumb-item active">Registrar venta</li>
               </ol>
             </div>
             <!-- /.col -->
@@ -69,141 +70,144 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.fin titulo de la vista -->
 
       <!-- Contenido principal vista -->
-      <section class="content">
+      <section class="content " >
+        <div class="container-fluid " style="max-width:1000px;">
         <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
           
-        </button>
-        <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
-          
-        </button>
-       
-        <div>
-          <div class="">
-
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-detalle">
-              Agregar detalle<i class="bi bi-plus-circle"></i>
-            </button>
-            <?php include('modal_add_detalle_venta.php') ?>
-          </div>
-
-          <form action="" method='POST' class="row mb-3" id='form-venta'>
-
-            <?php
-            function getPostValue($name)
-            {
-              // Verifica si el campo de entrada fue enviado con el formulario
-              if (isset($_POST[$name])) {
-                // Devuelve el valor enviado, escapado para prevenir inyecciones de código HTML
-                return htmlspecialchars($_POST[$name]);
+          </button>
+          <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+            
+          </button>
+         
+          <div>
+            <div class="">
+  
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-detalle">
+                Agregar detalle<i class="bi bi-plus-circle"></i>
+              </button>
+              <?php include('modal_add_detalle_venta.php') ?>
+            </div>
+  
+            <form action="" method='POST' class="row mb-3" id='form-venta'>
+  
+              <?php
+              function getPostValue($name)
+              {
+                // Verifica si el campo de entrada fue enviado con el formulario
+                if (isset($_POST[$name])) {
+                  // Devuelve el valor enviado, escapado para prevenir inyecciones de código HTML
+                  return htmlspecialchars($_POST[$name]);
+                }
+                // Si el campo no fue enviado, devuelve una cadena vacía
+                return '';
               }
-              // Si el campo no fue enviado, devuelve una cadena vacía
-              return '';
-            }
-            ?>
-
-            <input type="hidden" name="detallesVentaInput" id="detallesVentaInput" value="">
-
-            <div class="col-md-6 col-12">
-              <label for="nombres" style="display:block;">Nombres cliente</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
+              ?>
+  
+              <input type="hidden" name="detallesVentaInput" id="detallesVentaInput" value="">
+  
+              <div class="col-md-6 col-12">
+                <label for="nombres" style="display:block;">Nombres cliente</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
+                  </div>
+                  <input required type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombre" <?php echo getPostValue('nombres'); ?>>
                 </div>
-                <input required type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombre" <?php echo getPostValue('nombres'); ?>>
-              </div>
-              <label for="dni" style="display:block;">DNI Cliente</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                <label for="dni" style="display:block;">DNI Cliente</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                  </div>
+                  <input required type="number" class="form-control" id='dni' name="dni" placeholder="DNI" <?php echo getPostValue('nombres'); ?>>
                 </div>
-                <input required type="number" class="form-control" id='dni' name="dni" placeholder="DNI" <?php echo getPostValue('nombres'); ?>>
-              </div>
-              <label for="correo" style="display:block;">Correo</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                <label for="correo" style="display:block;">Correo</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                  </div>
+                  <input required type="email" class="form-control" name="correo" id="correo" placeholder="Correo" <?php echo getPostValue('nombres'); ?>>
                 </div>
-                <input required type="email" class="form-control" name="correo" id="correo" placeholder="Correo" <?php echo getPostValue('nombres'); ?>>
-              </div>
-
-
-              <label for="ciudad" style="display:block;">Ciudad</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fa-solid fa-building-user"></i></span>
+  
+  
+                <label for="ciudad" style="display:block;">Ciudad</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-building-user"></i></span>
+                  </div>
+                  <input required type="text" class="form-control" id='ciudad' name="ciudad" placeholder="Ciudad" <?php echo getPostValue('nombres'); ?>>
                 </div>
-                <input required type="text" class="form-control" id='ciudad' name="ciudad" placeholder="Ciudad" <?php echo getPostValue('nombres'); ?>>
+  
               </div>
-
+  
+              <div class="col-md-6 col-12">
+                <label for="apellidos" style="display:block;">Apellidos cliente</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
+                  </div>
+                  <input required type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Nombre" <?php echo getPostValue('apellidos'); ?>>
+                </div>
+  
+  
+  
+                <label for="telefono" style="display:block;">Telefono</label>
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-square-phone"></i></span>
+                  </div>
+                  <input required type="number" class="form-control" name="telefono" id='telefono' placeholder="Telefono" <?php echo getPostValue('telefono'); ?>>
+                </div>
+  
+                <label for="descuento" class="col-form-label">Descuento:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input required type="number" class="form-control" id="descuento" name="descuento" placeholder="" <?php echo getPostValue('descuento'); ?>>
+                </div>
+  
+                <label for="valor-total" class="col-form-label">Valor total:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input required readonly="" type="number" class="form-control" id="valor-total" name="valor-total" value='' placeholder="" <?php echo getPostValue('valor-total'); ?>>
+                </div>
+              </div>
+              <button type="button" class="btn btn-success " id="btn-regventa" value=''>Registrar</button>
+            </form>
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Detalles de Venta</h2>
+              </div>
+  
+  
+              <div class="card-body table-responsive p-0">
+                <table id="tabla-detalles" class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Tipo venta</th>
+                      <th>Modalidad</th>
+                      <th>Categoria</th>
+                      <th>Nombre Curso</th>
+                      <th>Horas</th>
+                      <th>Valor hora/clase</th>
+                      <th>Subtotal</th>
+                      <th>Editar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+  
+                  </tbody>
+                </table>
+              </div>
+  
             </div>
-
-            <div class="col-md-6 col-12">
-              <label for="apellidos" style="display:block;">Apellidos cliente</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
-                </div>
-                <input required type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Nombre" <?php echo getPostValue('apellidos'); ?>>
-              </div>
-
-
-
-              <label for="telefono" style="display:block;">Telefono</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fa-solid fa-square-phone"></i></span>
-                </div>
-                <input required type="number" class="form-control" name="telefono" id='telefono' placeholder="Telefono" <?php echo getPostValue('telefono'); ?>>
-              </div>
-
-              <label for="descuento" class="col-form-label">Descuento:</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
-                </div>
-                <input required type="number" class="form-control" id="descuento" name="descuento" placeholder="" <?php echo getPostValue('descuento'); ?>>
-              </div>
-
-              <label for="valor-total" class="col-form-label">Valor total:</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
-                </div>
-                <input required readonly="" type="number" class="form-control" id="valor-total" name="valor-total" value='' placeholder="" <?php echo getPostValue('valor-total'); ?>>
-              </div>
-            </div>
-            <button type="button" class="btn btn-success " id="btn-regventa" value=''>Registrar</button>
-          </form>
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Detalles de Venta</h2>
-            </div>
-
-
-            <div class="card-body table-responsive p-0">
-              <table id="tabla-detalles" class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>Tipo venta</th>
-                    <th>Modalidad</th>
-                    <th>Categoria</th>
-                    <th>Nombre Curso</th>
-                    <th>Horas</th>
-                    <th>Valor hora/clase</th>
-                    <th>Subtotal</th>
-                    <th>Editar</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-              </table>
-            </div>
-
+  
           </div>
-
+  
         </div>
-
+        
       </section>
 
       <!-- /. Maincontent -->

@@ -1,12 +1,12 @@
 <?php
 $urlStarter = '../../../view/admin/';  //son desde el controlador
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="en">
+<html lang="en"> 
 
 <head>
   <meta charset="utf-8">
@@ -51,8 +51,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Starter Page</li>
+                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="./controller_gestionar_cursos">Cursos</a></li>
+                <li class="breadcrumb-item active">Agregar curso</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -109,8 +110,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
        
       }
         ?>
-        <div class="container">
-          <div class="row justify-content-center">
+        <!-- <div class="container-fluid" style="max-width: 1000px;"> -->
+          <div class="container-fluid">
+          <div class="row justify-content-center ">
             <div class="col-lg-6">
               <div class="formulario">
                 <form action="" method='POST' enctype="multipart/form-data">
@@ -163,6 +165,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="form-group">
                         <label for="descripcion">Descripción del curso</label>
                         <textarea required name="descripcion" id="descripcion" placeholder="Escriba aquí" class="form-control"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="descripcion">Temas</label>
+                        <textarea required name="temas" id="temas" placeholder="Escriba aquí" class="form-control"></textarea>
                       </div>
                     </div>
                   </div>
