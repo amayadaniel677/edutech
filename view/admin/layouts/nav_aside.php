@@ -47,7 +47,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Ventas
                 <i class="right fas fa-angle-left"></i>
@@ -72,7 +72,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 Usuarios
                 <i class="right fas fa-angle-left"></i>
@@ -95,7 +95,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-money-bill-wave"></i>
               <p>
                 Pagos
                 <i class="fas fa-angle-left right"></i>
@@ -119,7 +119,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-graduation-cap"></i>
               <p>
                 Cursos
                 <i class="fas fa-angle-left right"></i>
@@ -148,7 +148,7 @@
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-folder-open"></i>
               <p>
                 Areas
                 <i class="fas fa-angle-left right"></i>
@@ -178,22 +178,14 @@
           </li>
           <li class="nav-item">
             <a href="<?php if(isset($urlStarter)){echo $urlStarter;}; ?>../../controller/admin/modalidades/controller_modalidades.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
+              <i class="nav-icon fas fa-exchange-alt"></i>
               <p>
                 Modalidades
                 
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="<?php if(isset($urlStarter)){echo $urlStarter;}; ?>../../controller/admin/backup_restore/controller_backup.php" class="nav-link">
-              <i class="nav-icon fas fa-edit"></i>
-              <p>
-               Backup
-                
-              </p>
-            </a>
-          </li>
+        
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
