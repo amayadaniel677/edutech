@@ -11,6 +11,9 @@ $consult = new controlador_buscar_venta();
 if (isset($_GET['msj_eliminar'])) {
     $msj_eliminar = $_GET['msj_eliminar'];
 }
+if (isset($_GET['mensaje_error'])) {
+    $mensaje_error = $_GET['mensaje_error'];
+}
 
 $ventas_paginadas = $consult->ventas();
 // echo "ventas filtradas: ".$ventasFiltradas;
