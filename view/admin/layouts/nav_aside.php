@@ -186,9 +186,7 @@
             </a>
           </li>
           <li class="nav-item">
-          <a href="<?php if(isset($urlStarter)){echo $urlStarter . '#';}; ?>" class="nav-link">
-
-
+            <a href="<?php if(isset($urlStarter)){echo $urlStarter;}; ?>../../controller/admin/backup_restore/controller_backup.php" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                Backup
