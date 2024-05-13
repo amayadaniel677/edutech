@@ -22,10 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $to_date = $_POST['to_date'];
        
        
-        if (($from_date == '' and $to_date != '') || ($from_date != '' and $to_date == '')) {
-           
-            $mensaje = "Debe ingresar ambas fechas";
-        } else {
+    if($from_date > $to_date){
+            $mensaje = "La fecha de inicio no puede ser mayor a la fecha final";
+        // redirigirlo con el mensaje
+        header("Location: controller_buscar_ventas.php?mensaje_error=" .$mensaje);
+        }else {
             
             $ventasFiltradas = $consult->ventas_filtradas($dni, $from_date, $to_date);
            
