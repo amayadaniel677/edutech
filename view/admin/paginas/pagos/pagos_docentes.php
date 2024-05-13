@@ -64,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       
         <div class="cuerpo">
       <div class="imagen">
-        <img src="../../../resource/img/adm_users/User Group_Monochromatic 2.png" alt="" />
+        <img src="../../../resource/img/gestionar/pagos.svg" alt="imagen de pagos" />
       </div>
       <div class="botones">
         <a href="controller_pagos_pendientes.php">Pagos pendientes</a>

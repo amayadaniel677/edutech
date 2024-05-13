@@ -12,15 +12,21 @@ include('../../../model/admin/areas/agregar_area_model.php');
 
 if($_POST){
     $nombre_area = $_POST['nombre_area'];
-    $precio = $_POST['precio'];
-    if(empty($nombre_area) || empty($precio)){
-        $error="Los campos no pueden estar vacíos";
+    $nombre_area_2 = $_POST['nombre_area_2'];
+    if($nombre_area != $nombre_area_2){
+        $error="Los nombres no coinciden, intente de nuevo";
     }else{
         $agregar_area = new AgregarAreaController();    
-        if($agregar_area->agregarArea($nombre_area,$precio)){
+        if($agregar_area->verificarArea($nombre_area)){
+            $error="El area ingresada ya existe";
+            header('location:controller_buscar_area.php?error='.$error);
+        }
+        elseif($agregar_area->agregarArea($nombre_area)){
             $mensaje="Area agregada correctamente";
+            header('location:controller_buscar_area.php?mensaje='.$mensaje);
         }else{
             $error="Error al agregar el area";
+            header('location:controller_buscar_area.php?error='.$error);           
         }   
     }
     
@@ -29,14 +35,20 @@ if($_POST){
 class AgregarAreaController {
     
     
-    public function agregarArea($name,$price) {
+    public function agregarArea($name) {
         $name = trim($name);
         $name = ucfirst(strtolower($name));
-        $price = trim($price);
         $agregar_area_model = new AgregarAreaModel();
-        $result_model=$agregar_area_model->agregarArea($name,$price);
+        $result_model=$agregar_area_model->agregarArea($name);
+        return $result_model;
+    }
+    public function verificarArea($name) {
+        $name = trim($name);
+        $name = ucfirst(strtolower($name));
+        $agregar_area_model = new AgregarAreaModel();
+        $result_model=$agregar_area_model->verificarArea($name);
         return $result_model;
     }
 }
-include('../../../view/admin/paginas/areas/agregar_area.php');
+
 ?>
