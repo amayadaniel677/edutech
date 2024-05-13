@@ -61,8 +61,8 @@ class buscar_area_model{
         }
     }
 
-    public function editarArea($name,$price,$id,$status){
-        $sql = "UPDATE areas SET name = '$name', price = '$price', status='$status' WHERE id = '$id'";
+    public function editarArea($name,$id,$status){
+        $sql = "UPDATE areas SET name = '$name', status='$status' WHERE id = '$id'";
         $result = $this->con->query($sql);
         if ($result) {
             return true;

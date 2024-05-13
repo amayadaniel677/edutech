@@ -68,7 +68,14 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                       </select>
                     </div>
                     <div class="form-group">
-                      <button type="submit" class="btn btn-success btn-md w-50 mt-3 ">Buscar</button>
+                      <button type="submit" class="btn btn-success btn-md mt-3 ">Buscar</button>
+                      <button type="button" class="btn btn-outline-primary  mt-3" data-toggle="modal" data-target="#crearAreaModal">
+       Crear Area <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Modal -->
+
+
                     </div>
                   </div>
                 </div>
@@ -85,7 +92,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                               echo $areaSelect['name'];
                               echo "
        <button type='button' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#modal-edit-area'>
-         <i class='fas fa-edit'></i>
+       Editar Area <i class='fas fa-edit'></i> 
        ";
                             } else {
                               echo "Nombre de la materia";
@@ -116,7 +123,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                         echo "<tr>";
                         echo "<td>" . $vinculado['people_name'] . "</td>";
                         echo "<td>" . $vinculado['area_name'] . "</td>";
-                        echo "<td><a href='controller_desvincular_docente.php?id_people_area=" . $vinculado['people_area_id'] . "' class='btn btn-danger btn-sm ml-4'><i class='fas fa-trash'></i></a></td>";
+                        echo "<td><a href='controller_desvincular_docente.php?id_people_area=" . $vinculado['people_area_id'] .'&area_id='.$vinculado['area_id']. "' class='btn btn-danger btn-sm ml-4'><i class='fas fa-trash'></i></a></td>";
                         echo "</tr>";
                       }
                     } else {
@@ -148,7 +155,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="modalMateriaLabel">NOMBRE AREA</h5>
+                      <h5 class="modal-title" id="modalMateriaLabel">EDITAR AREA</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -165,12 +172,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                                                                                                               echo $areaSelect['name'];
                                                                                                             } ?>">
                         </div>
-                        <div class="form-group">
-                          <label for="nombre">Precio del area:</label>
-                          <input required type="number" name="precio" id="precio" class="form-control" value="<?php if (isset($area)) {
-                                                                                                                echo $areaSelect['price'];
-                                                                                                              } ?>">
-                        </div>
+                       
                         <!-- agregar estado dependiendo de su valor en la BD -->
                         <div class="form-group
                         ">
@@ -201,6 +203,42 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
           </div>
         </div>
       </section>
+      <!-- modal de agregar area -->
+      <div class="modal fade" id="crearAreaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Nueva Area</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="./controller_agregar_area.php" method='POST'>
+                        <div class="form-group row">
+                            <label for="nombre_area" class="col-sm-4 col-form-label">Nombre del Area: </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="nombre_area" id="nombre_area" placeholder="Escriba el nombre" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="nombre_area_2" class="col-sm-4 col-form-label">Confirmar nombre del Area: </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="nombre_area_2" id="nombre_area_2" placeholder="Confirmar el nombre" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group text-center ">
+                            <button type="submit" id='btn-agregar-area'class="btn btn-primary btn-md w-50 mt-3">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
     <aside class="control-sidebar control-sidebar-dark">

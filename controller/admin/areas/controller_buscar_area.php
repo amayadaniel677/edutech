@@ -23,20 +23,40 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['categoria']) && $_POST[
     // traer docentes vinculados
     $vinculados=$consult->traer_vinculados($id_area);
 }
-if(isset($_GET['mensaje'])){
+if(isset($_GET['area_id'])  ){
+    $id_area=$_GET['area_id'];
+    // traer area seleccionada
+    $areaSelect=$consult->traer_area($id_area);
+    // traer docentes vinculados
+    $vinculados=$consult->traer_vinculados($id_area);
+
+}
+if(isset($_GET['mensaje'])  ){
     $mensaje=$_GET['mensaje'];
 }
-if ($_POST and isset($_POST['nombre'] ) and isset($_POST['precio']) and isset($_POST['idArea']) and $_POST['nombre'] != '' and $_POST['precio'] != '' and $_POST['idArea']){
+if(isset($_GET['error'])  ){
+    $error=$_GET['error'];
+}
+
+if(isset($_GET['error2'])  ){
+    $error=$_GET['error2'];
+    $id_area=$_GET['area_id'];
+    // traer area seleccionada
+    $areaSelect=$consult->traer_area($id_area);
+    // traer docentes vinculados
+    $vinculados=$consult->traer_vinculados($id_area);
+}
+
+if ($_POST and isset($_POST['nombre'] ) and isset($_POST['idArea']) and $_POST['nombre'] != '' and $_POST['precio'] != '' and $_POST['idArea']){
     // Debugging (borrar después de verificar que los datos son correctos
     $nombre = $_POST['nombre'];
     $nombre= trim($nombre);
     $nombre = ucfirst($nombre); // Convierte la primera letra en mayúscula
-    $precio = $_POST['precio'];
     $id = $_POST['idArea'];
     $status = $_POST['status'];
     
     $areaModel = new buscar_area_model();
-    $areaModel->editarArea($nombre, $precio, $id,$status);
+    $areaModel->editarArea($nombre,$id,$status);
     if($areaModel){
         $mensaje = 'Area actualizada correctamente';
     }else{

@@ -16,7 +16,6 @@
 .cuerpo {
   display: flex;
   justify-content: space-between;
-  margin-top: 50px;
   max-width: 1200px;
   margin-left: 30px;
 }
