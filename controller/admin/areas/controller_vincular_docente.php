@@ -18,11 +18,15 @@ $docentes = $consult->traer_docentes();
 // ...
 
 // Verificar si han enviado un docente para desvincular
-if (isset($_GET['idDesvincular'])) {
+if (isset($_GET['idDesvincular']) && isset($_GET['area_id'])) {
     $id_desvincular = $_GET['idDesvincular'];
+    $area_id = $_GET['area_id'];
     if ($consult->inactivar_docente($id_desvincular)) {
         $mensaje = 'docente desvinculado con exito';
     }
+    $docentes_vinculados = $consult->traer_docentes_vinculados($area_id);
+    // Almacenar los datos en la sesión
+    $_SESSION['docentes_vinculados'] = $docentes_vinculados;
 }
 // Recibir si han enviado un docente para vincular
 if (isset($_GET['mensaje'])) {

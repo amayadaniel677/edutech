@@ -57,15 +57,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['estudiante_id_form']))
     $consult3 = new buscar_usuario_model();
     $horasAsistidas = $_POST['horasAsistidas'];
     $cursoSeleccionado = $_POST['cursoSeleccionado'];
-    // enviar al modelo para registrarhorasasistidas
-    $asistenciaHoras = $consult3->agregarHorasAsistidas($horasAsistidas,$cursoSeleccionado);
-    if(is_array($asistenciaHoras)){
-        $msj_error='Error de cantidad:'.$horasAsistidas." ingresadas de ".$asistenciaHoras['horasRestantes']." disponibles" ;
-    }
-    elseif($asistenciaHoras){
-        $mensaje_editar = 'Operación exitosa. Horas restantes del estudiante: '.$asistenciaHoras;
-        header('refresh:4;url=controller_usuarios_totales.php?tipo_usuario=' . $tipo_usuario);
+    if($cursoSeleccionado==''){
+        $msj_error='Por favor seleccione un curso para agregar horas';
+    }else{
+// enviar al modelo para registrarhorasasistidas
+$asistenciaHoras = $consult3->agregarHorasAsistidas($horasAsistidas,$cursoSeleccionado);
+if(is_array($asistenciaHoras)){
+    $msj_error='Error de cantidad:'.$horasAsistidas." ingresadas de ".$asistenciaHoras['horasRestantes']." disponibles" ;
+}elseif($cursoSeleccionado){
+
 }
+elseif($asistenciaHoras){
+    $mensaje_editar = 'Operación exitosa. Horas restantes del estudiante: '.$asistenciaHoras;
+    header('refresh:4;url=controller_usuarios_totales.php?tipo_usuario=' . $tipo_usuario);
+}
+}
+    
+   
 }
 
 
