@@ -1,5 +1,5 @@
-<?php 
-$urlStarter='../../../view/admin/';  //son desde el controlador
+<?php
+$urlStarter = '../../../view/admin/';  //son desde el controlador
 ?>
 
 <!DOCTYPE html>
@@ -8,6 +8,7 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,73 +22,85 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <!-- CSS CURSOS ADMIN -->
-    <link rel="stylesheet" href="../../../resource/css/cursos/descripcion_curso.css" />
-    <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
-   
+  <link rel="stylesheet" href="../../../resource/css/cursos/descripcion_curso.css" />
+  <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
+
 </head>
+
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <!-- Navbar -->
-  <?php include('../../../view/admin/layouts/nav.php'); ?>
-  <!-- /.navbar -->
+    <!-- Navbar -->
+    <?php include('../../../view/admin/layouts/nav.php'); ?>
+    <!-- /.navbar -->
 
-  <!-- Main Nav Asidebar Container -->
-  <?php include('../../../view/admin/layouts/nav_aside.php'); ?>
-  <!-- Fin del Main Nav Asidebar Container -->
-  
-  <!-- TODA LA PAGINA -->
-  <div class="content-wrapper">
-    <!-- Titulo de la vista -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Descripción Curso</h1> 
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+    <!-- Main Nav Asidebar Container -->
+    <?php include('../../../view/admin/layouts/nav_aside.php'); ?>
+    <!-- Fin del Main Nav Asidebar Container -->
+
+    <!-- TODA LA PAGINA -->
+    <div class="content-wrapper">
+      <!-- Titulo de la vista -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Descripción Curso</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="./controller_gestionar_cursos">Cursos</a></li>
                 <li class="breadcrumb-item"><a href="./controller_catalogo_cursos">Catalogo</a></li>
                 <li class="breadcrumb-item active">Descripcion curso</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.fin titulo de la vista -->
+
+      <!-- Contenido principal vista -->
+      <?php
+            if (isset($mensaje_ok)) {
+              echo '<div class="alert alert-success text-center" role="alert">'.$mensaje_ok.'
+              </div>';
+            }
+            if (isset($mensaje)) {
+              echo '<div class="alert alert-danger text-center" role="alert">'.$mensaje.'
+              </div>';
+            }
+            ?>
+      <?php include('../../../view/layout/descripcion_curso.php'); ?>
+      <!-- /. Maincontent -->
     </div>
-    <!-- /.fin titulo de la vista -->
+    <!-- /.content-wrapper -->
 
-    <!-- Contenido principal vista -->
-    <?php include('../../../view/layout/descripcion_curso.php'); ?> 
-    <!-- /. Maincontent -->
-</div>
-  <!-- /.content-wrapper -->
+    <!-- Controlador del nav aSidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+      <div class="p-3">
+        <h5>Title</h5>
+        <p>Sidebar content</p>
+      </div>
+    </aside>
+    <!-- /.control-sidebar -->
 
-  <!-- Controlador del nav aSidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-    <div class="p-3">
-      <h5>Title</h5>
-      <p>Sidebar content</p>
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
+    <!-- Main Footer -->
+    <?php include('../../../view/admin/layouts/footer.php'); ?>
+    <!--FIN   Main Footer -->
 
-  <!-- Main Footer -->
-  <?php include('../../../view/admin/layouts/footer.php'); ?>
-  <!--FIN   Main Footer -->
+  </div> <!--fin de toda la pagina wrapper -->
+  <!-- ./wrapper -->
 
-</div> <!--fin de toda la pagina wrapper -->
-<!-- ./wrapper -->
+  <!-- REQUIRED SCRIPTS -->
 
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+  <!-- jQuery -->
+  <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 </body>
+
 </html>

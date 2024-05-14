@@ -103,6 +103,16 @@ class descripcionCurso{
         }
     }
 
+    public function eliminar_curso($id){
+        $sql="UPDATE subjects SET status='inactive' WHERE id='$id'";
+        $result=$this->con->query($sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     
 }
 

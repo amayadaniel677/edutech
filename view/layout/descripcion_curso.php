@@ -10,7 +10,7 @@
             </div>
             <div class="col-12 col-sm-6">
                 <h3 class="my-3"><?php echo $curso1['subject_name']; ?></h3>
-                <p><?php echo $curso1['description']; ?></p>
+                <p><?php echo $curso1['description']; ?></p> 
                 <hr>
                 <h3 class="my-3">TEMAS</h3>
                 <ul>
@@ -45,6 +45,9 @@
                 if($_SESSION['rol_session'] == 'administrador'){
                    echo ' <br>'; 
                    echo '<a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#miModal"><i class="fas fa-edit"></i> Modificar curso</a>';
+                   echo ' <br>'; 
+                   echo ' <br>'; 
+                   echo '<a class="btn btn-danger btn-lg" href="controller_descripcion_curso.php?id_eliminar='.$id_curso.'"><i class="fas fa-trash-alt"></i> Eliminar curso</a>';
                 }    
                 ?>
                 <!-- Modal  modificar cursos-->
