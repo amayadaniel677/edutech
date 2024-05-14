@@ -127,10 +127,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                           <?php foreach ($_SESSION['docentes_vinculados'] as $people_area) : ?>
                             <tr>
+                            
                               <td><?php echo htmlspecialchars($people_area['name']) . " " . htmlspecialchars($people_area['lastname']); ?></td>
                               <td><?php echo htmlspecialchars($people_area['area_name']); ?></td>
                               <td>
-                                <a class="btn btn-danger btn-sm ml-4" href='controller_confirmar_desvinculacion.php?idDesvincular=<?php echo htmlspecialchars($people_area['id']); ?>'>
+                                <a class="btn btn-danger btn-sm ml-4" href='controller_vincular_docente.php?idDesvincular=<?php echo htmlspecialchars($people_area['id']); ?>&area_id=<?php echo htmlspecialchars($people_area['areas_id']);?>'>
                                   <i class="fas fa-trash"></i>
                                 </a>
                               </td>

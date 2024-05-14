@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <!-- CSS CURSOS ADMIN -->
   <link rel="stylesheet" href="assets/css/ventas.css" />
-    <link rel="stylesheet" href="../../../resource/css/sales/ventas.css" />
+    <link rel="stylesheet" href="../../../resource/css/sales/ventas3.css" />
     <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
 </head>
 <body class="hold-transition sidebar-mini">
@@ -64,7 +64,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       
       <div class="cuerpo">
       <div class="imagen">
-        <img src="../../../resource/img/adm_ventas/pagos.png" alt="" />
+        <img src="../../../resource/img/gestionar/ventas.svg" alt="" />
       </div>
       <div class="botones">
         <a href="controller_buscar_ventas.php">Buscar Venta</a>

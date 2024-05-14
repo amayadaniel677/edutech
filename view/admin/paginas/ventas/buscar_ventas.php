@@ -73,9 +73,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="./controller_ventas.php">Ventas</a></li>
-               <li class="breadcrumb-item active">Buscar ventas</li>
+                <li class="breadcrumb-item active">Buscar ventas</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -85,9 +85,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Contenido principal vista -->
       <section class="content">
-      <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
-                                    error
-                                </button> 
+       
+        <button id="btnInfo" type="button" class="btn btn-success swalDefaultSuccess" style="display:none ">
+          error
+        </button>
+        <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
+          error
+        </button>
         <div class="container-fluid" style="max-width:1000px;">
 
           <div class="container">
@@ -103,18 +107,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                   <div class="form-group">
-                    <label><b>Del Dia</b></label>
-                    <input type="date" name="from_date" value="<?php if (isset($_POST['from_date'])) {
-                                                                  echo $_POST['from_date'];
-                                                                } ?>" class="form-control">
+                    <label><b>Fecha inicio</b></label>
+                    <input required type="date" name="from_date" value="<?php if (isset($_POST['from_date'])) {
+                                                                          echo $_POST['from_date'];
+                                                                        } ?>" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label><b> Hasta el Dia</b></label>
-                    <input type="date" name="to_date" value="<?php if (isset($_POST['to_date'])) {
-                                                                echo $_POST['to_date'];
-                                                              } ?>" class="form-control">
+                    <label><b>Fecha final</b></label>
+                    <input required type="date" name="to_date" value="<?php if (isset($_POST['to_date'])) {
+                                                                        echo $_POST['to_date'];
+                                                                      } ?>" class="form-control">
                   </div>
                 </div>
                 <div class="col-md-3">
@@ -159,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         echo '<tr>
                       <td>' . $venta['sale_id'] . '</td>
                               <td>' . $venta['person_dni'] . '</td>
-                              <td>' . $venta['person_name']," ",$venta['person_lastname'] . '</td>
+                              <td>' . $venta['person_name'], " ", $venta['person_lastname'] . '</td>
                               <td>' . $venta['sale_price'] . '</td>
                               <td>' . $venta['sale_date'] . '</td>
                               <td>
@@ -177,7 +181,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     // Cierra la tabla HTML
 
                     ?>
-                    
+
 
                   </tbody>
                   <tfoot>
@@ -235,9 +239,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- sweet alert -->
   <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
-  
+
   <?php
-  $mensaje_editar = $mensaje_editar ?? ''; // Asegura que $mensaje_editar esté definido
+  $mensaje_error = $mensaje_error ?? ''; // Asegura que $mensaje_editar esté definido
   $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
   ?>
   <script>
@@ -256,7 +260,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       $('.swalDefaultSuccess').click(function() {
         Toast.fire({
           icon: 'success',
-          title: '<?php echo $mensaje_editar; ?>'
+          title: '<?php echo $msj_eliminar; ?>'
 
         })
       });
@@ -269,7 +273,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       $('.swalDefaultError').click(function() {
         Toast.fire({
           icon: 'error',
-          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+          title: '<?php echo $mensaje_error; ?>'
         })
       });
       $('.swalDefaultWarning').click(function() {
@@ -298,44 +302,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       <?php endif; ?>
-      // crear confirmacion con sweet alert al dar click en boton-eliminarVenta
-     
-    });
-      </script>
-      <!-- script de sweet alert eliminar -->
-      <script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('btn-eliminarVenta').addEventListener('click', function(e) {
-        e.preventDefault(); // Evita que el enlace se siga por defecto
+      <?php if (isset($mensaje_error) && !empty($mensaje_error)) : ?>
+        // Simular un clic en el botón para activar el SweetAlert
 
-        Swal.fire({
-            title: '¡Atención!',
-            text: 'Has hecho clic en el enlace. ¿Deseas continuar?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Sí, continuar'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    'Continuado',
-                    'Has continuado con éxito.',
-                    'success'
-                )
-            } else if (
-                result.dismiss === Swal.DismissReason.cancel
-            ) {
-                Swal.fire(
-                    'Cancelado',
-                    'Has cancelado la acción.',
-                    'error'
-                )
-            }
-        })
+
+        $('#btnError').click();
+
+
+
+      <?php endif; ?>
+      // crear confirmacion con sweet alert al dar click en boton-eliminarVenta
+
     });
-});
-</script>
+  </script>
+  
   <!-- DataTables  & Plugins -->
   <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -353,25 +333,24 @@ document.addEventListener('DOMContentLoaded', function() {
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 
   <script>
-        // Función para confirmar la eliminación de un usuario
-        function confirmarEliminarVenta(url) {
-            Swal.fire({
-                title: "¿Estás seguro de inactivar la venta?",
-                text: "Esto podría restar las horas compradas",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Sí, inactivar",
-                cancelButtonText: "Cancelar",
-                reverseButtons: true,
-                dangerMode: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = url;
-                }
-            });
+    // Función para confirmar la eliminación de un usuario
+    function confirmarEliminarVenta(url) {
+      Swal.fire({
+        title: "¿Estás seguro de inactivar la venta?",
+        text: "Esto podría restar las horas compradas",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, inactivar",
+        cancelButtonText: "Cancelar",
+        reverseButtons: true,
+        dangerMode: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = url;
         }
-
-    </script>
+      });
+    }
+  </script>
   <!-- Page specific script -->
   <script>
     $(function() {

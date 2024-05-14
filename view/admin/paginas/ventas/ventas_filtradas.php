@@ -27,6 +27,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
+   <!-- SwadeetAlert2 -->
+<link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- css alertas mensajes -->
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />   <!-- necesario para el tamaño de mensajes alerta  -->
+
     <!-- CSS CURSOS ADMIN -->
     <link rel="stylesheet" href="../../../resource/css/sales/buscar_ventas.css" />
     <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
@@ -73,6 +78,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
+                
+    <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
+                                    Launch Success Toast
+                                </button>
+                                <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+                                    error
+                                </button> 
+                                <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
+                                    error
+                                </button> 
                 <div class="container-fluid"   style="max-width:1000px;" >
 
                     <div class="container">
@@ -137,8 +152,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <td>' . $venta['sale_date'] . '</td>
                               <td>
                                 <a href="controller_detalle_ventas.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                                <a href="controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                              </td>
+                                <a href="#" onclick="confirmarEliminarVenta(\'' . 'controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '\')" class="btn btn-danger" id="desactivarVenta"><i class="fas fa-trash"></i></a>
+                                </td>
                             </tr>';
                                                 }
                                             } else {
@@ -194,12 +209,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
     <!-- jQuery -->
     <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
+    <!-- sweet alert -->
+    <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <!-- Toastr -->
+    <script src="../../../view/admin/plugins/toastr/toastr.min.js"></script>
+
+    <script>
+        // Función para confirmar la eliminación de un usuario
+        function confirmarEliminarVenta(url) {
+            Swal.fire({
+                title: "¿Estás seguro de inactivar la venta?",
+                text: "Esto podría restar las horas compradas",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, inactivar",
+                cancelButtonText: "Cancelar",
+                reverseButtons: true,
+                dangerMode: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        }
+</script>
+   <!-- DataTables  & Plugins -->
     <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="../../../view/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>

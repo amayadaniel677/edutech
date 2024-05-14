@@ -24,13 +24,17 @@ class sing_up_model
     public function insertar($rol,$nombres, $apellidos, $tipo_documento, $documento, $sexo, $fecha, $correo, $contrasenia_encriptada, $telefono, $ciudad, $direccion, $foto)
     {
         if ($this->user_repeat($documento, $this->con)) {
+           
             return 'Error! el usuario ya está registrado';
         } else {
+            // el usuario no está registrado
+  
             $fecha = strtotime($fecha);
             $fecha_formateada = date('Y-m-d', $fecha);
             $sqlInsert = "INSERT INTO people (`name`,`lastname`,`dni_type`,`dni`,`birthdate`,`email`,`password`,`phone`,`city`,`address`,`sex`,`rol`,`photo`) VALUES ('$nombres','$apellidos','$tipo_documento','$documento','$fecha_formateada','$correo','$contrasenia_encriptada','$telefono','$ciudad','$direccion','$sexo','$rol','$foto')";
             $result = $this->con->query($sqlInsert);
             if ($result == 1) {
+              
                 return true;
             } else {
                 return false;

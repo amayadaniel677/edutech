@@ -177,7 +177,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Editar</button>
-                                    <a href="controller_buscar_usuario.php" class="btn btn-danger">Volver</a>
+                                    <a href="controller_usuarios_totales.php?tipo_usuario=<?php echo $tipo_usuario?>" class="btn btn-danger">Volver</a>
                                     <!-- falta boton volver -->
                                 </form>
 

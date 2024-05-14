@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
         empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0
     ) {
-        $mensaje = "El archivo que envió excede nuestros limites, vuelva a intentarlo";
+        $mensaje_info = "El archivo que envió excede nuestros limites, vuelva a intentarlo";
         $url = $_SERVER['REQUEST_URI'] . "?mensaje=" . urlencode($mensaje);
         header('location:' . $url);
         exit();
@@ -48,9 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $insertar_modelo = $new_user->validar($rol, $nombres, $apellidos, $tipo_documento, $documento, $sexo, $fecha, $correo, $contrasenia, $confContrasenia, $telefono, $ciudad, $direccion, $foto);
         if (!$insertar_modelo) {
             $errores = $new_user->msg;
+        }elseif($insertar_modelo==='Error! el usuario ya está registrado'){
+       
+            $mensaje_error = 'Error! el usuario ya está registrado';
         } else {
             // FUNCIONA
-            $mensaje = "Usuario agregado correctamente";
+            $mensaje_error='';
+            $mensaje_ok = "Usuario agregado correctamente";
+            // redireccionar a la misma vista
+            header('refresh:4; url=controller_sing_up_admin.php');
         }
     } else {
         // FUNCIONA BIEN
@@ -119,9 +125,12 @@ class sing_up_admin
             $contrasenia_encriptada = password_hash($contrasenia, PASSWORD_DEFAULT, ['cost' => 10]);
             $consult = new sing_up_model;
             $return = $consult->insertar($rol, $nombres, $apellidos, $tipo_documento, $documento, $sexo, $fecha, $correo, $contrasenia_encriptada, $telefono, $ciudad, $direccion, $foto);
-            if ($return) {
+            if ($return ==1) {
+                
                 return true;
-            } else {
+            }else if($return=='Error! el usuario ya está registrado'){
+                return 'Error! el usuario ya está registrado';
+            }else {
                 $this->msg[] = 'Error en el modelo de insertar';;
             }
         }

@@ -48,8 +48,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active ">Gallery</li>
+              <li class="breadcrumb-item"><a href="<?php echo $ruta_inicio;?>controller/admin/controller_inicio_admin.php">Inicio</a></li>
+              <li class="breadcrumb-item active ">Manual de ayuda</li>
             </ol>
           </div>
         </div>
@@ -67,7 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="card-body">
               <div class="row mt-4">
     <nav class="w-100">
-        <div class="nav nav-tabs" id="product-tab" role="tablist" style="background-color:aquamarine;">
+        <div class="nav nav-tabs" id="product-tab" role="tablist" style="">
             <a class="nav-item nav-link active" id="product-vent-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="false">Ventas</a>
             <a class="nav-item nav-link" id="product-user-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Usuarios</a>
             <a class="nav-item nav-link" id="product-pagos-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Pagos</a>
