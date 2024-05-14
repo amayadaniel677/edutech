@@ -27,7 +27,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../../../view/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
@@ -39,7 +40,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
     <style>
-
         .mi-clase-personalizada .swal2-popup {
             font-size: 16px !important;
             height: auto !important;
@@ -70,14 +70,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Lista <?php echo $tipo_usuario;?>s</h1>
+                            <h1 class="m-0">Lista
+                                <?php echo $tipo_usuario; ?>s
+                            </h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="./controller_usuario.php">Usuarios</a></li>
-                <li class="breadcrumb-item"><a href="./controller_buscar_usuario.php">Buscar usuarios</a></li>
-                <li class="breadcrumb-item active"><?php echo $tipo_usuario;?>s</li>
+                                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                                <li class="breadcrumb-item"><a href="./controller_usuario.php">Usuarios</a></li>
+                                <li class="breadcrumb-item"><a href="./controller_buscar_usuario.php">Buscar
+                                        usuarios</a></li>
+                                <li class="breadcrumb-item active">
+                                    <?php echo $tipo_usuario; ?>s
+                                </li>
                             </ol>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
@@ -89,18 +94,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <section class="content">
 
                 <!-- mostrar errores  -->
-                <div class="container-fluid"  style="max-width:1000px;">
+                <div class="container-fluid" style="max-width:1000px;">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="alert" role="alert">
                                 <!-- Botón con la clase swalDefaultSuccess -->
-                                <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
+                                <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess"
+                                    style="display:none">
                                     Launch Success Toast
                                 </button>
-                                <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+                                <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo"
+                                    style="display:none ">
                                     info
                                 </button>
-                                <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
+                                <button id="btnError" type="button" class="btn btn-success swalDefaultError"
+                                    style="display:none ">
                                     error
                                 </button>
                             </div>
@@ -166,12 +174,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                     ?>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="modalDocente" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="modalDocente" tabindex="-1" role="dialog"
+                                        aria-labelledby="miModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h3 class="modal-title" id="miModalLabel">Pagos docente</h3>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
@@ -182,12 +192,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <div class="">
                                                             <input type="text" name="docente_id" id="docente_id">
                                                             <div class="col-md-12 mt-3">
-                                                                <label for="horas">Cantidad de horas trabajadas:</label> <br>
-                                                                <input type="number" name="horas" id="horas" class="form-control" placeholder="Cantidad horas">
+                                                                <label for="horas">Cantidad de horas trabajadas:</label>
+                                                                <br>
+                                                                <input type="number" name="horas" id="horas"
+                                                                    class="form-control" placeholder="Cantidad horas">
                                                             </div>
                                                             <div class="col-md-10 mt-3 mb-5">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button id="btnPagar" class="btn btn-primary">Pagar</button>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Cerrar</button>
+                                                                <button id="btnPagar"
+                                                                    class="btn btn-primary">Pagar</button>
 
                                                             </div>
                                                         </div>
@@ -198,12 +212,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </div>
                                     </div>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="modalEstudiante" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="modalEstudiante" role="dialog"
+                                        aria-labelledby="miModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h3 class="modal-title" id="miModalLabel">Asistencia estudiante</h3>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
@@ -212,26 +228,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <!-- Agrega el ID "formPagar" al formulario -->
                                                     <form id="formAsistencia" method="POST" action="">
                                                         <div class="">
-                                                            <input type="text" name="estudiante_id_form" id="estudiante_id_form">
+                                                            <input type="text" name="estudiante_id_form"
+                                                                id="estudiante_id_form">
                                                             <div class="col-md-12 mt-3">
-                                                                
-                                                              
+
+
                                                                 <div class="form-group">
                                                                     <label>Seleccione un curso</label>
-                                                                    <select name='cursoSeleccionado' class="form-control select2" id="miSelect2" style="width: 100%;">
-                                                                        <option selected="selected">Seleccione uno</option>
-                                                                       
+                                                                    <select name='cursoSeleccionado'
+                                                                        class="form-control select2" id="miSelect2"
+                                                                        style="width: 100%;">
+                                                                        <option selected="selected">Seleccione uno
+                                                                        </option>
+
                                                                     </select>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 mt-3">
-                                                                <label for="horasAsistidas">Cantidad de horas asistidas:</label> <br>
-                                                                <input required type="number" name="horasAsistidas" id="horasAsistidas" class="form-control" placeholder="Cantidad horas">
+                                                                <label for="horasAsistidas">Cantidad de horas
+                                                                    asistidas:</label> <br>
+                                                                <input required type="number" name="horasAsistidas"
+                                                                    id="horasAsistidas" class="form-control"
+                                                                    placeholder="Cantidad horas">
                                                             </div>
-                                                            
+
                                                             <div class="col-md-10 mt-3 mb-5">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button id="btnPagar" class="btn btn-primary">Pagar</button>
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Cerrar</button>
+                                                                <button id="btnAsistencia"
+                                                                    class="btn btn-primary">Pagar</button>
 
                                                             </div>
                                                         </div>
@@ -290,61 +315,61 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-    
+
     <!-- jQuery -->
     <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
     <!-- capturar el id del usuario -->
     <script>
-        $(document).ready(function() {
-    // Adjunta el evento de clic a los botones que abren modales de docentes
-    $(document).on('click', '.abrir-modal-docente', function() {
-        const docenteId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
-        document.getElementById('docente_id').value = docenteId; // Asigna el valor al input
-    });
+        $(document).ready(function () {
+            // Adjunta el evento de clic a los botones que abren modales de docentes
+            $(document).on('click', '.abrir-modal-docente', function () {
+                const docenteId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
+                document.getElementById('docente_id').value = docenteId; // Asigna el valor al input
+            });
 
-    // Adjunta el evento de clic a los botones que abren modales de estudiantes
-    $(document).on('click', '.abrir-modal-estudiante', function() {
-        console.log("sirve la funcion");
-        document.getElementById('estudiante_id_form').value = '';
+            // Adjunta el evento de clic a los botones que abren modales de estudiantes
+            $(document).on('click', '.abrir-modal-estudiante', function () {
+                console.log("sirve la funcion");
+                document.getElementById('estudiante_id_form').value = '';
 
-        console.log("se borró el valor id de input");
+                console.log("se borró el valor id de input");
 
-        const estudianteId = this.getAttribute('data-id-estudiante'); // Obtiene el valor del atributo data-id
+                const estudianteId = this.getAttribute('data-id-estudiante'); // Obtiene el valor del atributo data-id
 
-        console.log("nuevo id del estudiante:", estudianteId);
+                console.log("nuevo id del estudiante:", estudianteId);
 
-        document.getElementById('estudiante_id_form').value = estudianteId; // Asigna el valor al input
+                document.getElementById('estudiante_id_form').value = estudianteId; // Asigna el valor al input
 
-         // Empieza el AJAX
-         let data = {
-            'estudiante_id': estudianteId
-        };
-        console.log("actualizado el id del input");
-       
-        $.ajax({
-            url: 'controller_usuarios_totales.php',
-            type: 'POST',
-            data: data,
-            success: function(response) {
-       console.log('respuesta de controller:',response);
-       var selectElement = document.getElementById('miSelect2');
-        selectElement.innerHTML = ''; // Limpiar el select
+                // Empieza el AJAX
+                let data = {
+                    'estudiante_id': estudianteId
+                };
+                console.log("actualizado el id del input");
 
-        // Iterar sobre la respuesta y generar las opciones
-        for (var i = 0; i < response.length; i++) {
-            var curso = response[i];
-            var option = document.createElement('option');
-            option.value = curso.id; // Usar el ID como valor de la opción
-            option.text = curso.subject_name + ' - ' + curso.modality + ' (' + curso.quantity_type + ')';
-            selectElement.appendChild(option);
-        } 
-    }
+                $.ajax({
+                    url: 'controller_usuarios_totales.php',
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        console.log('respuesta de controller:', response);
+                        var selectElement = document.getElementById('miSelect2');
+                        selectElement.innerHTML = ''; // Limpiar el select
+
+                        // Iterar sobre la respuesta y generar las opciones
+                        for (var i = 0; i < response.length; i++) {
+                            var curso = response[i];
+                            var option = document.createElement('option');
+                            option.value = curso.id; // Usar el ID como valor de la opción
+                            option.text = curso.subject_name + ' - ' + curso.modality + ' (' + curso.quantity_type + ')';
+                            selectElement.appendChild(option);
+                        }
+                    }
+                });
+
+
+
+            });
         });
-
-
-
-    });
-});
 
     </script>
     <!-- ajax -->
@@ -355,10 +380,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Select2 -->
     <script src="../../../view/admin/plugins/select2/js/select2.full.min.js"></script>
     <script>
-        $(function() {
+        $(function () {
 
-            $('#modalEstudiante').on('shown.bs.modal', function() {
-                setTimeout(function() {
+            $('#modalEstudiante').on('shown.bs.modal', function () {
+                setTimeout(function () {
                     $('#miSelect2').select2();
                 }, 100); // Ajusta el tiempo según sea necesario
             });
@@ -376,9 +401,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/plugins/toastr/toastr.min.js"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Escuchar el click del botón "Pagar"
-            $('#btnPagar').click(function(e) {
+            $('#btnPagar').click(function (e) {
                 e.preventDefault(); // Evitar el envío del formulario por defecto
 
                 // Mostrar la alerta de confirmación
@@ -398,7 +423,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     }
                 });
             });
+            $('#btnAsistencia').click(function (e) {
+                e.preventDefault(); // Evitar el envío del formulario por defecto
+
+                // Mostrar la alerta de confirmación
+                Swal.fire({
+                    title: '¿Estás seguro de confirmar asistencia?',
+                    text: "Esta acción no se puede revertir.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí,confirmar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    // Si el usuario confirma, enviar el formulario
+                    if (result.isConfirmed) {
+                        $('#formAsistencia').submit(); // Enviar el formulario
+                    }
+                });
+            });
         });
+        // Función para confirmar la eliminación de un usuario
+        function confirmarEliminarUsuario(url) {
+            Swal.fire({
+                title: "¿Estás seguro de inactivar el usuario?",
+                text: "Esto podría afectar sus cursos activos",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, inactivar",
+                cancelButtonText: "Cancelar",
+                confirmButtonColor: '#d33',
+                reverseButtons: true,
+                dangerMode: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        }
+
     </script>
 
     <!-- DataTables  & Plugins -->
@@ -426,7 +490,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     $msj_error = $msj_error ?? ''; // Asegura que $mensaje_editar esté definido
     ?>
     <script>
-        $(function() {
+        $(function () {
             var Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -440,32 +504,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             });
 
-            $('.swalDefaultSuccess').click(function() {
+            $('.swalDefaultSuccess').click(function () {
                 Toast.fire({
                     icon: 'success',
                     title: '<?php echo $mensaje_editar; ?>'
 
                 })
             });
-            $('.swalDefaultInfo').click(function() {
+            $('.swalDefaultInfo').click(function () {
                 Toast.fire({
                     icon: 'info',
                     title: '<?php echo $msj_eliminar; ?>'
                 })
             });
-            $('.swalDefaultError').click(function() {
+            $('.swalDefaultError').click(function () {
                 Toast.fire({
                     icon: 'error',
                     title: '<?php echo $msj_error; ?>'
                 })
             });
-            $('.swalDefaultWarning').click(function() {
+            $('.swalDefaultWarning').click(function () {
                 Toast.fire({
                     icon: 'warning',
                     title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
                 })
             });
-            $('.swalDefaultQuestion').click(function() {
+            $('.swalDefaultQuestion').click(function () {
                 Toast.fire({
                     icon: 'question',
                     title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
@@ -474,25 +538,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Verificar si la variable $mensaje_editar está definida
-            <?php if (isset($mensaje_editar) && !empty($mensaje_editar)) : ?>
+            <?php if (isset($mensaje_editar) && !empty($mensaje_editar)): ?>
                 // Simular un clic en el botón para activar el SweetAlert
                 $('#btnSuccess').click();
             <?php endif; ?>
-            <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
+            <?php if (isset($msj_eliminar) && !empty($msj_eliminar)): ?>
                 // Simular un clic en el botón para activar el SweetAlert
 
-            
+
                 $('#btnInfo').click();
 
 
 
             <?php endif; ?>
-            <?php if (isset($msj_error) && !empty($msj_error)) : ?>
+            <?php if (isset($msj_error) && !empty($msj_error)): ?>
                 // Simular un clic en el botón para activar el SweetAlert
 
-            
+
                 $('#btnError').click();
 
 
@@ -502,49 +566,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
         });
     </script>
-    <script>
-        // Función para confirmar la eliminación de un usuario
-        function confirmarEliminarUsuario(url) {
-            Swal.fire({
-                title: "¿Estás seguro de inactivar el usuario?",
-                text: "Esto podría afectar sus cursos activos",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Sí, inactivar",
-                cancelButtonText: "Cancelar",
-                reverseButtons: true,
-                dangerMode: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = url;
-                }
-            });
-        }
 
-        // Función para confirmar el envío del formulario de pago
-        $(document).ready(function() {
-            $('#btnPagar').click(function(e) {
-                e.preventDefault();
-                swal({
-                        title: "¿Estás seguro?",
-                        text: "Esta acción no se puede deshacer.",
-                        icon: "warning",
-                        buttons: true,
-                        dangerMode: true,
-                    })
-                    .then((willSubmit) => {
-                        if (willSubmit) {
-                            $('#formPagar').submit();
-                        }
-                    });
-            });
-        });
-    </script>
 
 
 
     <script>
-        $(function() {
+        $(function () {
             $("#example1").DataTable({
                 "responsive": true,
                 "lengthChange": false,

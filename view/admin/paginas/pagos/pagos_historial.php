@@ -16,9 +16,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- FUENTES PARA LAS TABLAS Y BARRA BUSQUEDA -->
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
+  <!-- LINKS DataTables -->
+  <link rel="stylesheet" href="../../../view/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../../view/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../../view/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <!-- CSS CURSOS ADMIN -->
@@ -88,14 +94,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($historial_pagos as $index => $historial_pago) : ?>
+                  <?php foreach ($historial_pagos as $index => $historial_pago): ?>
                     <tr class="odd">
-                      <td><?= $index + 1 ?></td>
-                      <td><?= $historial_pago['name'] . ' ' . $historial_pago['lastname'] ?></td>
-                      <td><?= $historial_pago['date'] ?></td>
-                      <td><?= $historial_pago['total_hours'] ?></td>
-                      <td><?= $historial_pago['price_hour'] ?></td>
-                      <td><?= $historial_pago['total_price'] ?></td>
+                      <td>
+                        <?= $index + 1 ?>
+                      </td>
+                      <td>
+                        <?= $historial_pago['name'] . ' ' . $historial_pago['lastname'] ?>
+                      </td>
+                      <td>
+                        <?= $historial_pago['date'] ?>
+                      </td>
+                      <td>
+                        <?= $historial_pago['total_hours'] ?>
+                      </td>
+                      <td>
+                        <?= $historial_pago['price_hour'] ?>
+                      </td>
+                      <td>
+                        <?= $historial_pago['total_price'] ?>
+                      </td>
                     </tr>
                   <?php endforeach; ?>
                 </tbody>
@@ -156,7 +174,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
   <!-- Page specific script -->
   <script>
-    $(function() {
+    $(function () {
       $("#example1").DataTable({
         "responsive": true,
         "lengthChange": false,
@@ -175,7 +193,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
   </script>
   <script>
-    $(function() {
+    $(function () {
       //Initialize Select2 Elements
       $('.select2').select2();
     });
