@@ -12,13 +12,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EduTech | Pagos Pendientes-Docentes</title>
+  <title>EduTech | Pagos Pendientes de Docentes</title>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
+  <!-- SwadeetAlert2 -->
+  <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- LINKS DataTables -->
+  <link rel="stylesheet" href="../../../view/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../../view/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../../view/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <!-- css alertas mensajes -->
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
@@ -66,17 +76,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Contenido principal vista -->
       <section class="content">
         <!-- div para mostrar los errores si existen, $mensaje_ok o $error -->
-        <?php if (isset($mensaje_ok)) : ?>
-          <div class="alert alert-success" role="alert">
-            <?= $mensaje_ok ?>
-          </div>
-        <?php endif; ?>
-        <!-- mostrar el mensaje de error -->
-        <?php if (isset($error)) : ?>
-          <div class="alert alert-danger" role="alert">
-            <?= $error ?>
-          </div>
-        <?php endif; ?>
+        <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
+          Launch Success Toast
+        </button>
+        <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
+          error
+        </button>
+        <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
+          error
+        </button>
         <div class="container-fluid" style="max-width:1000px;">
 
           <!-- /.card-body -->
@@ -95,22 +103,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($pagos as $index => $pago) : ?>
+                  <?php foreach ($pagos as $index => $pago): ?>
                     <tr class="odd">
-                      <td><?= $index + 1 ?></td>
-                      <td><?= $pago['name'] . ' ' . $pago['lastname'] ?></td>
-                      <td><?= $pago['last_pay'] ?></td>
-                      <td><?= $pago['total_hours'] ?></td>
+                      <td>
+                        <?= $index + 1 ?>
+                      </td>
+                      <td>
+                        <?= $pago['name'] . ' ' . $pago['lastname'] ?>
+                      </td>
+                      <td>
+                        <?= $pago['last_pay'] ?>
+                      </td>
+                      <td>
+                        <?= $pago['total_hours'] ?>
+                      </td>
                       <td>
                         <!-- Crear un botón Bootstrap llamado pagar -->
-                        <a href="#" class="btn btn-primary abrir-modal" data-toggle="modal" data-target="#miModal" data-id="<?= $pago['id'] ?>" data-toggle="tooltip" data-placement="top" title="pagar al docente"><i class="fas fa-dollar-sign"></i></a>
+                        <a href="#" class="btn btn-primary abrir-modal" data-toggle="modal" data-target="#miModal"
+                          data-id="<?= $pago['id'] ?>" data-toggle="tooltip" data-placement="top"
+                          title="pagar al docente"><i class="fas fa-dollar-sign"></i></a>
 
                       </td>
                     </tr>
                   <?php endforeach; ?>
 
                   <!-- Modal -->
-                  <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -121,26 +140,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                         <div class="modal-body">
                           <!-- Aquí irá el contenido dinámico del modal -->
-                          <form method="POST" action="">
+                          <form method="POST" id='form-pagarDocente' action="">
                             <div class="">
 
                               <input type="hidden" name="pago_id" id="pago_id">
 
                               <div class="col-md-12 mt-3">
                                 <label for="cantidad">Cantidad de horas trabajadas:</label> <br>
-                                <input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Cantidad horas">
+                                <input required type="number" name="cantidad" id="cantidad" class="form-control"
+                                  placeholder="Cantidad horas">
                               </div>
                               <div class="col-md-12 mt-3">
                                 <label for="valor_horas">Precio por hora:</label> <br>
-                                <input type="number" name="valor_horas" id="valor_horas" class="form-control" placeholder="Valor horas">
+                                <input required type="number" name="valor_horas" id="valor_horas" class="form-control"
+                                  placeholder="Valor horas">
                               </div>
                               <div class="col-md-12 mt-3">
                                 <label for="valor_total">Valor total a pagar:</label> <br>
-                                <input readonly type="number" name="valor_total" id="valor_total" class="form-control" placeholder="Valor total">
+                                <input readonly type="number" name="valor_total" id="valor_total" class="form-control"
+                                  placeholder="Valor total">
                               </div>
                               <div class="col-md-10 mt-3 mb-5">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="submit" class="btn btn-primary">Pagar</button>
+                                <button type="submit" id='btn-pagarDocente' class="btn btn-primary">Pagar</button>
                               </div>
                             </div>
                           </form>
@@ -153,11 +175,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <script>
                   // Captura el evento de hacer clic en el enlace
-                  document.addEventListener('DOMContentLoaded', function() {
+                  document.addEventListener('DOMContentLoaded', function () {
                     const abrirModalButtons = document.querySelectorAll('.abrir-modal');
 
-                    abrirModalButtons.forEach(function(button) {
-                      button.addEventListener('click', function() {
+                    abrirModalButtons.forEach(function (button) {
+                      button.addEventListener('click', function () {
                         const pagoId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
                         document.getElementById('pago_id').value = pagoId; // Asigna el valor al input
                       });
@@ -210,7 +232,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+  <!-- sweet alert -->
+  <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
   <!-- DataTables  & Plugins -->
   <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -230,7 +253,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../dist/js/demo.js"></script>
   <!-- Page specific script -->
   <script>
-    $(function() {
+    $(function () {
       $("#example1").DataTable({
         "responsive": true,
         "lengthChange": false,
@@ -252,7 +275,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- script de la pagiana  calcular valor total-->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Selecciona los campos de entrada
       const cantidadInput = document.getElementById('cantidad');
       const valorHorasInput = document.getElementById('valor_horas');
@@ -272,6 +295,105 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       // Calcula el valor total inicialmente
       calcularValorTotal();
+    });
+  </script>
+
+  <?php
+  $mensaje_ok = $mensaje_ok ?? ''; // Asegura que $mensaje_ok esté definido
+  $error = $error ?? ''; // Asegura que $mensaje_ok esté definido
+  ?>
+  <script>
+    $(function () {
+      var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 400000,
+        width: '80%',
+        customClass: {
+          container: 'mi-clase-personalizada'
+        }
+
+
+      });
+
+      $('.swalDefaultSuccess').click(function () {
+        Toast.fire({
+          icon: 'success',
+          title: '<?php echo $mensaje_ok; ?>'
+
+        })
+      });
+      $('.swalDefaultInfo').click(function () {
+        Toast.fire({
+          icon: 'info',
+          title: '<?php echo $error; ?>'
+        })
+      });
+      $('.swalDefaultError').click(function () {
+        Toast.fire({
+          icon: 'error',
+          title: '<?php echo $error; ?>'
+        })
+      });
+      $('.swalDefaultWarning').click(function () {
+        Toast.fire({
+          icon: 'warning',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultQuestion').click(function () {
+        Toast.fire({
+          icon: 'question',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      // Verificar si la variable $mensaje_ok está definida
+      <?php if (isset($mensaje_ok) && !empty($mensaje_ok)): ?>
+        // Simular un clic en el botón para activar el SweetAlert
+        $('#btnSuccess').click();
+      <?php endif; ?>
+      <?php if (isset($error) && !empty($error)): ?>
+        // Simular un clic en el botón para activar el SweetAlert
+
+        $('#btnError').click();
+
+
+
+      <?php endif; ?>
+
+
+    });
+  </script>
+  <script>
+    // PARA FORMULARIOS O MODALES
+    $(document).ready(function () {
+      // Escuchar el click del botón "Pagar"
+      $('#btn-pagarDocente').click(function (e) {
+        e.preventDefault(); // Evitar el envío del formulario por defecto
+
+        // Mostrar la alerta de confirmación
+        Swal.fire({
+          title: '¿Estás seguro de confirmar el pago?',
+          text: "Esta acción no se puede revertir.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Sí, pagar',
+          cancelButtonText: 'Cancelar'
+        }).then((result) => {
+          // Si el usuario confirma, enviar el formulario
+          if (result.isConfirmed) {
+            $('#form-pagarDocente').submit(); // Enviar el formulario
+          }
+        });
+      });
+
     });
   </script>
 </body>
