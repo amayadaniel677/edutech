@@ -4,7 +4,7 @@ require('../model/update_model.php');
 
 class obtener_datos
 {
-    public $errores_inputs = array();
+    public $errores_inputs = array(); 
     public $errores_foto = array();
     public $errores_contrasenia = array();
     public function validar_inputs($documento, $nombres, $apellidos, $tipo_documento, $fecha, $correo, $telefono, $ciudad, $direccion)
