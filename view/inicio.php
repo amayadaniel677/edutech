@@ -18,6 +18,21 @@
     <link rel="stylesheet" href="resource/css/inicio/btn.css" />
     <!-- <link rel="stylesheet" href="resource/css/inicio/nav.css" /> -->
     <title>Document</title>
+    <style>
+      .txt-banner p {
+        height: 80px;
+      }
+      .txt-banner a{
+        margin-bottom: 3px;
+      }
+      .img-banner{
+        height: 150px;
+      }
+      .img-banner img{
+        height: 100%;
+      }
+      
+    </style>
     
     <script src="https://kit.fontawesome.com/1165876da6.js" crossorigin="anonymous"></script>
   </head>
@@ -56,39 +71,37 @@
         <div class="destacados_banners">
           <div class="destacado_banner shadow-drop-center ">
             <div class="img-banner">
-              <img src="resource/img/inicio/banner.svg" alt="banner-img" />
+              <img src="resource/img/inicio/matematicas.jpg" alt="banner-img" />
             </div>
             <div class="txt-banner">
-              <h5 class="nombre-curso">NOMBRE DEL CURSO</h5>
+              <h5 class="nombre-curso">Matematicas</h5>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore
+              En este curso parenderas los principios basicos de las matematicas.Conoceras algunos conceptos, como aritmetica y geometria
               </p>
               <a href="https://wa.me/+573123467007?text=Hola,%20Estoy%20interesado%20en%20sus%20cursos%20" class="boton-comprar" style="text-decoration:none;">COMPRAR</a>
             </div>
           </div>
           <div class="destacado_banner">
             <div class="img-banner">
-              <img src="resource/img/inicio/banner3.svg" alt="banner-img" />
+              <img src="resource/img/inicio/preicfes.png" alt="banner-img" />
             </div>
             <div class="txt-banner">
-              <h5 class="nombre-curso">NOMBRE DEL CURSO</h5>
+              <h5 class="nombre-curso">Preicfes</h5>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore
+               Con este curso, conoceras los diferentes temas y retos que se llevan a cabo en las  pruebas icfes
+              
               </p>
               <a href="https://wa.me/+573123467007?text=Hola,%20Estoy%20interesado%20en%20sus%20cursos%20" class="boton-comprar" style="text-decoration:none;">COMPRAR</a>
             </div>
           </div>
           <div class="destacado_banner">
             <div class="img-banner">
-              <img src="resource/img/inicio/banner2.svg" alt="banner-img" />
+              <img src="resource/img/inicio/Ingles.jpg" alt="banner-img" />
             </div>
             <div class="txt-banner">
-              <h5 class="nombre-curso">NOMBRE DEL CURSO</h5>
+              <h5 class="nombre-curso">Ingles</h5>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore
+                Con este curso podras tener un nivel B1 en ingles 
               </p>
               <a href="https://wa.me/+573123467007?text=Hola,%20Estoy%20interesado%20en%20sus%20cursos%20" class="boton-comprar" style="text-decoration:none;">COMPRAR</a>
             </div>
