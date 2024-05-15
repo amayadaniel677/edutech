@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../resource/css/cursos/cursos.css" />
     <link rel="icon" href="../resource/img/icons/logo-kepler-removebg-preview.png" />
     <link rel="stylesheet" href="../resource/css/layouts/footer.css" />
+    <script src="https://cdn.userway.org/widget.js" data-account="oPQTiY7D0x"></script>
   </head>
   <body>
   <?php
