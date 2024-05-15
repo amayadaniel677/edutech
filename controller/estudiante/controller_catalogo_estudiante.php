@@ -10,7 +10,7 @@ $datos_curso = $ver_curso->seleccionar_curso(); // Obtener los datos de los curs
 $datos_organizados = [];
 foreach ($datos_curso as $curso1) {
     $area = $curso1['area_name'];
-    $datos_organizados[$area][] = $curso1;
+    $datos_organizados[$area][] = $curso1; 
 }
 
 $data = array('datos_organizados' => $datos_organizados); // Pasar los datos organizados a la vista

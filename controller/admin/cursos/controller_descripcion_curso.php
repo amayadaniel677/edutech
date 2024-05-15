@@ -40,9 +40,19 @@ if (isset($_GET['id_curso'])) {
     } else {
         echo "No se encontraron detalles para este curso.";
     }
-} else {
-    echo "No se proporcionó un ID de curso válido.";
-}
+} 
+if (isset($_GET['id_eliminar'])){
+    $id_eliminar=$_GET['id_eliminar'];
+    $consult=new descripcionCurso();
+    $curso_eliminado=$consult->eliminar_curso($id_eliminar);
+    if($curso_eliminado){
+        $mensaje_ok="El curso fue eliminado con exito";
+        header("Refresh: 3; URL=controller_catalogo_cursos.php");
+    }else{
+        $mensaje="El curso no puso ser eliminado, intenntelo de nuevo más tarde...";
+        header("Refresh: 3; URL=controller_catalogo_cursos.php");
+    }
+} 
 
 
 include('../../../view/admin/paginas/cursos/descripcion_curso.php');
