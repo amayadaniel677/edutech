@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 class descripcion_curso{
 
-    public $errores_foto = array();
+    public $errores_foto = array(); 
 
     public function validar_foto($foto, $dni, $old_photo)
     {

@@ -47,7 +47,7 @@
                    echo '<a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#miModal"><i class="fas fa-edit"></i> Modificar curso</a>';
                    echo ' <br>'; 
                    echo ' <br>'; 
-                   echo '<a class="btn btn-danger btn-lg" href="controller_descripcion_curso.php?id_eliminar='.$id_curso.'"><i class="fas fa-trash-alt"></i> Eliminar curso</a>';
+                   echo '<a class="btn btn-danger btn-lg" onclick="confirmarEliminar('.$id_curso.')"><i class="fas fa-trash-alt"></i> Eliminar curso</a>';
                 }    
                 ?>
                 <!-- Modal  modificar cursos-->

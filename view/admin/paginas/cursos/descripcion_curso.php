@@ -24,6 +24,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- CSS CURSOS ADMIN -->
   <link rel="stylesheet" href="../../../resource/css/cursos/descripcion_curso.css" />
   <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 
 </head>
 
@@ -101,6 +103,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+
+  <script>
+    function confirmarEliminar(id_curso) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "No podrás revertir esto",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminarlo!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma, redireccionamos al controlador PHP para eliminar el curso
+                window.location.href = 'controller_descripcion_curso.php?id_eliminar=' + id_curso;
+            }
+        });
+    }
+</script>
+
 </body>
 
 </html>
