@@ -14,7 +14,7 @@ class descripcionCurso{
             } catch (mysqli_sql_exception $e) {
                 // Maneja el error de conexión aquí
                 echo "Error al conectar: " . $e->getMessage();
-                // Considera lanzar una excepción o manejar el error de otra manera
+                // Considera lanzar una excepción o manejar el error de otra manera 
             } 
         }
     
@@ -105,6 +105,16 @@ class descripcionCurso{
 
     public function eliminar_curso($id){
         $sql="UPDATE subjects SET status='inactive' WHERE id='$id'";
+        $result=$this->con->query($sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function editar_curso($id,$name,$description,$photo,$topics){
+        $sql="UPDATE subjects SET name=$name, description=$description, photo=$photo, topics=$topics WHERE id=$id";
         $result=$this->con->query($sql);
         if($result){
             return true;

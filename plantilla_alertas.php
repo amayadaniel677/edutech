@@ -32,12 +32,12 @@ $mensaje_editar = $mensaje_editar ?? ''; // Asegura que $mensaje_editar esté de
 $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
 ?>
 <script>
-    $(function() {
+    $(function () {
         var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
-            timer: 400000,
+            timer: 5000,
             width: '80%',
             customClass: {
                 container: 'mi-clase-personalizada'
@@ -46,32 +46,32 @@ $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté defini
 
         });
 
-        $('.swalDefaultSuccess').click(function() {
+        $('.swalDefaultSuccess').click(function () {
             Toast.fire({
                 icon: 'success',
                 title: '<?php echo $mensaje_editar; ?>'
 
             })
         });
-        $('.swalDefaultInfo').click(function() {
+        $('.swalDefaultInfo').click(function () {
             Toast.fire({
                 icon: 'info',
                 title: '<?php echo $msj_eliminar; ?>'
             })
         });
-        $('.swalDefaultError').click(function() {
+        $('.swalDefaultError').click(function () {
             Toast.fire({
                 icon: 'error',
                 title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.swalDefaultWarning').click(function() {
+        $('.swalDefaultWarning').click(function () {
             Toast.fire({
                 icon: 'warning',
                 title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.swalDefaultQuestion').click(function() {
+        $('.swalDefaultQuestion').click(function () {
             Toast.fire({
                 icon: 'question',
                 title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
@@ -80,13 +80,13 @@ $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté defini
     });
 </script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Verificar si la variable $mensaje_editar está definida
-        <?php if (isset($mensaje_editar) && !empty($mensaje_editar)) : ?>
+        <?php if (isset($mensaje_editar) && !empty($mensaje_editar)): ?>
             // Simular un clic en el botón para activar el SweetAlert
             $('#btnSuccess').click();
         <?php endif; ?>
-        <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
+        <?php if (isset($msj_eliminar) && !empty($msj_eliminar)): ?>
             // Simular un clic en el botón para activar el SweetAlert
 
             console.log('entro');
@@ -98,6 +98,54 @@ $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté defini
 
 
     });
+</script>
+<!-- ALERTAS DE CONFIRMACION -->
+
+
+<script>
+    // PARA FORMULARIOS O MODALES
+    $(document).ready(function () {
+        // Escuchar el click del botón "Pagar"
+        $('#btnPagar').click(function (e) {
+            e.preventDefault(); // Evitar el envío del formulario por defecto
+
+            // Mostrar la alerta de confirmación
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede revertir.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, pagar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                // Si el usuario confirma, enviar el formulario
+                if (result.isConfirmed) {
+                    $('#formPagar').submit(); // Enviar el formulario
+                }
+            });
+        });
+
+    });
+    // PARA ELEMENTOS CREADOS CON PHP 
+    echo '<a href="#" onclick="confirmarEliminarUsuario(\''. 'controller_eliminar_usuario.php?id_usuario='.$usuario['id']. '&tipo_usuario='.$tipo_usuario. '\')" class="btn btn-danger" id="desactivarUsuario">';
+    function confirmarEliminarUsuario(url) {
+        Swal.fire({
+            title: "¿Estás seguro de inactivar el usuario?",
+            text: "Esto podría afectar sus cursos activos",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, inactivar",
+            cancelButtonText: "Cancelar",
+            reverseButtons: true,
+            dangerMode: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
 </script>
 <script class="alertas-opcionales">
     //     $('.toastrDefaultSuccess').click(function() {
