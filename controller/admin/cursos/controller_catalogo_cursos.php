@@ -1,11 +1,15 @@
-<?php 
+<?php
 session_start();
-if (!isset( $_SESSION['dni_session'])){
+if (!isset($_SESSION['dni_session'])) {
     header('location:../../login_controller.php');
     exit();
 }
-$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
+$ruta_inicio = '../../../';  //esta ruta se usa para cerrar sesion en el nav
 include('../../../model/estudiante/catalogo_estudiante_model.php');
+
+if (isset($_GET['mensaje'])) {
+    $mensaje = $_GET['mensaje'];
+}
 
 $ver_curso = new ver_curso(); // Crear una instancia de la clase ver_curso
 $datos_curso = $ver_curso->seleccionar_curso(); // Obtener los datos de los cursos
@@ -19,4 +23,3 @@ foreach ($datos_curso as $curso1) {
 
 $data = array('datos_organizados' => $datos_organizados); // Pasar los datos organizados a la vista
 include('../../../view/admin/paginas/cursos/catalogo_cursos_admin.php');
-?>
