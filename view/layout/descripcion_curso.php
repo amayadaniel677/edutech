@@ -65,15 +65,15 @@
                                     <input type="hidden" name="id" id="id" value="<?php echo $id_curso;?>">
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="<?php echo $curso['name'];?>">
+                                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="<?php echo $curso['name'];?>" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="descripcion">Descripción</label>
-                                        <textarea class="form-control" id="descripcion" name="descripcion" placeholder="<?php echo $curso['description'];?>"></textarea>
+                                        <textarea class="form-control" id="descripcion" name="descripcion" placeholder="<?php echo $curso['description'];?>" required></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="temas">Temas</label>
-                                        <textarea class="form-control" id="temas" name="temas" placeholder="<?php echo $curso['topics'];?>"></textarea>
+                                        <textarea class="form-control" id="temas" name="temas" placeholder="<?php echo $curso['topics'];?>" required></textarea>
                                     </div>
                                     <div class="custom-file">
                                         <input type="file" class="" id="foto" name="foto" accept='image/*'>

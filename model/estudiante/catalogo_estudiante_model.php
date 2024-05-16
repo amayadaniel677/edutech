@@ -6,7 +6,7 @@ class ver_curso {
         mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ERROR);
     
         try {
-            $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech");
+            $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech"); 
         } catch (mysqli_sql_exception $e) {
             // Intenta conectar con la segunda opción si la primera falla
             try {
