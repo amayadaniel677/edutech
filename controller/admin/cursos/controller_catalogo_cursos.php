@@ -16,6 +16,7 @@ if (isset($_GET['mensaje_warning'])) {
 
 $ver_curso = new ver_curso(); // Crear una instancia de la clase ver_curso
 $datos_curso = $ver_curso->seleccionar_curso(); // Obtener los datos de los cursos
+$cursos_inactivos = $ver_curso->seleccionar_curso_inactivo(); //obtener los cursos inactivos
 
 // Organizar los datos por áreas para facilitar su visualización en la vista
 $datos_organizados = [];
