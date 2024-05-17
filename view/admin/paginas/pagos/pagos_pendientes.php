@@ -16,8 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
   <!-- SwadeetAlert2 -->
@@ -103,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach ($pagos as $index => $pago): ?>
+                  <?php foreach ($pagos as $index => $pago) : ?>
                     <tr class="odd">
                       <td>
                         <?= $index + 1 ?>
@@ -117,19 +116,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <td>
                         <?= $pago['total_hours'] ?>
                       </td>
+                      
+                        <!-- Crear un botón Bootstrap llamado pagar -->
                       <td>
                         <!-- Crear un botón Bootstrap llamado pagar -->
-                        <a href="#" class="btn btn-primary abrir-modal" data-toggle="modal" data-target="#miModal"
-                          data-id="<?= $pago['id'] ?>" data-toggle="tooltip" data-placement="top"
-                          title="pagar al docente"><i class="fas fa-dollar-sign"></i></a>
-
+                        <a href="#" class="btn btn-primary abrir-modal" data-toggle="modal" data-target="#miModal" data-id="<?= $pago['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Pagar al docente"><i class="fas fa-dollar-sign"></i></a>
                       </td>
+
                     </tr>
                   <?php endforeach; ?>
 
                   <!-- Modal -->
-                  <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel"
-                    aria-hidden="true">
+                  <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -147,18 +145,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                               <div class="col-md-12 mt-3">
                                 <label for="cantidad">Cantidad de horas trabajadas:</label> <br>
-                                <input required type="number" name="cantidad" id="cantidad" class="form-control"
-                                  placeholder="Cantidad horas">
+                                <input required type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Cantidad horas">
                               </div>
                               <div class="col-md-12 mt-3">
                                 <label for="valor_horas">Precio por hora:</label> <br>
-                                <input required type="number" name="valor_horas" id="valor_horas" class="form-control"
-                                  placeholder="Valor horas">
+                                <input required type="number" name="valor_horas" id="valor_horas" class="form-control" placeholder="Valor horas">
                               </div>
                               <div class="col-md-12 mt-3">
                                 <label for="valor_total">Valor total a pagar:</label> <br>
-                                <input readonly type="number" name="valor_total" id="valor_total" class="form-control"
-                                  placeholder="Valor total">
+                                <input readonly type="number" name="valor_total" id="valor_total" class="form-control" placeholder="Valor total">
                               </div>
                               <div class="col-md-10 mt-3 mb-5">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -175,11 +170,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <script>
                   // Captura el evento de hacer clic en el enlace
-                  document.addEventListener('DOMContentLoaded', function () {
+                  document.addEventListener('DOMContentLoaded', function() {
                     const abrirModalButtons = document.querySelectorAll('.abrir-modal');
 
-                    abrirModalButtons.forEach(function (button) {
-                      button.addEventListener('click', function () {
+                    abrirModalButtons.forEach(function(button) {
+                      button.addEventListener('click', function() {
                         const pagoId = this.getAttribute('data-id'); // Obtiene el valor del atributo data-id
                         document.getElementById('pago_id').value = pagoId; // Asigna el valor al input
                       });
@@ -253,7 +248,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../dist/js/demo.js"></script>
   <!-- Page specific script -->
   <script>
-    $(function () {
+    $(function() {
       $("#example1").DataTable({
         "responsive": true,
         "lengthChange": false,
@@ -275,7 +270,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- script de la pagiana  calcular valor total-->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
       // Selecciona los campos de entrada
       const cantidadInput = document.getElementById('cantidad');
       const valorHorasInput = document.getElementById('valor_horas');
@@ -303,7 +298,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   $error = $error ?? ''; // Asegura que $mensaje_ok esté definido
   ?>
   <script>
-    $(function () {
+    $(function() {
       var Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -317,32 +312,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       });
 
-      $('.swalDefaultSuccess').click(function () {
+      $('.swalDefaultSuccess').click(function() {
         Toast.fire({
           icon: 'success',
           title: '<?php echo $mensaje_ok; ?>'
 
         })
       });
-      $('.swalDefaultInfo').click(function () {
+      $('.swalDefaultInfo').click(function() {
         Toast.fire({
           icon: 'info',
           title: '<?php echo $error; ?>'
         })
       });
-      $('.swalDefaultError').click(function () {
+      $('.swalDefaultError').click(function() {
         Toast.fire({
           icon: 'error',
           title: '<?php echo $error; ?>'
         })
       });
-      $('.swalDefaultWarning').click(function () {
+      $('.swalDefaultWarning').click(function() {
         Toast.fire({
           icon: 'warning',
           title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
         })
       });
-      $('.swalDefaultQuestion').click(function () {
+      $('.swalDefaultQuestion').click(function() {
         Toast.fire({
           icon: 'question',
           title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
@@ -351,13 +346,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
   </script>
   <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
       // Verificar si la variable $mensaje_ok está definida
-      <?php if (isset($mensaje_ok) && !empty($mensaje_ok)): ?>
+      <?php if (isset($mensaje_ok) && !empty($mensaje_ok)) : ?>
         // Simular un clic en el botón para activar el SweetAlert
         $('#btnSuccess').click();
       <?php endif; ?>
-      <?php if (isset($error) && !empty($error)): ?>
+      <?php if (isset($error) && !empty($error)) : ?>
         // Simular un clic en el botón para activar el SweetAlert
 
         $('#btnError').click();
@@ -371,9 +366,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </script>
   <script>
     // PARA FORMULARIOS O MODALES
-    $(document).ready(function () {
+    $(document).ready(function() {
       // Escuchar el click del botón "Pagar"
-      $('#btn-pagarDocente').click(function (e) {
+      $('#btn-pagarDocente').click(function(e) {
         e.preventDefault(); // Evitar el envío del formulario por defecto
 
         // Mostrar la alerta de confirmación
@@ -396,6 +391,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     });
   </script>
+  <script>
+  // Inicializar tooltips de Bootstrap
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+</script>
+
 </body>
 
 </html>
