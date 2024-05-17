@@ -16,6 +16,7 @@
             <ul>
                 <?php foreach ($curso1['topics_array'] as $topic) : ?>
                 <li><?php echo $topic; ?></li>
+                
                 <?php endforeach; ?>
             </ul>
             <?php if ($_SESSION['rol_session'] == 'estudiante') : ?>
@@ -45,10 +46,21 @@
             <?php
                 if ($_SESSION['rol_session'] == 'administrador') {
                     echo ' <br>';
-                    echo '<a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#miModal"><i class="fas fa-edit"></i> Modificar curso</a>';
-                    echo ' <br>';
-                    echo ' <br>';
-                    echo '<a class="btn btn-danger btn-lg" onclick="confirmarEliminar(' . $id_curso . ')"><i class="fas fa-trash-alt"></i> Eliminar curso</a>';
+                    if($curso['status']=='active'){
+                       
+                        echo '<a class="btn btn-danger btn-lg" onclick="confirmarEliminar(\''. $id_curso. '\',\''. $curso['status']. '\')"> <i class="fas fa-trash-alt"></i> Desactivar curso</a>';
+                        echo ' <br>';
+                        echo ' <br>';
+                        echo '<a class="btn btn-primary btn-lg" href="#" data-toggle="modal" data-target="#miModal"><i class="fas fa-edit"></i> Modificar curso</a>';
+                        
+                    }elseif($curso['status']=='inactive'){
+                      
+                        echo '<a class="btn btn-primary btn-lg" onclick="confirmarEliminar(\''. $id_curso. '\',\''. $curso['status']. '\')">
+                        <i class="fas fa-undo"></i> Activar curso</a>';                    }
+                   
+                    
+                    
+                   
                 }
                 ?>
             <!-- Modal  modificar cursos-->
@@ -83,7 +95,8 @@
                                 <div class="form-group">
                                     <label for="temas">Temas</label>
                                     <textarea class="form-control" id="temas" name="temas" placeholder=""
-                                        required><?php echo $curso['topics']; ?></textarea>
+                                        required><?php echo $curso['topics']  ?></textarea>
+                                       
                                 </div>
                                 <div class="form-group">
                                     <label for="new-photo">Foto:</label><br>
