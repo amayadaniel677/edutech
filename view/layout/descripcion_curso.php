@@ -63,17 +63,17 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="" method="POST" enctype="multipart/form-data">
+                            <form action="" method="POST" enctype="multipart/form-data" id='form-actualizarCurso'>
                                 <div class="text-center">
                                     <img class="img-fluid d-block mx-auto"
                                         src="<?php echo $ruta_inicio . $curso['photo']; ?>" alt="foto curso"
-                                        style='max-width:60%'>
+                                        style='max-width:30%'>
                                 </div>
                                 <input type="hidden" name="id" id="id" value="<?php echo $id_curso; ?>">
                                 <div class="form-group">
                                     <label for="nombre">Nombre</label>
                                     <input type="text" class="form-control" id="nombre" name="nombre"
-                                        value="<?php echo $curso['name']; ?>" required>
+                                        value="<?php echo $curso['name']; ?>" >
                                 </div>
                                 <div class="form-group">
                                     <label for="descripcion">Descripción</label>
@@ -90,7 +90,7 @@
                                     <input type="file" class="" id="new-photo" name="new-photo" accept='image/*'>
                                 </div>
                                 <div class="d-flex justify-content-between mt-5">
-                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                    <button type="submit" class="btn btn-primary" id='btn-actualizarCurso'>Guardar cambios</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 </div>
 

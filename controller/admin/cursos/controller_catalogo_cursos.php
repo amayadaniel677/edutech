@@ -10,6 +10,9 @@ include('../../../model/estudiante/catalogo_estudiante_model.php');
 if (isset($_GET['mensaje'])) {
     $mensaje = $_GET['mensaje'];
 }
+if (isset($_GET['mensaje_warning'])) {
+    $mensaje_warning = $_GET['mensaje_warning'];
+}
 
 $ver_curso = new ver_curso(); // Crear una instancia de la clase ver_curso
 $datos_curso = $ver_curso->seleccionar_curso(); // Obtener los datos de los cursos

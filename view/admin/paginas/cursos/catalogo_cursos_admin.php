@@ -68,15 +68,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
-                <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
-                    Launch Success Toast
-                </button>
-                <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
-                    error
-                </button>
-                <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
-                    error
-                </button>
+                <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none"></button>
+                <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none "></button>
+                <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none "></button>
+                <button id="btnWarning" type="button" class="btn btn-success swalDefaultWarning" style="display:none "></button>
                 <div class="container-button">
                     <a type="button" class="button btn btn-outline-success" href='controller_agregar_cursos.php'>
                         <span class="button__text">Agregar curso</span>
@@ -182,6 +177,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <?php
   $mensaje = $mensaje ?? ''; // Asegura que $mensaje esté definido
   $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje esté definido
+  $mensaje_warning = $mensaje_warning ?? ''; // Asegura que $mensaje esté definido
   ?>
     <script>
     $(function() {
@@ -220,7 +216,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         $('.swalDefaultWarning').click(function() {
             Toast.fire({
                 icon: 'warning',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                title: '<?php echo $mensaje_warning; ?>'
             })
         });
         $('.swalDefaultQuestion').click(function() {
@@ -237,6 +233,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <?php if (isset($mensaje) && !empty($mensaje)) : ?>
         // Simular un clic en el botón para activar el SweetAlert
         $('#btnError').click();
+        <?php endif; ?>
+        <?php if (isset($mensaje_warning) && !empty($mensaje_warning)) : ?>
+        // Simular un clic en el botón para activar el SweetAlert
+        $('#btnWarning').click();
         <?php endif; ?>
     });
     </script>

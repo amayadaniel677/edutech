@@ -123,7 +123,7 @@ class descripcionCurso
 
     public function editar_curso($id, $name, $description, $photo, $topics)
     {
-        $sql = "UPDATE subjects SET name=$name, description=$description, photo=$photo, topics=$topics WHERE id=$id";
+        $sql = "UPDATE subjects SET `name`='$name', `description`='$description', photo='$photo', topics='$topics' WHERE id='$id'";
         $result = $this->con->query($sql);
         if ($result) {
             return true;

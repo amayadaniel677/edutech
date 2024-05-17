@@ -8,15 +8,26 @@
 <!-- necesario para el tamaño de mensajes alerta  -->
 
 
-<button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
-    Launch Success Toast
-</button>
-<button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
-    error
-</button>
-<button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
-    error
-</button>
+<button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none"></button>
+<button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none "></button>
+<button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none "></button>
+<button id="btnWarning" type="button" class="btn btn-success swalDefaultWarning" style="display:none "></button>
+
+<!-- MOSTRAR LISTA DE ERRORES -->
+<?php if (isset($errores)) : ?>
+    <div class="container-fluid" style='max-width:1000px;'>
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style=" font-size:20px;  opacity:0.5;">x</button>
+
+            <h5><i class="icon fas fa-ban"></i> Errores</h5>
+            <ul class="list-group list-group-flush pl-3">
+                <?php foreach ($errores as $error) : ?>
+                    <li class=""><?php echo $error; ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
@@ -29,8 +40,10 @@
 <script src="../../../view/admin/plugins/toastr/toastr.min.js"></script>
 
 <?php
-$mensaje_editar = $mensaje_editar ?? ''; // Asegura que $mensaje_editar esté definido
-$msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
+$mensaje_ok = $mensaje_ok ?? ''; // Asegura que $mensaje_editar esté definido
+$mensaje_error = $mensaje_error ?? ''; // Asegura que $mensaje_editar esté definido
+$mensaje_warning = $mensaje_warning ?? ''; // Asegura que $mensaje_editar esté definido
+$mensaje_info = $mensaje_info ?? ''; // Asegura que $mensaje_editar esté definido
 ?>
 <script>
     $(function() {
@@ -50,26 +63,26 @@ $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté defini
         $('.swalDefaultSuccess').click(function() {
             Toast.fire({
                 icon: 'success',
-                title: '<?php echo $mensaje_editar; ?>'
+                title: '<?php echo $mensaje_ok; ?>'
 
             })
         });
         $('.swalDefaultInfo').click(function() {
             Toast.fire({
                 icon: 'info',
-                title: '<?php echo $msj_eliminar; ?>'
+                title: '<?php echo $mensaje_info; ?>'
             })
         });
         $('.swalDefaultError').click(function() {
             Toast.fire({
                 icon: 'error',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                title: '<?php echo $mensaje_error; ?>'
             })
         });
         $('.swalDefaultWarning').click(function() {
             Toast.fire({
                 icon: 'warning',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                title: '<?php echo $mensaje_warning; ?>'
             })
         });
         $('.swalDefaultQuestion').click(function() {
@@ -83,18 +96,17 @@ $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté defini
 <script>
     $(document).ready(function() {
         // Verificar si la variable $mensaje_editar está definida
-        <?php if (isset($mensaje_editar) && !empty($mensaje_editar)) : ?>
-            // Simular un clic en el botón para activar el SweetAlert
+        <?php if (isset($mensaje_ok) && !empty($mensaje_ok)) : ?>
             $('#btnSuccess').click();
         <?php endif; ?>
-        <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
-            // Simular un clic en el botón para activar el SweetAlert
-
-            console.log('entro');
+        <?php if (isset($mensaje_error) && !empty($mensaje_error)) : ?>
+            $('#btnError').click();
+        <?php endif; ?>
+        <?php if (isset($mensaje_warning) && !empty($mensaje_warning)) : ?>
+            $('#btnWarning').click();
+        <?php endif; ?>
+        <?php if (isset($mensaje_info) && !empty($mensaje_info)) : ?>
             $('#btnInfo').click();
-
-
-
         <?php endif; ?>
 
 
@@ -152,6 +164,7 @@ $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté defini
         });
     }
 </script>
+
 <script class="alertas-opcionales">
     //     $('.toastrDefaultSuccess').click(function() {
     //         toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')

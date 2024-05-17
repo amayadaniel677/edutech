@@ -49,11 +49,21 @@ if (isset($_GET['id_eliminar'])) {
         $mensaje_ok = "El curso fue eliminado con exito";
         header("Refresh: 3; URL=controller_catalogo_cursos.php");
     } else {
-        $mensaje = "El curso no puso ser eliminado, intenntelo de nuevo más tarde...";
-        header("Refresh: 3; URL=controller_catalogo_cursos.php");
+        $mensaje_error = "El curso no puso ser eliminado, intenntelo de nuevo más tarde...";
+        header('Refresh: 3; URL=controller_descripcion_curso.php?id_curso=' . $id_curso );
     }
 }
 
+if (isset($_GET['mensaje_ok'])) {
+    $mensaje_ok = $_GET['mensaje_ok'];
+}
+if (isset($_GET['mensaje_warning'])) {
+    $mensaje_warning = $_GET['mensaje_warning'];
+}
+if (isset($_GET['errores'])) {
+    $errores = $_GET['errores'];
+    $errores = explode('%', $errores);
+}
 
 
 
@@ -66,8 +76,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
         empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0
     ) {
-        $mensaje = "El archivo que envió excede nuestros limites, vuelva a intentarlo";
-        header('location:controller_catalogo_cursos.php?mensaje=' . $mensaje . '');
+        $mensaje_warning = "El archivo que envió excede nuestros limites, vuelva a intentarlo";
+        $id_post_encoded = urlencode($id_post); // Codifica la variable $id_post
+            // Construye la URL con ambos parámetros
+         header('Location: controller_catalogo_cursos.php?mensaje_warning='.$mensaje_warning);
+
     }
     if (isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['temas'])) {
         $id_post = $_POST['id'];
@@ -88,6 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $new_photo = false;
             $validaciones = new descripcion_curso();
             $errores_foto = false;
+            $old_photo = $curso['photo'];
             $foto = $old_photo; // O cualquier otra acción que desees tomar
         }
 
@@ -100,11 +114,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $actualizar_datos = $actualizar_model->editar_curso($id_post, $nombre_post, $descripcion_post, $foto, $temas_post);
             if ($actualizar_datos) {
                 $mensaje_ok = "INFORMACIÓN ACTUALIZADA CORRECTAMENTE!";
+                $validaciones->mover_borrar_foto($foto,$old_photo,$new_photo);
+                $id_post_encoded = urlencode($id_post); // Codifica la variable $id_post
+                $mensaje_ok_encoded = urlencode($mensaje_ok); // Codifica el mensaje de éxito
+                // Construye la URL con ambos parámetros
+                $url = 'controller_descripcion_curso.php?id_curso='. $id_post_encoded. '&mensaje_ok='. $mensaje_ok_encoded;
+                // Usa header('Refresh') para redirigir con un retardo de 4 segundos
+                header('location:'. $url);
+              
+            }else{
+                $mensaje_error = "ERROR: NO SE PUDO ACTUALIZAR LA INFORMACIÓN";
+                $id_post_encoded = urlencode($id_post); // Codifica la variable $id_post
+                $mensaje_error_encoded = urlencode($mensaje_error); // Codifica el mensaje de error
+                
+                // Construye la URL con ambos parámetros
+                $url = 'controller_descripcion_curso.php?id_curso='. $id_post_encoded. '&mensaje_error='. $mensaje_error_encoded;
+                
+                // Usa header('Refresh') para redirigir con un retardo de 4 segundos
+                header('location:'. $url);
+              
             }
-            header('Refresh: 4; URL=controller_catalogo_cursos.php?mensaje_ok=' . $mensaje_ok);
+           
+            
         } else {
+            $erroresInputs='';
+            $erroresFoto  = $validaciones->errores_foto;
+            if($errores_inputs){
+               $erroresInputs='Error: Todos los campos son obligatorios y no pueden estar vacíos';
+            }
+            $errores = array();
+            if (!empty($erroresFoto)) {
+                foreach ($erroresFoto as $error) {
+                    $errores[] = $error;
+                }
+            }
+            if (!empty($erroresInputs)) {
+                $errores[] = $erroresInputs;
+            }
+            // Redirige con los errores
+            $id_post_encoded = urlencode($id_post); // Codifica la variable $id_post
+            $errores_encoded = urlencode(implode('%', $errores)); // Codifica la lista de errores
+            
+            // Concatena ambas variables con el signo igual (=) y utiliza urlencode() para codificar toda la cadena
+            header('Location: controller_descripcion_curso.php?id_curso='.$id_post_encoded.'&errores='.$errores_encoded);
+         // Asegúrate de llamar a exit() después de header()
+            
 
-            exit();
+            
         }
     }
 }
@@ -130,7 +186,7 @@ class descripcion_curso
         $archivo_tipo = $foto['type'];
 
         if (!in_array($archivo_tipo, $tipos_permitidos)) {
-            $this->errores_foto[] = 'Error: Solo se permiten archivos JPEG, JPG o PNG';
+            $this->errores_foto[] = 'Error de foto: Solo se permiten archivos JPEG, JPG o PNG';
             $error = true;
         }
 
@@ -138,7 +194,7 @@ class descripcion_curso
         $archivo_tamanio = $foto['size'];
 
         if ($archivo_tamanio > $tamanio_maximo) {
-            $this->errores_foto[] = 'Error: El tamaño del archivo excede el límite de 10 MB.';
+            $this->errores_foto[] = 'Error de foto: El tamaño del archivo excede el límite de 10 MB.';
             $error = true;
         }
 
@@ -156,27 +212,26 @@ class descripcion_curso
 
     }
 
-    public function mover_borrar_foto($dni, $foto_actual, $old_photo, $new_photo)
+    public function mover_borrar_foto( $foto_actual, $old_photo, $new_photo)
     {
 
-        $carpeta_destino = '../resource/img/photosUsers/';
+        $carpeta_destino = '../../../resource/img/photosSubjects/';
 
         if (!file_exists($carpeta_destino)) {
             mkdir($carpeta_destino, 0777, true);
         }
 
 
-        $ruta_archivo_nombre_archivo = '../' . $foto_actual;
+        $ruta_archivo_nombre_archivo = '../../../' . $foto_actual;
 
         // borrar foto
-        $ruta_old_photo = '../' . $old_photo;
-        $ruta_default_photo = 'resource/img/photosUsers/defaultPhoto.png';
-
-
+        $ruta_old_photo = '../../../' . $old_photo;
+        $ruta_default_photo = 'resource/img/photosSubjects/defaultPhoto.jpg';
         if ($new_photo != false) {
             if (move_uploaded_file($new_photo['tmp_name'], $ruta_archivo_nombre_archivo)) {
                 if ($ruta_old_photo != $ruta_default_photo && $old_photo != $foto_actual) {
                     unlink($ruta_old_photo);
+                    echo "foto movida y borrada con exito";
                 }
             }
         }
