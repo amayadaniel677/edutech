@@ -4,7 +4,7 @@ require('../model/update_model.php');
 
 class obtener_datos
 {
-    public $errores_inputs = array(); 
+    public $errores_inputs = array();
     public $errores_foto = array();
     public $errores_contrasenia = array();
     public function validar_inputs($documento, $nombres, $apellidos, $tipo_documento, $fecha, $correo, $telefono, $ciudad, $direccion)
@@ -110,7 +110,8 @@ class obtener_datos
             return $contrasenia_bd;
         }
     }
-    public function redirigir_vista($rol){
+    public function redirigir_vista($rol)
+    {
         switch ($rol) {
             case 'docente':
                 header("Location: docente/controller_perfil_docente.php");
@@ -127,16 +128,17 @@ class obtener_datos
                 break;
         }
     }
-    public function redirigir_vista_msg($rol,$msg){
+    public function redirigir_vista_msg($rol, $msg)
+    {
         switch ($rol) {
             case 'docente':
-                header("Location: docente/controller_perfil_docente.php?mensaje=".urlencode($msg));
+                header("Location: docente/controller_perfil_docente.php?mensaje=" . urlencode($msg));
                 break;
             case 'estudiante':
-                header("Location: estudiante/controller_perfil_estudiante.php?mensaje=".urlencode($msg));
+                header("Location: estudiante/controller_perfil_estudiante.php?mensaje=" . urlencode($msg));
                 break;
             case 'administrador':
-                header("Location: admin/perfil/controller_perfil_admin.php?mensaje=".urlencode($msg));
+                header("Location: admin/perfil/controller_perfil_admin.php?mensaje=" . urlencode($msg));
                 break;
 
             default:
@@ -145,6 +147,20 @@ class obtener_datos
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -157,9 +173,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        $colapso=new obtener_datos();
-        $rol=$_SESSION['rol_session'];
-        $colapso->redirigir_vista_msg($rol,$mensaje);
+        $colapso = new obtener_datos();
+        $rol = $_SESSION['rol_session'];
+        $colapso->redirigir_vista_msg($rol, $mensaje);
     }
     if (isset($_POST['email'])) {
         $documento = $_POST['dni'];
@@ -219,7 +235,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
         }
 
-// LOGICA PARA ACTUALIZAR LA CONTRASEÑA UNICAMENTE
+        // LOGICA PARA ACTUALIZAR LA CONTRASEÑA UNICAMENTE
     } elseif (isset($_POST['current-password'])) {
         $dni = $_POST['dni'];
         $rol = $_POST['rol'];
@@ -231,24 +247,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $resultado = $error_validaciones->validar_contrasenia($dni, $contrasenia_actual, $contrasenia_nueva, $confirmar_contrasenia_nueva, $contrasenia_sesion);
         if (empty($resultado)) {
             $errores_vista = $error_validaciones->errores_contrasenia;
-             // Inicia la sesión si no está iniciada
-             if (session_status() == PHP_SESSION_NONE) {
+            // Inicia la sesión si no está iniciada
+            if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
             $_SESSION['errores_inputs'] = $errores_vista;
             $error_validaciones->redirigir_vista($rol);
             exit();
-
-        } else { 
+        } else {
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
             }
-           
-            $model_update= new actualizar_user();
-            $resultado_modelo=$model_update->actualizar_contrasenia($dni,$resultado);
-            if($resultado_modelo == 1){
+
+            $model_update = new actualizar_user();
+            $resultado_modelo = $model_update->actualizar_contrasenia($dni, $resultado);
+            if ($resultado_modelo == 1) {
                 $_SESSION['update-succes'] = "CONTRASEÑA ACTUALIZADA CORRECTAMENTE!";
-            }else{
+            } else {
                 $_SESSION['errores-inputs'] = "Error en la conexión con la base de datos, intente más tarde!";
             }
             $error_validaciones->redirigir_vista($rol);

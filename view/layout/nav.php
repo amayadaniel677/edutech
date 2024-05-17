@@ -33,7 +33,7 @@
           <a class="nav-link" href="<?php if(isset($ruta_inicio)){echo $ruta_inicio;} ?>controller/invitado/controller_cursos_inicio.php">CURSOS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<?php if(isset($ruta_inicio)){echo $ruta_inicio;}; ?>view/quienes.php">CONTACTO</a>
+          <a class="nav-link" href="<?php if(isset($ruta_inicio)){echo $ruta_inicio;}; ?>view/quienes.php">NOSOTROS</a>
 
         </li>
         
