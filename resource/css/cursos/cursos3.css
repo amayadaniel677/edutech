@@ -1,8 +1,5 @@
 /* PERTENECE AL CSS MAIN*/
-a {
-  text-decoration: none;
-  color: #000;
-}
+
 * {
   margin: 0;
   padding: 0;
@@ -59,6 +56,14 @@ body {
   width: 100%;
   border-radius: 5px;
 }
+.materias p{
+  height: 70px;
+}
+.materias a {
+  text-decoration: none;
+  color: #3d3c3c !important;
+}
+
 .titulo {
   margin: 50px 0;
 }
@@ -67,6 +72,7 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 12px;
+  margin-bottom: 7px;
 }
 .adquirir a {
   text-decoration: none;
