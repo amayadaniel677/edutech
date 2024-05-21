@@ -13,14 +13,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EduTech | Pagos Pendientes de Docentes</title>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
-  <!-- SwadeetAlert2 -->
+  <!-- SweetAlert2 -->
   <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+  <!-- Google Font: Source Sans Pro -->
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
   <!-- LINKS DataTables -->
   <link rel="stylesheet" href="../../../view/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="../../../view/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -32,12 +33,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <!-- CSS CURSOS ADMIN -->
-  <link rel="stylesheet" href="../../../resource/css/payments/pagos_historial.css" />
   <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
 
-  <link rel="stylesheet" href="../../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="../../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="../../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -104,26 +101,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <tbody>
                   <?php foreach ($pagos as $index => $pago) : ?>
                     <tr class="odd">
+                      <td><?= $index + 1 ?></td>
+                      <td><?= $pago['name'] . ' ' . $pago['lastname'] ?></td>
+                      <td><?= $pago['last_pay'] ?></td>
+                      <td><?= $pago['total_hours'] ?></td>
                       <td>
-                        <?= $index + 1 ?>
+                        <a href="#" class="btn btn-primary abrir-modal " data-toggle="tooltip" data-placement="right" data-target="#miModal" data-id="<?= $pago['id'] ?>" title="Pagar al docente">
+                          <i class="fas fa-dollar-sign"></i>
+                        </a>
                       </td>
-                      <td>
-                        <?= $pago['name'] . ' ' . $pago['lastname'] ?>
-                      </td>
-                      <td>
-                        <?= $pago['last_pay'] ?>
-                      </td>
-                      <td>
-                        <?= $pago['total_hours'] ?>
-                      </td>
-                      
-                        <!-- Crear un botón Bootstrap llamado pagar -->
-                      <td>
-                        <!-- Crear un botón Bootstrap llamado pagar -->
-                        <a href="#" class="btn btn-primary abrir-modal" data-toggle="modal" data-target="#miModal" data-id="<?= $pago['id'] ?>" data-bs-toggle="tooltip" data-bs-placement="top" title="Pagar al docente"><i class="fas fa-dollar-sign"></i></a>
-                      </td>
-
                     </tr>
+
+
                   <?php endforeach; ?>
 
                   <!-- Modal -->
@@ -223,10 +212,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- alerta de agregar pago -->
   <script src="../../../resource/js/admin/pagos/alert_pagos_pendientes.js"></script>
 
+
   <!-- jQuery -->
   <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('.abrir-modal').on('click', function(e) {
+        // Evita el comportamiento predeterminado del enlace
+        e.preventDefault();
+
+        // Muestra el modal
+        $('#miModal').modal('show');
+
+        // Aquí puedes agregar lógica adicional si necesitas mostrar el tooltip bajo ciertas condiciones
+      });
+    });
+
+    $(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+  </script>
+
   <!-- sweet alert -->
   <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
   <!-- DataTables  & Plugins -->
@@ -244,8 +253,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../../dist/js/demo.js"></script>
   <!-- Page specific script -->
   <script>
     $(function() {
@@ -391,13 +398,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     });
   </script>
-  <script>
-  // Inicializar tooltips de Bootstrap
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-  })
-</script>
+  <!-- Inicializar tooltips -->
+
 
 </body>
 
