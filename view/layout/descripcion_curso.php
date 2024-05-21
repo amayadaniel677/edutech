@@ -128,6 +128,7 @@
             </div>
         </div>
     </div>
+    <?php if($curso['status']=='active'): ?>
     <h3 class="mt-4">Cursos sugeridos</h3>
     <!-- Carrusel de cursos relacionados -->
     <div class="mb-3 col-md-6 p-3 rounded">
@@ -225,7 +226,7 @@
         </div>
     </div>
 
-
+<?php endif;?>
 
 
 

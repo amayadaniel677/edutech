@@ -27,6 +27,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../resource/css/inicio/nav.css" />
+  <link rel="stylesheet" href="../../resource/css/layouts/footer2.css" />
   <!-- CSS CURSOS ADMIN -->
 
     <link rel="icon" href="../../resource/img/icons/logo-kepler-removebg-preview.png" />
@@ -113,7 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?php include('../../view/admin/layouts/footer.php'); ?>
+  <?php require_once('../../view/layout/footer.php');?>
   <!--FIN   Main Footer -->
 
 </div> <!--fin de toda la pagina wrapper -->

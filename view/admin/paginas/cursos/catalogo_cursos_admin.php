@@ -139,8 +139,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div> <!-- Cerrar div de categoría -->
                             <?php endforeach; ?>
                         </div>
-                        <h2 style="border-bottom: 2px solid red">CURSOS INACTIVOS</h2>
-                 
+                        <div class="titulo">
+                                    <h2>CURSOS INACTIVOS </h2> <!-- Mostrar el nombre del área -->
+                                </div>
                             <?php if (isset($cursos_inactivos) && !empty($cursos_inactivos)) :?>
                                 
                                     <div class="articulos">
