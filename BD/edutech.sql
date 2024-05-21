@@ -39,7 +39,7 @@ CREATE TABLE `remaining_units` (
   `total_units` int NOT NULL,
   `attended_units` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 INSERT INTO remaining_units VALUES
@@ -85,7 +85,7 @@ CREATE TABLE `attendances` (
   PRIMARY KEY (`id`),
   KEY `fk_attendances_remaining_units1_idx` (`remaining_units_id`),
   CONSTRAINT `fk_attendances_remaining_units1` FOREIGN KEY (`remaining_units_id`) REFERENCES `remaining_units` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
@@ -431,7 +431,7 @@ CREATE TABLE `payments_students` (
   PRIMARY KEY (`id`),
   KEY `fk_payments_students_sales1_idx` (`sales_id`),
   CONSTRAINT `fk_payments_students_sales1` FOREIGN KEY (`sales_id`) REFERENCES `sales` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
@@ -507,7 +507,7 @@ CREATE TABLE `recovery_tokens` (
   `token` varchar(32) NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 

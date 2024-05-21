@@ -2,7 +2,7 @@
 class RegVenta_consult
 {
 
-    private $con;
+    private $con; 
 
     public function __construct()
     {
@@ -105,12 +105,12 @@ class RegVenta_consult
     }
 
     // METODOS PARA AGREGAR LA VENTA
-    public function agregar_venta_completa($nombres, $apellidos, $dni, $correo, $ciudad, $telefono, $descuento, $valor_total)
+    public function agregar_venta_completa($nombres, $apellidos, $dni,$direccion, $correo, $ciudad, $telefono, $descuento, $valor_total)
     {
         //    si existe el usuario
         $user_exist = $this->user_exist($dni);
         if (!$user_exist) {
-            $registrar = $this->user_register($nombres, $apellidos, $dni, $correo, $ciudad, $telefono);
+            $registrar = $this->user_register($nombres, $apellidos, $dni,$direccion, $correo, $ciudad, $telefono);
             $user_exist = $this->user_exist($dni);
         }
         if ($user_exist) {
@@ -139,13 +139,13 @@ class RegVenta_consult
             return false;
         }
     }
-    public function user_register($nombres, $apellidos, $dni, $correo, $ciudad, $telefono)
+    public function user_register($nombres, $apellidos, $dni,$direccion, $correo, $ciudad, $telefono)
     {
         $contrasenia_encriptada = password_hash($dni, PASSWORD_DEFAULT, ['cost' => 10]);
         $rol = 'estudiante';
         $dni_type = 'NA';
         $foto = 'resource/img/photosUsers/defaultPhoto.png';
-        $sql = "INSERT INTO people(`name`,lastname,dni,email,city,phone,`password`,rol,dni_type,photo) VALUES('$nombres','$apellidos','$dni','$correo','$ciudad','$telefono','$contrasenia_encriptada','$rol','$dni_type','$foto')";
+        $sql = "INSERT INTO people(`name`,lastname,dni,`address`,email,city,phone,`password`,rol,dni_type,photo) VALUES('$nombres','$apellidos','$dni','$direccion','$correo','$ciudad','$telefono','$contrasenia_encriptada','$rol','$dni_type','$foto')";
         $result = $this->con->query($sql);
         if ($result) {
             return true;

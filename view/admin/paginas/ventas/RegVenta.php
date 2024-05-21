@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 
-<head>
+<head> 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -104,7 +104,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
               ?>
   
               <input type="hidden" name="detallesVentaInput" id="detallesVentaInput" value="">
-  
+              
+              <label for="dni" style="display:block;">DNI Cliente</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                  </div>
+                  <input required type="number" class="form-control" id='dni' name="dni" placeholder="DNI" <?php echo getPostValue('nombres'); ?>>
+                </div>
+
               <div class="col-md-6 col-12">
                 <label for="nombres" style="display:block;">Nombres cliente</label>
                 <div class="input-group mb-3">
@@ -113,12 +121,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                   <input required type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombre" <?php echo getPostValue('nombres'); ?>>
                 </div>
-                <label for="dni" style="display:block;">DNI Cliente</label>
+                <label for="dni" style="display:block;">Direccion</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
                   </div>
-                  <input required type="number" class="form-control" id='dni' name="dni" placeholder="DNI" <?php echo getPostValue('nombres'); ?>>
+                  <input required type="text" class="form-control" id='direccion' name="direccion" placeholder="Direccion" <?php echo getPostValue('nombres'); ?>>
                 </div>
                 <label for="correo" style="display:block;">Correo</label>
                 <div class="input-group mb-3">

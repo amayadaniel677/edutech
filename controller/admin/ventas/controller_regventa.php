@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
 session_start();
 if (!isset( $_SESSION['dni_session'])){
     header('location:../../login_controller.php');
@@ -8,7 +11,7 @@ $ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
 require_once('../../../model/admin/ventas/regventa_model.php');
 
 class RegVenta
-{
+{ 
 
     public function __construct()
     {
@@ -68,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //HASTA ACÁ SIRVE Y RECIBE EL FORMULARIO.
         $nombres = $_POST['nombres'];
         $dni = $_POST['dni'];
+        $direccion=$_POST['direccion'];
         $correo = $_POST['correo'];
         $ciudad = $_POST['ciudad'];
         $apellidos = $_POST['apellidos'];
@@ -79,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // INSERTAR LA VENTA A LA BD
         $modelo = new RegVenta_consult();
-        $resultado_modelo_id=$modelo->agregar_venta_completa($nombres,$apellidos,$dni,$correo,$ciudad,$telefono,$descuento,$valor_total);
+        $resultado_modelo_id=$modelo->agregar_venta_completa($nombres,$apellidos,$dni,$direccion,$correo,$ciudad,$telefono,$descuento,$valor_total);
         if ($resultado_modelo_id) {
             $resultado_detalles = $modelo->agregar_detalles_venta($detallesVenta, $resultado_modelo_id,$dni);
             if ($resultado_detalles) {
