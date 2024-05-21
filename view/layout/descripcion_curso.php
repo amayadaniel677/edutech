@@ -131,43 +131,34 @@
     <h3 class="mt-4">Cursos sugeridos</h3>
     <!-- Carrusel de cursos relacionados -->
     <div class="mb-3 col-md-6 p-3 rounded">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"
-            style="background-color: #f2f2f2;">
-            <div class="carousel-inner">
-                <?php foreach ($cursos_area as $index => $curso2) : ?>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="background-color: #f2f2f2;">
+        <div class="carousel-inner">
+            <?php foreach ($cursos_area as $index => $curso2) : ?>
                 <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                    <div class="border p-3 mx-auto curso-container"
-                        style="max-width: 300px; margin-top:5px; margin-bottom: 5px; background: linear-gradient(to bottom, #7FFFD4, #40E0D0); border-radius:7px;">
+                    <div class="border p-3 mx-auto curso-container" style="max-width: 300px; margin-top:5px; margin-bottom: 5px; background: linear-gradient(to bottom, #7FFFD4, #40E0D0); border-radius:7px;">
                         <article class="materias">
-                            <a
-                                href="controller_descripcion_curso_estudiante.php?id_curso=<?php echo $curso2['subject_id']; ?>">
-                                <div class="curso"
-                                    style="height: 120px; position: relative; border-radius: 10px; display: flex; align-items: center;">
-                                    <img src="<?php echo $ruta_inicio . $curso2['photo']; ?>"
-                                        style="height: 100%; object-fit: cover; margin: auto;" alt="Curso Image">
-                                </div>
-                                <h5 class="text-center mt-3"><?php echo $curso2['subject_name']; ?></h5>
+                            <a href="controller_descripcion_curso.php?id_curso=<?php echo $curso2['subject_id']; ?>" class="d-flex justify-content-center align-items-center" style="height: 120px; position: relative; border-radius: 10px;">
+                                <img src="<?php echo $ruta_inicio . $curso2['photo']; ?>" style="max-height: 100%; max-width: 100%; object-fit: cover;" alt="Curso Image">
                             </a>
+                            <h5 class="text-center mt-3"><?php echo $curso2['subject_name']; ?></h5>
                             <div class="adquirir-button text-center">
-                                <a href="controller_descripcion_curso.php?id_curso=<?php echo $curso2['subject_id']; ?>"
-                                    style="color: white;">ADQUIRIR</a>
+                                <a href="controller_descripcion_curso.php?id_curso=<?php echo $curso2['subject_id']; ?>" style="color: white;">ADQUIRIR</a>
                             </div>
                         </article>
                     </div>
                 </div>
-                <?php endforeach; ?>
-
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <?php endforeach; ?>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
+</div>
 
     <div class="row mt-4">
         <nav class="w-100">

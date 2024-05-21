@@ -182,9 +182,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </section>
             </section>
             <!-- /. Maincontent -->
+            <?php include('../../../view/admin/layouts/footer.php'); ?>
         </div>
         <!-- /.content-wrapper -->
-
+        
         <!-- Controlador del nav aSidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -192,14 +193,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <h5>Title</h5>
                 <p>Sidebar content</p>
             </div>
+
+           
         </aside>
         <!-- /.control-sidebar -->
 
-        <!-- Main Footer -->
-        <?php include('../../../view/admin/layouts/footer.php'); ?>
-        <!--FIN   Main Footer -->
+      
+        
 
     </div>
+      <!-- Main Footer -->
+      
+     
+    
+     <!--FIN   Main Footer -->
     <!--fin de toda la pagina wrapper -->
     <!-- ./wrapper -->
 
