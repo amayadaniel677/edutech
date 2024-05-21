@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="resource/css/inicio/preguntas.css" />
     <link rel="stylesheet" href="resource/css/layouts/footer2.css" />
     <link rel="stylesheet" href="resource/css/inicio/btn.css" />
+    <script src="https://cdn.userway.org/widget.js" data-account="oPQTiY7D0x"></script>
     <!-- <link rel="stylesheet" href="resource/css/inicio/nav.css" /> -->
     <title>Document</title>
     <style>
