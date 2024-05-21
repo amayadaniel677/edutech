@@ -203,21 +203,25 @@ $mensaje_info = $mensaje_info ?? ''; // Asegura que $mensaje_editar esté defini
 </script>
     <!-- Toastr -->
     <script>
-        function confirmarEliminar(id_curso) {
+        function confirmarEliminar(id_curso,status) {
             Swal.fire({
-                title: '¿Estás seguro de desactivar curso?',
-                text: "Se ocultará del catalogo de cursos",
+                title: '¿Estás seguro de cambiar el estado del curso?',
+                text: "Esta acción si se puede revertir",
                 icon: 'warning',
-                showCancelButton: true,
+                showCancelButton: true, 
                 confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, eliminarlo!',
+                cancelButtonColor: '',
+                confirmButtonText: 'Sí, confirmar!',
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Si el usuario confirma, redireccionamos al controlador PHP para eliminar el curso
-                    window.location.href = 'controller_descripcion_curso.php?id_eliminar=' + id_curso;
+               // Construye la URL con ambas variables
+  var url = 'controller_descripcion_curso.php?id_eliminar=' + id_curso + '&status=' + status;
+
+// Redirige al usuario a la nueva URL
+window.location.href = url;
                 }
             });
         }

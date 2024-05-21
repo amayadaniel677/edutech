@@ -32,7 +32,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <!-- CSS CURSOS ADMIN -->
-  <link rel="stylesheet" href="../../../resource/css/sales/buscar_ventas.css" />
   <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
   <!-- css alertas mensajes -->
   <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" /> <!-- necesario para el tamaño de mensajes alerta  -->
@@ -47,6 +46,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .swal2-popup h2 {
       margin-top: 8px !important;
       font-size: 18px !important;
+    }
+    .content-wrapper{
+      height: auto !important;
     }
   </style>
 </head>
@@ -63,7 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Fin del Main Nav Asidebar Container -->
 
     <!-- TODA LA PAGINA -->
-    <div class="content-wrapper" style="height:auto;">
+    <div class="content-wrapper">
       <!-- Titulo de la vista -->
       <div class="content-header">
         <div class="container-fluid">

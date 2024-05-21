@@ -1,6 +1,7 @@
 <?php
+session_start();
 include('../../../model/admin/modalidades/modalidades_model.php');
-
+$ruta_inicio = '../../../';
 $model = new buscar_modalidad_model();
 
 try {
