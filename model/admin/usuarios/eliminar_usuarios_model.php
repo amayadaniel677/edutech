@@ -26,10 +26,26 @@ class eliminar_usuarios_model{
         $sql="update people set status='inactive' where id='$id'";
         $result=$this->con->query($sql);
         if($result){
+            $this->reset_remaining_units($id);
             return true;
         }else{
             return false;
         }
+    }
+    public function reset_remaining_units($people_id){
+        $sql="UPDATE remaining_units
+        INNER JOIN subject_sale ON remaining_units.id = subject_sale.remaining_units_id
+        INNER JOIN sales ON subject_sale.sales_id = sales.id
+        INNER JOIN people ON sales.people_id = people.id
+        SET remaining_units.total_units = 0, remaining_units.attended_units = 0
+        WHERE people.id = '$people_id' "; 
+        $result=$this->con->query($sql);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+         
     }
 }
 
