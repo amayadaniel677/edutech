@@ -78,23 +78,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="tab-content col-md-7 p-5  " id="nav-tabContent">
         <div class="tab-pane fade show active " id="product-desc" role="tabpanel" aria-labelledby="product-user-tab">
           <h3>Manual de ventas</h3>
-            <embed src="../../resource/pdf/normasISO2500.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/venta.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
         <div class="tab-pane fade mt-2" id="product-comments" role="tabpanel" aria-labelledby="product-user-tab">
           <h3>Manual de usuarios </h3>
-            <embed src="../../resource/pdf/normasISO2500.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/usuarios.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
         <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-pagos-tab">
           <h3> Manual de pagos</h3>
-            <embed src="../../resource/pdf/normasISO2500.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/Pagos.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
         <div class="tab-pane fade" id="product-price" role="tabpanel" aria-labelledby="product-areas-tab">
           <h3> Manual de areas </h3>
-            <embed src="../../resource/pdf/normasISO2500.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/Areas.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
         <div class="tab-pane fade" id="product-cursos" role="tabpanel" aria-labelledby="product-cursos-tab">
           <h3>Manual de cursos</h3>
-            <embed src="../../resource/pdf/normasISO2500.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/Cursos.pdf" type="application/pdf" width="100%" height="600px;">
+        </div>
+        <div class="tab-pane fade" id="product-cursos" role="tabpanel" aria-labelledby="product-cursos-tab">
+          <h3>Manual de perfil</h3>
+            <embed src="../../resource/pdf/asd.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
     </div>
 </div>
