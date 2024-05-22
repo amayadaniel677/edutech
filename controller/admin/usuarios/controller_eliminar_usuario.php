@@ -10,12 +10,21 @@ if(isset($_GET['id_usuario'])){
     $id_usuario = $_GET['id_usuario'];
     $tipo_usuario = $_GET['tipo_usuario'];
     $accion=$_GET['accion'];
-    $accion == "activar"? "active" : "inactive";
+    if($accion=='activar'){
+        $accion2='active';
+    }elseif($accion='desactivar'){
+        $accion2='inactive';
+    }
     $consult=new eliminar_usuario();
-    $eliminar=$consult->validar_eliminar($id_usuario,$accion);
+    $eliminar=$consult->validar_eliminar($id_usuario,$accion2);
     if($eliminar){
-        $accion == "active"? "activado" : "desactivado";
-        $msj_eliminar='El usuario fue'.$accion.'con exito';
+        if($accion2=='active'){
+            $accion3='activado';
+        }else{
+            $accion3='desactivado';
+        }
+           
+        $msj_eliminar='El usuario fue '.$accion3.' con exito';
         header("Location: controller_usuarios_totales.php?msj_eliminar=" . urlencode($msj_eliminar) . "&tipo_usuario=" . urlencode($tipo_usuario));
     }else{
         $msj_eliminar='El usuario no pudo ser eliminado intentelo nuevamente';

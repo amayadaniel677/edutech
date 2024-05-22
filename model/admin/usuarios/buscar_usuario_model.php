@@ -24,7 +24,7 @@ class buscar_usuario_model{
         if($tipo_usuario=='todos'){
             // entro al modelo traer todos
            
-            $sql="SELECT * FROM people WHERE rol !='administrador' AND status='active'";
+            $sql="SELECT * FROM people WHERE rol !='administrador' AND rol !='superadmin' AND status='active'";
         }elseif($tipo_usuario=='docente' || $tipo_usuario=='estudiante'){
             // entro al modelo traer por tipo de usuario
            

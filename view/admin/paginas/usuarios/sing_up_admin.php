@@ -218,7 +218,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <option value="">Seleccione un rol</option>
                     <option value="docente" <?php echo (getFieldValue('rol') == 'docente') ? 'selected' : ''; ?>>Docente</option>
                     <option value="estudiante" <?php echo (getFieldValue('rol') == 'estudiante') ? 'selected' : ''; ?>>Estudiante</option>
-                    <option value="administrador" <?php echo (getFieldValue('rol') == 'administrador') ? 'selected' : ''; ?>>Administrador</option>
+                    <?php if ($_SESSION['rol_session'] == 'superadmin') : ?>
+                      <option value="administrador" <?php echo (getFieldValue('rol') == 'administrador') ? 'selected' : ''; ?>>Administrador</option>
+                      <?php endif; ?>
+                   
                   </select>
                 </div>
               </div>

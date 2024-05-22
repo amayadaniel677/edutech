@@ -148,7 +148,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.info-box -->
           </div>
         </div>
-        <?php if($_SESSION['rol_session']=='administrador'):?>
+        <?php if($_SESSION['rol_session']=='superadmin'):?>
         <div class="row justify-content-center">
           <div class="col-md-4 col-sm-6 col-12">
             <a class="info-box bg-gray " href='controller_usuarios_totales.php?tipo_usuario=todosSuperAdmin'>

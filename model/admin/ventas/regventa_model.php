@@ -133,6 +133,9 @@ class RegVenta_consult
         $sql = "SELECT * FROM people WHERE dni='$dni'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
+            // actualizamos el estado del usuario a activo
+            $sql2 = "UPDATE people SET status='active' WHERE dni='$dni'";
+            $result2 = $this->con->query($sql);
             $row = $result->fetch_assoc();
             return  $row['id'];
         } else {
