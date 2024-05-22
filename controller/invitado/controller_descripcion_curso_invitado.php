@@ -14,7 +14,7 @@ if (isset($_GET['id_curso'])) {
     if ($detalle_curso) {
         $area = $detalle_curso['area_name']; 
         $area_id = $detalle_curso['id']; // Obtener el nombre del área del curso
-        $cursos_area = $curso_model->seleccionar_curso($area_id);// Obtener el nombre del área del curso
+        $cursos_area = $curso_model->seleccionar_cursos_sugeridos($area_id);// Obtener el nombre del área del curso
 
         // Llamar a la función mostrarDocentesPorArea para obtener los docentes del área específica
         $docentes_area = $curso_model->mostrarDocentesPorArea($area);

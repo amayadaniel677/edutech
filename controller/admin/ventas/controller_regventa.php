@@ -1,10 +1,13 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
+
 session_start();
-if (!isset( $_SESSION['dni_session'])){
+if (!isset($_SESSION['dni_session'])) {
     header('location:../../login_controller.php');
     exit();
 }
-$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
+$ruta_inicio = '../../../';  //esta ruta se usa para cerrar sesion en el nav
 require_once('../../../model/admin/ventas/regventa_model.php');
 
 class RegVenta
@@ -45,7 +48,29 @@ class RegVenta
 $consult = new RegVenta();
 $nombresAreas = $consult->areas();
 $modalidades = $consult->modalidades();
-$cursos = array(); // Declarar la variable antes del bloque if
+$cursos = array();
+
+if (isset($_GET['dni'])) {
+    $id = $_GET['dni'];
+    $consult_modelo = new RegVenta_consult();
+    $usuario = $consult_modelo->traer_usuario($id);
+
+    $data = array(
+        'usuario' => array(
+            'name' => $usuario['name'],
+            'city' => $usuario['city'],
+            'phone' => $usuario['phone'],
+            'lastname' => $usuario['lastname'],
+            'address' => $usuario['address']
+        )
+    );
+
+    header('Content-Type: application/json');
+
+    echo json_encode($data);
+}
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['categoria_seleccionada'])) {
@@ -68,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //HASTA ACÁ SIRVE Y RECIBE EL FORMULARIO.
         $nombres = $_POST['nombres'];
         $dni = $_POST['dni'];
+        $direccion = $_POST['direccion'];
         $correo = $_POST['correo'];
         $ciudad = $_POST['ciudad'];
         $apellidos = $_POST['apellidos'];
@@ -76,31 +102,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $valor_total = $_POST['valor-total'];
         $detallesVentaJSON = $_POST['detallesVentaInput'];
         $detallesVenta = json_decode($detallesVentaJSON, true);
-        
+
         // INSERTAR LA VENTA A LA BD
         $modelo = new RegVenta_consult();
-        $resultado_modelo_id=$modelo->agregar_venta_completa($nombres,$apellidos,$dni,$correo,$ciudad,$telefono,$descuento,$valor_total);
+        $resultado_modelo_id = $modelo->agregar_venta_completa($nombres, $apellidos, $dni, $direccion, $correo, $ciudad, $telefono, $descuento, $valor_total);
         if ($resultado_modelo_id) {
-            $resultado_detalles = $modelo->agregar_detalles_venta($detallesVenta, $resultado_modelo_id,$dni);
+            $resultado_detalles = $modelo->agregar_detalles_venta($detallesVenta, $resultado_modelo_id, $dni);
             if ($resultado_detalles) {
                 // Venta y detalles registrados exitosamente
                 $detallesVenta = '';
                 $resultado_modelo_id = '';
-                $mensaje='Venta registrada exitosamente';
+                $mensaje = 'Venta registrada exitosamente';
                 header('refresh:5;url=controller_regventa.php');
-                
             } else {
                 // Error al agregar detalles de venta
-               
-                $error= "Error al agregar detalles de venta en la BD.";
+
+                $error = "Error al agregar detalles de venta en la BD.";
             }
         } else {
             // Error al agregar venta completa
             $error = "Error al agregar la venta completa en la BD.";
-            
         }
-       
-
     }
 }
 

@@ -14,6 +14,11 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
 
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -30,55 +35,58 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="#">Modalidades</a></li>
-                <li class="breadcrumb-item active">ver modalidades</li>
+                                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                                <li class="breadcrumb-item"><a href="#">Modalidades</a></li>
+                                <li class="breadcrumb-item active">ver modalidades</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
-<section class="content">
- <div class="container-fluid mt-4" style='max-width:1200px;'>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
+            <section class="content">
+                <div class="container-fluid mt-4" style='max-width:1200px;'>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
 
-                        <table id="tabla-modalidades" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Modalidad</th>
-                                    <th>Precio Hora</th>
-                                    <th>Precio Docente</th>
-                                    <th>Precio Clase Estudiante</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <?php
-                            if ($modalidades && count($modalidades) > 0) : ?>
-                                <?php foreach ($modalidades as $modalidad) : ?>
-                                    <tr id="modalidad-<?php echo $modalidad['id']; ?>">
-                                        <td><?php echo $modalidad['name']; ?></td>
-                                        <td><?php echo $modalidad['price_hour_student']; ?></td>
-                                        <td><?php echo $modalidad['price_teacher']; ?></td>
-                                        <td><?php echo $modalidad['price_class_student']; ?></td>
-                                        <td>
-                                            <a href="controller_editar_modalidad.php?id_modalidad=<?php echo $modalidad['id']; ?>" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <button onclick="eliminarModalidad(<?php echo $modalidad['id']; ?>)" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-
-                                        </td>
+                            <table id="tabla-modalidades" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Modalidad</th>
+                                        <th>Precio Hora</th>
+                                        <th>Precio Docente</th>
+                                        <th>Precio Clase Estudiante</th>
+                                        <th>Acciones</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            <?php else : ?>
-                                <tr>
-                                    <td colspan="4">No se encontraron modalidades registradas.</td>
-                                </tr>
-                            <?php endif; ?>
-                        </table>
+                                </thead>
+                                <?php
+                                if ($modalidades && count($modalidades) > 0) : ?>
+                                    <?php foreach ($modalidades as $modalidad) : ?>
+                                        <tr id="modalidad-<?php echo $modalidad['id']; ?>">
+                                            <td><?php echo $modalidad['name']; ?></td>
+                                            <td><?php echo $modalidad['price_hour_student']; ?></td>
+                                            <td><?php echo $modalidad['price_teacher']; ?></td>
+                                            <td><?php echo $modalidad['price_class_student']; ?></td>
+                                            <td>
+                                                <a href="controller_editar_modalidad.php?id_modalidad=<?php echo $modalidad['id']; ?>" class="btn btn-primary tooltipEdit" title="Editar" data-placement="top">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                                <button onclick="eliminarModalidad(<?php echo $modalidad['id']; ?>)" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa-solid fa-trash-can"></i></button>
+
+
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <tr>
+                                        <td colspan="4">No se encontraron modalidades registradas.</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-</section>
-           
+            </section>
+
         </div>
 
         <aside class="control-sidebar control-sidebar-dark">
@@ -142,6 +150,14 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                 }
             });
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Inicializar el tooltip para cada botón con la clase .tooltipEdit
+            $('.tooltipEdit').tooltip({
+                placement: 'top'
+            });
+        });
     </script>
 
 </body>

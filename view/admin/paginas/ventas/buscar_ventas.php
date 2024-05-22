@@ -32,7 +32,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <!-- CSS CURSOS ADMIN -->
-  <link rel="stylesheet" href="../../../resource/css/sales/buscar_ventas.css" />
   <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
   <!-- css alertas mensajes -->
   <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" /> <!-- necesario para el tamaño de mensajes alerta  -->
@@ -47,6 +46,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .swal2-popup h2 {
       margin-top: 8px !important;
       font-size: 18px !important;
+    }
+    .content-wrapper{
+      height: auto !important;
     }
   </style>
 </head>
@@ -63,7 +65,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Fin del Main Nav Asidebar Container -->
 
     <!-- TODA LA PAGINA -->
-    <div class="content-wrapper" style="height:auto;">
+    <div class="content-wrapper">
       <!-- Titulo de la vista -->
       <div class="content-header">
         <div class="container-fluid">
@@ -85,7 +87,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Contenido principal vista -->
       <section class="content">
-       
+
         <button id="btnInfo" type="button" class="btn btn-success swalDefaultSuccess" style="display:none ">
           error
         </button>
@@ -167,8 +169,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <td>' . $venta['sale_price'] . '</td>
                               <td>' . $venta['sale_date'] . '</td>
                               <td>
-                                <a href="controller_detalle_ventas.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-primary"><i class="fas fa-eye"></i></a>
-                              <a href="#" onclick="confirmarEliminarVenta(\'' . 'controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '\')" class="btn btn-danger" id="desactivarVenta"><i class="fas fa-trash"></i></a>
+                              <a href="controller_detalle_ventas.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-primary" data-toggle="tooltip" title="Ver detalles de venta">
+                              <i class="fas fa-eye"></i>
+                              </a>
+                          
+                              <a href="#" onclick="confirmarEliminarVenta(\'' . 'controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '\')" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" id="desactivarVenta"><i class="fas fa-trash"></i></a>
                                
 
                               </td>
@@ -239,6 +244,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- sweet alert -->
   <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 
   <?php
   $mensaje_error = $mensaje_error ?? ''; // Asegura que $mensaje_editar esté definido
@@ -315,7 +321,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     });
   </script>
-  
+
   <!-- DataTables  & Plugins -->
   <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
   <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -371,6 +377,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
       });
     });
   </script>
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+
 </body>
 
 </html>

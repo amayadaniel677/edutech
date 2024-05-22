@@ -19,12 +19,12 @@ if (isset($_GET['id_curso'])) {
     $detalle_curso = $curso_model->descripcion_curso($id_curso);
     $mostrar_precio = $curso_model->mostrar_precio();
 
-    $curso = $curso_model->traer_cursos($id_curso);
+    $curso = $curso_model->traer_curso_seleccionado($id_curso);
 
     if ($detalle_curso) {
         $area = $detalle_curso['area_name'];
         $area_id = $detalle_curso['id']; // Obtener el nombre del área del curso
-        $cursos_area = $curso_model->seleccionar_curso($area_id);
+        $cursos_area = $curso_model->seleccionar_cursos_sugeridos($area_id);
 
 
         // Llamar a la función mostrarDocentesPorArea para obtener los docentes del área específica
@@ -43,10 +43,15 @@ if (isset($_GET['id_curso'])) {
 }
 if (isset($_GET['id_eliminar'])) {
     $id_eliminar = $_GET['id_eliminar'];
+    $status = $_GET['status'];
     $consult = new descripcionCurso();
-    $curso_eliminado = $consult->eliminar_curso($id_eliminar);
+    $curso_eliminado = $consult->eliminar_curso($id_eliminar,$status);
     if ($curso_eliminado) {
-        $mensaje_ok = "El curso fue eliminado con exito";
+        if($status=='active'){
+            $mensaje_ok = "El curso fue desactivado con exito";
+        }elseif($status== "inactive"){
+            $mensaje_ok = "El curso fue activado con exito";   
+        }
         header("Refresh: 3; URL=controller_catalogo_cursos.php");
     } else {
         $mensaje_error = "El curso no puso ser eliminado, intenntelo de nuevo más tarde...";

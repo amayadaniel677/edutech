@@ -56,9 +56,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
                 <li class="breadcrumb-item"><a href="./controller_ventas.php">Ventas</a></li>
-               <li class="breadcrumb-item active">Registrar venta</li>
+                <li class="breadcrumb-item active">Registrar venta</li>
               </ol>
             </div>
             <!-- /.col -->
@@ -70,26 +70,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.fin titulo de la vista -->
 
       <!-- Contenido principal vista -->
-      <section class="content " >
+      <section class="content ">
         <div class="container-fluid " style="max-width:1000px;">
-        <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
-          
+          <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none">
+
           </button>
           <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none ">
-            
+
           </button>
-         
+
           <div>
             <div class="">
-  
+
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-detalle">
                 Agregar detalle<i class="bi bi-plus-circle"></i>
               </button>
               <?php include('modal_add_detalle_venta.php') ?>
             </div>
-  
+
             <form action="" method='POST' class="row mb-3" id='form-venta'>
-  
+
               <?php
               function getPostValue($name)
               {
@@ -102,9 +102,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 return '';
               }
               ?>
-  
+
               <input type="hidden" name="detallesVentaInput" id="detallesVentaInput" value="">
-  
+
+              <label for="dni" style="display:block;">DNI Cliente</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                </div>
+                <input type="number" class="form-control" id='dni' name="dni" placeholder="DNI" onkeyup="buscarUsuario(this.value)">
+              </div>
+
               <div class="col-md-6 col-12">
                 <label for="nombres" style="display:block;">Nombres cliente</label>
                 <div class="input-group mb-3">
@@ -113,12 +121,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                   <input required type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombre" <?php echo getPostValue('nombres'); ?>>
                 </div>
-                <label for="dni" style="display:block;">DNI Cliente</label>
+
+                <label for="ciudad" style="display:block;">Ciudad</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                    <span class="input-group-text"><i class="fa-solid fa-building-user"></i></span>
                   </div>
-                  <input required type="number" class="form-control" id='dni' name="dni" placeholder="DNI" <?php echo getPostValue('nombres'); ?>>
+                  <input required type="text" class="form-control" id='ciudad' name="ciudad" placeholder="Ciudad" <?php echo getPostValue('nombres'); ?>>
                 </div>
                 <label for="correo" style="display:block;">Correo</label>
                 <div class="input-group mb-3">
@@ -127,18 +136,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                   <input required type="email" class="form-control" name="correo" id="correo" placeholder="Correo" <?php echo getPostValue('nombres'); ?>>
                 </div>
-  
-  
-                <label for="ciudad" style="display:block;">Ciudad</label>
-                <div class="input-group mb-3">
+
+
+                <label for="telefono" style="display:block;">Telefono</label>
+                <div class="input-group mb-2">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa-solid fa-building-user"></i></span>
+                    <span class="input-group-text"><i class="fa-solid fa-square-phone"></i></span>
                   </div>
-                  <input required type="text" class="form-control" id='ciudad' name="ciudad" placeholder="Ciudad" <?php echo getPostValue('nombres'); ?>>
+                  <input required type="number" class="form-control" name="telefono" id='telefono' placeholder="Telefono" <?php echo getPostValue('telefono'); ?>>
                 </div>
-  
+
               </div>
-  
+
               <div class="col-md-6 col-12">
                 <label for="apellidos" style="display:block;">Apellidos cliente</label>
                 <div class="input-group mb-3">
@@ -147,17 +156,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                   <input required type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Nombre" <?php echo getPostValue('apellidos'); ?>>
                 </div>
-  
-  
-  
-                <label for="telefono" style="display:block;">Telefono</label>
-                <div class="input-group mb-2">
+
+
+
+                <label for="dni" style="display:block;">Direccion</label>
+                <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa-solid fa-square-phone"></i></span>
+                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                   </div>
-                  <input required type="number" class="form-control" name="telefono" id='telefono' placeholder="Telefono" <?php echo getPostValue('telefono'); ?>>
+                  <input required type="text" class="form-control" id='direccion' name="direccion" placeholder="Direccion" <?php echo getPostValue('nombres'); ?>>
                 </div>
-  
+
                 <label for="descuento" class="col-form-label">Descuento:</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -165,7 +174,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </div>
                   <input required type="number" class="form-control" id="descuento" name="descuento" placeholder="" <?php echo getPostValue('descuento'); ?>>
                 </div>
-  
+
                 <label for="valor-total" class="col-form-label">Valor total:</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -180,8 +189,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="card-header">
                 <h2 class="card-title">Detalles de Venta</h2>
               </div>
-  
-  
+
+
               <div class="card-body table-responsive p-0">
                 <table id="tabla-detalles" class="table table-hover">
                   <thead>
@@ -197,17 +206,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </tr>
                   </thead>
                   <tbody>
-  
+
                   </tbody>
                 </table>
               </div>
-  
+
             </div>
-  
+
           </div>
-  
+
         </div>
-        
+
       </section>
 
       <!-- /. Maincontent -->
@@ -231,93 +240,129 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!--fin de toda la pagina wrapper -->
   <!-- ./wrapper -->
 
-  
-                                <!-- REQUIRED SCRIPTS -->
-    <!-- jQuery -->
-    <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- sweet alert -->
-    <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
-    <!-- Toastr -->
-    <script src="../../../view/admin/plugins/toastr/toastr.min.js"></script>
+
+  <!-- REQUIRED SCRIPTS -->
+  <!-- jQuery -->
+  <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- sweet alert -->
+  <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+  <!-- Toastr -->
+  <script src="../../../view/admin/plugins/toastr/toastr.min.js"></script>
 
   <script src="../../../resource/js/admin/ventas/modal_detalle_venta2.js"></script>
   <!-- alert registrar venta -->
   <script src="../../../resource/js/admin/ventas/alert_registrar_venta1.js"></script>
   <!-- scripts para mostrar alertas de exito o error -->
+
+
   <?php
-    $mensaje = $mensaje ?? ''; // Asegura que $mensaje esté definido
-    $error = $error ?? ''; // Asegura que $mensaje esté definido
-    ?>
-        <script>
-            $(function() {
-                var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 400000,
-                    width: '80%',
-                    customClass: {
-                        container: 'mi-clase-personalizada'
-                    }
-    
-                
-                });
-    
-                $('.swalDefaultSuccess').click(function() {
-                    Toast.fire({
-                        icon: 'success',
-                        title:'<?php echo $mensaje; ?>'
-                        
-                    })
-                });
-                $('.swalDefaultInfo').click(function() {
-                    Toast.fire({
-                        icon: 'info',
-                        title: '<?php echo $error; ?>'
-                    })
-                });
-                $('.swalDefaultError').click(function() {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                    })
-                });
-                $('.swalDefaultWarning').click(function() {
-                    Toast.fire({
-                        icon: 'warning',
-                        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                    })
-                });
-                $('.swalDefaultQuestion').click(function() {
-                    Toast.fire({
-                        icon: 'question',
-                        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                    })
-                });
-            });
-        </script>
-        <script>
-            $(document).ready(function() {
-                // Verificar si la variable $mensaje está definida
-                <?php if (isset($mensaje) && !empty($mensaje)) : ?>
-                    // Simular un clic en el botón para activar el SweetAlert
-                    $('#btnSuccess').click();
-                <?php endif; ?>
-                <?php if (isset($error) && !empty($error)) : ?>
-                    // Simular un clic en el botón para activar el SweetAlert
-                    
-                 console.log('entro');
-                    $('#btnInfo').click();
-    
-                   
-                    
-                <?php endif; ?>
-               
-                
-            });
-        </script>
+  $mensaje = $mensaje ?? ''; // Asegura que $mensaje esté definido
+  $error = $error ?? ''; // Asegura que $mensaje esté definido
+  ?>
+  <script>
+    $(function() {
+      var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 400000,
+        width: '80%',
+        customClass: {
+          container: 'mi-clase-personalizada'
+        }
+
+
+      });
+
+      $('.swalDefaultSuccess').click(function() {
+        Toast.fire({
+          icon: 'success',
+          title: '<?php echo $mensaje; ?>'
+
+        })
+      });
+      $('.swalDefaultInfo').click(function() {
+        Toast.fire({
+          icon: 'info',
+          title: '<?php echo $error; ?>'
+        })
+      });
+      $('.swalDefaultError').click(function() {
+        Toast.fire({
+          icon: 'error',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultWarning').click(function() {
+        Toast.fire({
+          icon: 'warning',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+      $('.swalDefaultQuestion').click(function() {
+        Toast.fire({
+          icon: 'question',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      // Verificar si la variable $mensaje está definida
+      <?php if (isset($mensaje) && !empty($mensaje)) : ?>
+        // Simular un clic en el botón para activar el SweetAlert
+        $('#btnSuccess').click();
+      <?php endif; ?>
+      <?php if (isset($error) && !empty($error)) : ?>
+        // Simular un clic en el botón para activar el SweetAlert
+
+        console.log('entro');
+        $('#btnInfo').click();
+
+
+
+      <?php endif; ?>
+
+
+    });
+  </script>
+
+  <!-- actualiza inputs por dni-->
+  <script>
+    function buscarUsuario(dni) {
+      $.ajax({
+        url: 'controller_regventa.php', 
+        type: 'GET',
+        data: {
+          dni: dni
+        },
+        dataType: 'json',
+        success: function(data) {
+          if (data && data.usuario) {
+            $('#nombres').val(data.usuario.name);
+            $('#ciudad').val(data.usuario.city);
+            $('#telefono').val(data.usuario.phone);
+            $('#apellidos').val(data.usuario.lastname);
+            $('#direccion').val(data.usuario.address);
+          } else {
+            // Limpiar los campos si no se encuentra el usuario
+            $('#nombres').val('');
+            $('#ciudad').val('');
+            $('#telefono').val('');
+            $('#apellidos').val('');
+            $('#direccion').val('');
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error("Error al buscar el usuario:", error);
+        }
+      });
+    }
+  </script>
+
 
 
   <!-- Bootstrap 4 -->

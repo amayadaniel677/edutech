@@ -279,10 +279,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.control-sidebar -->
 
       <!-- Main Footer -->
-      <?php include('../../../view/admin/layouts/footer.php'); ?>
+      
       <!--FIN   Main Footer -->
 
-    </div> <!--fin de toda la pagina wrapper -->
+    </div> 
+    <!--footer-->
+    <?php include('../../../view/admin/layouts/footer.php'); ?>
+    
+    <!--fin de toda la pagina wrapper -->
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->

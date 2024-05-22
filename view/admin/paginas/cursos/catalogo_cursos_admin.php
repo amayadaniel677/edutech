@@ -19,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <!-- CSS CURSOS ADMIN -->
-    <link rel="stylesheet" href="../../../resource/css/cursos/cursos1.css" />
+    <link rel="stylesheet" href="../../../resource/css/cursos/cursos3.css" />
     <link rel="stylesheet" href="http://localhost/edutech-project/resource/css/cursos/cursos1.css" />
     <!-- SwadeetAlert2 -->
     <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
@@ -104,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <?php endif; ?>
 
                 <section class="content">
-                    <div class="container-fluid" style="max-width:1000px;">
+                    <div class="container-fluid" style="max-width:1300px;">
 
                         <div class="categoria-cursos">
                             <?php foreach ($datos_organizados as $area => $cursos_area) : ?>
@@ -128,10 +128,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <!-- Mostrar la descripción del curso -->
                                             </div>
                                         </a>
-                                        <div class="adquirir">
+                                        <div class="adquirir mt-2">
                                             <a
-                                                href="controller_descripcion_curso.php?id_curso=<?php echo $curso['subject_id']; ?>">ADQUIRIR</a>
-                                            <p class="descuento">20%DTO</p>
+                                                href="controller_descripcion_curso.php?id_curso=<?php echo $curso['subject_id']; ?>" >ADQUIRIR</a>
+                                           
                                         </div>
                                     </article>
                                     <?php endforeach; ?>
@@ -139,14 +139,54 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div> <!-- Cerrar div de categoría -->
                             <?php endforeach; ?>
                         </div>
+                        <div class="titulo">
+                                    <h2>CURSOS INACTIVOS </h2> <!-- Mostrar el nombre del área -->
+                                </div>
+                            <?php if (isset($cursos_inactivos) && !empty($cursos_inactivos)) :?>
+                                
+                                    <div class="articulos">
+                                    <?php foreach ($cursos_inactivos as $curso_inactivo) :?>
+                                    <article class="materias">
+                                        <a
+                                            href="controller_descripcion_curso.php?id_curso=<?php echo $curso_inactivo['subject_id']; ?>">
+                                            <div style="height:120px;">
+                                                <img src="<?php echo $ruta_inicio . $curso_inactivo['photo']; ?>"
+                                                    style="height:100%;" /> <!-- Mostrar la imagen del curso -->
+                                            </div>
+                                            <div>
+                                                <h5><?php echo $curso_inactivo['subject_name']; ?></h5>
+                                                <!-- Mostrar el nombre del curso -->
+                                                <p><?php echo$curso_inactivo['description']; ?></p>
+                                                <!-- Mostrar la descripción del curso -->
+                                            </div>
+                                        </a>
+                                        <div class="adquirir mt-2">
+                                            <a
+                                                href="controller_descripcion_curso.php?id_curso=<?php echo $curso_inactivo['subject_id'];?>">ADQUIRIR  </a>
+                                           
+                                        </div>
+                                    </article>
+                                   
+                                
+                                <?php endforeach;?>
+                            <?php else :?>
+                                <div class="col">
+                                    <p>No hay cursos inactivos.</p>
+                                </div>
+                            <?php endif;?>
+                        </div>
+                    </div>
+
+
                     </div>
 
                 </section>
             </section>
             <!-- /. Maincontent -->
+            <?php include('../../../view/admin/layouts/footer.php'); ?>
         </div>
         <!-- /.content-wrapper -->
-
+        
         <!-- Controlador del nav aSidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
@@ -154,14 +194,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <h5>Title</h5>
                 <p>Sidebar content</p>
             </div>
+
+           
         </aside>
         <!-- /.control-sidebar -->
 
-        <!-- Main Footer -->
-        <?php include('../../../view/admin/layouts/footer.php'); ?>
-        <!--FIN   Main Footer -->
+      
+        
 
     </div>
+      <!-- Main Footer -->
+      
+     
+    
+     <!--FIN   Main Footer -->
     <!--fin de toda la pagina wrapper -->
     <!-- ./wrapper -->
 

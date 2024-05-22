@@ -22,11 +22,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../view/admin/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../resource/css/cursos/cursos1.css" />
+  <link rel="stylesheet" href="../../resource/css/cursos/cursos3.css" />
   
   <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../resource/css/inicio/nav.css" />
+  <link rel="stylesheet" href="../../resource/css/layouts/footer2.css" />
   <!-- CSS CURSOS ADMIN -->
 
     <link rel="icon" href="../../resource/img/icons/logo-kepler-removebg-preview.png" />
@@ -113,7 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?php include('../../view/admin/layouts/footer.php'); ?>
+  <?php require_once('../../view/layout/footer.php');?>
   <!--FIN   Main Footer -->
 
 </div> <!--fin de toda la pagina wrapper -->

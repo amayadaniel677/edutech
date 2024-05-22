@@ -63,12 +63,12 @@ class descripcionCurso
 
         return $docentes;
     }
-    public function seleccionar_curso($area_id)
+    public function seleccionar_cursos_sugeridos($area_id)
     {
         $sql = "SELECT s.id AS subject_id, s.name AS subject_name, s.description, s.photo, a.name AS area_name
                 FROM subjects s
                 INNER JOIN areas a ON s.areas_id = a.id
-                WHERE s.areas_id = ?";
+                WHERE s.areas_id = ? and s.status='active' " ;
         $stmt = $this->con->prepare($sql);
         $stmt->bind_param("i", $area_id);
         $stmt->execute();
@@ -98,9 +98,9 @@ class descripcionCurso
         }
     }
 
-    public function traer_cursos($id)
+    public function traer_curso_seleccionado($id)
     {
-        $sql = "SELECT * FROM subjects WHERE id='$id' AND `status`='active'";
+        $sql = "SELECT * FROM subjects WHERE id='$id' ";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -110,9 +110,14 @@ class descripcionCurso
         }
     }
     // LOGICA PARA EDITAR Y ELIMINAR LOS CURSOS
-    public function eliminar_curso($id)
+    public function eliminar_curso($id,$status)
     {
-        $sql = "UPDATE subjects SET status='inactive' WHERE id='$id'";
+        if($status=='active'){
+            $sql = "UPDATE subjects SET status='inactive' WHERE id='$id'";
+        }elseif($status== "inactive"){
+            $sql = "UPDATE subjects SET status='active' WHERE id='$id'";
+        }
+       
         $result = $this->con->query($sql);
         if ($result) {
             return true;

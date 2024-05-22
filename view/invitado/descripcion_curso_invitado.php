@@ -24,6 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Theme style -->
   <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../../resource/css/layouts/footer2.css" />
   <!-- CSS CURSOS ADMIN -->
 
     <link rel="icon" href="../../resource/img/icons/logo-kepler-removebg-preview.png" />
@@ -107,39 +108,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <h3 class="mt-4">Cursos sugeridos</h3>
         <!-- Carrusel de cursos relacionados -->
         <div class="mb-3 col-md-6 p-3 rounded">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="background-color: #f2f2f2;">
-                <div class="carousel-inner">
-                <?php foreach ($cursos_area as $index => $curso2): ?>
-    <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-        <div class="border p-3 mx-auto curso-container" style="max-width: 300px; margin-top:5px; margin-bottom: 5px; background: linear-gradient(to bottom, #7FFFD4, #40E0D0); border-radius:7px;">
-            <article class="materias">
-                <a href="controller_descripcion_curso_invitado.php?id_curso=<?php echo $curso2['subject_id']; ?>" style="text-decoration:none;">
-                    <div class="curso" style="height: 120px; position: relative; border-radius: 10px; display: flex; align-items: center;">
-                        <img src="<?php echo $ruta_inicio . $curso2['photo']; ?>" style="height: 100%; object-fit: cover; margin: auto;" alt="Curso Image">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="background-color: #f2f2f2;">
+        <div class="carousel-inner">
+            <?php foreach ($cursos_area as $index => $curso2) : ?>
+                <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                    <div class="border p-3 mx-auto curso-container" style="max-width: 300px; margin-top:5px; margin-bottom: 5px; background: linear-gradient(to bottom, #7FFFD4, #40E0D0); border-radius:7px;">
+                        <article class="materias">
+                            <a href="controller_descripcion_curso_invitado.php?id_curso=<?php echo $curso2['subject_id']; ?>" class="d-flex justify-content-center align-items-center" style="height: 120px; position: relative; border-radius: 10px;">
+                                <img src="<?php echo $ruta_inicio . $curso2['photo']; ?>" style="max-height: 100%; max-width: 100%; object-fit: cover;" alt="Curso Image">
+                            </a>
+                            <h5 class="text-center mt-3"><?php echo $curso2['subject_name']; ?></h5>
+                            <div class="adquirir-button text-center">
+                                <a href="controller_descripcion_curso_invitado.php?id_curso=<?php echo $curso2['subject_id']; ?>" style="color: white;">ADQUIRIR</a>
+                            </div>
+                        </article>
                     </div>
-                    <h5 class="text-center mt-3"><?php echo $curso2['subject_name']; ?></h5>
-                </a>
-                <div class="adquirir-button text-center">
-                    <a href="controller_descripcion_curso.php?id_curso=<?php echo $curso2['subject_id']; ?>" style="color: white; text-decoration:none;">ADQUIRIR</a>
                 </div>
-            </article>
+            <?php endforeach; ?>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-<?php endforeach; ?>
+</div>
 
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="row mt-4">
+        
+<div class="row mt-4">
             <nav class="w-100">
                 <div class="nav nav-tabs" id="product-tab" role="tablist">
                     <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Descripción</a>
@@ -153,49 +152,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
                     <h3>Recomendaciones para seguir un curso</h3>
                     <ol>
-                    <li><strong>Establece objetivos claros:</strong> Antes de comenzar el curso, define qué es lo que esperas lograr al finalizarlo.</li>
-                <!-- Otras recomendaciones -->
-            </ol>
-        </div>
-        <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
-            <div>
-                <?php if (!empty($docentes)) : ?>
-                    <h3>Docentes</h3>
-                    <ul class="list-unstyled">
-                        <?php foreach ($docentes as $docente) : ?>
-                            <li><?php echo $docente['docente'] .' '.$docente['lastname'];  ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php else : ?>
-                    <h4>No se encontraron docentes vinculados para este curso.</h4>
-                <?php endif; ?>
+                        <li><strong>Establece objetivos claros:</strong> Antes de comenzar el curso, define qué es lo que esperas lograr al finalizarlo.</li>
+                        <!-- Otras recomendaciones -->
+                    </ol>
+                </div>
+                <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
+                    
+                        <?php if (!empty($docentes)) : ?>
+                            <h3>Docentes</h3>
+                            <ul class="list-unstyled">
+                                <?php foreach ($docentes as $docente) : ?>
+                                    <li><?php echo $docente['docente'] . ' ' . $docente['lastname'];  ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else : ?>
+                            <h4>No se encontraron docentes vinculados para este curso.</h4>
+                        <?php endif; ?>
 
+                    
+                </div>
+                <div class="tab-pane fade col-md-3" id="product-price" role="tabpanel" aria-labelledby="product-price-tab">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>TIPO</th>
+                                <th>Precio por hora</th>
+                                <th>Precio por clase</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Aquí puedes agregar filas con los cursos y sus precios -->
+                            <?php foreach ($mostrar_precio as $precio) : ?>
+                                <tr>
+                                    <td><?php echo $precio['name']; ?> </td>
+                                    <td><?php echo $precio['p_student']; ?></td>
+                                    <td><?php echo $precio['p_class']; ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            <!-- Y así sucesivamente -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="tab-pane fade" id="product-price" role="tabpanel" aria-labelledby="product-price-tab">
-         
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>TIPO</th>
-                        <th>Precio por hora</th>
-                        <th>Precio por clase</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <!-- Aquí puedes agregar filas con los cursos y sus precios -->
-                <?php foreach($mostrar_precio as $precio) : ?>
-                    <tr>
-                        <td><?php echo $precio['name']; ?> </td>
-                        <td><?php echo $precio['p_student']; ?></td>
-                        <td><?php echo $precio['p_class']; ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                    <!-- Y así sucesivamente -->
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
 
 
@@ -227,7 +226,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <?php include('../../view/admin/layouts/footer.php'); ?>
+  <?php require_once('../../view/layout/footer.php');?>
   <!--FIN   Main Footer -->
 
 </div> <!--fin de toda la pagina wrapper -->
