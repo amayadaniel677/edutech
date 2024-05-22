@@ -22,8 +22,8 @@ class eliminar_usuarios_model{
     }
 
 
-    public function eliminar_usuario($id){
-        $sql="update people set status='inactive' where id='$id'";
+    public function eliminar_usuario($id,$accion){
+        $sql="update people set status='$accion' where id='$id'";
         $result=$this->con->query($sql);
         if($result){
             $this->reset_remaining_units($id);

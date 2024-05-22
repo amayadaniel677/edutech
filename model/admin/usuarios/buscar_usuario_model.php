@@ -25,10 +25,16 @@ class buscar_usuario_model{
             // entro al modelo traer todos
            
             $sql="SELECT * FROM people WHERE rol !='administrador' AND status='active'";
-        }else{
+        }elseif($tipo_usuario=='docente' || $tipo_usuario=='estudiante'){
             // entro al modelo traer por tipo de usuario
            
             $sql="SELECT * FROM people WHERE rol='$tipo_usuario' AND status='active' order by id desc";
+        
+        }elseif($tipo_usuario=='inactivo'){
+            // entro al modelo traer por tipo de usuario
+            $sql="SELECT * FROM people WHERE status='inactive' order by id desc";
+        }elseif($tipo_usuario=='todosSuperAdmin'){
+            $sql="SELECT * FROM people order by id desc";
         }
 
         $result=$this->con->query($sql);

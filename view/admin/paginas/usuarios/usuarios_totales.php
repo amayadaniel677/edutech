@@ -128,6 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <th scope="col"># Documento</th>
                                         <th scope="col">Ciudad</th>
                                         <th scope="col">Direccion</th>
+                                        <th scope="col">Estado</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -143,19 +144,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             echo '<td>' . $usuario['dni'] . '</td>';
                                             echo '<td>' . $usuario['city'] . '</td>';
                                             echo '<td>' . $usuario['address'] . '</td>';
+                                            echo '<td>' . $usuario['status'] . '</td>';
                                             echo '<td>';
                                             echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '" class="btn btn-primary">';
                                             echo '<i class="fas fa-edit" data-toggle="tooltip" title="Editar"></i>';
                                             echo '</a>';
+                                            if($usuario['status'] == 'active'){
+                                               $accion='desactivar';
+                                                echo '<a href="#" onclick="confirmarEliminarUsuario(\'' . 'controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario .'&accion='.$accion .'\')" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" id="desactivarUsuario">';
+                                                echo '<i class="fas fa-trash"></i>';
+                                                echo '</a>';
+                                            }elseif($usuario['status'] == 'inactive'){
+                                                $accion='activar';
+                                                echo '<a href="#" onclick="confirmarEliminarUsuario(\'' . 'controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario .'&accion='.$accion .'\')" class="btn btn-success" data-toggle="tooltip" title="Activar" id="activarUsuario">';
+                                                echo '<i class="fas fa-undo"></i> ';
+                                                echo '</a>';
+                                            }
+                                           
 
-                                            echo '<a href="#" onclick="confirmarEliminarUsuario(\'' . 'controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '\')" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" id="desactivarUsuario">';
-
-                                            echo '<i class="fas fa-trash"></i>';
-                                            echo '</a>';
-                                            if ($usuario['rol'] == 'docente') {
+                   
+                                            if ($usuario['rol'] == 'docente' and $usuario['status'] == 'active') {
                                                 $usuario_id = $usuario['id'];
                                                 echo "  <a href='#' class='btn btn-primary abrir-modal-docente' data-toggle='tooltip' data-target='#modalDocente' data-id='$usuario_id' data-toggle='tooltip' data-placement='top' title='sumar horas trabajadas'><i class='fas fa-clock' ></i></a>";
-                                            } else {
+                                            } elseif($usuario['rol'] == 'estudiante' and $usuario['status'] == 'active') {
                                                 $usuario_id = $usuario['id'];
                                                 echo "  <a href='#' class='btn btn-success abrir-modal-estudiante' data-toggle='tooltip' data-target='#modalEstudiante' data-id-estudiante='$usuario_id' data-toggle='tooltip' data-placement='top' title='agregar horas al estudiante'><i class='fas fa-clipboard-check'></i>
                                                 </a>";
@@ -431,9 +442,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
         });
         // Función para confirmar la eliminación de un usuario
-        function confirmarEliminarUsuario(url) {
+        function confirmarEliminarUsuario(url,accion) {
             Swal.fire({
-                title: "¿Estás seguro de inactivar el usuario?",
+                title: `¿Estás seguro de ${nombreUsuario} el usuario?`,
                 text: "Esto podría afectar sus cursos activos",
                 icon: "warning",
                 showCancelButton: true,
