@@ -136,7 +136,7 @@
         <div class="carousel-inner">
             <?php foreach ($cursos_area as $index => $curso2) : ?>
                 <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                    <div class="border p-3 mx-auto curso-container" style="max-width: 300px; margin-top:5px; margin-bottom: 5px; background: linear-gradient(to bottom, #7FFFD4, #40E0D0); border-radius:7px;">
+                    <div class="border p-3 mx-auto curso-container" style="max-width: 300px; margin-top:5px; margin-bottom: 5px; background: white; border-radius:7px;">
                         <article class="materias">
                             <a href="controller_descripcion_curso.php?id_curso=<?php echo $curso2['subject_id']; ?>" class="d-flex justify-content-center align-items-center" style="height: 120px; position: relative; border-radius: 10px;">
                                 <img src="<?php echo $ruta_inicio . $curso2['photo']; ?>" style="max-height: 100%; max-width: 100%; object-fit: cover;" alt="Curso Image">
@@ -165,13 +165,13 @@
         <nav class="w-100">
             <div class="nav nav-tabs" id="product-tab" role="tablist">
                 <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc"
-                    role="tab" aria-controls="product-desc" aria-selected="true">Descripción</a>
+                    role="tab" aria-controls="product-desc" aria-selected="true" style="color:black;" >Descripción</a>
                 <a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments"
-                    role="tab" aria-controls="product-comments" aria-selected="false">Recomendaciones</a>
+                    role="tab" aria-controls="product-comments" aria-selected="false" style="color:black;" >Recomendaciones</a>
                 <a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab"
-                    aria-controls="product-rating" aria-selected="false">Docentes</a>
+                    aria-controls="product-rating" aria-selected="false" style="color:black;"  >Docentes</a>
                 <a class="nav-item nav-link" id="product-price-tab" data-toggle="tab" href="#product-price" role="tab"
-                    aria-controls="product-price" aria-selected="false">Precio</a>
+                    aria-controls="product-price" aria-selected="false" style="color:black;"   >Precio</a>
             </div>
         </nav>
         <div class="tab-content p-3" id="nav-tabContent">

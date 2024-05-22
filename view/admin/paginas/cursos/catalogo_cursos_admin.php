@@ -116,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <?php foreach ($cursos_area as $curso) : ?>
                                     <article class="materias">
                                         <a
-                                            href="controller_descripcion_curso.php?id_curso=<?php echo $curso['subject_id']; ?>">
+                                            href="controller_descripcion_curso.php?id_curso=<?php echo $curso['subject_id']; ?>" style="text-decoration:none;">
                                             <div style="height:120px;">
                                                 <img src="<?php echo $ruta_inicio . $curso['photo']; ?>"
                                                     style="height:100%;" /> <!-- Mostrar la imagen del curso -->
@@ -130,7 +130,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </a>
                                         <div class="adquirir mt-2">
                                             <a
-                                                href="controller_descripcion_curso.php?id_curso=<?php echo $curso['subject_id']; ?>" >ADQUIRIR</a>
+                                                href="controller_descripcion_curso.php?id_curso=<?php echo $curso['subject_id']; ?>" style="text-decoration:none;">ADQUIRIR</a>
                                            
                                         </div>
                                     </article>
@@ -147,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="articulos">
                                     <?php foreach ($cursos_inactivos as $curso_inactivo) :?>
                                     <article class="materias">
-                                        <a
+                                        <a style="text-decoration:none;"
                                             href="controller_descripcion_curso.php?id_curso=<?php echo $curso_inactivo['subject_id']; ?>">
                                             <div style="height:120px;">
                                                 <img src="<?php echo $ruta_inicio . $curso_inactivo['photo']; ?>"
@@ -161,7 +161,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </div>
                                         </a>
                                         <div class="adquirir mt-2">
-                                            <a
+                                            <a style="text-decoration:none;"
                                                 href="controller_descripcion_curso.php?id_curso=<?php echo $curso_inactivo['subject_id'];?>">ADQUIRIR  </a>
                                            
                                         </div>
