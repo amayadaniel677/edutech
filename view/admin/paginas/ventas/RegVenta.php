@@ -110,7 +110,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
                 </div>
-                <input type="number" class="form-control" id='dni' name="dni" placeholder="DNI" onkeyup="buscarUsuario(this.value)">
+                <input type="number" class="form-control" id='dni_input' name="dni" placeholder="DNI">
               </div>
 
               <div class="col-md-6 col-12">
@@ -330,38 +330,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
   </script>
 
+
   <!-- actualiza inputs por dni-->
   <script>
-    function buscarUsuario(dni) {
-      $.ajax({
-        url: 'controller_regventa.php', 
-        type: 'GET',
-        data: {
-          dni: dni
-        },
-        dataType: 'json',
-        success: function(data) {
-          if (data && data.usuario) {
-            $('#nombres').val(data.usuario.name);
-            $('#ciudad').val(data.usuario.city);
-            $('#telefono').val(data.usuario.phone);
-            $('#apellidos').val(data.usuario.lastname);
-            $('#direccion').val(data.usuario.address);
-          } else {
-            // Limpiar los campos si no se encuentra el usuario
-            $('#nombres').val('');
-            $('#ciudad').val('');
-            $('#telefono').val('');
-            $('#apellidos').val('');
-            $('#direccion').val('');
-          }
-        },
-        error: function(xhr, status, error) {
-          console.error("Error al buscar el usuario:", error);
-        }
-      });
-    }
+    document.getElementById('dni_input').addEventListener('keyup', function() {
+      var dni = this.value;
+      fetch('controller_regventa.php?dni_input=' + dni)
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('nombres').value = data.name;
+          document.getElementById('apellidos').value = data.lastname;
+          document.getElementById('ciudad').value = data.city;
+          document.getElementById('direccion').value = data.address;
+          document.getElementById('correo').value = data.email;
+          document.getElementById('telefono').value = data.phone;
+        })
+        .catch(error => console.error('Error:', error));
+    });
   </script>
+
 
 
 
