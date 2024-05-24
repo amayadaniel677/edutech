@@ -34,7 +34,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- CSS CURSOS ADMIN -->
   <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
   <!-- css alertas mensajes -->
-  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" /> <!-- necesario para el tamaño de mensajes alerta  -->
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />
+  <!-- necesario para el tamaño de mensajes alerta  -->
 
   <style>
     .mi-clase-personalizada .swal2-popup {
@@ -47,7 +48,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       margin-top: 8px !important;
       font-size: 18px !important;
     }
-    .content-wrapper{
+
+    .content-wrapper {
       height: auto !important;
     }
   </style>
@@ -94,7 +96,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
           error
         </button>
-        <div class="container-fluid" style="max-width:1000px;">
+        <div class="container-fluid" style="max-width:1200px;">
 
           <div class="container">
 
@@ -152,6 +154,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th scope="col">dni</th>
                       <th scope="col">Nombre</th>
                       <th scope="col">Precio</th>
+                      <th scope="col">Descuento</th>
+
                       <th scope="col">Fecha</th>
                       <th scope="col">Acciones</th>
                     </tr>
@@ -167,6 +171,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                               <td>' . $venta['person_dni'] . '</td>
                               <td>' . $venta['person_name'], " ", $venta['person_lastname'] . '</td>
                               <td>' . $venta['sale_price'] . '</td>
+                              <td>' . $venta['sale_discount'] . '</td>
                               <td>' . $venta['sale_date'] . '</td>
                               <td>
                               <a href="controller_detalle_ventas.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-primary" data-toggle="tooltip" title="Ver detalles de venta">
@@ -195,6 +200,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th scope="col">dni</th>
                       <th scope="col">Nombre</th>
                       <th scope="col">Precio</th>
+                      <th scope="col">descuento</th>
                       <th scope="col">Fecha</th>
                       <th scope="col">Acciones</th>
                     </tr>
@@ -230,7 +236,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <?php include('../../../view/admin/layouts/footer.php'); ?>
     <!--FIN   Main Footer -->
 
-  </div> <!--fin de toda la pagina wrapper -->
+  </div>
+  <!--fin de toda la pagina wrapper -->
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
