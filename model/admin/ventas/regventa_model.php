@@ -268,7 +268,7 @@ class RegVenta_consult
 
     public function traer_usuario($dni)
     {
-        $sql = "SELECT * FROM people WHERE dni='$dni'";
+        $sql = "SELECT * FROM people WHERE dni='$dni' and rol='estudiante' ";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();

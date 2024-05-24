@@ -122,6 +122,9 @@ class obtener_datos
             case 'administrador':
                 header("Location: admin/perfil/controller_perfil_admin.php");
                 break;
+            case 'superadmin':
+                header("Location: admin/perfil/controller_perfil_admin.php");
+                break;
 
             default:
                 header("Location: login_controller.php");
@@ -138,6 +141,9 @@ class obtener_datos
                 header("Location: estudiante/controller_perfil_estudiante.php?mensaje=" . urlencode($msg));
                 break;
             case 'administrador':
+                header("Location: admin/perfil/controller_perfil_admin.php?mensaje=" . urlencode($msg));
+                break;
+            case 'superadmin':
                 header("Location: admin/perfil/controller_perfil_admin.php?mensaje=" . urlencode($msg));
                 break;
 
