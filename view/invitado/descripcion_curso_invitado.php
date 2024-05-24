@@ -150,7 +150,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="tab-content p-3" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"><?php echo $curso1['description']; ?></div>
                 <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
-                    <h3>Recomendaciones para seguir un curso</h3>
+                    <h4>Recomendaciones para seguir un curso</h4>
                     <ol>
                         <li><strong>Establece objetivos claros:</strong> Antes de comenzar el curso, define qué es lo que esperas lograr al finalizarlo.</li>
                         <!-- Otras recomendaciones -->
@@ -159,7 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
                     
                         <?php if (!empty($docentes)) : ?>
-                            <h3>Docentes</h3>
+                            <h4>Docentes</h4>
                             <ul class="list-unstyled">
                                 <?php foreach ($docentes as $docente) : ?>
                                     <li><?php echo $docente['docente'] . ' ' . $docente['lastname'];  ?></li>
