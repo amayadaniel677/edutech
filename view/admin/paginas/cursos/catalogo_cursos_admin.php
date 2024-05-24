@@ -19,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <!-- CSS CURSOS ADMIN -->
-    <link rel="stylesheet" href="../../../resource/css/cursos/cursos3.css" />
+    <link rel="stylesheet" href="../../../resource/css/cursos/cursos4.css" />
     <link rel="stylesheet" href="http://localhost/edutech-project/resource/css/cursos/cursos1.css" />
     <!-- SwadeetAlert2 -->
     <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
@@ -83,16 +83,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </svg></span>
                     </a>
                 </div>
-                <figcaption class="buscador mt-3">
-                    <div>
-                        <h2>CURSOS</h2>
-                    </div>
-                    <div>
-                        <form action="#">
-                            <input type="search" class="buscador" placeholder="Buscar Curso" />
-                        </form>
-                    </div>
-                </figcaption>
+                <figcaption class="buscador mt-2">
+                        <div>
+                            <h2>CURSOS</h2>
+                        </div>
+                        <div class="form-inline">
+                            <div class="input-group" >
+                            <input class="form-control form-control-sidebar" type="search" id="search-input" placeholder="Buscar curso..." aria-label="Search">
+                            <div class="input-group-append">
+                                <br>
+                                <button class="btn btn-primary " id="search-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                                </button>
+                            </div>
+                            </div>
+                        </div>
+                        </figcaption>
                 <br>
 
                 <?php if (isset($_SESSION['error_message'])) : ?>
@@ -106,7 +114,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <section class="content">
                     <div class="container-fluid" style="max-width:1300px;">
 
-                        <div class="categoria-cursos">
+                        <div class="categoria-cursos1">
                             <?php foreach ($datos_organizados as $area => $cursos_area) : ?>
                             <div class="categoria-cursos">
                                 <div class="titulo">
@@ -219,6 +227,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- sweet alert -->
     <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script>
+  document.getElementById('search-button').addEventListener('click', function() {
+    searchCourses();
+});
+
+function searchCourses() {
+    var query = document.getElementById('search-input').value.toLowerCase();
+    var courses = document.querySelectorAll('.categoria-cursos .materias');
+
+    var anyCourseFound = false;
+
+    courses.forEach(function(course) {
+        var courseName = course.querySelector('h5').innerText.toLowerCase();
+        var courseDescription = course.querySelector('p').innerText.toLowerCase();
+        var area = course.closest('.categoria-cursos').querySelector('h2').innerText.toLowerCase();
+
+        if (courseName.includes(query) || courseDescription.includes(query)) {
+            course.style.display = 'block';
+            course.closest('.categoria-cursos').style.display = 'block'; // Mostrar el área
+            anyCourseFound = true;
+        } else {
+            course.style.display = 'none';
+            // Ocultar el área solo si todos los cursos en esa área no coinciden con la búsqueda
+            var coursesInSection = course.closest('.categoria-cursos').querySelectorAll('.materias');
+            var coursesMatchingQuery = Array.from(coursesInSection).filter(function(course) {
+                var name = course.querySelector('h5').innerText.toLowerCase();
+                var description = course.querySelector('p').innerText.toLowerCase();
+                return name.includes(query) || description.includes(query);
+            });
+            if (coursesMatchingQuery.length === 0) {
+                course.closest('.categoria-cursos').style.display = 'none';
+            }
+        }
+    });
+
+    if (!anyCourseFound) {
+        alert('No se encontraron cursos que coincidan con la búsqueda.');
+    }
+}
+
+</script>
+
 
     <?php
   $mensaje = $mensaje ?? ''; // Asegura que $mensaje esté definido

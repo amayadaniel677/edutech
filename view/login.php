@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar secion</title>
-    <link rel="stylesheet" href="../resource/css/login/login1.css">
+    <link rel="stylesheet" href="../resource/css/login/login.css">
     
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
@@ -37,8 +37,8 @@
   <!-- /.login-logo -->
   <div class="card">
   <div class=" d-flex justify-content-center mb-2 mt-4">
-        <a href="" class="btn btn-secondary mr-2">Iniciar Sesión</a>
-        <a href="../controller/signup_controller.php" class="btn btn-outline-secondary ">Registrarse</a>
+        <h3> LOGIN </h3>
+        
     </div>
     <div class="card-body login-card-body">
       <p class="login-box-msg">Gracias por volver, ingresa tus credenciales. </p>
