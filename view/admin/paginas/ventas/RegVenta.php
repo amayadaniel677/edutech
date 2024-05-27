@@ -30,7 +30,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css" />
 
   <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
-  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" /> <!-- necesario para el tamaño de mensajes alerta  -->
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />
+  <!-- necesario para el tamaño de mensajes alerta  -->
 
 </head>
 
@@ -104,14 +105,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
               ?>
 
               <input type="hidden" name="detallesVentaInput" id="detallesVentaInput" value="">
-
-              <label for="dni" style="display:block;">DNI Cliente</label>
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+              <div class="col-md-12 col-12">
+                <label for="dni_input" style="display:block;">DNI Cliente</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                  </div>
+                  <input type="number" class="form-control" id='dni_input' name="dni" placeholder="DNI">
                 </div>
-                <input type="number" class="form-control" id='dni' name="dni" placeholder="DNI" onkeyup="buscarUsuario(this.value)">
               </div>
+
 
               <div class="col-md-6 col-12">
                 <label for="nombres" style="display:block;">Nombres cliente</label>
@@ -119,7 +122,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
                   </div>
-                  <input required type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombre" <?php echo getPostValue('nombres'); ?>>
+                  <input required type="text" class="form-control" name="nombres" id="nombres" placeholder="Nombre" value="<?php echo getPostValue('nombres'); ?>">
+
                 </div>
 
                 <label for="ciudad" style="display:block;">Ciudad</label>
@@ -127,14 +131,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-building-user"></i></span>
                   </div>
-                  <input required type="text" class="form-control" id='ciudad' name="ciudad" placeholder="Ciudad" <?php echo getPostValue('nombres'); ?>>
+                  <input required type="text" class="form-control" id='ciudad' name="ciudad" placeholder="Ciudad" value="<?php echo getPostValue('ciudad'); ?>">
                 </div>
                 <label for="correo" style="display:block;">Correo</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                   </div>
-                  <input required type="email" class="form-control" name="correo" id="correo" placeholder="Correo" <?php echo getPostValue('nombres'); ?>>
+                  <input required type="email" class="form-control" name="correo" id="correo" placeholder="Correo" value="<?php echo getPostValue('correo'); ?>">
                 </div>
 
 
@@ -143,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-square-phone"></i></span>
                   </div>
-                  <input required type="number" class="form-control" name="telefono" id='telefono' placeholder="Telefono" <?php echo getPostValue('telefono'); ?>>
+                  <input required type="number" class="form-control" name="telefono" id='telefono' placeholder="Telefono" value="<?php echo getPostValue('telefono'); ?>">
                 </div>
 
               </div>
@@ -154,7 +158,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
                   </div>
-                  <input required type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Nombre" <?php echo getPostValue('apellidos'); ?>>
+                  <input required type="text" class="form-control" name="apellidos" id="apellidos" placeholder="Nombre" value="<?php echo getPostValue('apellidos'); ?>">
                 </div>
 
 
@@ -164,7 +168,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                   </div>
-                  <input required type="text" class="form-control" id='direccion' name="direccion" placeholder="Direccion" <?php echo getPostValue('nombres'); ?>>
+                  <input required type="text" class="form-control" id='direccion' name="direccion" placeholder="Direccion" value="<?php echo getPostValue('direccion'); ?>">
                 </div>
 
                 <label for="descuento" class="col-form-label">Descuento:</label>
@@ -172,7 +176,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input required type="number" class="form-control" id="descuento" name="descuento" placeholder="" <?php echo getPostValue('descuento'); ?>>
+                  <input type="number" class="form-control" id="descuento" name="descuento" placeholder="" value="<?php echo getPostValue('descuento'); ?>">
                 </div>
 
                 <label for="valor-total" class="col-form-label">Valor total:</label>
@@ -180,10 +184,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input required readonly="" type="number" class="form-control" id="valor-total" name="valor-total" value='' placeholder="" <?php echo getPostValue('valor-total'); ?>>
+                  <input required readonly="" type="number" class="form-control" id="valor-total" name="valor-total" value='' placeholder="" value="<?php echo getPostValue('valor-total'); ?>">
                 </div>
+
               </div>
-              <button type="button" class="btn btn-success " id="btn-regventa" value=''>Registrar</button>
+              <div class="col-12 d-flex justify-content-start">
+                <button type="button" class="btn btn-success " id="btn-regventa" value=''>Registrar</button>
+              </div>
             </form>
             <div class="card">
               <div class="card-header">
@@ -253,7 +260,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script src="../../../resource/js/admin/ventas/modal_detalle_venta2.js"></script>
   <!-- alert registrar venta -->
-  <script src="../../../resource/js/admin/ventas/alert_registrar_venta1.js"></script>
+  <script src="../../../resource/js/admin/ventas/alert_registrar_venta.js"></script>
   <!-- scripts para mostrar alertas de exito o error -->
 
 
@@ -330,38 +337,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
   </script>
 
+
   <!-- actualiza inputs por dni-->
   <script>
-    function buscarUsuario(dni) {
-      $.ajax({
-        url: 'controller_regventa.php', 
-        type: 'GET',
-        data: {
-          dni: dni
-        },
-        dataType: 'json',
-        success: function(data) {
-          if (data && data.usuario) {
-            $('#nombres').val(data.usuario.name);
-            $('#ciudad').val(data.usuario.city);
-            $('#telefono').val(data.usuario.phone);
-            $('#apellidos').val(data.usuario.lastname);
-            $('#direccion').val(data.usuario.address);
+    document.getElementById('dni_input').addEventListener('keyup', function() {
+      var dni = this.value;
+      fetch('controller_regventa.php?dni_input=' + dni)
+        .then(response => response.json())
+        .then(data => {
+          // Verifica si los datos devueltos son válidos
+          if (data && data.name !== undefined && data.lastname !== undefined && data.city !==
+            undefined && data.address !== undefined && data.email !== undefined && data.phone !==
+            undefined) {
+            document.getElementById('nombres').value = data.name;
+            document.getElementById('apellidos').value = data.lastname;
+            document.getElementById('ciudad').value = data.city;
+            document.getElementById('direccion').value = data.address;
+            document.getElementById('correo').value = data.email;
+            document.getElementById('telefono').value = data.phone;
           } else {
-            // Limpiar los campos si no se encuentra el usuario
-            $('#nombres').val('');
-            $('#ciudad').val('');
-            $('#telefono').val('');
-            $('#apellidos').val('');
-            $('#direccion').val('');
+            // Limpia los campos si los datos no existen o son undefined
+            document.getElementById('nombres').value = '';
+            document.getElementById('apellidos').value = '';
+            document.getElementById('ciudad').value = '';
+            document.getElementById('direccion').value = '';
+            document.getElementById('correo').value = '';
+            document.getElementById('telefono').value = '';
           }
-        },
-        error: function(xhr, status, error) {
-          console.error("Error al buscar el usuario:", error);
-        }
-      });
-    }
+        })
+        .catch(error => console.error('Error:', error));
+    });
   </script>
+
 
 
 
@@ -382,8 +389,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
   <!-- AdminLTE App -->
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="../../../dist/js/demo.js"></script>
   <!-- Page specific script -->
   <script>
     $(function() {

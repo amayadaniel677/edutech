@@ -1,10 +1,12 @@
 <?php
-class detalle_ventas_model{
+class detalle_ventas_model
+{
 
     private $con;
-    public function __construct() {
+    public function __construct()
+    {
         mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ERROR);
-    
+
         try {
             $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech");
         } catch (mysqli_sql_exception $e) {
@@ -17,32 +19,34 @@ class detalle_ventas_model{
                 // Considera lanzar una excepción o manejar el error de otra manera
             }
         }
-    
+
         $this->con->set_charset("utf8");
     }
 
-    public function buscar_usuario($id_venta){
-        $sql="SELECT people.*
+    public function buscar_usuario($id_venta)
+    {
+        $sql = "SELECT people.*
         FROM sales
         INNER JOIN people ON sales.people_id = people.id
         WHERE sales.id = '$id_venta'";
-        $result=$this->con->query($sql);
-        if($result->num_rows>0){
-            $row=$result->fetch_assoc();
+        $result = $this->con->query($sql);
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
             return $row;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public function detalle_ventas($id_venta){
-        $sql="SELECT subjects.name, subject_sale.id, subject_sale.price, subject_sale.total_quantity,ru.total_units, ru.attended_units
+    public function detalle_ventas($id_venta)
+    {
+        $sql = "SELECT subjects.name, subject_sale.id, subject_sale.price, subject_sale.total_quantity,ru.total_units, ru.attended_units
         FROM sales
         INNER JOIN subject_sale ON sales.id = subject_sale.sales_id
         INNER JOIN subjects ON subject_sale.subjects_id = subjects.id
         INNER JOIN remaining_units as ru ON subject_sale.remaining_units_id =ru.id
         WHERE sales.id = '$id_venta'";
-        $result=$this->con->query($sql);
+        $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             $result_array = [];
             while ($row = $result->fetch_assoc()) {
@@ -54,4 +58,3 @@ class detalle_ventas_model{
         }
     }
 }
-?>

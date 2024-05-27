@@ -50,28 +50,6 @@ $nombresAreas = $consult->areas();
 $modalidades = $consult->modalidades();
 $cursos = array();
 
-if (isset($_GET['dni'])) {
-    $id = $_GET['dni'];
-    $consult_modelo = new RegVenta_consult();
-    $usuario = $consult_modelo->traer_usuario($id);
-
-    $data = array(
-        'usuario' => array(
-            'name' => $usuario['name'],
-            'city' => $usuario['city'],
-            'phone' => $usuario['phone'],
-            'lastname' => $usuario['lastname'],
-            'address' => $usuario['address']
-        )
-    );
-
-    header('Content-Type: application/json');
-
-    echo json_encode($data);
-}
-
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['categoria_seleccionada'])) {
         $categoria_seleccionada = $_POST['categoria_seleccionada'];
@@ -133,5 +111,25 @@ if (isset($nombresAreas['error']) && $nombresAreas['error']) {
     $datosParaVista = $nombresAreas;
 }
 
+if (isset($_GET['dni_input'])) {
+    $dni_input = $_GET['dni_input'];
+    $consult_modelo = new RegVenta_consult();
+    $usuario = $consult_modelo->traer_usuario($dni_input);
 
-include('../../../view/admin/paginas/ventas/RegVenta.php');
+    if ($usuario) {
+        echo json_encode([
+            'name' => $usuario['name'],
+            'lastname' => $usuario['lastname'],
+            'city' => $usuario['city'],
+            'address' => $usuario['address'],
+            'email' => $usuario['email'],
+            'phone' => $usuario['phone']
+        ]);
+    } else {
+        echo json_encode(['error' => 'Usuario no encontrado']);
+    }
+} else{
+    include('../../../view/admin/paginas/ventas/RegVenta.php');
+}
+
+
