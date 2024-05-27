@@ -128,6 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <th scope="col"># Documento</th>
                                         <th scope="col">Ciudad</th>
                                         <th scope="col">Direccion</th>
+                                        <th scope="col">Estado</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -143,25 +144,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             echo '<td>' . $usuario['dni'] . '</td>';
                                             echo '<td>' . $usuario['city'] . '</td>';
                                             echo '<td>' . $usuario['address'] . '</td>';
+                                            echo '<td>' . $usuario['status'] . '</td>';
                                             echo '<td>';
-                                            echo '<a href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '" class="btn btn-primary">';
-                                            echo '<i class="fas fa-edit" data-toggle="tooltip" title="Editar"></i>';
-                                            echo '</a>';
-
-                                            echo '<a href="#" onclick="confirmarEliminarUsuario(\'' . 'controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '\')" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" id="desactivarUsuario">';
-
-                                            echo '<i class="fas fa-trash"></i>';
-                                            echo '</a>';
-                                            if ($usuario['rol'] == 'docente') {
+                                            echo '<div class="d-flex flex-wrap justify-content-start">';
+                                         
+                                           
+                                            if($usuario['status'] == 'active'){
+                                               $accion='desactivar';
+                                               echo '<a  data-toggle="tooltip" title="Editar usuario" href="controller_editar_usuario.php?id_usuario='. $usuario['id']. '&tipo_usuario='. $tipo_usuario. '" class="btn btn-primary mr-2">';
+                                               echo '<i class="fas fa-edit"></i>';
+                                               echo '</a>';
+                                               echo '<a href="#"  data-toggle="tooltip" title="Desactivar usuario" onclick="confirmarEliminarUsuario(\'controller_eliminar_usuario.php?id_usuario='. $usuario['id']. '&tipo_usuario='. $tipo_usuario. '&accion='. $accion. '\', \''.$accion.'\')" class="btn btn-danger mr-2">';
+                                                echo '<i class="fas fa-trash"></i>';
+                                                echo '</a>';
+                                            }elseif($usuario['status'] == 'inactive'){
+                                                $accion='activar';
+                                                echo '<a href="#"  data-toggle="tooltip" title="Activar usuario" onclick="confirmarEliminarUsuario(\'controller_eliminar_usuario.php?id_usuario='. $usuario['id']. '&tipo_usuario='. $tipo_usuario. '&accion='. $accion. '\', \''.$accion.'\')" class="btn btn-success mr-2">';      
+                                                echo '<i class="fas fa-undo"></i> ';
+                                                echo '</a>';
+                                            }
+                                            
+                                            if ($usuario['rol'] == 'docente' and $usuario['status'] == 'active') {
                                                 $usuario_id = $usuario['id'];
-                                                echo "  <a href='#' class='btn btn-primary abrir-modal-docente' data-toggle='tooltip' data-target='#modalDocente' data-id='$usuario_id' data-toggle='tooltip' data-placement='top' title='sumar horas trabajadas'><i class='fas fa-clock' ></i></a>";
-                                            } else {
+                                                echo "  <a href='#' class='btn btn-primary abrir-modal-docente mr-2' data-toggle='tooltip' data-target='#modalDocente' data-id='$usuario_id' data-toggle='tooltip' data-placement='top' title='sumar horas trabajadas'><i class='fas fa-clock' ></i></a>";
+                                            } elseif($usuario['rol'] == 'estudiante' and $usuario['status'] == 'active') {
                                                 $usuario_id = $usuario['id'];
-                                                echo "  <a href='#' class='btn btn-success abrir-modal-estudiante' data-toggle='tooltip' data-target='#modalEstudiante' data-id-estudiante='$usuario_id' data-toggle='tooltip' data-placement='top' title='agregar horas al estudiante'><i class='fas fa-clipboard-check'></i>
+                                                echo "  <a href='#' class='btn btn-success abrir-modal-estudiante mr-2' data-toggle='tooltip' data-target='#modalEstudiante' data-id-estudiante='$usuario_id' data-toggle='tooltip' data-placement='top' title='agregar horas al estudiante'><i class='fas fa-clipboard-check'></i>
                                                 </a>";
                                             }
-                                            echo "";
+                                            echo '</div>'; // Cierre del div que contiene los botones
                                             echo '</td>';
+                                            
                                             echo '</tr>';
                                         }
                                     }
@@ -257,11 +270,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <tr>
                                         <th scope="col">Rol</th>
                                         <th scope="col">Nombres</th>
-
                                         <th scope="col">Correo</th>
                                         <th scope="col"># Documento</th>
                                         <th scope="col">Ciudad</th>
                                         <th scope="col">Direccion</th>
+                                        <th scope="col">Estado</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </tfoot>
@@ -431,13 +444,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
         });
         // Función para confirmar la eliminación de un usuario
-        function confirmarEliminarUsuario(url) {
+        function confirmarEliminarUsuario(url,accion) {
             Swal.fire({
-                title: "¿Estás seguro de inactivar el usuario?",
-                text: "Esto podría afectar sus cursos activos",
+                title: `¿Estás seguro de ${accion} el usuario?`,
+                text: "Esto podría afectar los cursos relacionados del usuario",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonText: "Sí, inactivar",
+                confirmButtonText:  `Sí, ${accion}`,
                 cancelButtonText: "Cancelar",
                 confirmButtonColor: '#d33',
                 reverseButtons: true,

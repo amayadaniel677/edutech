@@ -41,7 +41,7 @@ class login{
                 $datos_user=$consult->obtener_datos($dni);
                 $this->iniciar_session($datos_user);
                 $rol=$datos_user['rol'];
-                if($rol=="administrador"){
+                if($rol=="administrador" || $rol=="superadmin"){
                     header('location: admin/controller_inicio_admin.php');
                 }  
                 if($rol=="docente"){
