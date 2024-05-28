@@ -25,7 +25,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
@@ -38,20 +39,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- necesario para el tamaño de mensajes alerta  -->
 
     <style>
-        .mi-clase-personalizada .swal2-popup {
-            font-size: 16px !important;
-            height: auto !important;
-            padding-bottom: 4px !important;
-        }
+    .mi-clase-personalizada .swal2-popup {
+        font-size: 16px !important;
+        height: auto !important;
+        padding-bottom: 4px !important;
+    }
 
-        .swal2-popup h2 {
-            margin-top: 8px !important;
-            font-size: 18px !important;
-        }
+    .swal2-popup h2 {
+        margin-top: 8px !important;
+        font-size: 18px !important;
+    }
 
-        .content-wrapper {
-            height: auto !important;
-        }
+    .content-wrapper {
+        height: auto !important;
+    }
     </style>
 </head>
 
@@ -125,22 +126,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <tbody>
                                         <?php
                                         if (isset($abonos_pendientes)) {
+
                                             foreach ($abonos_pendientes as $abono) {
                                                 echo '<tr>
-                      <td>' . $abono[''] . '</td>
+                      
                               <td>' . $abono['fecha_venta'] . '</td>
                               <td>' . $abono['id_venta'] . '</td>
                               <td>' . $abono['person_name'], " ", $abono['person_lastname'] . '</td>
                               <td>' . $abono['valor_venta'] . '</td>
                               <td>' . $abono['valor_abonado'] . '</td>
-                              <td>' . $abono['saldo_pendiente'] . '</td>
+                              <td>' . $abono['valor_venta'] - $abono['valor_abonado'] . '</td>
                               <td>' . $abono['ultimo_abono'] . '</td>
                               <td>
                               <a href="controller_detalle_abonos.php?id_venta=' . $abono['id_venta'] . '" class="btn btn-primary" data-toggle="tooltip" title="Registro de abonos">
                               <i class="fas fa-eye"></i>
                               </a>
                           
-                              <a href="#" onclick="confirmarEliminarVenta(\'' . 'controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '\')" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" id="desactivarVenta"><i class="fas fa-trash"></i></a>
+                              <a href="#" onclick="confirmarEliminarVenta(\'' . 'controller_eliminar_venta.php?id_venta=' . $abono['id_venta'] . '\')" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" id="desactivarVenta"><i class="fas fa-trash"></i></a>
                                
 
                               </td>
@@ -221,75 +223,75 @@ scratch. This page gets rid of all links and provides the needed markup only.
     $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
     ?>
     <script>
-        $(function() {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 5000,
-                width: '80%',
-                customClass: {
-                    container: 'mi-clase-personalizada'
-                }
-            });
-
-            $('.swalDefaultSuccess').click(function() {
-                Toast.fire({
-                    icon: 'success',
-                    title: '<?php echo $msj_eliminar; ?>'
-
-                })
-            });
-            $('.swalDefaultInfo').click(function() {
-                Toast.fire({
-                    icon: 'info',
-                    title: '<?php echo $msj_eliminar; ?>'
-                })
-            });
-            $('.swalDefaultError').click(function() {
-                Toast.fire({
-                    icon: 'error',
-                    title: '<?php echo $mensaje_error; ?>'
-                })
-            });
-            $('.swalDefaultWarning').click(function() {
-                Toast.fire({
-                    icon: 'warning',
-                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
-            $('.swalDefaultQuestion').click(function() {
-                Toast.fire({
-                    icon: 'question',
-                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-                })
-            });
+    $(function() {
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            width: '80%',
+            customClass: {
+                container: 'mi-clase-personalizada'
+            }
         });
+
+        $('.swalDefaultSuccess').click(function() {
+            Toast.fire({
+                icon: 'success',
+                title: '<?php echo $msj_eliminar; ?>'
+
+            })
+        });
+        $('.swalDefaultInfo').click(function() {
+            Toast.fire({
+                icon: 'info',
+                title: '<?php echo $msj_eliminar; ?>'
+            })
+        });
+        $('.swalDefaultError').click(function() {
+            Toast.fire({
+                icon: 'error',
+                title: '<?php echo $mensaje_error; ?>'
+            })
+        });
+        $('.swalDefaultWarning').click(function() {
+            Toast.fire({
+                icon: 'warning',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+        $('.swalDefaultQuestion').click(function() {
+            Toast.fire({
+                icon: 'question',
+                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+            })
+        });
+    });
     </script>
     <script>
-        $(document).ready(function() {
+    $(document).ready(function() {
 
-            <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
-                // Simular un clic en el botón para activar el SweetAlert
-
-
-                $('#btnInfo').click();
+        <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
+        // Simular un clic en el botón para activar el SweetAlert
 
 
-
-            <?php endif; ?>
-            <?php if (isset($mensaje_error) && !empty($mensaje_error)) : ?>
-                // Simular un clic en el botón para activar el SweetAlert
-
-
-                $('#btnError').click();
+        $('#btnInfo').click();
 
 
 
-            <?php endif; ?>
-            // crear confirmacion con sweet alert al dar click en boton-eliminarVenta
+        <?php endif; ?>
+        <?php if (isset($mensaje_error) && !empty($mensaje_error)) : ?>
+        // Simular un clic en el botón para activar el SweetAlert
 
-        });
+
+        $('#btnError').click();
+
+
+
+        <?php endif; ?>
+        // crear confirmacion con sweet alert al dar click en boton-eliminarVenta
+
+    });
     </script>
 
     <!-- DataTables  & Plugins -->
@@ -319,48 +321,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 
     <script>
-        // Función para confirmar la eliminación de un usuario
-        function confirmarEliminarVenta(url) {
-            Swal.fire({
-                title: "¿Estás seguro de inactivar la venta?",
-                text: "Esto podría restar las horas compradas",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Sí, inactivar",
-                cancelButtonText: "Cancelar",
-                reverseButtons: true,
-                dangerMode: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = url;
-                }
-            });
-        }
+    // Función para confirmar la eliminación de un usuario
+    function confirmarEliminarVenta(url) {
+        Swal.fire({
+            title: "¿Estás seguro de inactivar la venta?",
+            text: "Esto podría restar las horas compradas",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, inactivar",
+            cancelButtonText: "Cancelar",
+            reverseButtons: true,
+            dangerMode: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        });
+    }
     </script>
     <!-- Page specific script -->
     <script>
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
         });
+    });
     </script>
     <script>
-        $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+    $(document).ready(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
     </script>
 
 </body>
