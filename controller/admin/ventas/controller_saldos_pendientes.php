@@ -9,4 +9,6 @@ $ruta_inicio = '../../../';  //esta ruta se usa para cerrar sesion en el nav
 include('../../../model/admin/ventas/saldos_pendientes_model.php');
 
 // LOGICA
+$consulta = new saldos_pendientes_model();
+$abonos_pendientes = $consulta->traer_abonos_pendientes();
 include('../../../view/admin/paginas/ventas/saldos_pendientes.php');
