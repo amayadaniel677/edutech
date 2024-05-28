@@ -19,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <!-- CSS CURSOS ADMIN -->
-    <link rel="stylesheet" href="../../../resource/css/cursos/cursos4.css" />
+    <link rel="stylesheet" href="../../../resource/css/cursos/cursos3.css" />
     <link rel="stylesheet" href="http://localhost/edutech-project/resource/css/cursos/cursos1.css" />
     <!-- SwadeetAlert2 -->
     <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
