@@ -150,6 +150,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <input required type="number" class="form-control" name="telefono" id='telefono' placeholder="Telefono" value="<?php echo getPostValue('telefono'); ?>">
                 </div>
 
+
+                <label for="valor-abonado" class="col-form-label">Valor abonado:</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input required type="number" class="form-control" id="valor-abonado" name="valor-abonado" value='' placeholder="Cantidad pagada del cliente" value="<?php echo getPostValue('valor-total'); ?>">
+                </div>
               </div>
 
               <div class="col-md-6 col-12">
@@ -179,13 +187,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <input type="number" class="form-control" id="descuento" name="descuento" placeholder="" value="<?php echo getPostValue('descuento'); ?>">
                 </div>
 
-                <label for="valor-total" class="col-form-label">Valor total:</label>
+                <label for="valor-total" class="col-form-label">Valor total a pagar:</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
                   <input required readonly="" type="number" class="form-control" id="valor-total" name="valor-total" value='' placeholder="" value="<?php echo getPostValue('valor-total'); ?>">
                 </div>
+
 
               </div>
               <div class="col-12 d-flex justify-content-start">
@@ -260,7 +269,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script src="../../../resource/js/admin/ventas/modal_detalle_venta2.js"></script>
   <!-- alert registrar venta -->
-  <script src="../../../resource/js/admin/ventas/alert_registrar_venta.js"></script>
+  <script src="../../../resource/js/admin/ventas/alert_registrar_venta1.js"></script>
   <!-- scripts para mostrar alertas de exito o error -->
 
 

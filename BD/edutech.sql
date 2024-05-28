@@ -69,6 +69,57 @@ LOCK TABLES `attendances` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `balance_detail`
+--
+
+DROP TABLE IF EXISTS `balance_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `balance_detail` (
+  `id` int NOT NULL,
+  `date` date NOT NULL,
+  `amound_paid` int NOT NULL,
+  `balances_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_balance_detail_balances1_idx` (`balances_id`),
+  CONSTRAINT `fk_balance_detail_balances1` FOREIGN KEY (`balances_id`) REFERENCES `balances` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `balance_detail`
+--
+
+LOCK TABLES `balance_detail` WRITE;
+/*!40000 ALTER TABLE `balance_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `balance_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `balances`
+--
+
+DROP TABLE IF EXISTS `balances`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `balances` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `total_paid` int DEFAULT '0',
+  `last_payment` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `balances`
+--
+
+LOCK TABLES `balances` WRITE;
+/*!40000 ALTER TABLE `balances` DISABLE KEYS */;
+/*!40000 ALTER TABLE `balances` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `modalities`
 --
 
@@ -94,56 +145,6 @@ LOCK TABLES `modalities` WRITE;
 /*!40000 ALTER TABLE `modalities` DISABLE KEYS */;
 INSERT INTO `modalities` VALUES (1,'presencial',11000,11000,20000,'active'),(2,'telepresencial',9000,15000,21000,'active'),(3,'virtual',8000,10000,22000,'active'),(4,'domicilio',20000,12000,15000,'active');
 /*!40000 ALTER TABLE `modalities` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `package_sale`
---
-
-DROP TABLE IF EXISTS `package_sale`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `package_sale` (
-  `packages_id` int NOT NULL,
-  `sales_id` int NOT NULL,
-  KEY `fk_package_sale_packages1_idx` (`packages_id`),
-  KEY `fk_package_sale_sales1_idx` (`sales_id`),
-  CONSTRAINT `fk_package_sale_packages1` FOREIGN KEY (`packages_id`) REFERENCES `packages` (`id`),
-  CONSTRAINT `fk_package_sale_sales1` FOREIGN KEY (`sales_id`) REFERENCES `sales` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `package_sale`
---
-
-LOCK TABLES `package_sale` WRITE;
-/*!40000 ALTER TABLE `package_sale` DISABLE KEYS */;
-/*!40000 ALTER TABLE `package_sale` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `packages`
---
-
-DROP TABLE IF EXISTS `packages`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `packages` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `packages`
---
-
-LOCK TABLES `packages` WRITE;
-/*!40000 ALTER TABLE `packages` DISABLE KEYS */;
-/*!40000 ALTER TABLE `packages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -364,8 +365,12 @@ CREATE TABLE `sales` (
   `people_id` int NOT NULL,
   `status` enum('active','inactive') DEFAULT 'active',
   `discount` int NOT NULL,
+  `balances_id` int NOT NULL,
+  `value_paid` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_sales_people1_idx` (`people_id`),
+  KEY `fk_sales_balances1_idx` (`balances_id`),
+  CONSTRAINT `fk_sales_balances1` FOREIGN KEY (`balances_id`) REFERENCES `balances` (`id`),
   CONSTRAINT `fk_sales_people1` FOREIGN KEY (`people_id`) REFERENCES `people` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -376,34 +381,8 @@ CREATE TABLE `sales` (
 
 LOCK TABLES `sales` WRITE;
 /*!40000 ALTER TABLE `sales` DISABLE KEYS */;
-INSERT INTO `sales` VALUES (2,87000,'2024-03-07 00:00:00',4,'inactive',0),(3,87000,'2024-03-07 00:00:00',4,'inactive',0),(4,87000,'2024-03-07 00:00:00',4,'active',0),(5,100000,'2024-03-07 00:00:00',20,'inactive',0),(6,100000,'2024-03-07 00:00:00',20,'active',0),(7,100000,'2024-03-07 00:00:00',20,'active',0),(8,60000,'2024-03-07 00:00:00',21,'active',0),(9,109999,'2024-03-07 00:00:00',22,'active',0),(10,109999,'2024-03-07 00:00:00',22,'active',0),(76,43999,'2024-03-19 00:00:00',4,'active',0),(77,21889,'2024-03-19 00:00:00',38,'active',0),(78,329667,'2024-03-19 00:00:00',39,'active',0),(79,722221,'2024-04-02 00:00:00',5,'inactive',0),(82,40000,'2024-04-19 00:00:00',49,'active',0),(83,40000,'2024-04-19 00:00:00',49,'active',0),(84,50000,'2024-04-19 00:00:00',50,'active',0),(85,50000,'2024-04-19 00:00:00',50,'active',0),(86,50000,'2024-04-19 00:00:00',51,'active',0),(87,84000,'2024-04-22 00:00:00',52,'active',0),(88,110000,'2024-04-23 00:00:00',13,'active',0),(89,11000,'2024-04-24 00:00:00',53,'active',0),(90,11000,'2024-04-24 00:00:00',53,'active',0),(91,220000,'2024-04-30 00:00:00',56,'active',0),(92,220000,'2024-04-30 00:00:00',56,'active',0),(93,110000,'2024-04-30 00:00:00',57,'active',0),(94,110000,'2024-04-30 00:00:00',57,'active',0),(95,220000,'2024-04-30 00:00:00',58,'active',0),(96,220000,'2024-04-30 00:00:00',58,'active',0),(97,220000,'2024-04-30 00:00:00',58,'active',0),(98,110000,'2024-04-30 00:00:00',58,'active',0),(99,110000,'2024-05-02 00:00:00',59,'active',0),(100,66000,'2024-05-02 00:00:00',59,'active',0),(101,66000,'2024-05-02 00:00:00',59,'active',0),(102,66000,'2024-05-02 00:00:00',59,'active',0),(103,66000,'2024-05-02 00:00:00',59,'active',0),(104,66000,'2024-05-02 00:00:00',59,'active',0),(105,66000,'2024-05-02 00:00:00',59,'active',0),(106,66000,'2024-05-02 00:00:00',59,'active',0),(107,66000,'2024-05-02 00:00:00',59,'active',0),(108,66000,'2024-05-02 00:00:00',59,'active',0),(109,33000,'2024-05-02 00:00:00',59,'active',0),(110,44000,'2024-05-02 00:00:00',59,'active',0),(111,110000,'2024-05-02 00:00:00',59,'active',0),(112,110000,'2024-05-02 00:00:00',59,'active',0),(113,110000,'2024-05-02 00:00:00',59,'active',0),(114,110000,'2024-05-02 00:00:00',59,'active',0),(115,110000,'2024-05-02 00:00:00',59,'active',0),(116,110000,'2024-05-02 00:00:00',59,'active',0),(117,110000,'2024-05-02 00:00:00',59,'active',0),(118,100000,'2024-05-02 00:00:00',59,'active',0),(119,200000,'2024-05-02 00:00:00',59,'active',0),(120,200000,'2024-05-02 00:00:00',59,'active',0),(121,200000,'2024-05-02 00:00:00',60,'active',0),(122,90000,'2024-05-02 00:00:00',59,'active',0),(123,110000,'2024-05-02 00:00:00',61,'active',0),(124,110000,'2024-05-02 00:00:00',61,'active',0),(125,110000,'2024-05-02 00:00:00',61,'active',0),(126,110000,'2024-05-02 00:00:00',61,'active',0),(127,11000,'2024-05-02 00:00:00',62,'active',0),(128,110000,'2024-05-02 00:00:00',62,'active',0),(129,11000,'2024-05-02 00:00:00',63,'active',0),(130,110000,'2024-05-02 00:00:00',64,'active',0),(131,110000,'2024-05-03 00:00:00',65,'active',0),(132,110000,'2024-05-03 00:00:00',66,'active',0),(133,110000,'2024-05-03 00:00:00',66,'active',0),(134,110000,'2024-05-03 00:00:00',66,'active',0),(135,110000,'2024-05-03 00:00:00',66,'active',0),(136,110000,'2024-05-03 00:00:00',66,'active',0),(137,242000,'2024-05-03 00:00:00',67,'active',0),(138,490000,'2024-05-03 00:00:00',68,'inactive',0),(139,556000,'2024-05-03 00:00:00',69,'inactive',0),(140,766000,'2024-05-17 00:00:00',21,'active',0),(141,854000,'2024-05-17 00:00:00',21,'active',0),(142,628000,'2024-05-17 00:00:00',21,'inactive',0),(143,9978000,'2024-05-17 00:00:00',21,'active',0);
+INSERT INTO `sales` VALUES (2,87000,'2024-03-07 00:00:00',4,'inactive',0,0,NULL),(3,87000,'2024-03-07 00:00:00',4,'inactive',0,0,NULL),(4,87000,'2024-03-07 00:00:00',4,'active',0,0,NULL),(5,100000,'2024-03-07 00:00:00',20,'inactive',0,0,NULL),(6,100000,'2024-03-07 00:00:00',20,'active',0,0,NULL),(7,100000,'2024-03-07 00:00:00',20,'active',0,0,NULL),(8,60000,'2024-03-07 00:00:00',21,'active',0,0,NULL),(9,109999,'2024-03-07 00:00:00',22,'active',0,0,NULL),(10,109999,'2024-03-07 00:00:00',22,'active',0,0,NULL),(76,43999,'2024-03-19 00:00:00',4,'active',0,0,NULL),(77,21889,'2024-03-19 00:00:00',38,'active',0,0,NULL),(78,329667,'2024-03-19 00:00:00',39,'active',0,0,NULL),(79,722221,'2024-04-02 00:00:00',5,'inactive',0,0,NULL),(82,40000,'2024-04-19 00:00:00',49,'active',0,0,NULL),(83,40000,'2024-04-19 00:00:00',49,'active',0,0,NULL),(84,50000,'2024-04-19 00:00:00',50,'active',0,0,NULL),(85,50000,'2024-04-19 00:00:00',50,'active',0,0,NULL),(86,50000,'2024-04-19 00:00:00',51,'active',0,0,NULL),(87,84000,'2024-04-22 00:00:00',52,'active',0,0,NULL),(88,110000,'2024-04-23 00:00:00',13,'active',0,0,NULL),(89,11000,'2024-04-24 00:00:00',53,'active',0,0,NULL),(90,11000,'2024-04-24 00:00:00',53,'active',0,0,NULL),(91,220000,'2024-04-30 00:00:00',56,'active',0,0,NULL),(92,220000,'2024-04-30 00:00:00',56,'active',0,0,NULL),(93,110000,'2024-04-30 00:00:00',57,'active',0,0,NULL),(94,110000,'2024-04-30 00:00:00',57,'active',0,0,NULL),(95,220000,'2024-04-30 00:00:00',58,'active',0,0,NULL),(96,220000,'2024-04-30 00:00:00',58,'active',0,0,NULL),(97,220000,'2024-04-30 00:00:00',58,'active',0,0,NULL),(98,110000,'2024-04-30 00:00:00',58,'active',0,0,NULL),(99,110000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(100,66000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(101,66000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(102,66000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(103,66000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(104,66000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(105,66000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(106,66000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(107,66000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(108,66000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(109,33000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(110,44000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(111,110000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(112,110000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(113,110000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(114,110000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(115,110000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(116,110000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(117,110000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(118,100000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(119,200000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(120,200000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(121,200000,'2024-05-02 00:00:00',60,'active',0,0,NULL),(122,90000,'2024-05-02 00:00:00',59,'active',0,0,NULL),(123,110000,'2024-05-02 00:00:00',61,'active',0,0,NULL),(124,110000,'2024-05-02 00:00:00',61,'active',0,0,NULL),(125,110000,'2024-05-02 00:00:00',61,'active',0,0,NULL),(126,110000,'2024-05-02 00:00:00',61,'active',0,0,NULL),(127,11000,'2024-05-02 00:00:00',62,'active',0,0,NULL),(128,110000,'2024-05-02 00:00:00',62,'active',0,0,NULL),(129,11000,'2024-05-02 00:00:00',63,'active',0,0,NULL),(130,110000,'2024-05-02 00:00:00',64,'active',0,0,NULL),(131,110000,'2024-05-03 00:00:00',65,'active',0,0,NULL),(132,110000,'2024-05-03 00:00:00',66,'active',0,0,NULL),(133,110000,'2024-05-03 00:00:00',66,'active',0,0,NULL),(134,110000,'2024-05-03 00:00:00',66,'active',0,0,NULL),(135,110000,'2024-05-03 00:00:00',66,'active',0,0,NULL),(136,110000,'2024-05-03 00:00:00',66,'active',0,0,NULL),(137,242000,'2024-05-03 00:00:00',67,'active',0,0,NULL),(138,490000,'2024-05-03 00:00:00',68,'inactive',0,0,NULL),(139,556000,'2024-05-03 00:00:00',69,'inactive',0,0,NULL),(140,766000,'2024-05-17 00:00:00',21,'active',0,0,NULL),(141,854000,'2024-05-17 00:00:00',21,'active',0,0,NULL),(142,628000,'2024-05-17 00:00:00',21,'inactive',0,0,NULL),(143,9978000,'2024-05-17 00:00:00',21,'active',0,0,NULL);
 /*!40000 ALTER TABLE `sales` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `subject_package`
---
-
-DROP TABLE IF EXISTS `subject_package`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `subject_package` (
-  `subjects_id` int NOT NULL,
-  `packages_id` int NOT NULL,
-  KEY `fk_subjects_has_packages_subjects1_idx` (`subjects_id`),
-  KEY `fk_subjects_has_packages_packages1_idx` (`packages_id`),
-  CONSTRAINT `fk_subjects_has_packages_packages1` FOREIGN KEY (`packages_id`) REFERENCES `packages` (`id`),
-  CONSTRAINT `fk_subjects_has_packages_subjects1` FOREIGN KEY (`subjects_id`) REFERENCES `subjects` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `subject_package`
---
-
-LOCK TABLES `subject_package` WRITE;
-/*!40000 ALTER TABLE `subject_package` DISABLE KEYS */;
-/*!40000 ALTER TABLE `subject_package` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -473,64 +452,6 @@ LOCK TABLES `subjects` WRITE;
 INSERT INTO `subjects` VALUES (1,'calculo','calculo diferencial para universitarios',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(2,'algebra','lineal y factorizacion',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(3,'Nombre Ejemplo','descripcion ejemplo',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(4,'Pruebanombre','pruebadescripcion',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(5,'Pruebashoy','deschoy',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(6,'Nombreultimo','descultimo',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(7,'Asdfsd58','dafsf58',2,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(8,'11:10nombre','11:10 desc',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(9,'Nombre 11:15','desc11:15',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(10,'11:18nombre','11:18 desc',1,'active','resource/img/photosSubjects/11:18nombre_Logo_fresas_arturo-removebg-preview.png',''),(11,'Asfdadfs','adsfadf',2,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(12,'Zsdfaf000','000',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(13,'11:46','11:46',2,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(14,'Adsfafd49','49',2,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(15,'53','53',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(16,'Adsfffadsfa 11:54','11:54',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(17,'Ejemplo 12:06','ejemplo 12:06',1,'active','resource/img/photosSubjects/Ejemplo_12:06_WhatsApp Image 2024-03-18 at 5.44.10 PM.jpeg',''),(18,'12:06 22','12:06 22 desc',1,'active','resource/img/photosSubjects/12:06_22_Logo_fresas_arturo-removebg-preview.png',''),(19,'12:07','12:07 edsss',1,'active','resource/img/photosSubjects/12:07_Logo_fresas_arturo.png',''),(20,'Xxx','xxxxxx',1,'active','resource/img/photosSubjects/Xxx_Logo_fresas_arturo-removebg-preview.png',''),(21,'Asdfasfd','asdfasdfxxxxx',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(22,'Ejemploconfoto','ejemploconfoto',2,'inactive','resource/img/photosSubjects/Ejemploconfoto_amor.jpg',''),(23,'Ejemplosinfoto','sinfoto',1,'active','resource/img/photosSubjects/defaultPhoto.jpg',''),(24,'Prueba','prueba Daniel',1,'active','resource/img/photosSubjects/defaultPhoto.jpg','uno, dos, tres'),(25,'Prueba2','prueba dos',1,'active','resource/img/photosSubjects/defaultPhoto.jpg','prueba');
 /*!40000 ALTER TABLE `subjects` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `trolley`
---
-
-DROP TABLE IF EXISTS `trolley`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `trolley` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `price` int NOT NULL,
-  `hours` int NOT NULL,
-  `people_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `subjects_id` int NOT NULL,
-  `name_subject` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_trolley_subjects1_idx` (`subjects_id`),
-  CONSTRAINT `fk_trolley_subjects1` FOREIGN KEY (`subjects_id`) REFERENCES `subjects` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `trolley`
---
-
-LOCK TABLES `trolley` WRITE;
-/*!40000 ALTER TABLE `trolley` DISABLE KEYS */;
-/*!40000 ALTER TABLE `trolley` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tutorships`
---
-
-DROP TABLE IF EXISTS `tutorships`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tutorships` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `date` date NOT NULL,
-  `start_time` time NOT NULL,
-  `groups_id` int NOT NULL,
-  `payments_id` int NOT NULL,
-  `status` set('active','inactive') DEFAULT 'active',
-  PRIMARY KEY (`id`),
-  KEY `fk_tutorships_payments1_idx` (`payments_id`),
-  CONSTRAINT `fk_tutorships_payments1` FOREIGN KEY (`payments_id`) REFERENCES `payments` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tutorships`
---
-
-LOCK TABLES `tutorships` WRITE;
-/*!40000 ALTER TABLE `tutorships` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tutorships` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -541,4 +462,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-28 14:14:49
+-- Dump completed on 2024-05-28 17:14:43
