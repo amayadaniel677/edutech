@@ -8,7 +8,7 @@ class pagos_pendientes_model
         mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ERROR);
 
         try {
-            $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech");
+            $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech"); 
         } catch (mysqli_sql_exception $e) {
             // Intenta conectar con la segunda opción si la primera falla
             try {
@@ -61,6 +61,7 @@ class pagos_pendientes_model
             $sql = "INSERT INTO payment_history (`date`,`total_hours`,`price_hour`,`total_price`,`payments_id`) VALUES ('$date','$total_hours','$price_hour','$total_price','$payments_id')";
             $result=$this->con->query($sql);
             if($result){
+                $this->actualizar_fecha($date, $payments_id);
                 return true;
             }else{
                 return false;
@@ -73,6 +74,16 @@ class pagos_pendientes_model
     public function restar_horas($payments_id, $total_hours)
     {
         $sql = "UPDATE payments SET total_hours=total_hours-$total_hours WHERE id='$payments_id'";
+        $result = $this->con->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function actualizar_fecha($date, $id){
+        $sql = "UPDATE payments SET last_pay='$date' WHERE id='$id'";
         $result = $this->con->query($sql);
         if ($result) {
             return true;
