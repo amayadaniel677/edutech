@@ -10,7 +10,7 @@ include('../../../model/admin/pagos/pagos_pendientes_model.php');
 $consult = new pagos_pendientes_model();
 $pagos = $consult->traer_pagos();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
     $pago_id = $_POST['pago_id'];
     $cantidad = $_POST['cantidad'];
     $valor_horas = $_POST['valor_horas'];
