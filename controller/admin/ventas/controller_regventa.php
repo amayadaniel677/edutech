@@ -78,12 +78,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $telefono = $_POST['telefono'];
         $descuento = $_POST['descuento'];
         $valor_total = $_POST['valor-total'];
+        $valor_abonado = $_POST['valor-abonado'];
         $detallesVentaJSON = $_POST['detallesVentaInput'];
         $detallesVenta = json_decode($detallesVentaJSON, true);
 
         // INSERTAR LA VENTA A LA BD
         $modelo = new RegVenta_consult();
-        $resultado_modelo_id = $modelo->agregar_venta_completa($nombres, $apellidos, $dni, $direccion, $correo, $ciudad, $telefono, $descuento, $valor_total);
+        $resultado_modelo_id = $modelo->agregar_venta_completa($nombres, $apellidos, $dni, $direccion, $correo, $ciudad, $telefono, $descuento, $valor_total, $valor_abonado);
         if ($resultado_modelo_id) {
             $resultado_detalles = $modelo->agregar_detalles_venta($detallesVenta, $resultado_modelo_id, $dni);
             if ($resultado_detalles) {
@@ -128,8 +129,6 @@ if (isset($_GET['dni_input'])) {
     } else {
         echo json_encode(['error' => 'Usuario no encontrado']);
     }
-} else{
+} else {
     include('../../../view/admin/paginas/ventas/RegVenta.php');
 }
-
-
