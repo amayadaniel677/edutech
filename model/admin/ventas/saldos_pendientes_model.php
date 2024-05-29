@@ -30,7 +30,8 @@ class saldos_pendientes_model
         people.name AS person_name, 
         people.lastname AS person_lastname, 
         balances.total_paid AS valor_abonado,
-        balances.last_payment AS ultimo_abono 
+        balances.last_payment AS ultimo_abono,
+        balances.id AS id_saldo
     FROM balances
     INNER JOIN sales ON balances.sales_id = sales.id
     INNER JOIN people ON sales.people_id = people.id WHERE sales.status='active' and balances.status='active' AND balances.total_paid < sales.price ORDER BY sales.date DESC ";
@@ -40,5 +41,41 @@ class saldos_pendientes_model
             $abonos_pendientes[] = $fila;
         }
         return $abonos_pendientes;
+    }
+    public function abonar_saldo($saldo_id, $valor_abono)
+    {
+        $date=date('Y-m-d');
+        // consultar cuanto falta por pagar
+        $sql = "SELECT sales.price AS valor_venta, balances.total_paid AS valor_abonado FROM balances 
+        INNER JOIN sales ON balances.sales_id = sales.id 
+        WHERE balances.id = '$saldo_id'";
+        $resultado = $this->con->query($sql);
+        $fila = $resultado->fetch_assoc();
+        $valor_venta = $fila['valor_venta'];
+        $valor_abonado = $fila['valor_abonado'];
+        $saldo_restante = $valor_venta - $valor_abonado;
+        // si el abono es mayor al saldo restante, no se puede registrar el abono
+        if ($valor_abono > $saldo_restante) {
+            return "Error: el valor abonado $valor_abono es mayor al saldo restante $saldo_restante";
+        }
+        else{
+            $sql = "UPDATE balances SET total_paid = total_paid + '$valor_abono', last_payment = '$date' WHERE id = '$saldo_id'";
+            $result=$this->con->query($sql);
+           
+            if($result){
+                $sql = "INSERT INTO balance_detail(`date`, amound_paid, balances_id) VALUES ('$date', '$valor_abono', $saldo_id)";
+                $result2=$this->con->query($sql);
+                if($result2){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+
+            }
+
+        }
+        
+        $this->con->query($sql);
     }
 }
