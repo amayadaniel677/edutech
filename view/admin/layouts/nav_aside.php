@@ -164,14 +164,6 @@
             <li class="nav-item">
               <a href="<?php if (isset($ruta_inicio)) {
                           echo $ruta_inicio;
-                        }; ?>controller/admin/cursos/controller_modificar_cursos.php" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Modificar</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="<?php if (isset($ruta_inicio)) {
-                          echo $ruta_inicio;
                         }; ?>controller/admin/cursos/controller_catalogo_cursos.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Catalogo</p>

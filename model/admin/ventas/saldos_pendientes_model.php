@@ -1,5 +1,5 @@
 <?php
-class buscar_venta_model
+class saldos_pendientes_model
 {
     private $con;
     public function __construct()
@@ -21,99 +21,61 @@ class buscar_venta_model
 
         $this->con->set_charset("utf8");
     }
-
-    public function user_exist($dni)
+    public function traer_abonos_pendientes()
     {
-        $sql = "SELECT * FROM people WHERE dni='$dni'";
-        $result = $this->con->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            return $row['id'];
-        } else {
-            return false;
+        $sql = "SELECT 
+        sales.price AS valor_venta, 
+        sales.date AS fecha_venta, 
+        sales.id AS id_venta, 
+        people.name AS person_name, 
+        people.lastname AS person_lastname, 
+        balances.total_paid AS valor_abonado,
+        balances.last_payment AS ultimo_abono,
+        balances.id AS id_saldo
+    FROM balances
+    INNER JOIN sales ON balances.sales_id = sales.id
+    INNER JOIN people ON sales.people_id = people.id WHERE sales.status='active' and balances.status='active' AND balances.total_paid < sales.price ORDER BY sales.date DESC ";
+        $resultado = $this->con->query($sql);
+        $abonos_pendientes = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $abonos_pendientes[] = $fila;
         }
+        return $abonos_pendientes;
     }
-
-    public function ventas()
+    public function abonar_saldo($saldo_id, $valor_abono)
     {
-        $sql = $sql = "SELECT
-            p.dni AS person_dni,
-            p.name AS person_name,
-            p.lastname AS person_lastname,
-            sa.price AS sale_price,
-            sa.date AS sale_date,
-            sa.id AS sale_id,
-            sa.status AS sale_status,
-            sa.discount as sale_discount
-            FROM sales sa
-            INNER JOIN people p ON sa.people_id = p.id  WHERE sa.status='active' ORDER BY sa.date DESC ";
+        $date=date('Y-m-d');
+        // consultar cuanto falta por pagar
+        $sql = "SELECT sales.price AS valor_venta, balances.total_paid AS valor_abonado FROM balances 
+        INNER JOIN sales ON balances.sales_id = sales.id 
+        WHERE balances.id = '$saldo_id'";
+        $resultado = $this->con->query($sql);
+        $fila = $resultado->fetch_assoc();
+        $valor_venta = $fila['valor_venta'];
+        $valor_abonado = $fila['valor_abonado'];
+        $saldo_restante = $valor_venta - $valor_abonado;
+        // si el abono es mayor al saldo restante, no se puede registrar el abono
+        if ($valor_abono > $saldo_restante) {
+            return "Error: el valor abonado $valor_abono es mayor al saldo restante $saldo_restante";
+        }
+        else{
+            $sql = "UPDATE balances SET total_paid = total_paid + '$valor_abono', last_payment = '$date' WHERE id = '$saldo_id'";
+            $result=$this->con->query($sql);
+           
+            if($result){
+                $sql = "INSERT INTO balance_detail(`date`, amound_paid, balances_id) VALUES ('$date', '$valor_abono', $saldo_id)";
+                $result2=$this->con->query($sql);
+                if($result2){
+                    return true;
+                }
+                else{
+                    return false;
+                }
 
-        $result = $this->con->query($sql);
-
-        if ($result->num_rows > 0) {
-            $result_array = [];
-            while ($row = $result->fetch_assoc()) {
-                $result_array[] = $row;
             }
-            return $result_array;
-        } else {
-            return false;
+
         }
-    }
-
-    public function ventas_filtradas($dni1, $from_date, $to_date)
-    {
-
-        // $id_people = $this->user_exist($dni1);
-        // if ($id_people) {
-        // validar si enviaron las fechas o solo el dni
-
-        if ($from_date != "" && $to_date != "" && $dni1 != "") {
-            $sql = "SELECT
-                p.dni  AS person_dni,
-                p.name  AS person_name,
-                sa.id AS sale_id,
-                sa.price AS sale_price,
-                sa.date AS sale_date
-                FROM sales sa
-                INNER JOIN people p ON sa.people_id = p.id
-                WHERE p.dni = '$dni1' AND sa.date BETWEEN '$from_date' AND '$to_date' ORDER BY sa.date DESC";
-        } elseif ($from_date != "" && $to_date != "" && $dni1 == "") {
-
-            $sql = "SELECT
-                p.dni  AS person_dni,
-                p.name  AS person_name,
-                sa.id AS sale_id,
-                sa.price AS sale_price,
-                sa.date AS sale_date
-                FROM sales sa
-                INNER JOIN people p ON sa.people_id = p.id
-                WHERE sa.date BETWEEN '$from_date' AND '$to_date'  ORDER BY sa.date DESC";
-        } elseif ($from_date == "" && $to_date == "" && $dni1 != "") {
-            $sql = "SELECT
-                p.dni  AS person_dni,
-                p.name  AS person_name,
-                sa.id AS sale_id,
-                sa.price AS sale_price,
-                sa.date AS sale_date
-                FROM sales sa
-                INNER JOIN people p ON sa.people_id = p.id
-                WHERE p.dni = '$dni1'  ORDER BY sa.date DESC";
-        }
-
-
-        $result = $this->con->query($sql);
-
-        if ($result->num_rows > 0) {
-            $result_array = [];
-            while ($row = $result->fetch_assoc()) {
-                $result_array[] = $row;
-            }
-            return $result_array;
-        } else {
-            // no devolvio la cantidad de filas esperadas
-
-            return false;
-        }
+        
+        $this->con->query($sql);
     }
 }

@@ -123,6 +123,8 @@ class RegVenta_consult
             if ($result) {
                 // Obtener el ID de la última inserción
                 $lastInsertedId = $this->con->insert_id;
+                $this->crear_registro_abono($valor_abonado, $lastInsertedId);
+
                 return $lastInsertedId;
             } else {
                 return false;
@@ -134,7 +136,7 @@ class RegVenta_consult
     public function crear_registro_abono($valor_abonado, $sales_id)
     {
         $date = date("Y-m-d");
-        $sql = "INSERT INTO payments(value,`date`,sales_id) VALUES('$valor_abonado','$date','$sales_id')";
+        $sql = "INSERT INTO balances(total_paid,`last_payment`,sales_id) VALUES('$valor_abonado','$date','$sales_id')";
         $result = $this->con->query($sql);
         if ($result) {
             return true;
