@@ -105,14 +105,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
             </div>
         </div>
-        <h3 class="mt-4">Cursos sugeridos</h3>
+        <h2 class="mt-4">Cursos sugeridos</h2>
         <!-- Carrusel de cursos relacionados -->
         <div class="mb-3 col-md-6 p-3 rounded">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="background-color: #f2f2f2;">
         <div class="carousel-inner">
             <?php foreach ($cursos_area as $index => $curso2) : ?>
                 <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                    <div class="border p-3 mx-auto curso-container" style="max-width: 300px; margin-top:5px; margin-bottom: 5px; background: linear-gradient(to bottom, #7FFFD4, #40E0D0); border-radius:7px;">
+                    <div class="border p-3 mx-auto curso-container" style="max-width: 300px; margin-top:5px; margin-bottom: 5px; background:white; border-radius:7px;">
                         <article class="materias">
                             <a href="controller_descripcion_curso_invitado.php?id_curso=<?php echo $curso2['subject_id']; ?>" class="d-flex justify-content-center align-items-center" style="height: 120px; position: relative; border-radius: 10px;">
                                 <img src="<?php echo $ruta_inicio . $curso2['photo']; ?>" style="max-height: 100%; max-width: 100%; object-fit: cover;" alt="Curso Image">
@@ -150,7 +150,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="tab-content p-3" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"><?php echo $curso1['description']; ?></div>
                 <div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
-                    <h3>Recomendaciones para seguir un curso</h3>
+                    <h4>Recomendaciones para seguir un curso</h4>
                     <ol>
                         <li><strong>Establece objetivos claros:</strong> Antes de comenzar el curso, define qué es lo que esperas lograr al finalizarlo.</li>
                         <!-- Otras recomendaciones -->
@@ -159,7 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
                     
                         <?php if (!empty($docentes)) : ?>
-                            <h3>Docentes</h3>
+                            <h4>Docentes</h4>
                             <ul class="list-unstyled">
                                 <?php foreach ($docentes as $docente) : ?>
                                     <li><?php echo $docente['docente'] . ' ' . $docente['lastname'];  ?></li>
