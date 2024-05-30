@@ -76,4 +76,24 @@ class buscar_area_model
             return false;
         }
     }
+    public function activarArea($id)
+    {
+        $sql = "UPDATE areas SET status = 'active' WHERE id = '$id'";
+        $result = $this->con->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function desactivarArea($id)
+    {
+        $sql = "UPDATE areas SET status = 'inactive' WHERE id = '$id'";
+        $result = $this->con->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
