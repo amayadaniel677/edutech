@@ -1,9 +1,11 @@
 <?php
-class buscar_area_model{
+class buscar_area_model
+{
     private $con;
-    public function __construct() {
+    public function __construct()
+    {
         mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ERROR);
-    
+
         try {
             $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech");
         } catch (mysqli_sql_exception $e) {
@@ -16,11 +18,12 @@ class buscar_area_model{
                 // Considera lanzar una excepción o manejar el error de otra manera
             }
         }
-    }    
+    }
 
-    public function traer_areas(){
-        $sql="SELECT * FROM areas";
-        $result=$this->con->query($sql);
+    public function traer_areas()
+    {
+        $sql = "SELECT * FROM areas";
+        $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             $result_array = [];
             while ($row = $result->fetch_assoc()) {
@@ -32,9 +35,10 @@ class buscar_area_model{
         }
     }
     // traer area seleccionada
-    public function traer_area($id_area){
-        $sql="SELECT * FROM areas WHERE id = '$id_area'";
-        $result=$this->con->query($sql);
+    public function traer_area($id_area)
+    {
+        $sql = "SELECT * FROM areas WHERE id = '$id_area'";
+        $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             $result_array = $result->fetch_assoc();
             return $result_array;
@@ -42,8 +46,9 @@ class buscar_area_model{
             return false;
         }
     }
-    public function traer_vinculados($id_area){
-        $sql="SELECT people_area.id AS people_area_id, people.name AS people_name, areas.name AS area_name,
+    public function traer_vinculados($id_area)
+    {
+        $sql = "SELECT people_area.id AS people_area_id, people.name AS people_name, areas.name AS area_name,
         areas.price AS area_price, areas.id AS area_id, areas.status AS area_status
         FROM people_area
         INNER JOIN people ON people_area.people_id = people.id
@@ -61,8 +66,29 @@ class buscar_area_model{
         }
     }
 
-    public function editarArea($name,$id,$status){
-        $sql = "UPDATE areas SET name = '$name', status='$status' WHERE id = '$id'";
+    public function editarArea($name, $id)
+    {
+        $sql = "UPDATE areas SET name = '$name' WHERE id = '$id'";
+        $result = $this->con->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function activarArea($id)
+    {
+        $sql = "UPDATE areas SET status = 'active' WHERE id = '$id'";
+        $result = $this->con->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function desactivarArea($id)
+    {
+        $sql = "UPDATE areas SET status = 'inactive' WHERE id = '$id'";
         $result = $this->con->query($sql);
         if ($result) {
             return true;
@@ -71,4 +97,3 @@ class buscar_area_model{
         }
     }
 }
-?>
