@@ -79,7 +79,7 @@
                     </div>
                 </div>
 
-                <div class="container-fluid mt-4" style='max-width:1000px;'>
+                <div class="container-fluid mt-4" style='max-width:1200px;'>
                     <div class="row">
                         <div class="card col-md-9">
                             <div class="card-header">
@@ -90,12 +90,9 @@
        Editar Area <i class='fas fa-edit'></i>  </button>
        ";
                                                 if ($areaSelect['status'] == 'active') {
-
-                                                    echo "<a href='controller_buscar_area.php?id_area_desactivar=" . $areaSelect['id'] . "' class='btn btn-danger btn-sm ml-4'><i class='fas fa-trash'></i>Desactivar area</a>
-      ";
+                                                    echo "<button onclick=\"confirmarAccion('desactivar', " . $areaSelect['id'] . ")\" class='btn btn-danger btn-sm ml-4'><i class='fas fa-trash'></i> Desactivar área</button>";
                                                 } else {
-                                                    echo "<a href='controller_buscar_area.php?id_area_activar=" . $areaSelect['id'] . "' class='btn btn-success btn-sm ml-4'><i class='fas fa-check'></i>Activar area</a>
-        ";
+                                                    echo "<button onclick=\"confirmarAccion('activar', " . $areaSelect['id'] . ")\" class='btn btn-success btn-sm ml-4'><i class='fas fa-check'></i> Activar área</button>";
                                                 }
                                             } else {
                                                 echo "Nombre de la materia";
@@ -285,6 +282,24 @@
                         '&area_id=' + area_id;
                 }
             })
+        }
+
+        function confirmarAccion(accion, id_area) {
+            const urlBase = accion === 'activar' ? 'controller_buscar_area.php?id_area_activar=' :
+                'controller_buscar_area.php?id_area_desactivar=';
+            Swal.fire({
+                title: '¿Estás seguro de cambiar el estado del area?',
+                text: "Esta acción podría afectar el catalogo de cursos",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#' + (accion === 'activar' ? '28a745' : 'dc3545'),
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, ' + (accion === 'activar' ? 'activar' : 'desactivar')
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = urlBase + id_area;
+                }
+            });
         }
     </script>
 
