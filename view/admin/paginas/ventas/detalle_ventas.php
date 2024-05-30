@@ -43,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="content-wrapper">
             <!-- Titulo de la vista -->
             <div class="content-header">
-                <div class="container-fluid"  >
+                <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0">Detalles de venta</h1>
@@ -51,10 +51,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="./controller_ventas.php">Ventas</a></li>
-                <li class="breadcrumb-item"><a href="./controller_buscar_ventas.php">Buscar ventas</a></li>
-               <li class="breadcrumb-item active">Detalles de venta</li>
+                                <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
+                                <li class="breadcrumb-item"><a href="./controller_ventas.php">Ventas</a></li>
+                                <li class="breadcrumb-item"><a href="./controller_buscar_ventas.php">Buscar ventas</a>
+                                </li>
+                                <li class="breadcrumb-item active">Detalles de venta</li>
                             </ol>
                         </div>
                         <!-- /.col -->
@@ -67,10 +68,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <!-- Contenido principal vista -->
             <section class="content">
-                <div class="container-fluid"  style="max-width:1000px;">
+                <div class="container-fluid" style="max-width:1000px;">
 
                     <!-- Contenido del modal -->
-                    <div class="invoice p-3 mb-3 col-md-8">
+                    <div class="invoice p-3 mb-3 col-md-11">
                         <!-- title row -->
                         <div class="row">
                             <div class="col-12">
@@ -100,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="col-sm-4 invoice-col">
                                     Cliente
                                     <address>
-                                        <div class="form-group">
+                                        <div class="">
                                             <strong><?php echo htmlspecialchars($usuario['name']); ?></strong>
                                             <strong class="ml-2"><?php echo htmlspecialchars($usuario['lastname']); ?></strong>
                                             <br>
@@ -111,7 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </address>
                                 </div>
                                 <!-- /.col -->
-                                <div class="col-sm-4 invoice-col">
+                                <div class="col-sm-2 invoice-col">
                                     <br>
                                     <b>ID usuario</b> <?php echo htmlspecialchars($usuario['id']); ?><br>
                                     <img src="../../../<?php echo $usuario['photo']; ?>" class="rounded-circle img-fluid w-50" alt="Foto de usuario">
@@ -137,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <th>Materia</th>
                                                             <th>Precio</th>
                                                             <th>Horas Totales</th>
-                                                           
+
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -145,8 +146,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <tr>
                                                                 <td><?php echo htmlspecialchars($detalle['name']); ?></td>
                                                                 <td><?php echo htmlspecialchars($detalle['price']); ?></td>
-                                                                <td><?php echo htmlspecialchars($detalle['total_quantity']); ?></td>
-                                                             
+                                                                <td><?php echo htmlspecialchars($detalle['total_quantity']); ?>
+                                                                </td>
+
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>
@@ -158,7 +160,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                             </div>
-                                                            
+
                             <!-- /.col -->
 
 

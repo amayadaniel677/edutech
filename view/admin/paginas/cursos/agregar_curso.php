@@ -1,12 +1,12 @@
 <?php
 $urlStarter = '../../../view/admin/';  //son desde el controlador
 ?>
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="en"> 
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -16,6 +16,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
+  <!-- SwadeetAlert2 -->
+  <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
@@ -63,55 +66,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       <section class="content">
-        <?php
-        if (isset($mensajeColapso)) {
-          echo " <div class='container mt-5'> <div class='alert alert-danger' role='alert'>";
-          echo $mensajeColapso;
-          echo " </div>  </div>";
-        }
-        ?>
-
+        <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none"></button>
+        <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none "></button>
+        <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none "></button>
+        <button id="btnWarning" type="button" class="btn btn-success swalDefaultWarning" style="display:none "></button>
 
         <?php
 
-        // Verifica si hay un mensaje de éxito en la sesión
-        if (isset($mensajeExito)) {
-          echo '<div class="alert alert-success mt-3" role="alert">';
-          echo $mensajeExito;
-          echo '</div>';
-        }
-        
         if (isset($errores_foto) || isset($errores_inputs)) {
-          if (is_array($errores_foto) || is_array($errores_inputs)) {
-              echo "<div class='alert alert-danger mt-3'>";
-      
-              // Muestra errores de la foto
-              if (!empty($errores_foto)) {
-                  echo "<strong>Errores en la foto:</strong><br>";
-                  foreach ($errores_foto as $error) {
-                      echo $error . "<br>";
-                  }
-              }
-      
-              // Muestra errores de los inputs
-              if (!empty($errores_inputs)) {
-                  echo "<strong>Errores:</strong><br>";
-                  foreach ($errores_inputs as $errors) {
-                      echo $errors . "<br>";
-                  }
-              }
-      
-              echo "</div>";
+          echo "<div class='container-fluid' style='max-width:1000px;'>"; // Contenedor principal
+
+          // Muestra errores de la foto si existen
+          if (isset($errores_foto) && is_array($errores_foto) && !empty($errores_foto)) {
+            echo "<div class='alert alert-danger alert-dismissible'>";
+            echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true' style='font-size:20px; opacity:0.5;'>x</button>";
+            echo "<h5><i class='icon fas fa-ban'></i> Errores en la foto:</h5>";
+            echo "<ul class='list-group list-group-flush pl-3'>";
+            foreach ($errores_foto as $error) {
+              echo "<li class=''>" . $error . "</li>";
+            }
+            echo "</ul>";
+            echo "</div>";
           }
-          else{
-           
+
+          // Muestra errores de los inputs si existen
+          if (isset($errores_inputs) && is_array($errores_inputs) && !empty($errores_inputs)) {
+            echo "<div class='alert alert-danger alert-dismissible'>";
+            echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true' style='font-size:20px; opacity:0.5;'>x</button>";
+            echo "<h5><i class='icon fas fa-ban'></i> Errores:</h5>";
+            echo "<ul class='list-group list-group-flush pl-3'>";
+            foreach ($errores_inputs as $error) {
+              echo "<li class=''>" . $error . "</li>";
+            }
+            echo "</ul>";
+            echo "</div>";
           }
-      }else{
-       
-      }
+
+          echo "</div>"; // Cierre del contenedor principal
+        }
         ?>
+
+
         <!-- <div class="container-fluid" style="max-width: 1000px;"> -->
-          <div class="container-fluid">
+        <div class="container-fluid">
           <div class="row justify-content-center ">
             <div class="col-lg-6">
               <div class="formulario">
@@ -154,7 +151,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <div class="input-group mb-3">
                         <div class="custom-file">
                           <input type="file" class="" id="foto" name="foto" accept='image/*'>
-                          <label class="custom-file-label" for="foto">Seleccionar archivo</label>
+
+                          archivo</label>
                         </div>
                       </div>
                     </div>
@@ -216,7 +214,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <?php include('../../../view/admin/layouts/footer.php'); ?>
     <!--FIN   Main Footer -->
 
-  </div> <!--fin de toda la pagina wrapper -->
+  </div>
+  <!--fin de toda la pagina wrapper -->
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
@@ -225,6 +224,86 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- sweet alert -->
+  <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+  <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+  <!-- Toastr -->
+  <script src="../../../view/admin/plugins/toastr/toastr.min.js"></script>
+
+  <?php
+  $mensajeExito = $mensajeExito ?? ''; // Asegura que $mensaje_editar esté definido
+  $mensajeColapso = $mensajeColapso ?? ''; // Asegura que $mensaje_editar esté definido
+  $mensaje_warning = $mensaje_warning ?? ''; // Asegura que $mensaje_editar esté definido
+  $mensaje_info = $mensaje_info ?? ''; // Asegura que $mensaje_editar esté definido
+  ?>
+  <script>
+    $(function() {
+      var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000,
+        width: '80%',
+        customClass: {
+          container: 'mi-clase-personalizada'
+        }
+
+
+      });
+
+      $('.swalDefaultSuccess').click(function() {
+        Toast.fire({
+          icon: 'success',
+          title: '<?php echo $mensajeExito; ?>'
+
+        })
+      });
+      $('.swalDefaultInfo').click(function() {
+        Toast.fire({
+          icon: 'info',
+          title: '<?php echo $mensaje_info; ?>'
+        })
+      });
+      $('.swalDefaultError').click(function() {
+        Toast.fire({
+          icon: 'error',
+          title: '<?php echo $mensajeColapso; ?>'
+        })
+      });
+      $('.swalDefaultWarning').click(function() {
+        Toast.fire({
+          icon: 'warning',
+          title: '<?php echo $mensaje_warning; ?>'
+        })
+      });
+      $('.swalDefaultQuestion').click(function() {
+        Toast.fire({
+          icon: 'question',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      // Verificar si la variable $mensaje_editar está definida
+      <?php if (isset($mensajeExito) && !empty($mensajeExito)) : ?>
+        $('#btnSuccess').click();
+      <?php endif; ?>
+      <?php if (isset($mensajeColapso) && !empty($mensajeColapso)) : ?>
+        $('#btnError').click();
+      <?php endif; ?>
+      <?php if (isset($mensaje_warning) && !empty($mensaje_warning)) : ?>
+        $('#btnWarning').click();
+      <?php endif; ?>
+      <?php if (isset($mensaje_info) && !empty($mensaje_info)) : ?>
+        $('#btnInfo').click();
+      <?php endif; ?>
+
+
+    });
+  </script>
   <!-- AdminLTE App -->
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 </body>

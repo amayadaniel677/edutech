@@ -25,8 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
@@ -39,20 +38,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- necesario para el tamaño de mensajes alerta  -->
 
     <style>
-    .mi-clase-personalizada .swal2-popup {
-        font-size: 16px !important;
-        height: auto !important;
-        padding-bottom: 4px !important;
-    }
+        .mi-clase-personalizada .swal2-popup {
+            font-size: 16px !important;
+            height: auto !important;
+            padding-bottom: 4px !important;
+        }
 
-    .swal2-popup h2 {
-        margin-top: 8px !important;
-        font-size: 18px !important;
-    }
+        .swal2-popup h2 {
+            margin-top: 8px !important;
+            font-size: 18px !important;
+        }
 
-    .content-wrapper {
-        height: auto !important;
-    }
+        .content-wrapper {
+            height: auto !important;
+        }
     </style>
 </head>
 
@@ -92,13 +91,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <section class="content">
 
                 <button id="btnInfo" type="button" class="btn btn-success swalDefaultSuccess" style="display:none ">
-                 
+
                 </button>
                 <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none ">
-             
+
                 </button>
                 <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none ">
-                 
+
                 </button>
                 <div class="container-fluid" style="max-width:1300px;">
 
@@ -120,32 +119,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <th scope="col">Id venta</th>
                                             <th scope="col">Nombres</th>
                                             <th scope="col">Valor venta</th>
-                                            <th scope="col">Valor abonado</th>
                                             <th scope="col">Saldo pendiente</th>
                                             <th scope="col">Ultimo abono</th>
-                                            <th scope="col">Agregar abono</th>
+                                            <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        if (isset($abonos_pendientes) and !empty($abonos_pendientes) ){
+                                        if (isset($abonos_pendientes) and !empty($abonos_pendientes)) {
 
                                             foreach ($abonos_pendientes as $abono) {
                                                 echo '<tr>
                       
                               <td>' . $abono['fecha_venta'] . '</td>
-                              <td>' . $abono['id_venta']. '</td>
+                              <td>' . $abono['id_venta'] . '</td>
                               <td>' . $abono['person_name'], " ", $abono['person_lastname'] . '</td>
                               <td>' . $abono['valor_venta'] . '</td>
-                              <td>' . $abono['valor_abonado'] . '</td>
                               <td>' . $abono['valor_venta'] - $abono['valor_abonado'] . '</td>
                               <td>' . $abono['ultimo_abono'] . '</td>
                               <td>
-                              <a class="btn btn-outline-success abrir-modal-abonos" data-target="#modalAbonos" data-id-saldo="'.$abono['id_saldo'].'" data-toggle="tooltip" data-placement=""top" title="Abonos realizados">
+                              <a class="btn btn-outline-success abrir-modal-abonos mr-2" data-target="#modalAbonos" data-id-saldo="' . $abono['id_saldo'] . '" data-toggle="tooltip" data-placement="top" title="Nuevo abono">
                               <i class="fas fa-plus"></i>
                               </a>
                           
-                              <a href="controller_detalle_abonos.php?id_venta=' . $abono['id_venta'] . '"   class="btn btn-primary" data-toggle="tooltip" title="Ver abonos realizados" id="desactivarVenta"><i  class="fas fa-eye"></i></a>
+                              <a href="controller_detalle_abonos.php?id_saldo=' . $abono['id_saldo'] . '"   class="btn btn-primary" data-toggle="tooltip" title="Ver abonos realizados" id="detalleSaldo"><i  class="fas fa-eye"></i></a>
                                
 
                               </td>
@@ -158,44 +155,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         // Cierra la tabla HTML
 
                                         ?>
- <!-- Modal -->
- <div class="modal fade" id="modalAbonos" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h3 class="modal-title" id="miModalLabel">Nuevo abono</h3>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <!-- Aquí irá el contenido dinámico del modal -->
-                                                    <!-- Agrega el ID "formPagar" al formulario -->
-                                                    <form id="formAddAbono" method="POST" action="">
-                                                        <div class="">
-                                                            <input type="hidden" name="saldo_id" id="saldo_id">
-                                                            <div class="col-md-12 mt-3">
-                                                                <label for="valor_abono">Valor del abono</label>
-                                                                <br>
-                                                                <input type="number" name="valor_abono" id="valor_abono" class="form-control" placeholder="precio del abono">
-                                                            </div>
-                                                            <div class="col-md-12 mt-3">
-                                                                <label for="valor_abono_2">Confirmar valor del abono</label>
-                                                                <br>
-                                                                <input type="number" name="valor_abono_2" id="valor_abono_2" class="form-control" placeholder="confirmar precio">
-                                                            </div>
-                                                            <div class="col-md-10 mt-3 mb-5">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button id="btnAddAbono" class="btn btn-primary">Agregar abono</button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="modalAbonos" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="miModalLabel">Nuevo abono</h3>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- Aquí irá el contenido dinámico del modal -->
+                                                        <!-- Agrega el ID "formPagar" al formulario -->
+                                                        <form id="formAddAbono" method="POST" action="">
+                                                            <div class="">
+                                                                <input type="hidden" name="saldo_id" id="saldo_id">
+                                                                <div class="col-md-12 mt-3">
+                                                                    <label for="valor_abono">Valor del abono</label>
+                                                                    <br>
+                                                                    <input type="number" name="valor_abono" id="valor_abono" class="form-control" placeholder="precio del abono">
+                                                                </div>
+                                                                <div class="col-md-12 mt-3">
+                                                                    <label for="valor_abono_2">Confirmar valor del
+                                                                        abono</label>
+                                                                    <br>
+                                                                    <input type="number" name="valor_abono_2" id="valor_abono_2" class="form-control" placeholder="confirmar precio">
+                                                                </div>
+                                                                <div class="col-md-10 mt-3 mb-5">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                                    <button id="btnAddAbono" class="btn btn-primary">Agregar abono</button>
 
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </form>
+                                                        </form>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     </tbody>
                                     <tfoot>
                                         <tr>
@@ -203,7 +201,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <th scope="col">Id venta</th>
                                             <th scope="col">Nombres</th>
                                             <th scope="col">Valor venta</th>
-                                            <th scope="col">Valor abonado</th>
+
                                             <th scope="col">Saldo pendiente</th>
                                             <th scope="col">Ultimo abono</th>
                                             <th scope="col">Agregar abono</th>
@@ -252,118 +250,121 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- jQuery -->
     <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+    <!-- popper -->
+    <!-- <script src="../../../view/admin/plugins/popper/umd/popper.min.js"></script> -->
     <!-- Bootstrap 4 -->
     <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- sweet alert -->
     <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
-  <script>
-    $(document).ready(function() {
-        $(document).on('click', '.abrir-modal-abonos', function() {
-                const saldo_id = this.getAttribute('data-id-saldo'); // Obtiene el valor del atributo data-id
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.abrir-modal-abonos', function() {
+                const saldo_id = this.getAttribute(
+                    'data-id-saldo'); // Obtiene el valor del atributo data-id
                 document.getElementById('saldo_id').value = saldo_id; // Asigna el valor al input
             });
-    });
-    </script>
-       <script>
-       $(document).ready(function() {
-        // Escuchar el click del botón "Pagar"
-        $('#btnAddAbono').click(function(e) {
-            e.preventDefault(); // Evitar el envío del formulario por defecto
-
-            // Mostrar la alerta de confirmación
-            Swal.fire({
-                title: '¿Estás seguro que es el abono correcto?',
-                text: "Esta acción no se puede revertir y descontará al total del saldo pendiente.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, confirmar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                // Si el usuario confirma, enviar el formulario
-                if (result.isConfirmed) {
-                    $('#formAddAbono').submit(); // Enviar el formulario
-                }
-            });
         });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Escuchar el click del botón "Pagar"
+            $('#btnAddAbono').click(function(e) {
+                e.preventDefault(); // Evitar el envío del formulario por defecto
 
-    });
-</script>
+                // Mostrar la alerta de confirmación
+                Swal.fire({
+                    title: '¿Estás seguro que es el abono correcto?',
+                    text: "Esta acción no se puede revertir y descontará al total del saldo pendiente.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, confirmar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    // Si el usuario confirma, enviar el formulario
+                    if (result.isConfirmed) {
+                        $('#formAddAbono').submit(); // Enviar el formulario
+                    }
+                });
+            });
+
+        });
+    </script>
     <?php
     $mensaje_error = $mensaje_error ?? ''; // Asegura que $mensaje_editar esté definido
     $mensaje_ok = $mensaje_ok ?? ''; // Asegura que $mensaje_editar esté definido
     ?>
     <script>
-    $(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 7000,
-            width: '80%',
-            customClass: {
-                container: 'mi-clase-personalizada'
-            }
-        });
+        $(function() {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 7000,
+                width: '80%',
+                customClass: {
+                    container: 'mi-clase-personalizada'
+                }
+            });
 
-        $('.swalDefaultSuccess').click(function() {
-            Toast.fire({
-                icon: 'success',
-                title: '<?php echo $mensaje_ok; ?>'
+            $('.swalDefaultSuccess').click(function() {
+                Toast.fire({
+                    icon: 'success',
+                    title: '<?php echo $mensaje_ok; ?>'
 
-            })
+                })
+            });
+            $('.swalDefaultInfo').click(function() {
+                Toast.fire({
+                    icon: 'info',
+                    title: ''
+                })
+            });
+            $('.swalDefaultError').click(function() {
+                Toast.fire({
+                    icon: 'error',
+                    title: '<?php echo $mensaje_error; ?>'
+                })
+            });
+            $('.swalDefaultWarning').click(function() {
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+            $('.swalDefaultQuestion').click(function() {
+                Toast.fire({
+                    icon: 'question',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
         });
-        $('.swalDefaultInfo').click(function() {
-            Toast.fire({
-                icon: 'info',
-                title: ''
-            })
-        });
-        $('.swalDefaultError').click(function() {
-            Toast.fire({
-                icon: 'error',
-                title: '<?php echo $mensaje_error; ?>'
-            })
-        });
-        $('.swalDefaultWarning').click(function() {
-            Toast.fire({
-                icon: 'warning',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-            })
-        });
-        $('.swalDefaultQuestion').click(function() {
-            Toast.fire({
-                icon: 'question',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-            })
-        });
-    });
     </script>
     <script>
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-        <?php if (isset($mensaje_ok) && !empty($mensaje_ok)) : ?>
-        // Simular un clic en el botón para activar el SweetAlert
-
-
-        $('#btnSuccess').click();
+            <?php if (isset($mensaje_ok) && !empty($mensaje_ok)) : ?>
+                // Simular un clic en el botón para activar el SweetAlert
 
 
-
-        <?php endif; ?>
-        <?php if (isset($mensaje_error) && !empty($mensaje_error)) : ?>
-        // Simular un clic en el botón para activar el SweetAlert
-
-
-        $('#btnError').click();
+                $('#btnSuccess').click();
 
 
 
-        <?php endif; ?>
-        // crear confirmacion con sweet alert al dar click en boton-eliminarVenta
+            <?php endif; ?>
+            <?php if (isset($mensaje_error) && !empty($mensaje_error)) : ?>
+                // Simular un clic en el botón para activar el SweetAlert
 
-    });
+
+                $('#btnError').click();
+
+
+
+            <?php endif; ?>
+            // crear confirmacion con sweet alert al dar click en boton-eliminarVenta
+
+        });
     </script>
 
     <!-- DataTables  & Plugins -->
@@ -393,48 +394,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 
     <script>
-    // Función para confirmar la eliminación de un usuario
-    function confirmarEliminarVenta(url) {
-        Swal.fire({
-            title: "¿Estás seguro de inactivar la venta?",
-            text: "Esto podría restar las horas compradas",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Sí, inactivar",
-            cancelButtonText: "Cancelar",
-            reverseButtons: true,
-            dangerMode: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = url;
-            }
-        });
-    }
+        // Función para confirmar la eliminación de un usuario
+        function confirmarEliminarVenta(url) {
+            Swal.fire({
+                title: "¿Estás seguro de inactivar la venta?",
+                text: "Esto podría restar las horas compradas",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, inactivar",
+                cancelButtonText: "Cancelar",
+                reverseButtons: true,
+                dangerMode: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        }
     </script>
     <!-- Page specific script -->
     <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
-    });
     </script>
     <script>
-    $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-        $(document).on('click', '.abrir-modal-abonos', function(event) {
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $(document).on('click', '.abrir-modal-abonos', function(event) {
                 event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
                 var targetModal = $(this).data('target'); // Obtener el objetivo del modal
                 var idSaldo = $(this).data('id-saldo'); // Obtener el ID del saldo
@@ -443,8 +445,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 $(targetModal).modal('show'); // Mostrar el modal
             });
-       
-    });
+
+        });
     </script>
 
 </body>

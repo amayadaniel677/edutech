@@ -44,10 +44,10 @@ class saldos_pendientes_model
     }
     public function abonar_saldo($saldo_id, $valor_abono)
     {
-        $date=date('Y-m-d');
+        $date = date('Y-m-d');
         // consultar cuanto falta por pagar
-        $sql = "SELECT sales.price AS valor_venta, balances.total_paid AS valor_abonado FROM balances 
-        INNER JOIN sales ON balances.sales_id = sales.id 
+        $sql = "SELECT sales.price AS valor_venta, balances.total_paid AS valor_abonado FROM balances
+        INNER JOIN sales ON balances.sales_id = sales.id
         WHERE balances.id = '$saldo_id'";
         $resultado = $this->con->query($sql);
         $fila = $resultado->fetch_assoc();
@@ -57,25 +57,43 @@ class saldos_pendientes_model
         // si el abono es mayor al saldo restante, no se puede registrar el abono
         if ($valor_abono > $saldo_restante) {
             return "Error: el valor abonado $valor_abono es mayor al saldo restante $saldo_restante";
-        }
-        else{
+        } else {
             $sql = "UPDATE balances SET total_paid = total_paid + '$valor_abono', last_payment = '$date' WHERE id = '$saldo_id'";
-            $result=$this->con->query($sql);
-           
-            if($result){
+            $result = $this->con->query($sql);
+
+            if ($result) {
                 $sql = "INSERT INTO balance_detail(`date`, amound_paid, balances_id) VALUES ('$date', '$valor_abono', $saldo_id)";
-                $result2=$this->con->query($sql);
-                if($result2){
+                $result2 = $this->con->query($sql);
+                if ($result2) {
                     return true;
-                }
-                else{
+                } else {
                     return false;
                 }
-
             }
-
         }
-        
-        $this->con->query($sql);
+    }
+    // logica para detalles de abonos
+    public function obtenerDatosCliente($id_saldo)
+    {
+        $sql = "SELECT  people.id, people.dni, people.name, people.lastname, people.phone, people.email, people.address, people.city, people.photo, sales.id as sales_id FROM balances
+        INNER JOIN sales ON balances.sales_id = sales.id
+        INNER JOIN people ON sales.people_id = people.id WHERE balances.id = '$id_saldo'";
+        $resultado = $this->con->query($sql);
+        $usuario = $resultado->fetch_assoc();
+        return $usuario;
+    }
+    public function obtenerAbonos($id_saldo)
+    {
+
+        $sql = "SELECT balance_detail.*, balances.sales_id 
+        FROM balance_detail 
+        INNER JOIN balances ON balance_detail.balances_id = balances.id 
+        WHERE balances_id = '$id_saldo'";
+        $resultado = $this->con->query($sql);
+        $detalles_abono = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $detalles_abono[] = $fila;
+        }
+        return $detalles_abono;
     }
 }
