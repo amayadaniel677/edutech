@@ -92,7 +92,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <div class="tab-pane fade" id="product-price" role="tabpanel" aria-labelledby="product-areas-tab">
           <h3> Manual de areas </h3>
-            <embed src="../../resource/pdf/Areas.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/Area.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
         <div class="tab-pane fade" id="product-cursos" role="tabpanel" aria-labelledby="product-cursos-tab">
           <h3>Manual de cursos</h3>
