@@ -100,7 +100,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.content-wrapper -->
 
         <!-- Controlador del nav aSidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
+        <aside class="control-sidebar control-sidebar-dark"> 
             <!-- Control sidebar content goes here -->
             <div class="p-3">
                 <h5>Title</h5>
