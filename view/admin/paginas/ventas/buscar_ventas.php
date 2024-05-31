@@ -321,7 +321,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
         $('#btnError').click();
-
+   
 
 
         <?php endif; ?>
@@ -332,7 +332,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- DataTables  & Plugins -->
     <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-
+ 
     <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 
     <script src="../../../view/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
