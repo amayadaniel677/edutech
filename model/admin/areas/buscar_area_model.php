@@ -66,9 +66,9 @@ class buscar_area_model
         }
     }
 
-    public function editarArea($name, $id)
+    public function editarArea($name, $id,$status)
     {
-        $sql = "UPDATE areas SET name = '$name' WHERE id = '$id'";
+        $sql = "UPDATE areas SET name = '$name', `status` = '$status' WHERE id = '$id'";
         $result = $this->con->query($sql);
         if ($result) {
             return true;
@@ -91,6 +91,34 @@ class buscar_area_model
         $sql = "UPDATE areas SET status = 'inactive' WHERE id = '$id'";
         $result = $this->con->query($sql);
         if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function crear_area($name)
+    {
+        $otra_area=$this->area_exist($name);
+        if($otra_area){
+            return false;
+        }else{
+            $price = 0;
+            $sql = "INSERT INTO areas (name, price) VALUES ('$name', '$price')";
+            $result = $this->con->query($sql);
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            } 
+        }
+    }
+
+    public function area_exist($name)
+    {   
+        $sql = "SELECT * FROM areas WHERE name = '$name'";
+        $result = $this->con->query($sql);
+        if ($result->num_rows > 0) {
             return true;
         } else {
             return false;
