@@ -7,9 +7,7 @@ if (!isset($_SESSION['dni_session'])) {
 }
 $ruta_inicio = '../../../';  //esta ruta se usa para cerrar sesion en el nav
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 include('../../../model/admin/areas/buscar_area_model.php');
 $consult = new buscar_area_model();
 if ($consult->traer_areas()) {
@@ -55,18 +53,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['categoria']) && $_POST
 }
 
 // RECIBE EL FORMULARIO PARA ACTUALIZAR EL AREA
-if ($_POST and isset($_POST['nombre']) and isset($_POST['idArea']) and $_POST['nombre'] != '' and $_POST['precio'] != '' and $_POST['idArea']) {
+if (isset($_POST['nombre']) and isset($_POST['idArea']) and isset($_POST['status'])) {
     // Debugging (borrar después de verificar que los datos son correctos
     $nombre = $_POST['nombre'];
     $nombre = trim($nombre);
     $nombre = ucfirst($nombre); // Convierte la primera letra en mayúscula
     $id = $_POST['idArea'];
-
+    $status = $_POST['status'];
+     
 
     $areaModel = new buscar_area_model();
-    $areaModel->editarArea($nombre, $id);
+    $areaModel->editarArea($nombre, $id,$status);
     if ($areaModel) {
         $mensaje = 'Area actualizada correctamente';
+        header('refresh: 5; url=controller_buscar_area.php?&mensaje=' . $mensaje . '');
     } else {
         $mensaje_error = 'Error al actualizar el area';
     }
@@ -93,6 +93,31 @@ if (isset($_GET['id_area_activar'])) {
         header('location: controller_buscar_area.php?mensaje=' . $mensaje . '');
     } else {
         $mensaje_error = 'Error al activar el area';
+    }
+}
+
+if(isset($_POST['nombre_area']) && isset($_POST['nombre_area_2'])){
+    $nombre = $_POST['nombre_area'];
+    $nombre2 = $_POST['nombre_area_2'];
+    $nombre = trim($nombre);
+    $nombre=  preg_replace('/\s+/', ' ', $nombre);
+    $nombre = strtolower($nombre);
+    $nombre =ucwords($nombre);
+    $nombre2 = trim($nombre);
+    $nombre2=  preg_replace('/\s+/', ' ', $nombre);
+    $nombre2 = strtolower($nombre);
+    $nombre2 =ucwords($nombre);
+    if ($nombre ==  $nombre2 ) {
+        $areaModel = new buscar_area_model();
+        $areaModel->crear_area($nombre);
+        if ($areaModel) {
+            $mensaje = 'Area creada correctamente';
+            header('location: controller_buscar_area.php?mensaje=' . $mensaje . '');
+        } else {
+            $mensaje_error = 'Error al crear el area';
+        } 
+    } else {
+        $mensaje_error = 'Los nombres no coinciden';
     }
 }
 include('../../../view/admin/paginas/areas/buscar_area.php');

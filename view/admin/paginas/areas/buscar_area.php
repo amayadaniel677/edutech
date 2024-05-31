@@ -168,9 +168,9 @@
                                         </div>
                                         <div class="modal-body">
                                             <!-- Aquí puedes incluir el contenido del modal, como formularios para editar la materia -->
-                                            <form action="" method='POST' id='form-edit'>
+                                            <form action="controller_buscar_area.php" method='POST' id='form-edit'>
                                                 <div class="form-group">
-                                                    <input required type="text" name="idArea" id="idArea" class="form-control" value="<?php if (isset($area)) {
+                                                    <input required type="hidden" name="idArea" id="idArea" class="form-control" value="<?php if (isset($area)) {
                                                                                                                                             echo $areaSelect['id'];
                                                                                                                                         } ?>">
                                                     <label for="nombre">Nombre del area:</label>
@@ -182,7 +182,15 @@
                                                 <!-- agregar estado dependiendo de su valor en la BD -->
                                                 <div class="form-group
                         ">
-                                                    <label for="estado">Estado:</label>
+                                                    <label for="status">Estado:</label>
+                                                    <select name="status" id="estado" class="form-control">
+                                                        <option value="active" <?php if (isset($areaSelect['status']) && $areaSelect['status'] == 'active') {
+                                                                                    echo 'selected';
+                                                                                } ?>>Activo</option>
+                                                        <option value="inactive" <?php if (isset($areaSelect['status']) && $areaSelect['status'] == 'inactive') {
+                                                                                        echo 'selected';
+                                                                                    } ?>>Inactivo</option>
+                                                    </select>                                
 
 
                                                     <div class="modal-footer">
@@ -211,7 +219,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="./controller_agregar_area.php" method='POST'>
+                            <form action="controller_buscar_area.php" method='POST'>
                                 <div class="form-group row">
                                     <label for="nombre_area" class="col-sm-4 col-form-label">Nombre del Area: </label>
                                     <div class="col-sm-8">
