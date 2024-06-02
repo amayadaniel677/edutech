@@ -44,7 +44,9 @@ class saldos_pendientes_model
     }
     public function abonar_saldo($saldo_id, $valor_abono)
     {
-        $date = date('Y-m-d');
+        // FORMATO HORA COLOMBIANA
+        date_default_timezone_set('America/Bogota');
+        $date = date('Y-m-d H:i:s');
         // consultar cuanto falta por pagar
         $sql = "SELECT sales.price AS valor_venta, balances.total_paid AS valor_abonado FROM balances
         INNER JOIN sales ON balances.sales_id = sales.id
