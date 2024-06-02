@@ -1,69 +1,69 @@
 <?php
 session_start();
-if (!isset( $_SESSION['dni_session'])){
+if (!isset($_SESSION['dni_session'])) {
     header('location:../../login_controller.php');
-    exit(); 
+    exit();
 }
-$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
+$ruta_inicio = '../../../';  //esta ruta se usa para cerrar sesion en el nav
 // capturar el mensaje enviado en get
 
- include('../../../model/admin/cursos/agregar_curso_model.php');
-if(isset($_GET['mensajeExito'])){
-    $mensajeExito=$_GET['mensajeExito'];
+include('../../../model/admin/cursos/agregar_curso_model.php');
+if (isset($_GET['mensajeExito'])) {
+    $mensajeExito = $_GET['mensajeExito'];
 }
-    if ($_SERVER['REQUEST_METHOD']=='POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $id_categoria = $_POST['categoria'];
 
-    $nombre_curso= ucwords(strtolower((trim($_POST['nombre-curso']))));
+    $nombre_curso = ucwords(strtolower((trim($_POST['nombre-curso']))));
     $nombre_curso = preg_replace('/\s+/', ' ', $nombre_curso);
-    
-   
+
+
     $descripcion = $_POST['descripcion'];
-    $temas=$_POST['temas'];
-   
+    $temas = $_POST['temas'];
+
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $foto_post = $_FILES['foto'];
         $consult = new agregar_curso_controller();
         $errores_foto_2 = $consult->validar_foto($foto_post);
         $nombre_curso_espacios = str_replace(' ', '_', $nombre_curso);
-        $foto=$consult->obtener_ruta_foto($foto_post, $nombre_curso_espacios);
+        $foto = $consult->obtener_ruta_foto($foto_post, $nombre_curso_espacios);
     } else {
         $consult = new agregar_curso_controller();
         $errores_foto_2 = false;
         $foto = 'resource/img/photosSubjects/defaultPhoto.jpg';
     }
-    $errores_inputs_2=$consult->validar_campos($id_categoria);
-    
-  
+    $errores_inputs_2 = $consult->validar_campos($id_categoria);
+
+
     if (!$errores_inputs_2 && !$errores_foto_2) {
-          $model = new agregar_curso_model();
-        $result_model=$model->insertar_curso($id_categoria, $nombre_curso, $descripcion, $foto,$temas);
-        if ($result_model) {
-            $consult->mover_borrar_foto($foto_post,$foto);
-            $mensajeExito = 'Se creo el curso con EXITO'; 
+        $model = new agregar_curso_model();
+        $result_model = $model->insertar_curso($id_categoria, $nombre_curso, $descripcion, $foto, $temas);
+        if ($result_model == 1) {
+            $consult->mover_borrar_foto($foto_post, $foto);
+            $mensajeExito = 'Se creo el curso con EXITO';
             // redirigir a la misma pagina pero con el mensajeexito
-            header('Location: controller_agregar_cursos.php?mensajeExito='.$mensajeExito);
+            header('Location: controller_agregar_cursos.php?mensajeExito=' . $mensajeExito);
             // leer el mensaje de get y capturarlo, solo si existe , si no guardarlo como vacio
-          
-            
-        
+
+
+
+        } elseif ($result_model == "Ya existe un curso con ese nombre, active este curso en el catalogo si desea volver a publicarlo") {
+            $mensajeExito = '';
+            $errores_inputs[] = 'Ya existe un curso con ese nombre, active este curso en el catalogo si desea volver a publicarlo';
         } else {
+            $mensajeExito = '';
             $errores_inputs[] = 'Error no se ingreso el curso';
-          
         }
-        
-       
-    } else{
-        $mensajeExito=null;
+    } else {
+        $mensajeExito = null;
         $errores_inputs = (array) $consult->errores_inputs;
         $errores_foto = (array) $consult->errores_foto;
     }
-   
 }
 
-$consult_previa=new agregar_curso_controller();
-$areas_bd=$consult_previa->traer_areas();
+$consult_previa = new agregar_curso_controller();
+$areas_bd = $consult_previa->traer_areas();
 
 
 class agregar_curso_controller
@@ -76,13 +76,13 @@ class agregar_curso_controller
     public function validar_campos($id_categoria)
     {
         $error = false;
-        
-       
-        if ($id_categoria=='0') {
-            
+
+
+        if ($id_categoria == '0') {
+
             $this->errores_inputs = 'Error, seleccione una categoria';
-            $error=true;
-        } 
+            $error = true;
+        }
         return $error;
     }
 
@@ -118,7 +118,7 @@ class agregar_curso_controller
 
     }
 
-    public function mover_borrar_foto($foto_file,$ruta_photo)
+    public function mover_borrar_foto($foto_file, $ruta_photo)
     {
 
         $carpeta_destino = '../../../resource/img/photosSubjects/';
@@ -131,27 +131,27 @@ class agregar_curso_controller
         $ruta_archivo_nombre_archivo = '../../../' . $ruta_photo;
 
         // borrar foto
-        
 
-        if($ruta_photo!='resource/img/photosSubjects/defaultPhoto.jpg'){
+
+        if ($ruta_photo != 'resource/img/photosSubjects/defaultPhoto.jpg') {
             if (move_uploaded_file($foto_file['tmp_name'], $ruta_archivo_nombre_archivo)) {
                 return true;
             } else {
-                return false;                
+                return false;
             }
-        
         }
-}
-    
+    }
 
-    public function traer_areas(){
-        $consult= new agregar_curso_model();
-        $areas_bd=$consult->traer_areas();
-        if($areas_bd){
+
+    public function traer_areas()
+    {
+        $consult = new agregar_curso_model();
+        $areas_bd = $consult->traer_areas();
+        if ($areas_bd) {
             return $areas_bd;
-        }else{
+        } else {
             return false;
         }
     }
-} 
+}
 include('../../../view/admin/paginas/cursos/agregar_curso.php');

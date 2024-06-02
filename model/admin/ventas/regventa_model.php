@@ -105,7 +105,7 @@ class RegVenta_consult
     }
 
     // METODOS PARA AGREGAR LA VENTA
-    public function agregar_venta_completa($nombres, $apellidos, $dni, $direccion, $correo, $ciudad, $telefono, $descuento, $valor_total)
+    public function agregar_venta_completa($nombres, $apellidos, $dni, $direccion, $correo, $ciudad, $telefono, $descuento, $valor_total, $valor_abonado)
     {
         if ($descuento == '') {
             $descuento = 0;
@@ -118,15 +118,28 @@ class RegVenta_consult
         }
         if ($user_exist) {
             $date = date("Y-m-d");
-            $sql = "INSERT INTO sales(price,`date`,people_id,discount) VALUES('$valor_total','$date','$user_exist','$descuento')";
+            $sql = "INSERT INTO sales(price,`date`,people_id,discount,value_paid) VALUES('$valor_total','$date','$user_exist','$descuento','$valor_abonado')";
             $result = $this->con->query($sql);
             if ($result) {
                 // Obtener el ID de la última inserción
                 $lastInsertedId = $this->con->insert_id;
+                $this->crear_registro_abono($valor_abonado, $lastInsertedId);
+
                 return $lastInsertedId;
             } else {
                 return false;
             }
+        } else {
+            return false;
+        }
+    }
+    public function crear_registro_abono($valor_abonado, $sales_id)
+    {
+        $date = date("Y-m-d");
+        $sql = "INSERT INTO balances(total_paid,`last_payment`,sales_id) VALUES('$valor_abonado','$date','$sales_id')";
+        $result = $this->con->query($sql);
+        if ($result) {
+            return true;
         } else {
             return false;
         }

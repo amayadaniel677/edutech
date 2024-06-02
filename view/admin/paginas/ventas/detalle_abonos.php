@@ -53,9 +53,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
                                 <li class="breadcrumb-item"><a href="./controller_ventas.php">Ventas</a></li>
-                                <li class="breadcrumb-item"><a href="./controller_buscar_ventas.php">Buscar ventas</a>
-                                </li>
-                                <li class="breadcrumb-item active">Detalles de venta</li>
+                                <li class="breadcrumb-item"><a href="./controller_saldos_pendientes.php">Saldos
+                                        pendientes</a></li>
+                                <li class="breadcrumb-item active">Abonos realizados</li>
                             </ol>
                         </div>
                         <!-- /.col -->
@@ -99,22 +99,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             if ($usuario) {
                             ?>
                                 <div class="col-sm-4 invoice-col">
-                                    Cliente
+
                                     <address>
                                         <div class="">
-                                            <strong><?php echo htmlspecialchars($usuario['name']); ?></strong>
-                                            <strong class="ml-2"><?php echo htmlspecialchars($usuario['lastname']); ?></strong>
+                                            <strong>Cliente:</strong> <span><?php echo $usuario['name']; ?></span>
+                                            <span class="ml-1"><?php echo $usuario['lastname']; ?></span>
                                             <br>
-                                        </div> <strong><?php echo htmlspecialchars($usuario['dni']); ?></strong><br>
-                                        <?php echo htmlspecialchars($usuario['city']); ?><br>
-                                        Telefono: <?php echo htmlspecialchars($usuario['phone']); ?><br>
-                                        Correo: <?php echo htmlspecialchars($usuario['email']); ?>
+                                        </div>
+                                        <strong>Dni: </strong> <?php echo $usuario['dni']; ?><br>
+                                        <strong>
+                                            Ubicación:
+                                        </strong><?php echo $usuario['address'] . " " . $usuario['city']; ?><br>
+                                        <strong>Telefono:</strong> <?php echo $usuario['phone']; ?><br>
+                                        <strong>Correo:</strong> <?php echo $usuario['email']; ?>
                                     </address>
                                 </div>
                                 <!-- /.col -->
                                 <div class="col-sm-2 invoice-col">
                                     <br>
-                                    <b>ID usuario</b> <?php echo htmlspecialchars($usuario['id']); ?><br>
+                                    <b>ID VENTA</b> <?php echo $usuario['sales_id']; ?><br>
                                     <img src="../../../<?php echo $usuario['photo']; ?>" class="rounded-circle img-fluid w-50" alt="Foto de usuario">
                                 </div>
                                 <!-- /.col -->
@@ -135,22 +138,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <table class="table table-striped">
                                                     <thead>
                                                         <tr>
-                                                            <th>Materia</th>
-                                                            <th>Precio</th>
-                                                            <th>Horas Totales</th>
+                                                            <th>#</th>
+                                                            <th>Id venta</th>
+                                                            <th>Valor abonado</th>
+                                                            <th>Fecha de abono</th>
 
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php foreach ($detalles_venta as $detalle) : ?>
-                                                            <tr>
-                                                                <td><?php echo htmlspecialchars($detalle['name']); ?></td>
-                                                                <td><?php echo htmlspecialchars($detalle['price']); ?></td>
-                                                                <td><?php echo htmlspecialchars($detalle['total_quantity']); ?>
-                                                                </td>
+                                                        <?php if (isset($detalles_abonos) and !empty($detalles_abonos)) : ?>
+                                                            <?php $contador = 1; ?>
+                                                            <?php foreach ($detalles_abonos as $detalle) : ?>
+                                                                <tr>
+                                                                    <td><?php echo $contador ?></td>
+                                                                    <td><?php echo htmlspecialchars($detalle['sales_id']); ?>
+                                                                    </td>
+                                                                    <td><?php echo htmlspecialchars($detalle['amound_paid']); ?>
+                                                                    </td>
+                                                                    <td><?php echo htmlspecialchars($detalle['date']); ?>
+                                                                    </td>
 
+                                                                </tr>
+                                                                <?php $contador++; ?>
+                                                            <?php endforeach; ?>
+                                                        <?php else : ?>
+                                                            <tr>
+                                                                <td colspan="4">No hay abonos registrados</td>
                                                             </tr>
-                                                        <?php endforeach; ?>
+                                                        <?php endif; ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -165,7 +180,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                         </div>
-                        <a href="controller_buscar_ventas.php" class="btn btn-danger">Volver</a>
+                        <a href="controller_saldos_pendientes.php" class="btn btn-danger">Volver</a>
             </section>
             <!-- /. Maincontent -->
         </div>

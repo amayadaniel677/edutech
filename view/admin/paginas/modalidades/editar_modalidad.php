@@ -59,16 +59,23 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                 </form>
             </section>
         </div>
+        <?php include('../../../view/admin/layouts/footer.php'); ?>
         </div>
+
         <aside class="control-sidebar control-sidebar-dark">
             <div class="p-3">
                 <h5>Title</h5>
                 <p>Sidebar content</p>
+                
             </div>
+            
         </aside>
-
-        <?php include('../../../view/admin/layouts/footer.php'); ?>
+        
+       
+       
     </div>
+   
+
 
     <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
     <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

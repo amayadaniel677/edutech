@@ -54,8 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var telefono = document.getElementById("telefono").value;
         var descuento = document.getElementById("descuento").value;
         var valorTotal = document.getElementById("valor-total").value;
-
-        if (!nombres || !dni || !correo || !ciudad || !apellidos || !telefono || !valorTotal) {
+        var valorAbonado = document.getElementById("valor-abonado").value;
+        valorAbonado = parseInt(valorAbonado);
+        valorTotal = parseFloat(valorTotal);
+        if (!nombres || !dni || !correo || !ciudad || !apellidos || !telefono || !valorTotal || !valorAbonado || !descuento) {
             Swal.fire({
                 title: "¡Error 1 !",
                 text: "Para registrar la venta, debe completar todos los campos del formulario.",
@@ -69,6 +71,14 @@ document.addEventListener('DOMContentLoaded', function () {
             Swal.fire({
                 title: "¡Error!",
                 text: "No hay detalles de venta para registrar 0.",
+                icon: "error"
+            });
+            return; // Salir de la función si no hay detalles de venta
+        } else if (valorAbonado > valorTotal) {
+            console.log(valorAbonado, valorTotal)
+            Swal.fire({
+                title: "¡Error!",
+                text: "El valor abonado no puede ser mayor al valor total.",
                 icon: "error"
             });
             return; // Salir de la función si no hay detalles de venta

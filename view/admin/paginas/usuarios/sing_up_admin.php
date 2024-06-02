@@ -81,7 +81,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
             <form id='formSignup' action="" method="POST" enctype="multipart/form-data">
-
               <?php
               if (isset($_GET['mensaje'])) {
                 $mensaje_info = $_GET['mensaje'];
@@ -102,12 +101,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <?php
               if (isset($mensaje_ok)) {
                 echo "<div class='container mt-5'> 
-            <div class='alert alert-success' role='alert'>";
-
+      <div class='alert alert-success' role='alert'>";
                 echo $mensaje_ok;
-                echo "
-            </div>
-            </div>";
+                echo "</div></div>";
               }
 
               function getFieldValue($field_name)
@@ -115,23 +111,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 return isset($_POST[$field_name]) ? $_POST[$field_name] : '';
               }
               ?>
+
               <div class="row">
                 <div class="col-md-6 col-sm-12">
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="[a-zA-Z\s]+" value="<?php echo  getFieldValue('nombres'); ?>" required>
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-user"></span>
+                  <div class="form-group">
+                    <label for="nombres">Nombres</label>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="[a-zA-Z\s]+" value="<?php echo getFieldValue('nombres'); ?>" required>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-user"></span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" pattern="[a-zA-Z\s]+" value="<?php echo  getFieldValue('apellidos'); ?>" required>
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-user"></span>
+                  <div class="form-group">
+                    <label for="apellidos">Apellidos</label>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" pattern="[a-zA-Z\s]+" value="<?php echo getFieldValue('apellidos'); ?>" required>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-user"></span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -140,129 +143,155 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
               <div class="row">
                 <div class="col-md-6 col-sm-12">
-                  <div class="input-group mb-3">
-                    <select class="form-control" id="tipo_documento" name="tipo_documento">
-                      <option value="">Tipo de documento</option>
-                      <option value="CC" <?php echo (getFieldValue('tipo_documento') == 'CC') ? 'selected' : ''; ?>>Cédula de ciudadanía</option>
-                      <option value="TI" <?php echo (getFieldValue('tipo_documento') == 'TI') ? 'selected' : ''; ?>>Tarjeta de identidad</option>
-                      <option value="CE" <?php echo (getFieldValue('tipo_documento') == 'CE') ? 'selected' : ''; ?>>Cédula de extranjería</option>
-                    </select>
+                  <div class="form-group">
+                    <label for="tipo_documento">Tipo de documento</label>
+                    <div class="input-group mb-3">
+                      <select class="form-control" id="tipo_documento" name="tipo_documento">
+                        <option value="">Tipo de documento</option>
+                        <option value="CC" <?php echo (getFieldValue('tipo_documento') == 'CC') ? 'selected' : ''; ?>>Cédula de ciudadanía</option>
+                        <option value="TI" <?php echo (getFieldValue('tipo_documento') == 'TI') ? 'selected' : ''; ?>>Tarjeta de identidad</option>
+                        <option value="CE" <?php echo (getFieldValue('tipo_documento') == 'CE') ? 'selected' : ''; ?>>Cédula de extranjería</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
-                  <div class="input-group mb-3">
-                    <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" pattern="\d{5,12}" minlength="5" maxlength="12" required value="<?php echo  getFieldValue('documento'); ?>">
+                  <div class="form-group">
+                    <label for="documento">Número de documento</label>
+                    <div class="input-group mb-3">
+                      <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" pattern="\d{5,12}" minlength="5" maxlength="12" required value="<?php echo getFieldValue('documento'); ?>">
+                    </div>
                   </div>
                 </div>
               </div>
 
-
               <div class="row">
                 <div class="col-md-6 col-sm-12">
-                  <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Correo electrónico" id="correo" name="correo" required value="<?php echo  getFieldValue('correo'); ?>">
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
+                  <div class="form-group">
+                    <label for="correo">Correo electrónico</label>
+                    <div class="input-group mb-3">
+                      <input type="email" class="form-control" placeholder="Correo electrónico" id="correo" name="correo" required value="<?php echo getFieldValue('correo'); ?>">
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-envelope"></span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
-                  <div class="input-group mb-3">
-                    <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono" pattern="\d{7,11}" minlength="7" maxlength="11" required value="<?php echo  getFieldValue('telefono'); ?>">
+                  <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <div class="input-group mb-3">
+                      <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono" pattern="\d{7,11}" minlength="7" maxlength="11" required value="<?php echo getFieldValue('telefono'); ?>">
+                    </div>
                   </div>
                 </div>
-
               </div>
 
               <div class="row">
                 <div class="col-md-6 col-sm-12">
-                  <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Escribir contraseña" id="contrasenia" name="contrasenia" required value="<?php echo  getFieldValue('contrasenia'); ?>">
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
+                  <div class="form-group">
+                    <label for="contrasenia">Escribir contraseña</label>
+                    <div class="input-group mb-3">
+                      <input type="password" class="form-control" placeholder="Escribir contraseña" id="contrasenia" name="contrasenia" required value="<?php echo getFieldValue('contrasenia'); ?>" readonly>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-lock"></span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
-                  <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Confirmar contraseña" id="confContrasenia" name="confContrasenia" required value="<?php echo  getFieldValue('confContrasenia'); ?>">
-                    <div class="input-group-append">
-                      <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
+                  <div class="form-group">
+                    <label for="confContrasenia">Confirmar contraseña</label>
+                    <div class="input-group mb-3">
+                      <input type="password" class="form-control" placeholder="Confirmar contraseña" id="confContrasenia" name="confContrasenia" required value="<?php echo getFieldValue('confContrasenia'); ?>" readonly>
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-lock"></span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
               </div>
 
               <div class="row">
                 <div class="col-md-6 col-sm-12">
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" pattern="[a-zA-Z\s]+" required value="<?php echo  getFieldValue('ciudad'); ?>">
+                  <div class="form-group">
+                    <label for="ciudad">Ciudad</label>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" pattern="[a-zA-Z\s]+" required value="<?php echo getFieldValue('ciudad'); ?>">
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Dirección" id="direccion" name="direccion" required value="<?php echo  getFieldValue('direccion'); ?>">
+                  <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <div class="input-group mb-3">
+                      <input type="text" class="form-control" placeholder="Dirección" id="direccion" name="direccion" required value="<?php echo getFieldValue('direccion'); ?>">
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-12 col-sm-12">
+
+              <div class="form-group">
+                <label for="rol">Seleccione un rol</label>
                 <div class="input-group mb-3">
                   <select class="form-control" id="rol" name="rol">
                     <option value="">Seleccione un rol</option>
                     <option value="docente" <?php echo (getFieldValue('rol') == 'docente') ? 'selected' : ''; ?>>Docente</option>
                     <option value="estudiante" <?php echo (getFieldValue('rol') == 'estudiante') ? 'selected' : ''; ?>>Estudiante</option>
                     <?php if ($_SESSION['rol_session'] == 'superadmin') : ?>
-                      <option value="administrador" <?php echo (getFieldValue('rol') == 'administrador') ? 'selected' : ''; ?>>Administrador</option>
-                      <?php endif; ?>
-                   
+                      <option value="administrador" <?php echo (getFieldValue('rol') == 'administrador') ? 'selected' : ''; ?> id="rolAdministardor">Administrador</option>
+                    <?php endif; ?>
                   </select>
                 </div>
               </div>
-              <label for='foto'>Subir foto:</label>
-              <div class="input-group mb-3">
-                <div class="custom-file">
-                  <input type="file" class="" id="foto" name="foto" accept='image/*'>
-                </div>
 
+              <div class="form-group">
+                <label for='foto'>Subir foto</label>
+                <div class="input-group mb-3">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="foto" name="foto" accept='image/*'>
+                    <label class="custom-file-label" for="foto">Elegir archivo</label>
+                  </div>
+                </div>
               </div>
+
               <div class="row">
                 <div class="col-md-6 col-sm-12">
-                  <label for='sexo'>Sexo:</label>
-                  <div class="input-group mb-3">
-                    <div>
-                      <input type="radio" value="M" id="sexoM" name="sexo" <?php echo (getFieldValue('sexo') === 'M') ? 'checked' : ''; ?>>
-                      <label for="sexoM">M</label>
-                      <input type="radio" value="F" id="sexoF" name="sexo" <?php echo (getFieldValue('sexo') === 'F') ? 'checked' : ''; ?>>
-                      <label for="sexoF">F</label>
-
+                  <div class="form-group">
+                    <label for='sexo'>Sexo</label>
+                    <div class="input-group mb-3">
+                      <div>
+                        <input type="radio" value="M" id="sexoM" name="sexo" <?php echo (getFieldValue('sexo') === 'M') ? 'checked' : ''; ?>>
+                        <label for="sexoM">M</label>
+                        <input type="radio" value="F" id="sexoF" name="sexo" <?php echo (getFieldValue('sexo') === 'F') ? 'checked' : ''; ?>>
+                        <label for="sexoF">F</label>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
-                  <label for='fecha'>Fecha de Nacimiento</label>
-                  <div class="input-group mb-3">
-
-                    <input required type="date" class="form-control" placeholder="Fecha de nacimiento" id="fecha" name="fecha" value="<?php echo  getFieldValue('fecha'); ?>">
+                  <div class="form-group">
+                    <label for='fecha'>Fecha de Nacimiento</label>
+                    <div class="input-group mb-3">
+                      <input required type="date" class="form-control" placeholder="Fecha de nacimiento" id="fecha" name="fecha" value="<?php echo getFieldValue('fecha'); ?>">
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Resto de los campos aquí... -->
-
               <div class="row">
-
                 <div class="col-12">
                   <button id='btn-reg-user' type="submit" class="btn btn-primary btn-block">Registrar</button>
                 </div>
               </div>
             </form>
+
           </div>
         </div>
       </section>
@@ -282,13 +311,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- /.control-sidebar -->
 
       <!-- Main Footer -->
-      
+
       <!--FIN   Main Footer -->
 
-    </div> 
+    </div>
     <!--footer-->
     <?php include('../../../view/admin/layouts/footer.php'); ?>
-    
+
     <!--fin de toda la pagina wrapper -->
     <!-- ./wrapper -->
 
@@ -369,7 +398,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <?php if (isset($mensaje_info) && !empty($mensaje_info)) : ?>
           // Simular un clic en el botón para activar el SweetAlert
 
-    
+
           $('#btnInfo').click();
 
 
@@ -403,6 +432,26 @@ function confirmarRegistro(event) {
     });
 }
 </script> -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const rolSelect = document.getElementById('rol');
+    const contraseniaInput = document.getElementById('contrasenia');
+    const confContraseniaInput = document.getElementById('confContrasenia');
+
+    rolSelect.addEventListener('change', function() {
+      if (rolSelect.value === 'administrador') {
+        contraseniaInput.removeAttribute('readonly');
+        confContraseniaInput.removeAttribute('readonly');
+      } else {
+        contraseniaInput.setAttribute('readonly', true);
+        confContraseniaInput.setAttribute('readonly', true);
+        contraseniaInput.value = '';
+        confContraseniaInput.value = '';
+      }
+    });
+  });
+</script>
 </body>
 
 </html>

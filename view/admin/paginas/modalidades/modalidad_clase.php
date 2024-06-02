@@ -70,7 +70,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                                                 <a href="controller_editar_modalidad.php?id_modalidad=<?php echo $modalidad['id']; ?>" class="btn btn-primary tooltipEdit" title="Editar" data-placement="top">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                                <button onclick="eliminarModalidad(<?php echo $modalidad['id']; ?>)" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fa-solid fa-trash-can"></i></button>
+                                              
 
 
                                             </td>

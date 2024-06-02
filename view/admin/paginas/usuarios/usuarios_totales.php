@@ -115,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">DataTable with default features</h3>
+                           
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -143,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             echo '<td>' . $usuario['email'] . '</td>';
                                             echo '<td>' . $usuario['dni'] . '</td>';
                                             echo '<td>' . $usuario['city'] . '</td>';
-                                            echo '<td>' . $usuario['address'] . '</td>';
+                                            echo '<td>' . $usuario['address'] . '</td>'; 
                                             echo '<td>' . $usuario['status'] . '</td>';
                                             echo '<td>';
                                             echo '<div class="d-flex flex-wrap justify-content-start">';
@@ -205,7 +205,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             </div>
                                                             <div class="col-md-10 mt-3 mb-5">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button id="btnPagar" class="btn btn-primary">Pagar</button>
+                                                                <button id="btnPagar" class="btn btn-primary">agregar</button>
 
                                                             </div>
                                                         </div>
@@ -289,6 +289,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </section>
 
         <!-- /. Maincontent -->
+         
+           <!-- Main Footer -->
+        <?php include('../../../view/admin/layouts/footer.php'); ?>
+           <!-- FIN Footer -->
     </div>
     <!-- /.content-wrapper -->
 
@@ -302,9 +306,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </aside>
     <!-- /.control-sidebar -->
 
-    <!-- Main Footer -->
-    <?php include('../../../view/admin/layouts/footer.php'); ?>
-    <!--FIN   Main Footer -->
+ 
+   
+   
 
     </div> <!--fin de toda la pagina wrapper -->
     <!-- ./wrapper -->
@@ -413,7 +417,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sí, pagar',
+                    confirmButtonText: 'Sí, Agregar',
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     // Si el usuario confirma, enviar el formulario
