@@ -25,8 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
@@ -39,20 +38,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- necesario para el tamaño de mensajes alerta  -->
 
     <style>
-    .mi-clase-personalizada .swal2-popup {
-        font-size: 16px !important;
-        height: auto !important;
-        padding-bottom: 4px !important;
-    }
+        .mi-clase-personalizada .swal2-popup {
+            font-size: 16px !important;
+            height: auto !important;
+            padding-bottom: 4px !important;
+        }
 
-    .swal2-popup h2 {
-        margin-top: 8px !important;
-        font-size: 18px !important;
-    }
+        .swal2-popup h2 {
+            margin-top: 8px !important;
+            font-size: 18px !important;
+        }
 
-    .content-wrapper {
-        height: auto !important;
-    }
+        .content-wrapper {
+            height: auto !important;
+        }
     </style>
 </head>
 
@@ -104,8 +103,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <form method="POST" action='controller_ventas_filtradas.php'>
                             <input value='<?php if (isset($_POST['dni'])) {
-                              echo $_POST['dni'];
-                            } ?>' type="hidden" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
+                                                echo $_POST['dni'];
+                                            } ?>' type="hidden" class="form-control" name="dni" id="dni" placeholder="Ingrese el DNI">
                             <div class="row">
 
                                 <div class="col-md-4">
@@ -114,16 +113,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="form-group">
                                         <label><b>Fecha inicio</b></label>
                                         <input required type="date" name="from_date" value="<?php if (isset($_POST['from_date'])) {
-                                                                          echo $_POST['from_date'];
-                                                                        } ?>" class="form-control">
+                                                                                                echo $_POST['from_date'];
+                                                                                            } ?>" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label><b>Fecha final</b></label>
                                         <input required type="date" name="to_date" value="<?php if (isset($_POST['to_date'])) {
-                                                                        echo $_POST['to_date'];
-                                                                      } ?>" class="form-control">
+                                                                                                echo $_POST['to_date'];
+                                                                                            } ?>" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -152,57 +151,75 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <thead>
                                         <tr>
                                             <th scope="col">ID Venta</th>
+                                            <th scope="col">Fecha (DD/MM/AAAA) </th>
+
                                             <th scope="col">dni</th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Precio</th>
                                             <th scope="col">Descuento</th>
 
-                                            <th scope="col">Fecha</th>
+
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                    if (isset($ventas_paginadas)) {
+                                        if (isset($ventas_paginadas)) {
 
-                      $ventas_reverse = $ventas_paginadas;
-                      foreach ($ventas_reverse as $venta) {
-                        echo '<tr>
-                      <td>' . $venta['sale_id'] . '</td>
-                              <td>' . $venta['person_dni'] . '</td>
-                              <td>' . $venta['person_name'], " ", $venta['person_lastname'] . '</td>
-                              <td>' . $venta['sale_price'] . '</td>
-                              <td>' . $venta['sale_discount'] . '</td>
-                              <td>' . $venta['sale_date'] . '</td>
-                              <td>
-                              <a href="controller_detalle_ventas.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-primary" data-toggle="tooltip" title="Ver detalles de venta">
-                              <i class="fas fa-eye"></i>
-                              </a>
-                          
-                              <a href="#" onclick="confirmarEliminarVenta(\'' . 'controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '\')" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" id="desactivarVenta"><i class="fas fa-trash"></i></a>
-                               
+                                            $ventas_reverse = $ventas_paginadas;
+                                            foreach ($ventas_reverse as $venta) {
+                                                // Configura el locale para español
+                                                // Configura el locale para español
+                                                setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
 
-                              </td>
-                            </tr>';
-                      }
-                    } else {
-                      echo '<tr><td colspan="6">No hay ventas disponibles.</td></tr>';
-                    }
+                                                // Suponiendo que $venta['sale_date'] contiene la fecha en formato 'Y-m-d H:i:s'
+                                                $sale_date = $venta['sale_date'];
 
-                    // Cierra la tabla HTML
+                                                // Utiliza strftime para formatear la fecha y hora, excluyendo los segundos
+                                                $formatted_date = strftime('%Y-%b-%d %H:%M', strtotime($sale_date));
 
-                    ?>
+
+
+                                                echo '<tr>
+                             <td>' . $venta['sale_id'] . '</td>
+                            <td>' . $formatted_date . '</td>
+                            
+                            <td>' . $venta['person_dni'] . '</td>
+                            <td>' . $venta['person_name'] . ' ' . $venta['person_lastname'] . '</td>
+                            <td>' . $venta['sale_price'] . '</td>
+                            <td>' . $venta['sale_discount'] . '</td>
+                            
+                            <td>
+                                <a href="controller_detalle_ventas.php?id_venta=' . $venta['sale_id'] . '" class="btn btn-primary" data-toggle="tooltip" title="Ver detalles de venta">
+                      
+                                <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="#" onclick="confirmarEliminarVenta(\'controller_eliminar_venta.php?id_venta=' . $venta['sale_id'] . '\')" class="btn btn-danger" data-toggle="tooltip" title="Eliminar" id="desactivarVenta">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>';
+                                            }
+                                        } else {
+                                            echo '<tr><td colspan="6">No hay ventas disponibles.</td></tr>';
+                                        }
+
+                                        // Cierra la tabla HTML
+
+                                        ?>
 
 
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th scope="col">ID Venta</th>
+                                            <th scope="col">Fecha (DD/MM/AAAA) </th>
+
                                             <th scope="col">dni</th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Precio</th>
                                             <th scope="col">descuento</th>
-                                            <th scope="col">Fecha</th>
+
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </tfoot>
@@ -255,84 +272,84 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 
     <?php
-  $mensaje_error = $mensaje_error ?? ''; // Asegura que $mensaje_editar esté definido
-  $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
-  ?>
+    $mensaje_error = $mensaje_error ?? ''; // Asegura que $mensaje_editar esté definido
+    $msj_eliminar = $msj_eliminar ?? ''; // Asegura que $mensaje_editar esté definido
+    ?>
     <script>
-    $(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 5000,
-            width: '80%',
-            customClass: {
-                container: 'mi-clase-personalizada'
-            }
-        });
+        $(function() {
+            var Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 5000,
+                width: '80%',
+                customClass: {
+                    container: 'mi-clase-personalizada'
+                }
+            });
 
-        $('.swalDefaultSuccess').click(function() {
-            Toast.fire({
-                icon: 'success',
-                title: '<?php echo $msj_eliminar; ?>'
+            $('.swalDefaultSuccess').click(function() {
+                Toast.fire({
+                    icon: 'success',
+                    title: '<?php echo $msj_eliminar; ?>'
 
-            })
+                })
+            });
+            $('.swalDefaultInfo').click(function() {
+                Toast.fire({
+                    icon: 'info',
+                    title: '<?php echo $msj_eliminar; ?>'
+                })
+            });
+            $('.swalDefaultError').click(function() {
+                Toast.fire({
+                    icon: 'error',
+                    title: '<?php echo $mensaje_error; ?>'
+                })
+            });
+            $('.swalDefaultWarning').click(function() {
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
+            $('.swalDefaultQuestion').click(function() {
+                Toast.fire({
+                    icon: 'question',
+                    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+                })
+            });
         });
-        $('.swalDefaultInfo').click(function() {
-            Toast.fire({
-                icon: 'info',
-                title: '<?php echo $msj_eliminar; ?>'
-            })
-        });
-        $('.swalDefaultError').click(function() {
-            Toast.fire({
-                icon: 'error',
-                title: '<?php echo $mensaje_error; ?>'
-            })
-        });
-        $('.swalDefaultWarning').click(function() {
-            Toast.fire({
-                icon: 'warning',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-            })
-        });
-        $('.swalDefaultQuestion').click(function() {
-            Toast.fire({
-                icon: 'question',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-            })
-        });
-    });
     </script>
     <script>
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-        <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
-        // Simular un clic en el botón para activar el SweetAlert
-
-
-        $('#btnInfo').click();
+            <?php if (isset($msj_eliminar) && !empty($msj_eliminar)) : ?>
+                // Simular un clic en el botón para activar el SweetAlert
 
 
-
-        <?php endif; ?>
-        <?php if (isset($mensaje_error) && !empty($mensaje_error)) : ?>
-        // Simular un clic en el botón para activar el SweetAlert
+                $('#btnInfo').click();
 
 
-        $('#btnError').click();
-   
+
+            <?php endif; ?>
+            <?php if (isset($mensaje_error) && !empty($mensaje_error)) : ?>
+                // Simular un clic en el botón para activar el SweetAlert
 
 
-        <?php endif; ?>
-        // crear confirmacion con sweet alert al dar click en boton-eliminarVenta
+                $('#btnError').click();
 
-    });
+
+
+            <?php endif; ?>
+            // crear confirmacion con sweet alert al dar click en boton-eliminarVenta
+
+        });
     </script>
 
     <!-- DataTables  & Plugins -->
     <script src="../../../view/admin/plugins/datatables/jquery.dataTables.min.js"></script>
- 
+
     <script src="../../../view/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 
     <script src="../../../view/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -357,48 +374,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 
     <script>
-    // Función para confirmar la eliminación de un usuario
-    function confirmarEliminarVenta(url) {
-        Swal.fire({
-            title: "¿Estás seguro de inactivar la venta?",
-            text: "Esto podría restar las horas compradas",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Sí, inactivar",
-            cancelButtonText: "Cancelar",
-            reverseButtons: true,
-            dangerMode: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = url;
-            }
-        });
-    }
+        // Función para confirmar la eliminación de un usuario
+        function confirmarEliminarVenta(url) {
+            Swal.fire({
+                title: "¿Estás seguro de inactivar la venta?",
+                text: "Esto podría restar las horas compradas",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, inactivar",
+                cancelButtonText: "Cancelar",
+                reverseButtons: true,
+                dangerMode: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            });
+        }
     </script>
     <!-- Page specific script -->
     <script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
         });
-    });
     </script>
     <script>
-    $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
 
 </body>

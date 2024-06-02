@@ -100,10 +100,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </thead>
                                 <tbody>
                                     <?php foreach ($pagos as $index => $pago) : ?>
+                                        <?php setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
+
+// Suponiendo que $venta['sale_date'] contiene la fecha en formato 'Y-m-d H:i:s'
+$fecha_pago = $pago['last_pay'];
+
+// Utiliza strftime para formatear la fecha y hora, excluyendo los segundos
+$formatted_date = strftime('%Y-%b-%d %H:%M', strtotime($fecha_pago));
+?>
                                     <tr class="odd">
                                         <td><?= $index + 1 ?></td>
                                         <td><?= $pago['name'] . ' ' . $pago['lastname'] ?></td>
-                                        <td><?= $pago['last_pay'] ?></td>
+                                        <td><?= $formatted_date ?></td>
                                         <td><?= $pago['total_hours'] ?></td>
                                         <td>
                                             <a href="#" class="btn btn-primary abrir-modal " data-toggle="tooltip"

@@ -40,7 +40,7 @@ class detalle_ventas_model
 
     public function detalle_ventas($id_venta)
     {
-        $sql = "SELECT subjects.name, subject_sale.id, subject_sale.price, subject_sale.total_quantity,ru.total_units, ru.attended_units
+        $sql = "SELECT subjects.name, subject_sale.id,subject_sale.quantity_type as `type`,subject_sale.modality, subject_sale.price, subject_sale.total_quantity,ru.total_units, ru.attended_units
         FROM sales
         INNER JOIN subject_sale ON sales.id = subject_sale.sales_id
         INNER JOIN subjects ON subject_sale.subjects_id = subjects.id
