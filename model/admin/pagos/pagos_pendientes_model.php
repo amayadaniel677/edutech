@@ -58,6 +58,7 @@ class pagos_pendientes_model
         $restar = $this->restar_horas($payments_id, $total_hours);
         if ($restar) {
             // fecha con hora minuto y segundos
+            date_default_timezone_set('America/Bogota');
             $date = date("Y-m-d H:i:s");
             
             $sql = "INSERT INTO payment_history (`date`,`total_hours`,`price_hour`,`total_price`,`payments_id`) VALUES ('$date','$total_hours','$price_hour','$total_price','$payments_id')";
