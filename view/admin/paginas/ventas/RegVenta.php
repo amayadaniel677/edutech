@@ -151,7 +151,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
 
 
-                <label for="valor-abonado" class="col-form-label">Valor abonado:</label>
+                <label for="valor-abonado" class="col-form-label">Pago inicial recibido:</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
@@ -215,8 +215,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       <th>Modalidad</th>
                       <th>Categoria</th>
                       <th>Nombre Curso</th>
-                      <th>Horas</th>
-                      <th>Valor hora/clase</th>
+                      <th>Cantidad</th>
+                      <th>Valor hora o clase</th>
                       <th>Subtotal</th>
                       <th>Editar</th>
                     </tr>

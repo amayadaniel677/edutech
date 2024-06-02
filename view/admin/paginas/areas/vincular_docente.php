@@ -98,7 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <select class="form-control" name="docente">
                           <option value='false' selected>Selecciona un docente</option>
                           <?php foreach ($docentes as $docente) : ?>
-                            <option value="<?php echo $docente['id']; ?>"><?php echo $docente['name']; ?></option>
+                            <option value="<?php echo $docente['id']; ?>"><?php echo $docente['name']." ". $docente['lastname']; ?></option>
                           <?php endforeach; ?>
                         </select>
                       </div>
