@@ -132,7 +132,7 @@ class buscar_usuario_model{
     JOIN 
         PEOPLE AS P ON S.people_id = P.id
     WHERE 
-        P.id ='$people_id'
+        P.id ='$people_id' AND RU.attended_units < RU.total_units
     GROUP BY 
         RU.id, SS.subjects_id, SS.quantity_type, SS.modality;
     ";

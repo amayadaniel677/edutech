@@ -108,8 +108,14 @@ class RegVenta_consult
     public function agregar_venta_completa($nombres, $apellidos, $dni, $direccion, $correo, $ciudad, $telefono, $descuento, $valor_total, $valor_abonado)
     {
         if ($descuento == '') {
+            echo "descuento vacio";
             $descuento = 0;
         }
+        if ($valor_abonado == '') {
+            echo "valor abonado vacio";
+            $valor_abonado = 0;
+        }
+        var_dump($valor_abonado);
         //    si existe el usuario
         $user_exist = $this->user_exist($dni);
         if (!$user_exist) {
@@ -117,7 +123,13 @@ class RegVenta_consult
             $user_exist = $this->user_exist($dni);
         }
         if ($user_exist) {
-            $date = date("Y-m-d");
+            // crear fecha con hora actual
+            // Establece la zona horaria a Colombia
+            date_default_timezone_set('America/Bogota');
+
+            // Obtén la fecha y hora actuales en formato datetime
+            $date = date("Y-m-d H:i:s");
+
             $sql = "INSERT INTO sales(price,`date`,people_id,discount,value_paid) VALUES('$valor_total','$date','$user_exist','$descuento','$valor_abonado')";
             $result = $this->con->query($sql);
             if ($result) {

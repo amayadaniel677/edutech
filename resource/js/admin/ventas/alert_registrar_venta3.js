@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var valorAbonado = document.getElementById("valor-abonado").value;
         valorAbonado = parseInt(valorAbonado);
         valorTotal = parseFloat(valorTotal);
-        if (!nombres || !dni || !correo || !ciudad || !apellidos || !telefono || !valorTotal || !valorAbonado || !descuento) {
+        if (!nombres || !dni || !correo || !ciudad || !apellidos || !telefono || !valorTotal) {
             Swal.fire({
                 title: "¡Error 1 !",
                 text: "Para registrar la venta, debe completar todos los campos del formulario.",

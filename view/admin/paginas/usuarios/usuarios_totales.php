@@ -328,14 +328,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             // Adjunta el evento de clic a los botones que abren modales de estudiantes
             $(document).on('click', '.abrir-modal-estudiante', function() {
-                console.log("sirve la funcion");
+                
                 document.getElementById('estudiante_id_form').value = '';
 
-                console.log("se borró el valor id de input");
+               
 
                 const estudianteId = this.getAttribute('data-id-estudiante'); // Obtiene el valor del atributo data-id
 
-                console.log("nuevo id del estudiante:", estudianteId);
+               
 
                 document.getElementById('estudiante_id_form').value = estudianteId; // Asigna el valor al input
 
@@ -343,14 +343,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 let data = {
                     'estudiante_id': estudianteId
                 };
-                console.log("actualizado el id del input");
+              
 
                 $.ajax({
                     url: 'controller_usuarios_totales.php',
                     type: 'POST',
                     data: data,
                     success: function(response) {
-                        console.log('respuesta de controller:', response);
+                        
                         var selectElement = document.getElementById('miSelect2');
                         selectElement.innerHTML = ''; // Limpiar el select
 
@@ -497,7 +497,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
-                timer: 4000,
+                timer: 6000,
                 width: '80%',
                 customClass: {
                     container: 'mi-clase-personalizada'
@@ -591,34 +591,55 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
         });
     </script>
+   <script>
+function asignarManejadoresDeEventos() {
+    // Reinicia los manejadores de eventos para los botones de abrir modal
+    $('.abrir-modal-docente').off('click').on('click', function(event) {
+        event.preventDefault();
+        var targetModal = $(this).data('target');
+        $(targetModal).modal('show');
+    });
+
+    $('.abrir-modal-estudiante').off('click').on('click', function(event) {
+        event.preventDefault();
+        var targetModal = $(this).data('target');
+        $(targetModal).modal('show');
+    });
+}
+
+$(document).ready(function() {
+    // Verifica si el elemento ya ha sido inicializado como una tabla de DataTables
+    if (!$.fn.dataTable.isDataTable('#example1')) {
+        // Inicializa DataTables solo si el elemento no ha sido inicializado previamente
+        $('#example1').DataTable({
+            responsive: true // Activa el modo responsive
+        });
+    }
+
+    // Asigna manejadores de eventos inicialmente
+    asignarManejadoresDeEventos();
+
+    // Escucha el evento responsive-display para actualizar los manejadores de eventos
+    $('#example1').on('responsive-display.dt', function() {
+        // Vuelve a asignar los manejadores de eventos después de que una fila responsive se expande o colapsa
+        asignarManejadoresDeEventos();
+    });
+
+    // Escucha el evento draw.dt para actualizar los manejadores de eventos después de cualquier redibujado de la tabla (por ejemplo, al cambiar de página)
+    $('#example1').on('draw.dt', function() {
+        // Vuelve a asignar los manejadores de eventos después de que la tabla se redibuje
+        asignarManejadoresDeEventos();
+    });
+});
+</script>
+
+
 <!-- // Docentes -->
-    <script>
-        $(document).ready(function() {
-            // Inicializar tooltips
-            $('[data-toggle="tooltip"]').tooltip();
 
-            // Manejar la apertura del modal
-            $('.abrir-modal-docente').click(function(event) {
-                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-                var targetModal = $(this).data('target'); // Obtener el objetivo del modal
-                $(targetModal).modal('show'); // Mostrar el modal
-            });
-        });
-    </script>
+
+
 <!-- // Estudiantes -->
-    <script>
-        $(document).ready(function() {
-            // Inicializar tooltips
-            $('[data-toggle="tooltip"]').tooltip();
 
-            // Manejar la apertura del modal
-            $('.abrir-modal-estudiante').click(function(event) {
-                event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-                var targetModal = $(this).data('target'); // Obtener el objetivo del modal
-                $(targetModal).modal('show'); // Mostrar el modal
-            });
-        });
-    </script>
 
     <!-- <script>
         $(document).ready(function() {
@@ -637,7 +658,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         $(function() {
             $('[data-toggle="tooltip"]').tooltip();
         });
-    </script> -->
+    </scrip> -->
 
     <script class="alertas-opcionales">
         //     $('.toastrDefaultSuccess').click(function() {

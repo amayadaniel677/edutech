@@ -45,7 +45,7 @@ class eliminar_venta_model
                 // restar horas de remaining_units
                 $sql2 = "UPDATE remaining_units SET total_units=total_units-'$total_quantity' WHERE id='$remaining_units_id'";
                 $result2 = $this->con->query($sql2);
-                $sql3 = "UPDATE balances SET status='inactive WHERE sales_id='$id_venta'";
+                $sql3 = "UPDATE balances SET status='inactive' WHERE sales_id='$id_venta'";
                 $result3 = $this->con->query($sql3);
             }
 

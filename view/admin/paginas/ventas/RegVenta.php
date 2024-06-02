@@ -156,7 +156,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="input-group-prepend">
                     <span class="input-group-text">$</span>
                   </div>
-                  <input required type="number" class="form-control" id="valor-abonado" name="valor-abonado" value='' placeholder="Cantidad pagada del cliente" value="<?php echo getPostValue('valor-total'); ?>">
+                  <input  type="number" class="form-control" id="valor-abonado" name="valor-abonado" value='' placeholder="Cantidad pagada del cliente" value="<?php echo getPostValue('valor-total'); ?>">
                 </div>
               </div>
 
@@ -269,7 +269,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <script src="../../../resource/js/admin/ventas/modal_detalle_venta2.js"></script>
   <!-- alert registrar venta -->
-  <script src="../../../resource/js/admin/ventas/alert_registrar_venta1.js"></script>
+  <script src="../../../resource/js/admin/ventas/alert_registrar_venta3.js"></script>
   <!-- scripts para mostrar alertas de exito o error -->
 
 
