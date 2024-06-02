@@ -108,14 +108,14 @@ class RegVenta_consult
     public function agregar_venta_completa($nombres, $apellidos, $dni, $direccion, $correo, $ciudad, $telefono, $descuento, $valor_total, $valor_abonado)
     {
         if ($descuento == '') {
-            echo "descuento vacio";
+          
             $descuento = 0;
         }
         if ($valor_abonado == '') {
-            echo "valor abonado vacio";
+           
             $valor_abonado = 0;
         }
-        var_dump($valor_abonado);
+      
         //    si existe el usuario
         $user_exist = $this->user_exist($dni);
         if (!$user_exist) {

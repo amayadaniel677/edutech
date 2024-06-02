@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="col-12">
                                 <h4>
                                     <i class="fas fa-globe"></i> Kepler S.A.S.
-                                    <small class="float-right">Fecha hoy: <?php echo date('d/m/Y'); ?></small>
+                                    <small class="float-right">Fecha hoy: <?php  date_default_timezone_set('America/Bogota'); echo date('d/m/Y'); ?></small>
                                 </h4>
                             </div>
                             <!-- /.col -->
