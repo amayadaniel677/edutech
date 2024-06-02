@@ -136,6 +136,7 @@ class RegVenta_consult
                 // Obtener el ID de la última inserción
                 $lastInsertedId = $this->con->insert_id;
                 $this->crear_registro_abono($valor_abonado, $lastInsertedId);
+                $this->activar_usuario($dni);
 
                 return $lastInsertedId;
             } else {
@@ -145,6 +146,8 @@ class RegVenta_consult
             return false;
         }
     }
+
+
     public function crear_registro_abono($valor_abonado, $sales_id)
     {
         $date = date("Y-m-d");
@@ -258,7 +261,7 @@ class RegVenta_consult
             return $fila['remaining_units_id'];
         } else {
             // echo "no existe un detalle igual";
-            return null;
+            return null; 
         }
         // si no existe se crea un nuevo registro de asistencia
     }
@@ -301,5 +304,15 @@ class RegVenta_consult
         } else {
             return false;
         }
+    }
+
+    public function activar_usuario($dni){
+        $sql = "UPDATE people SET `status`='active' WHERE dni='$dni' ";
+        $result = $this->con->query($sql);
+        if ($result) {
+            return true;    
+        }else{
+            return false;
+        }    
     }
 }

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
 </head>
-
+ 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <?php include('../../../view/admin/layouts/nav.php'); ?>
@@ -43,7 +43,7 @@
                 <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none "></button>
 
 
-                <div class="container-fluid" style='max-width:1000px;'>
+                <div class="container-fluid" style='max-width:1000px;'> 
                     <div class="row">
                         <div class="col-md-6">
                             <form action="" method="POST">
@@ -182,15 +182,7 @@
                                                 <!-- agregar estado dependiendo de su valor en la BD -->
                                                 <div class="form-group
                         ">
-                                                    <label for="status">Estado:</label>
-                                                    <select name="status" id="estado" class="form-control">
-                                                        <option value="active" <?php if (isset($areaSelect['status']) && $areaSelect['status'] == 'active') {
-                                                                                    echo 'selected';
-                                                                                } ?>>Activo</option>
-                                                        <option value="inactive" <?php if (isset($areaSelect['status']) && $areaSelect['status'] == 'inactive') {
-                                                                                        echo 'selected';
-                                                                                    } ?>>Inactivo</option>
-                                                    </select>                                
+                                                                               
 
 
                                                     <div class="modal-footer">

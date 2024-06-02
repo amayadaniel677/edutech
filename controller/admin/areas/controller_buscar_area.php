@@ -2,7 +2,7 @@
 
 session_start();
 if (!isset($_SESSION['dni_session'])) {
-    header('location:../../login_controller.php');
+    header('location:../../login_controller.php'); 
     exit();
 }
 $ruta_inicio = '../../../';  //esta ruta se usa para cerrar sesion en el nav
@@ -50,20 +50,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['categoria']) && $_POST
 
     // traer docentes vinculados
     $vinculados = $consult->traer_vinculados($id_area);
-}
+} 
 
 // RECIBE EL FORMULARIO PARA ACTUALIZAR EL AREA
-if (isset($_POST['nombre']) and isset($_POST['idArea']) and isset($_POST['status'])) {
+if (isset($_POST['nombre']) and isset($_POST['idArea'])) {
     // Debugging (borrar después de verificar que los datos son correctos
     $nombre = $_POST['nombre'];
     $nombre = trim($nombre);
     $nombre = ucfirst($nombre); // Convierte la primera letra en mayúscula
     $id = $_POST['idArea'];
-    $status = $_POST['status'];
+    
      
 
     $areaModel = new buscar_area_model();
-    $areaModel->editarArea($nombre, $id,$status);
+    $areaModel->editarArea($nombre, $id);
     if ($areaModel) {
         $mensaje = 'Area actualizada correctamente';
         header('refresh: 5; url=controller_buscar_area.php?&mensaje=' . $mensaje . '');
@@ -103,10 +103,10 @@ if(isset($_POST['nombre_area']) && isset($_POST['nombre_area_2'])){
     $nombre=  preg_replace('/\s+/', ' ', $nombre);
     $nombre = strtolower($nombre);
     $nombre =ucwords($nombre);
-    $nombre2 = trim($nombre);
-    $nombre2=  preg_replace('/\s+/', ' ', $nombre);
-    $nombre2 = strtolower($nombre);
-    $nombre2 =ucwords($nombre);
+    $nombre2 = trim($nombre2);
+    $nombre2=  preg_replace('/\s+/', ' ', $nombre2);
+    $nombre2 = strtolower($nombre2);
+    $nombre2 =ucwords($nombre2);
     if ($nombre ==  $nombre2 ) {
         $areaModel = new buscar_area_model();
         $areaModel->crear_area($nombre);
