@@ -151,7 +151,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <thead>
                                         <tr>
                                             <th scope="col">ID Venta</th>
-                                            <th scope="col">Fecha (DD/MM/AAAA) </th>
+                                            <th scope="col">Fecha  </th>
 
                                             <th scope="col">dni</th>
                                             <th scope="col">Nombre</th>
@@ -213,8 +213,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <tfoot>
                                         <tr>
                                             <th scope="col">ID Venta</th>
-                                            <th scope="col">Fecha (DD/MM/AAAA) </th>
-
+                                            <th scope="col">Fecha  </th>
                                             <th scope="col">dni</th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Precio</th>
