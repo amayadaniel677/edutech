@@ -170,6 +170,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="col-md-12">
                       <div class="form-group">
                         <label for="descripcion">Temas</label>
+                       <div class="alert alert-danger">
+                       <ul class=" list-group list-group-flush pl-3">
+                    
+                    <li class="">Separar los temas por comas ","</li>
+                    <li class="">Ejemplo: tema 1, tema 2, tema 3</li>
+                  
+                </ul>
+                       </div>
                         <textarea required name="temas" id="temas" placeholder="Escriba aquí" class="form-control"></textarea>
                       </div>
                     </div>
