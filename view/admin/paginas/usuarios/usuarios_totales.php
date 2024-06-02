@@ -230,7 +230,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <!-- Agrega el ID "formPagar" al formulario -->
                                                     <form id="formAsistencia" method="POST" action="">
                                                         <div class="">
-                                                            <input type="text" name="estudiante_id_form" id="estudiante_id_form">
+                                                            <input type="hidden" name="estudiante_id_form" id="estudiante_id_form">
                                                             <div class="col-md-12 mt-3">
 
 
