@@ -9,7 +9,7 @@ $mysqli->query("SET NAMES 'utf8'");
 
 // Array con las tablas en el orden correcto
 $correct_order_tables = [
-    'areas', 'remaining_units', 'attendances','people', 'subjects', 'sales', 'modalities', 'packages', 'package_sale', 'payments', 'payment_history', 'payments_students', 'people_area', 'recovery_tokens', 'subject_package', 'subject_sale', 'trolley','tutorships'
+    'areas', 'remaining_units','people', 'subjects', 'sales', 'modalities', 'payments', 'payment_history', 'people_area', 'recovery_tokens', 'subject_sale','balances','balance_detail'
 ]; 
 
 // get table structure
