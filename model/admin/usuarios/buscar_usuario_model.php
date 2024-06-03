@@ -34,7 +34,7 @@ class buscar_usuario_model{
             // entro al modelo traer por tipo de usuario
             $sql="SELECT * FROM people WHERE status='inactive' order by id desc";
         }elseif($tipo_usuario=='todosSuperAdmin'){
-            $sql="SELECT * FROM people order by id desc";
+            $sql="SELECT * FROM people WHERE rol !='superadmin' order by id desc";
         }
 
         $result=$this->con->query($sql);
