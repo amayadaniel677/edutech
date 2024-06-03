@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../view/admin/plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../resource/css/cursos/cursos3.css" />
+  <link rel="stylesheet" href="../../resource/css/cursos/cursos.css" />
   
   <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../view/admin/dist/css/adminlte.min.css">
