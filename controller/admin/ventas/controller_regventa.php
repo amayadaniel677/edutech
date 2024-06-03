@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = "Error al agregar la venta completa en la BD.";
         }
     }
-}
+} 
 
 // Manejar errores
 if (isset($nombresAreas['error']) && $nombresAreas['error']) {

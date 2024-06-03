@@ -11,7 +11,7 @@ class buscar_venta_model
         } catch (mysqli_sql_exception $e) {
             // Intenta conectar con la segunda opción si la primera falla
             try {
-                $this->con = new mysqli("localhost", "root", "", "edutech");
+                $this->con = new mysqli("localhost", "root", "", "edutech"); 
             } catch (mysqli_sql_exception $e) {
                 // Maneja el error de conexión aquí
                 echo "Error al conectar: " . $e->getMessage();

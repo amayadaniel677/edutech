@@ -5,7 +5,7 @@ class buscar_area_model
     public function __construct()
     {
         mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ERROR);
-
+ 
         try {
             $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech");
         } catch (mysqli_sql_exception $e) {
@@ -63,12 +63,12 @@ class buscar_area_model
             return $result_array;
         } else {
             return false;
-        }
+        } 
     }
 
-    public function editarArea($name, $id,$status)
+    public function editarArea($name, $id)
     {
-        $sql = "UPDATE areas SET name = '$name', `status` = '$status' WHERE id = '$id'";
+        $sql = "UPDATE areas SET name = '$name' WHERE id = '$id'";
         $result = $this->con->query($sql);
         if ($result) {
             return true;

@@ -126,7 +126,7 @@
                       <div class="form-row">
                         <div class="form-group col-md-6">
                           <label for="address">Dirección</label>
-                          <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" value="<?php echo $_SESSION['name_session']; ?>">
+                          <input type="text" class="form-control" id="address" name="address" placeholder="Dirección" value="<?php echo $_SESSION['address_session']; ?>">
                         </div>
                         <div class="form-group col-md-6">
                           <label for="dni_type">Tipo de Documento</label>
@@ -141,11 +141,11 @@
 
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="photo">Foto</label>
+                          <label for="photo">Seleccionar foto</label>
                           <img src="<?php echo $ruta_inicio . $_SESSION['photo_session']; ?>" alt="User Avatar" class="img-size-50 mr-3 img-circle mb-2 d-block">
                           <div class="custom-file">
                             <input type="file" class="custom-file-input" id="new-photo" name="new-photo">
-                            <label class="custom-file-label" for="photo">Seleccionar archivo</label>
+                            <label class="custom-file-label" for="new-photo">Elegir archivo</label>
                           </div>
                         </div>
                       </div>

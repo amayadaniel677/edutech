@@ -38,8 +38,7 @@ class pagos_historial_model
             payments AS p ON ph.payments_id = p.id
         JOIN 
             people AS pe ON p.people_id = pe.id
-        WHERE 
-            pe.status = 'active'";
+        order by ph.id desc";
         $result=$this->con->query($sql);
         if ($result->num_rows > 0) {
             $result_array = [];

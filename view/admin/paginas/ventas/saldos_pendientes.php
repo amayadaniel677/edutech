@@ -129,14 +129,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         if (isset($abonos_pendientes) and !empty($abonos_pendientes)) {
 
                                             foreach ($abonos_pendientes as $abono) {
+                                                setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
+
+                                                // Suponiendo que $venta['sale_date'] contiene la fecha en formato 'Y-m-d H:i:s'
+                                                $fecha_venta = $abono['fecha_venta'];
+                                                $ultimo_abono = $abono['ultimo_abono'];
+                                                // Utiliza strftime para formatear la fecha y hora, excluyendo los segundos
+                                                $formatted_date = strftime('%Y-%b-%d %H:%M', strtotime($fecha_venta));
+                                                $formatted_date2= strftime('%Y-%b-%d %H:%M', strtotime($ultimo_abono));
                                                 echo '<tr>
                       
-                              <td>' . $abono['fecha_venta'] . '</td>
+                              <td>' . $formatted_date. '</td>
                               <td>' . $abono['id_venta'] . '</td>
                               <td>' . $abono['person_name'], " ", $abono['person_lastname'] . '</td>
                               <td>' . $abono['valor_venta'] . '</td>
                               <td>' . $abono['valor_venta'] - $abono['valor_abonado'] . '</td>
-                              <td>' . $abono['ultimo_abono'] . '</td>
+                              <td>' . $formatted_date2. '</td>
                               <td>
                               <a class="btn btn-outline-success abrir-modal-abonos mr-2" data-target="#modalAbonos" data-id-saldo="' . $abono['id_saldo'] . '" data-toggle="tooltip" data-placement="top" title="Nuevo abono">
                               <i class="fas fa-plus"></i>
