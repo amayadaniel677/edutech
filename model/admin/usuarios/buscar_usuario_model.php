@@ -32,7 +32,7 @@ class buscar_usuario_model{
         
         }elseif($tipo_usuario=='inactivo'){
             // entro al modelo traer por tipo de usuario
-            $sql="SELECT * FROM people WHERE status='inactive' order by id desc";
+            $sql="SELECT * FROM people WHERE status='inactive' AND rol !='superadmin' order by id desc";
         }elseif($tipo_usuario=='todosSuperAdmin'){
             $sql="SELECT * FROM people WHERE rol !='superadmin' order by id desc";
         }
