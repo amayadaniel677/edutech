@@ -53,7 +53,6 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                                     <tr>
                                         <th>Modalidad</th>
                                         <th>Precio Hora</th>
-                                        <th>Precio Docente</th>
                                         <th>Precio Clase Estudiante</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -64,7 +63,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                                         <tr id="modalidad-<?php echo $modalidad['id']; ?>">
                                             <td><?php echo $modalidad['name']; ?></td>
                                             <td><?php echo $modalidad['price_hour_student']; ?></td>
-                                            <td><?php echo $modalidad['price_teacher']; ?></td>
+                                           
                                             <td><?php echo $modalidad['price_class_student']; ?></td>
                                             <td>
                                                 <a href="controller_editar_modalidad.php?id_modalidad=<?php echo $modalidad['id']; ?>" class="btn btn-primary tooltipEdit" title="Editar" data-placement="top">
