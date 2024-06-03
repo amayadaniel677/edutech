@@ -87,6 +87,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="card">
 
                         <!-- /.card-header -->
+                        <div class="card-header">
+                            <h3 class="card-title"> Pagos pendientes a docentes</h3>
+                        </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -99,6 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php if (isset($pagos) and empty($pagos) and $pagos!='') : ?>
                                     <?php foreach ($pagos as $index => $pago) : ?>
                                         <?php setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
 
@@ -124,6 +128,13 @@ $formatted_date = strftime('%Y-%b-%d %H:%M', strtotime($fecha_pago));
 
 
                                     <?php endforeach; ?>
+                                    <!-- else -->
+                                    <?php else : ?>
+                                    <tr>
+                                        <td colspan="5" class="text-center">No hay pagos pendientes</td>
+                                    </tr>
+                                    <?php endif; ?>
+                                    
 
                                     <!-- Modal -->
                                     <div class="modal fade" id="miModal" tabindex="-1" role="dialog"

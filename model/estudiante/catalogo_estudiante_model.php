@@ -33,7 +33,7 @@ class ver_curso {
             }
             return $datos; // Se ha agregado el retorno de los datos
         } else {
-            echo "0 resultados";
+          
             return null; // Se ha agregado el retorno en caso de no haber resultados
         }
     }
@@ -49,7 +49,7 @@ class ver_curso {
             }
             return $datos; // Se ha agregado el retorno de los datos
         } else {
-            echo "0 resultados";
+         
             return null; // Se ha agregado el retorno en caso de no haber resultados
         }
     }

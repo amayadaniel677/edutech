@@ -157,7 +157,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </tr>';
                                             }
                                         } else {
-                                            echo '<tr><td colspan="6">No hay ventas disponibles.</td></tr>';
+                                            echo '<tr><td colspan="7">No hay saldos pendientes.</td></tr>';
                                         }
 
                                         // Cierra la tabla HTML
@@ -212,7 +212,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                             <th scope="col">Saldo pendiente</th>
                                             <th scope="col">Ultimo abono</th>
-                                            <th scope="col">Agregar abono</th>
+                                            <th scope="col">Acciones</th>
 
                                         </tr>
                                     </tfoot>

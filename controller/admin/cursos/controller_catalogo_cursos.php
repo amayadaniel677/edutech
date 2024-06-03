@@ -20,10 +20,14 @@ $cursos_inactivos = $ver_curso->seleccionar_curso_inactivo(); //obtener los curs
 
 // Organizar los datos por áreas para facilitar su visualización en la vista
 $datos_organizados = [];
-foreach ($datos_curso as $curso1) {
-    $area = $curso1['area_name'];
-    $datos_organizados[$area][] = $curso1;
+if(is_array($datos_curso)){
+    var_dump($datos_curso);
+    foreach ($datos_curso as $curso1) {
+        $area = $curso1['area_name'];
+        $datos_organizados[$area][] = $curso1;
+    }
 }
+
 
 $data = array('datos_organizados' => $datos_organizados); // Pasar los datos organizados a la vista
 include('../../../view/admin/paginas/cursos/catalogo_cursos_admin.php');
