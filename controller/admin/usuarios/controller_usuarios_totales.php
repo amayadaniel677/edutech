@@ -25,7 +25,7 @@ if (isset($_GET['mensaje'])) {
 }
 
 
-
+ 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['docente_id'])) {
     $consult2 = new buscar_usuario_model();
     $horas = $_POST['horas'];

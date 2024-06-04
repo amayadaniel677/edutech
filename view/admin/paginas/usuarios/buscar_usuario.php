@@ -146,7 +146,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- /.info-box-content -->
             </a>
             <!-- /.info-box -->
-          </div>
+          </div> 
         </div>
         <?php if($_SESSION['rol_session']=='superadmin'):?>
         <div class="row justify-content-center">
