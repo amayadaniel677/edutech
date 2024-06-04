@@ -21,7 +21,6 @@ $cursos_inactivos = $ver_curso->seleccionar_curso_inactivo(); //obtener los curs
 // Organizar los datos por áreas para facilitar su visualización en la vista
 $datos_organizados = [];
 if(is_array($datos_curso)){
-    var_dump($datos_curso);
     foreach ($datos_curso as $curso1) {
         $area = $curso1['area_name'];
         $datos_organizados[$area][] = $curso1;

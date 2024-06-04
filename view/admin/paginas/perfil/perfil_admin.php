@@ -107,6 +107,34 @@ include('../../../view/layout/perfil_usuario.php');
 <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var nameInput = document.getElementById('name');
+    var lastnameInput = document.getElementById('lastname');
+    var cityInput = document.getElementById('city');
+
+    function validateInput(input) {
+        var regex = /^[a-zA-Zñ\s]*$/; // Expresión regular actualizada para incluir "ñ"
+        if (!regex.test(input.value)) {
+            input.setCustomValidity("Solo se permiten letras y espacios en blanco");
+        } else {
+            input.setCustomValidity("");
+        }
+    }
+
+    nameInput.addEventListener('input', function() {
+        validateInput(this);
+    });
+
+    lastnameInput.addEventListener('input', function() {
+        validateInput(this);
+    });
+    cityInput.addEventListener('input', function() {
+        validateInput(this);
+    });
+});
+</script>
+
 </body>
 </html>
 

@@ -255,7 +255,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                                             <div class="col-md-10 mt-3 mb-5">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button id="btnAsistencia" class="btn btn-primary">Pagar</button>
+                                                                <button id="btnAsistencia" class="btn btn-primary">Registrar</button>
 
                                                             </div>
                                                         </div>

@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (isset($pagos) and empty($pagos) and $pagos!='') : ?>
+                                    <?php if (isset($pagos) and !empty($pagos) and $pagos!='') : ?>
                                     <?php foreach ($pagos as $index => $pago) : ?>
                                         <?php setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
 
