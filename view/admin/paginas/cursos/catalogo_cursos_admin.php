@@ -19,7 +19,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
     <!-- CSS CURSOS ADMIN -->
-    <link rel="stylesheet" href="../../../resource/css/cursos/cursos.css" />
+    <link rel="stylesheet" href="../../../resource/css/cursos/cursos3.css" />
     <link rel="stylesheet" href="http://localhost/edutech-project/resource/css/cursos/cursos1.css" />
     <!-- SwadeetAlert2 -->
     <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
@@ -132,7 +132,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <div>
                                                 <h5><?php echo $curso['subject_name']; ?></h5>
                                                 <!-- Mostrar el nombre del curso -->
-                                                <p ><?php echo $curso['description']; ?></p>
+                                                <p><?php echo $curso['description']; ?></p>
                                                 <!-- Mostrar la descripción del curso -->
                                             </div>
                                         </a>
@@ -147,11 +147,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div> <!-- Cerrar div de categoría -->
                             <?php endforeach; ?>
                         </div>
-                        
-                            <?php if (isset($cursos_inactivos) && !empty($cursos_inactivos)) :?>
-                                <div class="titulo">
+                        <div class="titulo">
                                     <h2>CURSOS INACTIVOS </h2> <!-- Mostrar el nombre del área -->
                                 </div>
+                            <?php if (isset($cursos_inactivos) && !empty($cursos_inactivos)) :?>
+                                
                                     <div class="articulos">
                                     <?php foreach ($cursos_inactivos as $curso_inactivo) :?>
                                     <article class="materias">
@@ -183,20 +183,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div>
                             <?php endif;?>
                         </div>
-                       
+                    </div>
+
 
                     </div>
-                    
 
-                   
-                    </div>
-                    <?php include('../../../view/admin/layouts/footer.php'); ?>
-                    
                 </section>
-                
             </section>
             <!-- /. Maincontent -->
-            
+            <?php include('../../../view/admin/layouts/footer.php'); ?>
         </div>
         <!-- /.content-wrapper -->
         

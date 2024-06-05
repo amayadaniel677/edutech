@@ -53,7 +53,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                                     <tr>
                                         <th>Modalidad</th>
                                         <th>Precio Hora</th>
-                                        <th>Precio Clase</th>
+                                        <th>Precio Clase Estudiante</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>

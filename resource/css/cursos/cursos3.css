@@ -10,6 +10,7 @@ body {
   background-color: rgb(247, 247, 247);
 }
 
+
 * {
   margin: 0;
   padding: 0;
@@ -45,9 +46,9 @@ body {
   border: 1px solid rgba(95, 95, 95, 0.745);
   margin: 30px 0;
   box-shadow: 0px 0px 0px 0px;
-  transition: all 0.3s ease;
+  transition: all .3s ease;
 }
-.materias:hover {
+.materias:hover{
   box-shadow: 0px 0px 20px -5px;
   border: 1px solid rgba(95, 95, 95, 0.245);
 }
@@ -55,10 +56,8 @@ body {
   width: 100%;
   border-radius: 5px;
 }
-.materias p {
+.materias p{
   height: 70px;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .materias a {
   text-decoration: none;
