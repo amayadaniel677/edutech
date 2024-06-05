@@ -115,6 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="container-fluid" style="max-width:1300px;">
 
                         <div class="categoria-cursos1">
+                            <?php if (isset($datos_organizados) && !empty($datos_organizados) && $datos_organizados!=false): ?>
                             <?php foreach ($datos_organizados as $area => $cursos_area) : ?>
                             <div class="categoria-cursos">
                                 <div class="titulo">
@@ -146,6 +147,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div> <!-- Cerrar div de artículos -->
                             </div> <!-- Cerrar div de categoría -->
                             <?php endforeach; ?>
+                            <?php else : ?>
+                            <div class="col">
+                                <p>No hay cursos activos.</p>
+                            </div>
+                            <?php endif; ?>
                         </div>
                         <div class="titulo">
                                     <h2>CURSOS INACTIVOS </h2> <!-- Mostrar el nombre del área -->
@@ -185,13 +191,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </div>
                     </div>
 
-
+                    <?php include('../../../view/admin/layouts/footer.php'); ?>
                     </div>
 
                 </section>
             </section>
             <!-- /. Maincontent -->
-            <?php include('../../../view/admin/layouts/footer.php'); ?>
+          
         </div>
         <!-- /.content-wrapper -->
         

@@ -78,9 +78,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <section class="content">
         <div class="container-fluid" style="max-width:1000px;">
 
-
-
           <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Historial de pagos</h3>
+            </div>
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -94,6 +95,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </tr>
                 </thead>
                 <tbody>
+                  <?php if(isset($historial_pagos) && !empty($historial_pagos) && $historial_pagos!=false): ?>
                   <?php foreach ($historial_pagos as $index => $historial_pago): ?>
                     <?php 
                        setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
@@ -126,6 +128,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </td>
                     </tr>
                   <?php endforeach; ?>
+                  <?php else: ?>
+                  <tr>
+                    <td colspan="6" class="text-center">No hay pagos registrados</td>
+                  </tr> 
+                  <?php endif; ?>
                 </tbody>
               </table>
             </div>

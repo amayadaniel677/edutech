@@ -164,8 +164,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </thead>
                                     <tbody>
                                         <?php
-                                        if (isset($ventas_paginadas)) {
-
+                                        if (isset($ventas_paginadas)and $ventas_paginadas != false) {
+                                           
                                             $ventas_reverse = $ventas_paginadas;
                                             foreach ($ventas_reverse as $venta) {
                                                 // Configura el locale para español

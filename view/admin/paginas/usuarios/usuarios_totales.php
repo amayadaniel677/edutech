@@ -115,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <div class="card">
                         <div class="card-header">
-                           
+                           Usuarios <?php echo $tipo_usuario; ?>s
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -134,7 +134,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </thead>
                                 <tbody>
                                     <?php
-                                    if ($bandera) {
+                                    if ($bandera and $usuarios != null and $usuarios != false and $usuarios != '' ) {
 
                                         foreach ($usuarios as $usuario) {
                                             echo '<tr>';
@@ -177,6 +177,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             
                                             echo '</tr>';
                                         }
+                                    }else{
+                                        echo '<tr>';
+                                        echo '<td colspan="8" class="text-center">No se encontraron usuarios</td>';
+                                        echo '</tr>';
                                     }
 
 
@@ -251,7 +255,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                                             <div class="col-md-10 mt-3 mb-5">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                                                <button id="btnAsistencia" class="btn btn-primary">Pagar</button>
+                                                                <button id="btnAsistencia" class="btn btn-primary">Registrar</button>
 
                                                             </div>
                                                         </div>
