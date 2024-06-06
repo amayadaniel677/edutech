@@ -115,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <div class="card">
                         <div class="card-header">
-                           
+
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -143,38 +143,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             echo '<td>' . $usuario['email'] . '</td>';
                                             echo '<td>' . $usuario['dni'] . '</td>';
                                             echo '<td>' . $usuario['city'] . '</td>';
-                                            echo '<td>' . $usuario['address'] . '</td>'; 
+                                            echo '<td>' . $usuario['address'] . '</td>';
                                             echo '<td>' . $usuario['status'] . '</td>';
                                             echo '<td>';
                                             echo '<div class="d-flex flex-wrap justify-content-start">';
-                                         
-                                           
-                                            if($usuario['status'] == 'active'){
-                                               $accion='desactivar';
-                                               echo '<a  data-toggle="tooltip" title="Editar usuario" href="controller_editar_usuario.php?id_usuario='. $usuario['id']. '&tipo_usuario='. $tipo_usuario. '" class="btn btn-primary mr-2">';
-                                               echo '<i class="fas fa-edit"></i>';
-                                               echo '</a>';
-                                               echo '<a href="#"  data-toggle="tooltip" title="Desactivar usuario" onclick="confirmarEliminarUsuario(\'controller_eliminar_usuario.php?id_usuario='. $usuario['id']. '&tipo_usuario='. $tipo_usuario. '&accion='. $accion. '\', \''.$accion.'\')" class="btn btn-danger mr-2">';
+
+
+                                            if ($usuario['status'] == 'active') {
+                                                $accion = 'desactivar';
+                                                echo '<a  data-toggle="tooltip" title="Editar usuario" href="controller_editar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '" class="btn btn-primary mr-2">';
+                                                echo '<i class="fas fa-edit"></i>';
+                                                echo '</a>';
+                                                echo '<a href="#"  data-toggle="tooltip" title="Desactivar usuario" onclick="confirmarEliminarUsuario(\'controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '&accion=' . $accion . '\', \'' . $accion . '\')" class="btn btn-danger mr-2">';
                                                 echo '<i class="fas fa-trash"></i>';
                                                 echo '</a>';
-                                            }elseif($usuario['status'] == 'inactive'){
-                                                $accion='activar';
-                                                echo '<a href="#"  data-toggle="tooltip" title="Activar usuario" onclick="confirmarEliminarUsuario(\'controller_eliminar_usuario.php?id_usuario='. $usuario['id']. '&tipo_usuario='. $tipo_usuario. '&accion='. $accion. '\', \''.$accion.'\')" class="btn btn-success mr-2">';      
+                                            } elseif ($usuario['status'] == 'inactive') {
+                                                $accion = 'activar';
+                                                echo '<a href="#"  data-toggle="tooltip" title="Activar usuario" onclick="confirmarEliminarUsuario(\'controller_eliminar_usuario.php?id_usuario=' . $usuario['id'] . '&tipo_usuario=' . $tipo_usuario . '&accion=' . $accion . '\', \'' . $accion . '\')" class="btn btn-success mr-2">';
                                                 echo '<i class="fas fa-undo"></i> ';
                                                 echo '</a>';
                                             }
-                                            
+
                                             if ($usuario['rol'] == 'docente' and $usuario['status'] == 'active') {
                                                 $usuario_id = $usuario['id'];
                                                 echo "  <a href='#' class='btn btn-primary abrir-modal-docente mr-2' data-toggle='tooltip' data-target='#modalDocente' data-id='$usuario_id' data-toggle='tooltip' data-placement='top' title='sumar horas trabajadas'><i class='fas fa-clock' ></i></a>";
-                                            } elseif($usuario['rol'] == 'estudiante' and $usuario['status'] == 'active') {
+                                            } elseif ($usuario['rol'] == 'estudiante' and $usuario['status'] == 'active') {
                                                 $usuario_id = $usuario['id'];
                                                 echo "  <a href='#' class='btn btn-success abrir-modal-estudiante mr-2' data-toggle='tooltip' data-target='#modalEstudiante' data-id-estudiante='$usuario_id' data-toggle='tooltip' data-placement='top' title='agregar horas al estudiante'><i class='fas fa-clipboard-check'></i>
                                                 </a>";
                                             }
                                             echo '</div>'; // Cierre del div que contiene los botones
                                             echo '</td>';
-                                            
+
                                             echo '</tr>';
                                         }
                                     }
@@ -289,10 +289,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </section>
 
         <!-- /. Maincontent -->
-         
-           <!-- Main Footer -->
+
+        <!-- Main Footer -->
         <?php include('../../../view/admin/layouts/footer.php'); ?>
-           <!-- FIN Footer -->
+        <!-- FIN Footer -->
     </div>
     <!-- /.content-wrapper -->
 
@@ -306,9 +306,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </aside>
     <!-- /.control-sidebar -->
 
- 
-   
-   
+
+
+
 
     </div> <!--fin de toda la pagina wrapper -->
     <!-- ./wrapper -->
@@ -328,14 +328,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             // Adjunta el evento de clic a los botones que abren modales de estudiantes
             $(document).on('click', '.abrir-modal-estudiante', function() {
-                
+
                 document.getElementById('estudiante_id_form').value = '';
 
-               
+
 
                 const estudianteId = this.getAttribute('data-id-estudiante'); // Obtiene el valor del atributo data-id
 
-               
+
 
                 document.getElementById('estudiante_id_form').value = estudianteId; // Asigna el valor al input
 
@@ -343,14 +343,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 let data = {
                     'estudiante_id': estudianteId
                 };
-              
+
 
                 $.ajax({
                     url: 'controller_usuarios_totales.php',
                     type: 'POST',
                     data: data,
                     success: function(response) {
-                        
+
                         var selectElement = document.getElementById('miSelect2');
                         selectElement.innerHTML = ''; // Limpiar el select
 
@@ -448,13 +448,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
         });
         // Función para confirmar la eliminación de un usuario
-        function confirmarEliminarUsuario(url,accion) {
+        function confirmarEliminarUsuario(url, accion) {
             Swal.fire({
                 title: `¿Estás seguro de ${accion} el usuario?`,
                 text: "Esto podría afectar los cursos relacionados del usuario",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonText:  `Sí, ${accion}`,
+                confirmButtonText: `Sí, ${accion}`,
                 cancelButtonText: "Cancelar",
                 confirmButtonColor: '#d33',
                 reverseButtons: true,
@@ -591,54 +591,54 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
         });
     </script>
-   <script>
-function asignarManejadoresDeEventos() {
-    // Reinicia los manejadores de eventos para los botones de abrir modal
-    $('.abrir-modal-docente').off('click').on('click', function(event) {
-        event.preventDefault();
-        var targetModal = $(this).data('target');
-        $(targetModal).modal('show');
-    });
+    <script>
+        function asignarManejadoresDeEventos() {
+            // Reinicia los manejadores de eventos para los botones de abrir modal
+            $('.abrir-modal-docente').off('click').on('click', function(event) {
+                event.preventDefault();
+                var targetModal = $(this).data('target');
+                $(targetModal).modal('show');
+            });
 
-    $('.abrir-modal-estudiante').off('click').on('click', function(event) {
-        event.preventDefault();
-        var targetModal = $(this).data('target');
-        $(targetModal).modal('show');
-    });
-}
+            $('.abrir-modal-estudiante').off('click').on('click', function(event) {
+                event.preventDefault();
+                var targetModal = $(this).data('target');
+                $(targetModal).modal('show');
+            });
+        }
 
-$(document).ready(function() {
-    // Verifica si el elemento ya ha sido inicializado como una tabla de DataTables
-    if (!$.fn.dataTable.isDataTable('#example1')) {
-        // Inicializa DataTables solo si el elemento no ha sido inicializado previamente
-        $('#example1').DataTable({
-            responsive: true // Activa el modo responsive
+        $(document).ready(function() {
+            // Verifica si el elemento ya ha sido inicializado como una tabla de DataTables
+            if (!$.fn.dataTable.isDataTable('#example1')) {
+                // Inicializa DataTables solo si el elemento no ha sido inicializado previamente
+                $('#example1').DataTable({
+                    responsive: true // Activa el modo responsive
+                });
+            }
+
+            // Asigna manejadores de eventos inicialmente
+            asignarManejadoresDeEventos();
+
+            // Escucha el evento responsive-display para actualizar los manejadores de eventos
+            $('#example1').on('responsive-display.dt', function() {
+                // Vuelve a asignar los manejadores de eventos después de que una fila responsive se expande o colapsa
+                asignarManejadoresDeEventos();
+            });
+
+            // Escucha el evento draw.dt para actualizar los manejadores de eventos después de cualquier redibujado de la tabla (por ejemplo, al cambiar de página)
+            $('#example1').on('draw.dt', function() {
+                // Vuelve a asignar los manejadores de eventos después de que la tabla se redibuje
+                asignarManejadoresDeEventos();
+            });
         });
-    }
-
-    // Asigna manejadores de eventos inicialmente
-    asignarManejadoresDeEventos();
-
-    // Escucha el evento responsive-display para actualizar los manejadores de eventos
-    $('#example1').on('responsive-display.dt', function() {
-        // Vuelve a asignar los manejadores de eventos después de que una fila responsive se expande o colapsa
-        asignarManejadoresDeEventos();
-    });
-
-    // Escucha el evento draw.dt para actualizar los manejadores de eventos después de cualquier redibujado de la tabla (por ejemplo, al cambiar de página)
-    $('#example1').on('draw.dt', function() {
-        // Vuelve a asignar los manejadores de eventos después de que la tabla se redibuje
-        asignarManejadoresDeEventos();
-    });
-});
-</script>
+    </script>
 
 
-<!-- // Docentes -->
+    <!-- // Docentes -->
 
 
 
-<!-- // Estudiantes -->
+    <!-- // Estudiantes -->
 
 
     <!-- <script>
@@ -672,6 +672,11 @@ $(document).ready(function() {
         //     $('.toastrDefaultError').click(function() {
         //         toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
         //     });
+
+
+
+
+
         //     $('.toastrDefaultWarning').click(function() {
         //         toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
         //     });

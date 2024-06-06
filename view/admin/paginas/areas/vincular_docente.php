@@ -16,6 +16,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css">
+  <!-- SwadeetAlert2 -->
+  <link rel="stylesheet" href="../../../view/admin/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />
+  <!-- necesario para el tamaño de mensajes alerta  -->
+
   <!-- Theme style -->
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="../../../view/admin/dist/css/adminlte.min.css">
@@ -63,18 +68,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
       <section class="content">
+        <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none"></button>
+        <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none "></button>
+        <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none "></button>
+        <button id="btnWarning" type="button" class="btn btn-success swalDefaultWarning" style="display:none "></button>
+
         <div class='container-fluid' style="max-width:1000px;">
-          <?php if (!empty($mensaje) && $mensaje == 'Docente vinculado con exito') : ?>
-            <div class="alert alert-success col-md-8 ">
-              <?php echo $mensaje; ?>
-              <?php $mensaje = ''; ?>
-            </div>
-          <?php elseif (!empty($mensaje)) : ?>
-            <div class="alert alert-danger col-md-8 ">
-              <?php echo $mensaje; ?>
-              <?php $mensaje = ''; ?>
-            </div>
-          <?php endif; ?>
+
           <div class="container mt-4">
             <div class="row  align-items-start">
               <!-- Formulario -->
@@ -98,7 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <select class="form-control" name="docente">
                           <option value='false' selected>Selecciona un docente</option>
                           <?php foreach ($docentes as $docente) : ?>
-                            <option value="<?php echo $docente['id']; ?>"><?php echo $docente['name']." ". $docente['lastname']; ?></option>
+                            <option value="<?php echo $docente['id']; ?>"><?php echo $docente['name'] . " " . $docente['lastname']; ?></option>
                           <?php endforeach; ?>
                         </select>
                       </div>
@@ -127,11 +127,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                           <?php foreach ($_SESSION['docentes_vinculados'] as $people_area) : ?>
                             <tr>
-                            
+
                               <td><?php echo htmlspecialchars($people_area['name']) . " " . htmlspecialchars($people_area['lastname']); ?></td>
                               <td><?php echo htmlspecialchars($people_area['area_name']); ?></td>
                               <td>
-                                <a class="btn btn-danger btn-sm ml-4" href='controller_vincular_docente.php?idDesvincular=<?php echo htmlspecialchars($people_area['id']); ?>&area_id=<?php echo htmlspecialchars($people_area['areas_id']);?>'>
+                                <a data-toggle="tooltip" title="Desvincular docente" class="btn btn-danger btn-sm ml-4" href='controller_vincular_docente.php?idDesvincular=<?php echo htmlspecialchars($people_area['id']); ?>&area_id=<?php echo htmlspecialchars($people_area['areas_id']); ?>'>
                                   <i class="fas fa-trash"></i>
                                 </a>
                               </td>
@@ -188,8 +188,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </div> <!--fin de toda la pagina wrapper -->
   <!-- ./wrapper -->
 
-  <!-- REQUIRED SCRIPTS -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- jQuery -->
+  <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- sweet alert -->
+  <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
+
   <script>
     function showConfirmationDialog(event) {
       event.preventDefault(); // Prevent the form from submitting immediately
@@ -210,10 +216,80 @@ scratch. This page gets rid of all links and provides the needed markup only.
       });
     }
   </script>
-  <!-- jQuery -->
-  <script src="../../../view/admin/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="../../../view/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <?php
+  $mensaje_ok = $mensaje_ok ?? ''; // Asegura que $mensaje_editar esté definido
+  $mensaje_error = $mensaje_error ?? ''; // Asegura que $mensaje_editar esté definido
+  $mensaje_warning = $mensaje_warning ?? ''; // Asegura que $mensaje_editar esté definido
+  $mensaje_info = $mensaje_info ?? ''; // Asegura que $mensaje_editar esté definido
+  ?>
+  <script>
+    $(function() {
+      var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 8000,
+        width: '80%',
+        customClass: {
+          container: 'mi-clase-personalizada'
+        }
+
+
+      });
+
+      $('.swalDefaultSuccess').click(function() {
+        Toast.fire({
+          icon: 'success',
+          title: '<?php echo $mensaje_ok; ?>'
+
+        })
+      });
+      $('.swalDefaultInfo').click(function() {
+        Toast.fire({
+          icon: 'info',
+          title: '<?php echo $mensaje_info; ?>'
+        })
+      });
+      $('.swalDefaultError').click(function() {
+        Toast.fire({
+          icon: 'error',
+          title: '<?php echo $mensaje_error; ?>'
+        })
+      });
+      $('.swalDefaultWarning').click(function() {
+        Toast.fire({
+          icon: 'warning',
+          title: '<?php echo $mensaje_warning; ?>'
+        })
+      });
+      $('.swalDefaultQuestion').click(function() {
+        Toast.fire({
+          icon: 'question',
+          title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+        })
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      // Verificar si la variable $mensaje_editar está definida
+      <?php if (isset($mensaje_ok) && !empty($mensaje_ok)) : ?>
+        $('#btnSuccess').click();
+      <?php endif; ?>
+      <?php if (isset($mensaje_error) && !empty($mensaje_error)) : ?>
+        $('#btnError').click();
+      <?php endif; ?>
+      <?php if (isset($mensaje_warning) && !empty($mensaje_warning)) : ?>
+        $('#btnWarning').click();
+      <?php endif; ?>
+      <?php if (isset($mensaje_info) && !empty($mensaje_info)) : ?>
+        $('#btnInfo').click();
+      <?php endif; ?>
+
+
+    });
+  </script>
   <!-- AdminLTE App -->
   <script src="../../../view/admin/dist/js/adminlte.min.js"></script>
 </body>
