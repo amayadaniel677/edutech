@@ -88,7 +88,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <tr>
                     <th>#</th>
                     <th>Docente</th>
-                    <th>Fecha pago</th>
+                    <th>Fecha pago (AAAA-MM-DD)</th>
                     <th>Horas pagadas</th>
                     <th>Valor hora</th>
                     <th>Valor total</th>
@@ -98,14 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <?php if(isset($historial_pagos) && !empty($historial_pagos) && $historial_pagos!=false): ?>
                   <?php foreach ($historial_pagos as $index => $historial_pago): ?>
                     <?php 
-                       setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
-
-                       // Suponiendo que $venta['sale_date'] contiene la fecha en formato 'Y-m-d H:i:s'
-                       $fecha_pago = $historial_pago['date'];
-
-                       // Utiliza strftime para formatear la fecha y hora, excluyendo los segundos
-                       $formatted_date = strftime('%Y-%b-%d %H:%M', strtotime($fecha_pago));
-
+                       $formatted_date = $historial_pago['date'];
                       ?>
                     <tr class="odd">
                       <td>

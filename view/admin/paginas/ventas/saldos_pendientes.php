@@ -115,12 +115,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Fecha Venta</th>
+                                            <th scope="col">Fecha Venta (AAAA-MM-DD)</th>
                                             <th scope="col">Id venta</th>
                                             <th scope="col">Nombres</th>
                                             <th scope="col">Valor venta</th>
                                             <th scope="col">Saldo pendiente</th>
-                                            <th scope="col">Ultimo abono</th>
+                                            <th scope="col">Ultimo abono (AAAA-MM-DD)</th>
                                             <th scope="col">Acciones</th>
                                         </tr>
                                     </thead>
@@ -129,14 +129,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         if (isset($abonos_pendientes) and !empty($abonos_pendientes)) {
 
                                             foreach ($abonos_pendientes as $abono) {
-                                                setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
+                                               
 
-                                                // Suponiendo que $venta['sale_date'] contiene la fecha en formato 'Y-m-d H:i:s'
-                                                $fecha_venta = $abono['fecha_venta'];
-                                                $ultimo_abono = $abono['ultimo_abono'];
-                                                // Utiliza strftime para formatear la fecha y hora, excluyendo los segundos
-                                                $formatted_date = strftime('%Y-%b-%d %H:%M', strtotime($fecha_venta));
-                                                $formatted_date2= strftime('%Y-%b-%d %H:%M', strtotime($ultimo_abono));
+                                                $formatted_date = $abono['fecha_venta'];
+                                                $formatted_date2 = $abono['ultimo_abono'];
+                                               
                                                 echo '<tr>
                       
                               <td>' . $formatted_date. '</td>
@@ -205,13 +202,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th scope="col">Fecha Venta</th>
+                                            <th scope="col">Fecha Venta (AAAA-MM-DD)</th>
                                             <th scope="col">Id venta</th>
                                             <th scope="col">Nombres</th>
                                             <th scope="col">Valor venta</th>
 
                                             <th scope="col">Saldo pendiente</th>
-                                            <th scope="col">Ultimo abono</th>
+                                            <th scope="col">Ultimo abono (AAAA-MM-DD)</th>
                                             <th scope="col">Acciones</th>
 
                                         </tr>
