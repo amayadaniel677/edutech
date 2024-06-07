@@ -90,7 +90,6 @@ class sing_up_admin
 
         // Campos vacíos de registro
         if (empty($rol) || empty($nombres) || empty($apellidos) || empty($tipo_documento) || empty($documento) || empty($sexo) || empty($fecha) || empty($correo) || empty($contrasenia) || empty($confContrasenia) || empty($telefono) || empty($ciudad) || empty($direccion)) {
-            echo 'Campos vacíos';
             $this->msg[] = 'Verifique que los campos estén diligenciados';
             $error = true; // Cambiar la bandera de error a verdadera
         }
