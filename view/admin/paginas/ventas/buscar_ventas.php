@@ -151,7 +151,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <thead>
                                         <tr>
                                             <th scope="col">ID Venta</th>
-                                            <th scope="col">Fecha  </th>
+                                            <th scope="col">Fecha (AAAA-MM-DD)  </th>
 
                                             <th scope="col">dni</th>
                                             <th scope="col">Nombre</th>
@@ -168,15 +168,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                            
                                             $ventas_reverse = $ventas_paginadas;
                                             foreach ($ventas_reverse as $venta) {
-                                                // Configura el locale para español
-                                                // Configura el locale para español
-                                                setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
 
-                                                // Suponiendo que $venta['sale_date'] contiene la fecha en formato 'Y-m-d H:i:s'
-                                                $sale_date = $venta['sale_date'];
+                                                $formatted_date = $venta['sale_date'];
 
-                                                // Utiliza strftime para formatear la fecha y hora, excluyendo los segundos
-                                                $formatted_date = strftime('%Y-%b-%d %H:%M', strtotime($sale_date));
 
 
 
@@ -213,7 +207,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <tfoot>
                                         <tr>
                                             <th scope="col">ID Venta</th>
-                                            <th scope="col">Fecha  </th>
+                                            <th scope="col">Fecha (AAAA-MM-DD)  </th>
                                             <th scope="col">dni</th>
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Precio</th>
