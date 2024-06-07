@@ -9,7 +9,7 @@ class editar_usuario_model{
         } catch (mysqli_sql_exception $e) {
             // Intenta conectar con la segunda opción si la primera falla
             try {
-                $this->con = new mysqli("localhost", "root", "", "edutech");
+                $this->con = new mysqli("localhost", "root", "", "edutech"); 
             } catch (mysqli_sql_exception $e) {
                 // Maneja el error de conexión aquí
                 echo "Error al conectar: " . $e->getMessage();
@@ -29,8 +29,8 @@ class editar_usuario_model{
         }
     }
 
-    public function editar_informacion($id,$nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento){
-        $sql="UPDATE people SET name = '$nombre', lastname = '$apellido', city = '$ciudad', address = '$direccion', birthdate = '$fecha_nacimiento', sex = '$sexo', email = '$correo', dni_type = '$tipo_documento' WHERE id = '$id' ";
+    public function editar_informacion($id,$nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento, $rol){
+        $sql="UPDATE people SET name = '$nombre', lastname = '$apellido', city = '$ciudad', address = '$direccion', birthdate = '$fecha_nacimiento', sex = '$sexo', email = '$correo', dni_type = '$tipo_documento', rol= '$rol' WHERE id = '$id' ";
         $result=$this->con->query($sql);
         if($result){
             return true;
