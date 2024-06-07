@@ -141,7 +141,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <th>#</th>
                                                             <th>Id venta</th>
                                                             <th>Valor abonado</th>
-                                                            <th>Fecha de abono</th>
+                                                            <th>Fecha de abono (AAAA-MM-DD)</th>
 
                                                         </tr>
                                                     </thead>
