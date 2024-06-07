@@ -150,14 +150,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <?php $contador = 1; ?>
                                                             <?php foreach ($detalles_abonos as $detalle) : ?>
                                                                 <?php
-                                                                     setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
-
-                                                                     // Suponiendo que $venta['sale_date'] contiene la fecha en formato 'Y-m-d H:i:s'
-                                                                     $fecha_abono = $detalle['date'];
-                     
-                                                                     // Utiliza strftime para formatear la fecha y hora, excluyendo los segundos
-                                                                     $formatted_date = strftime('%Y-%b-%d %H:%M', strtotime($fecha_abono));
-                     
+                                                                     $formatted_date = $detalle['date'];
                                                                     ?>
                                                                 <tr>
                                                                     <td><?php echo $contador ?></td>
