@@ -22,10 +22,10 @@ class ver_curso {
     }
 
     public function seleccionar_curso() {
-        $sql = "SELECT s.id AS subject_id, s.name AS subject_name, s.description, s.photo, a.name AS area_name
+        $sql = "SELECT s.id AS subject_id, s.name AS subject_name, s.description, s.photo, a.name AS area_name,a.status AS area_status
         FROM subjects s
         INNER JOIN areas a ON s.areas_id = a.id
-        WHERE s.status = 'active'";
+        WHERE s.status = 'active' AND a.status = 'active'";
         $result = $this->con->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {

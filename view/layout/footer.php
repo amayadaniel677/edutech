@@ -12,7 +12,6 @@
                  <ul class="list">
                     <li><a href="#section-inicio">Inicio</a></li>
                     <li><a href="view/quienes.php">Nosotros</a></li>
-                    <li><a href="view/sign_up_user.php">Registro</a></li>
                     
                  </ul>
             </div>
@@ -27,6 +26,6 @@
                 </div>
         </div>
         <div class="bottom-bar">
-            <p>&copy; 2023 EduTech . Todos los derechos reserv</p>
+            <p>&copy; 2023 EduTech . Todos los derechos reservados</p>
         </div>
     </footer>

@@ -1,55 +1,59 @@
 <section class="content">
-  <div class="container-fluid"  style="max-width:1000px;">
+  <div class="container-fluid" style="max-width:1000px;">
     <div class="errores">
-   
-   
-              <?php
-              if (isset($_GET['mensaje'])) {
-                echo " <div class='container mt-5'> <div class='alert alert-danger' role='alert'>";
-                $mensaje_recibido = $_GET['mensaje'];
-                echo $mensaje_recibido;
-                echo " </div>  </div>";
-            }
-              ?>
-           
+      <button id="btnSuccess" type="button" class="btn btn-success swalDefaultSuccess" style="display:none"></button>
+      <button id="btnInfo" type="button" class="btn btn-success swalDefaultInfo" style="display:none "></button>
+      <button id="btnError" type="button" class="btn btn-success swalDefaultError" style="display:none "></button>
+      <button id="btnWarning" type="button" class="btn btn-success swalDefaultWarning" style="display:none "></button>
+
 
       <?php
-
-      // Verifica si hay un mensaje de éxito en la sesión
-      if (isset($_SESSION['update-succes'])) {
-        echo '<div class="alert alert-success mt-3" role="alert">';
-        echo $_SESSION['update-succes'];
-        echo '</div>';
-        // Limpia la variable de sesión después de mostrar el mensaje
-        unset($_SESSION['update-succes']);
-      }
-      // Verifica si hay errores en la sesión
-      if (isset($_SESSION['errores_foto']) || isset($_SESSION['errores_inputs'])) {
-        echo "<div class='alert alert-danger mt-3'>";
-
-        // Muestra errores de la foto
-        if (!empty($_SESSION['errores_foto'])) {
-          echo "<strong>Errores en la foto:</strong><br>";
-          foreach ($_SESSION['errores_foto'] as $error) {
-            echo $error . "<br>";
-          }
-        }
-
-        // Muestra errores de los inputs
-        if (!empty($_SESSION['errores_inputs'])) {
-          echo "<strong>Errores:</strong><br>";
-          foreach ($_SESSION['errores_inputs'] as $errors) {
-            echo $errors . "<br>";
-          }
-        }
-
-        echo "</div>";
-
-        // Limpia las variables de sesión después de mostrar los errores
-        unset($_SESSION['errores_foto']);
-        unset($_SESSION['errores_inputs']);
+      if (isset($_GET['mensaje'])) {
+        echo " <div class='container mt-5'> <div class='alert alert-danger' role='alert'>";
+        $mensaje_recibido = $_GET['mensaje'];
+        echo $mensaje_recibido;
+        echo " </div>  </div>";
       }
       ?>
+
+
+
+
+      <?php if (isset($_SESSION['update-succes'])) : ?>
+        <div class="container-fluid" style='max-width:1000px;'>
+          <div class="alert alert-success alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="font-size:20px; opacity:0.5;">x</button>
+
+            <h5><i class="icon fas fa-check"></i> Actualización exitosa</h5>
+            <p><?php echo $_SESSION['update-succes']; ?></p>
+          </div>
+        </div>
+      <?php endif; ?>
+      <?php if (isset($_SESSION['errores_foto']) || isset($_SESSION['errores_inputs'])) : ?>
+        <div class="container-fluid" style='max-width:1000px;'>
+          <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="font-size:20px; opacity:0.5;">x</button>
+
+            <h5><i class="icon fas fa-exclamation-triangle"></i> Errores encontrados</h5>
+            <ul class="list-group list-group-flush pl-3">
+              <?php
+              if (!empty($_SESSION['errores_foto'])) :
+                foreach ($_SESSION['errores_foto'] as $error) :
+                  echo "<li class=''><strong>Errores en la foto:</strong> " . $error . "</li>";
+                endforeach;
+              endif;
+
+              if (!empty($_SESSION['errores_inputs'])) :
+                foreach ($_SESSION['errores_inputs'] as $error) :
+                  echo "<li class=''>" . $error . "</li>";
+                endforeach;
+              endif;
+              ?>
+            </ul>
+          </div>
+        </div>
+      <?php endif; ?>
+
     </div>
     <div class="row justify-content-center">
       <div class="col-md-7">

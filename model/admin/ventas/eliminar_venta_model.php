@@ -53,10 +53,13 @@ class eliminar_venta_model
                 $new_total_units = $current_total_units - $total_quantity;
                 if ($new_total_units < 0) {
                     $new_total_units = 0; // Establece a 0 si el resultado sería negativo
+                    $update_sql = "UPDATE remaining_units SET total_units=$new_total_units,attended_units=0 WHERE id='$remaining_units_id'";
+                }else{
+                    $update_sql = "UPDATE remaining_units SET total_units=$new_total_units WHERE id='$remaining_units_id'";
                 }
 
                 // Actualizar el valor de total_units con el nuevo valor calculado
-                $update_sql = "UPDATE remaining_units SET total_units=$new_total_units WHERE id='$remaining_units_id'";
+                
                 $update_result = $this->con->query($update_sql);
 
                 // Si todo salió bien, actualizar el estado a 'inactive'
