@@ -83,7 +83,8 @@ class obtener_datos
 
         if ($new_photo != false) {
             if (move_uploaded_file($new_photo['tmp_name'], $ruta_archivo_nombre_archivo)) {
-                if ($ruta_old_photo != $ruta_default_photo && $old_photo != $foto_actual) {
+                if ($old_photo !== $ruta_default_photo && $old_photo != $foto_actual ) {
+        
                     unlink($ruta_old_photo);
                 }
             }

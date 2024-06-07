@@ -34,13 +34,13 @@ class buscar_modalidad_model{
     }
     
 
-    public function actualizar_modalidad($id, $price_hour_student, $price_teacher, $price_class_student){
+    public function actualizar_modalidad($id, $price_hour_student, $price_class_student){
 
-        $sql = "UPDATE modalities SET price_hour_student = ?, price_teacher = ?, price_class_student = ? WHERE id = ?";
+        $sql = "UPDATE modalities SET price_hour_student = ?, price_class_student = ? WHERE id = ?";
 
         $result = $this->con->prepare($sql);
 
-        $result->bind_param("dddi", $price_hour_student, $price_teacher, $price_class_student, $id);
+        $result->bind_param("ddi", $price_hour_student, $price_class_student, $id);
         return $result->execute();
     }
 

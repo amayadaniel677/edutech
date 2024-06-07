@@ -124,7 +124,6 @@ class sing_up_admin
 
         if ($fechaNacimiento > $fechaMinima || $fechaNacimiento < $fechaLimite) {
             // var_dump($fechaNacimiento);
-
             // var_dump($fechaLimite);
             $this->msg[] = 'Edad del usuario no valida: <br> Debe haber nacido después de 1950 <br>Debe tener minimo dos años de edad';
             $error = true;

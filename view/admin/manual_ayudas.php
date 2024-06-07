@@ -73,28 +73,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a class="nav-item nav-link" id="product-pagos-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Pagos</a>
             <a class="nav-item nav-link" id="product-areas-tab" data-toggle="tab" href="#product-price" role="tab" aria-controls="product-price" aria-selected="false">Areas</a>
             <a class="nav-item nav-link" id="product-cursos-tab" data-toggle="tab" href="#product-cursos" role="tab" aria-controls="product-cursos" aria-selected="false">Cursos</a>
+            <a class="nav-item nav-link" id="product-variedad-tab" data-toggle="tab" href="#product-variedad" role="tab" aria-controls="product-variedad" aria-selected="false">variedad</a>
+            <a class="nav-item nav-link" id="product-perfil-tab" data-toggle="tab" href="#product-perfil" role="tab" aria-controls="product-perfil" aria-selected="false">Mi perfil</a>
         </div>
     </nav>
     <div class="tab-content col-md-7 p-5  " id="nav-tabContent">
         <div class="tab-pane fade show active " id="product-desc" role="tabpanel" aria-labelledby="product-user-tab">
           <h3>Manual de ventas</h3>
-            <embed src="../../resource/pdf/normasISO2500.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/venta.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
         <div class="tab-pane fade mt-2" id="product-comments" role="tabpanel" aria-labelledby="product-user-tab">
           <h3>Manual de usuarios </h3>
-            <embed src="../../resource/pdf/normasISO2500.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/usuarios.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
         <div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-pagos-tab">
           <h3> Manual de pagos</h3>
-            <embed src="../../resource/pdf/normasISO2500.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/Pagos.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
         <div class="tab-pane fade" id="product-price" role="tabpanel" aria-labelledby="product-areas-tab">
           <h3> Manual de areas </h3>
-            <embed src="../../resource/pdf/normasISO2500.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/Area.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
         <div class="tab-pane fade" id="product-cursos" role="tabpanel" aria-labelledby="product-cursos-tab">
           <h3>Manual de cursos</h3>
-            <embed src="../../resource/pdf/normasISO2500.pdf" type="application/pdf" width="100%" height="600px;">
+            <embed src="../../resource/pdf/Cursos.pdf" type="application/pdf" width="100%" height="600px;">
+        </div>
+        <div class="tab-pane fade" id="product-variedad" role="tabpanel" aria-labelledby="product-variedad-tab">
+          <h3>Manual de variedad</h3>
+            <embed src="../../resource/pdf/Varias.pdf" type="application/pdf" width="100%" height="600px;">
+        </div>
+        <div class="tab-pane fade" id="product-perfil" role="tabpanel" aria-labelledby="product-perfil-tab">
+          <h3>Manual mi Perfil</h3>
+            <embed src="../../resource/pdf/Perfil.pdf" type="application/pdf" width="100%" height="600px;">
         </div>
     </div>
 </div>

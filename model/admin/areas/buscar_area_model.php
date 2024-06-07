@@ -5,7 +5,7 @@ class buscar_area_model
     public function __construct()
     {
         mysqli_report(MYSQLI_REPORT_STRICT | MYSQLI_REPORT_ERROR);
-
+ 
         try {
             $this->con = new mysqli("localhost", "edutech", "edutechadso2024", "edutech");
         } catch (mysqli_sql_exception $e) {
@@ -63,7 +63,7 @@ class buscar_area_model
             return $result_array;
         } else {
             return false;
-        }
+        } 
     }
 
     public function editarArea($name, $id)
@@ -91,6 +91,34 @@ class buscar_area_model
         $sql = "UPDATE areas SET status = 'inactive' WHERE id = '$id'";
         $result = $this->con->query($sql);
         if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function crear_area($name)
+    {
+        $otra_area=$this->area_exist($name);
+        if($otra_area){
+            return false;
+        }else{
+            $price = 0;
+            $sql = "INSERT INTO areas (name, price) VALUES ('$name', '$price')";
+            $result = $this->con->query($sql);
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            } 
+        }
+    }
+
+    public function area_exist($name)
+    {   
+        $sql = "SELECT * FROM areas WHERE name = '$name'";
+        $result = $this->con->query($sql);
+        if ($result->num_rows > 0) {
             return true;
         } else {
             return false;

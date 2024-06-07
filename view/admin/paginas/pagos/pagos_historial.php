@@ -78,9 +78,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <section class="content">
         <div class="container-fluid" style="max-width:1000px;">
 
-
-
           <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Historial de pagos</h3>
+            </div>
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
@@ -94,7 +95,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   </tr>
                 </thead>
                 <tbody>
+                  <?php if(isset($historial_pagos) && !empty($historial_pagos) && $historial_pagos!=false): ?>
                   <?php foreach ($historial_pagos as $index => $historial_pago): ?>
+                    <?php 
+                       setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
+
+                       // Suponiendo que $venta['sale_date'] contiene la fecha en formato 'Y-m-d H:i:s'
+                       $fecha_pago = $historial_pago['date'];
+
+                       // Utiliza strftime para formatear la fecha y hora, excluyendo los segundos
+                       $formatted_date = strftime('%Y-%b-%d %H:%M', strtotime($fecha_pago));
+
+                      ?>
                     <tr class="odd">
                       <td>
                         <?= $index + 1 ?>
@@ -103,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <?= $historial_pago['name'] . ' ' . $historial_pago['lastname'] ?>
                       </td>
                       <td>
-                        <?= $historial_pago['date'] ?>
+                        <?= $formatted_date ?>
                       </td>
                       <td>
                         <?= $historial_pago['total_hours'] ?>
@@ -116,6 +128,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                       </td>
                     </tr>
                   <?php endforeach; ?>
+                  <?php else: ?>
+                  <tr>
+                    <td colspan="6" class="text-center">No hay pagos registrados</td>
+                  </tr> 
+                  <?php endif; ?>
                 </tbody>
               </table>
             </div>

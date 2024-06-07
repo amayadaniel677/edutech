@@ -25,7 +25,7 @@ if (isset($_GET['mensaje'])) {
 }
 
 
-
+ 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['docente_id'])) {
     $consult2 = new buscar_usuario_model();
     $horas = $_POST['horas'];
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['docente_id'])) {
             $pago = $consult2->realizar_pago($docente, $horas);
             if ($pago) {
                 $msj_eliminar = '';
-                $msj_error='';
+                $msj_error = '';
                 $cant_horas = $consult2->traer_horas($docente);
                 $mensaje_editar = 'Las horas se agregaron correctamente ahora suman: ' . $cant_horas['total_hours'];
                 // refrescar la pagina para que se actualice la tabla
@@ -57,26 +57,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['estudiante_id_form']))
     $consult3 = new buscar_usuario_model();
     $horasAsistidas = $_POST['horasAsistidas'];
     $cursoSeleccionado = $_POST['cursoSeleccionado'];
-    if($cursoSeleccionado==''){
-        $msj_error='Por favor seleccione un curso para agregar horas';
-    }else{
-// enviar al modelo para registrarhorasasistidas
-$asistenciaHoras = $consult3->agregarHorasAsistidas($horasAsistidas,$cursoSeleccionado);
-if(is_array($asistenciaHoras)){
-    $msj_error='Error de cantidad:'.$horasAsistidas." ingresadas de ".$asistenciaHoras['horasRestantes']." disponibles" ;
-}elseif($cursoSeleccionado){
+    if ($cursoSeleccionado == '') {
+        $msj_error = 'Por favor seleccione un curso para agregar horas';
+    } elseif ($horasAsistidas == '') {
+        $msj_error = 'Por favor ingrese la cantidad de horas a agregar';
+    } else {
+        // enviar al modelo para registrarhorasasistidas
+        $asistenciaHoras = $consult3->agregarHorasAsistidas($horasAsistidas, $cursoSeleccionado);
+        if (is_array($asistenciaHoras)) {
+            $mensaje_editar='';
+            $msj_error = 'Error de cantidad:' . $horasAsistidas . " ingresadas de " . $asistenciaHoras['horasRestantes'] . " disponibles";
+        } elseif ($asistenciaHoras) {
+            $mensaje_editar= 'Operación exitosa. Horas restantes del estudiante: '. $asistenciaHoras;
+            header('refresh:1;url=controller_usuarios_totales.php?tipo_usuario='. $tipo_usuario. '&mensaje='. urlencode($mensaje_editar));
+            
+        }
+    }
 
 }
-elseif($asistenciaHoras){
-    $mensaje_editar = 'Operación exitosa. Horas restantes del estudiante: '.$asistenciaHoras;
-    header('refresh:4;url=controller_usuarios_totales.php?tipo_usuario=' . $tipo_usuario);
-}
-}
-    
-   
-}
-
-
 
 
 class buscar_usuario_controlador
@@ -122,17 +120,17 @@ class buscar_usuario_controlador
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['estudiante_id'])) {
-   
+
     $estudianteId = $_POST['estudiante_id'];
     header('Content-Type: application/json');
     // Aquí va tu lógica para buscar los cursos del estudiante por su ID
     $consultAjax = new buscar_usuario_model();
-    $cursosActivos =$consultAjax->traer_cursos_activos($estudianteId) ; // Ejemplo de cómo podrías obtener los cursos
+    $cursosActivos = $consultAjax->traer_cursos_activos($estudianteId); // Ejemplo de cómo podrías obtener los cursos
 
     // Devolver los cursos en formato JSON
     echo json_encode($cursosActivos);
 } else {
-include('../../../view/admin/paginas/usuarios/usuarios_totales.php');
-  
+    include('../../../view/admin/paginas/usuarios/usuarios_totales.php');
 }
+
 ?>

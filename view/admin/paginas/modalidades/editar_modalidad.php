@@ -50,10 +50,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
                         <label for="price_class_student">Precio por clase para estudiante</label>
                         <input type="number" class="form-control" id="price_class_student" name="price_class_student" value="<?php echo $datos_modalidad['price_class_student']; ?>" placeholder="Introduce el precio por clase" required>
                     </div>
-                    <div class="form-group">
-                        <label for="price_teacher">Precio por hora para profesor</label>
-                        <input type="number" class="form-control" id="price_teacher" name="price_teacher" value="<?php echo $datos_modalidad['price_teacher']; ?>" placeholder="Introduce el precio por hora" required>
-                    </div>
+                
                     <input type="hidden" id="id-modalidad" name="id" value="<?php echo $datos_modalidad['id']; ?>"> <!-- Campo oculto -->
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>

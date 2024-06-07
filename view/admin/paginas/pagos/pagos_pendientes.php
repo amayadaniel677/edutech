@@ -87,6 +87,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="card">
 
                         <!-- /.card-header -->
+                        <div class="card-header">
+                            <h3 class="card-title"> Pagos pendientes a docentes</h3>
+                        </div>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -99,11 +102,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php if (isset($pagos) and !empty($pagos) and $pagos!='') : ?>
                                     <?php foreach ($pagos as $index => $pago) : ?>
+                                        <?php setlocale(LC_TIME, 'es_ES.utf8', 'spanish', 'Spanish_Spain');
+
+// Suponiendo que $venta['sale_date'] contiene la fecha en formato 'Y-m-d H:i:s'
+$fecha_pago = $pago['last_pay'];
+
+// Utiliza strftime para formatear la fecha y hora, excluyendo los segundos
+$formatted_date = strftime('%Y-%b-%d %H:%M', strtotime($fecha_pago));
+?>
                                     <tr class="odd">
                                         <td><?= $index + 1 ?></td>
                                         <td><?= $pago['name'] . ' ' . $pago['lastname'] ?></td>
-                                        <td><?= $pago['last_pay'] ?></td>
+                                        <td><?= $formatted_date ?></td>
                                         <td><?= $pago['total_hours'] ?></td>
                                         <td>
                                             <a href="#" class="btn btn-primary abrir-modal " data-toggle="tooltip"
@@ -116,6 +128,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
                                     <?php endforeach; ?>
+                                    <!-- else -->
+                                    <?php else : ?>
+                                    <tr>
+                                        <td colspan="5" class="text-center">No hay pagos pendientes</td>
+                                    </tr>
+                                    <?php endif; ?>
+                                    
 
                                     <!-- Modal -->
                                     <div class="modal fade" id="miModal" tabindex="-1" role="dialog"
