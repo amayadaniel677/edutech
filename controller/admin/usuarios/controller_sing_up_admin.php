@@ -1,10 +1,10 @@
 <?php
 session_start();
-if (!isset( $_SESSION['dni_session'])){
+if (!isset($_SESSION['dni_session'])) {
     header('location:../../login_controller.php');
     exit();
 }
-$ruta_inicio='../../../';  //esta ruta se usa para cerrar sesion en el nav
+$ruta_inicio = '../../../';  //esta ruta se usa para cerrar sesion en el nav
 include('../../../model/admin/usuarios/sing_up_admin_model.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tipo_documento = $_POST['tipo_documento'];
     $documento = str_replace(' ', '', $_POST['documento']);
     $sexo = isset($_POST['sexo']) ? $_POST['sexo'] : '';
-    $fecha =$_POST['fecha'];
+    $fecha = $_POST['fecha'];
     $correo = strtolower(str_replace(' ', '', $_POST['correo']));
     $telefono = str_replace(' ', '', $_POST['telefono']);
     $ciudad = strtolower(str_replace(' ', '', $_POST['ciudad']));
@@ -32,13 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($_POST['contrasenia'])) {
         $contrasenia = "NA";
-    }else{
+    } else {
         $contrasenia = $_POST['contrasenia'];
     }
 
     if (empty($_POST['confContrasenia'])) {
         $confContrasenia = "NA";
-    }else{
+    } else {
         $confContrasenia = $_POST['confContrasenia'];
     }
 
@@ -58,20 +58,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $insertar_modelo = $new_user->validar($rol, $nombres, $apellidos, $tipo_documento, $documento, $sexo, $fecha, $correo, $contrasenia, $confContrasenia, $telefono, $ciudad, $direccion, $foto);
         if (!$insertar_modelo) {
             $errores = $new_user->msg;
-        }elseif($insertar_modelo==='Error! el usuario ya está registrado'){
-       
+        } elseif ($insertar_modelo === 'Error! el usuario ya está registrado') {
+
             $mensaje_error = 'Error! el usuario ya está registrado';
         } else {
             // FUNCIONA
-            $mensaje_error='';
+            $mensaje_error = '';
             $mensaje_ok = "Usuario agregado correctamente";
             // redireccionar a la misma vista
-            header('refresh:4; url=controller_sing_up_admin.php');
+            // header('refresh:4; url=controller_sing_up_admin.php');
         }
     } else {
         // FUNCIONA BIEN
         $errores = $msg;
-        var_dump($errores);
     }
 }
 
@@ -86,12 +85,12 @@ class sing_up_admin
 
     public function validar($rol, $nombres, $apellidos, $tipo_documento, $documento, $sexo, $fecha, $correo, $contrasenia, $confContrasenia, $telefono, $ciudad, $direccion, $foto)
     {
-     
 
         $error = false; // Inicializar la bandera de error como falsa
 
         // Campos vacíos de registro
         if (empty($rol) || empty($nombres) || empty($apellidos) || empty($tipo_documento) || empty($documento) || empty($sexo) || empty($fecha) || empty($correo) || empty($contrasenia) || empty($confContrasenia) || empty($telefono) || empty($ciudad) || empty($direccion)) {
+            echo 'Campos vacíos';
             $this->msg[] = 'Verifique que los campos estén diligenciados';
             $error = true; // Cambiar la bandera de error a verdadera
         }
@@ -125,40 +124,41 @@ class sing_up_admin
 
         if ($fechaNacimiento > $fechaMinima || $fechaNacimiento < $fechaLimite) {
             // var_dump($fechaNacimiento);
-            var_dump($fechaMinima);
+
             // var_dump($fechaLimite);
             $this->msg[] = 'Edad del usuario no valida: <br> Debe haber nacido después de 1950 <br>Debe tener minimo dos años de edad';
             $error = true;
         }
         // Si no hay errores, realizar el registro
-        if ($contrasenia == 'NA'||$confContrasenia == 'NA') {
-            $contrasenia_encriptada = 'NA';
-            $consult = new sing_up_model;
+        if ($contrasenia == 'NA' || $confContrasenia == 'NA') {
+            if (!$error) {
+                $contrasenia_encriptada = 'NA';
+                $consult = new sing_up_model;
                 $return = $consult->insertar($rol, $nombres, $apellidos, $tipo_documento, $documento, $sexo, $fecha, $correo, $contrasenia_encriptada, $telefono, $ciudad, $direccion, $foto);
-                if ($return ==1) {
-                    
+                if ($return == 1) {
+
                     return true;
-                }else if($return=='Error! el usuario ya está registrado'){
+                } else if ($return == 'Error! el usuario ya está registrado') {
                     return 'Error! el usuario ya está registrado';
-                }else {
+                } else {
                     $this->msg[] = 'Error en el modelo de insertar';
                 }
-        }else{
+            }
+        } else {
             if (!$error) {
                 $contrasenia_encriptada = password_hash($contrasenia, PASSWORD_DEFAULT, ['cost' => 10]);
                 $consult = new sing_up_model;
                 $return = $consult->insertar($rol, $nombres, $apellidos, $tipo_documento, $documento, $sexo, $fecha, $correo, $contrasenia_encriptada, $telefono, $ciudad, $direccion, $foto);
-                if ($return ==1) {
-                    
+                if ($return == 1) {
+
                     return true;
-                }else if($return=='Error! el usuario ya está registrado'){
+                } else if ($return == 'Error! el usuario ya está registrado') {
                     return 'Error! el usuario ya está registrado';
-                }else {
+                } else {
                     $this->msg[] = 'Error en el modelo de insertar';
                 }
             }
         }
-        
     }
 
     public function validarFoto($foto, $dni)
