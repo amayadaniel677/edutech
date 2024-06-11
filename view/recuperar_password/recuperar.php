@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label for="email">Ingrese la identificacion: </label>
-                    <input type="number" id="dni" name="dni" class="form-control" placeholder="Identificacion">
+                    <input type="number" id="dni" name="dni" class="form-control" placeholder="Identificacion" oninput="validateInput(this)" onkeydown="preventInvalidKeys(event)">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Enviar</button>
                
@@ -52,6 +52,27 @@
             <a href="../login_controller.php" class="btn btn-success btn-block">Regresar</a>
         </div>
     </div>
+    <!-- Validacion Imputs number -->
+<script>
+    function validateInput(input) {
+        // Asegura que el valor sea mayor o igual a 0
+        if (input.value && parseFloat(input.value) < 0) {
+            input.classList.add("is-invalid");
+        } else {
+            input.classList.remove("is-invalid");
+        }
+    }
+
+    function preventInvalidKeys(event) {
+        const input = event.target;
+        if (input.type === 'number') {
+            // Previene la entrada de 'e', 'E', signos menos y más
+            if (event.key === 'e' || event.key === 'E' || event.key === '-' || event.key === '+') {
+                event.preventDefault();
+            }
+        }
+    }
+    </script>
 
 </body>
 

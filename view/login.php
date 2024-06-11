@@ -60,7 +60,7 @@
             
         
         <div class="input-group mb-3">
-          <input type="number" id="dni" name="dni" required class="form-control" placeholder="Documento de identidad">
+          <input type="number" id="dni" name="dni" required class="form-control" placeholder="Documento de identidad" oninput="validateInput(this)" onkeydown="preventInvalidKeys(event)">
           <div class="input-group-append">
             <div class="input-group-text">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -96,6 +96,27 @@
     <!-- /.login-card-body -->
   </div>
 </div>   
+<!-- Validacion Imputs number -->
+<script>
+    function validateInput(input) {
+        // Asegura que el valor sea mayor o igual a 0
+        if (input.value && parseFloat(input.value) < 0) {
+            input.classList.add("is-invalid");
+        } else {
+            input.classList.remove("is-invalid");
+        }
+    }
+
+    function preventInvalidKeys(event) {
+        const input = event.target;
+        if (input.type === 'number') {
+            // Previene la entrada de 'e', 'E', signos menos y más
+            if (event.key === 'e' || event.key === 'E' || event.key === '-' || event.key === '+') {
+                event.preventDefault();
+            }
+        }
+    }
+    </script>
     
 </body>
 </html>

@@ -67,7 +67,7 @@
                         </div>
                         <label for="cantidad-horas-clases" class="col-sm-2 col-form-label">Cantidad horas/clases:</label> <br>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="cantidad-horas-clases" name="cantidad-horas-clases" Pleaceholder="Ingrese la cantidad">
+                            <input type="number" class="form-control" id="cantidad-horas-clases" name="cantidad-horas-clases" Pleaceholder="Ingrese la cantidad" oninput="validateInput(this)" onkeydown="preventInvalidKeys(event)">
                         </div>
 
                         <label for="valor-hora-clase" class="col-sm-6 col-form-label">Valor hora/clase:</label>

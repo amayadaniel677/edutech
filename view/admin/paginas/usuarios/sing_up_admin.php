@@ -164,7 +164,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="form-group">
                     <label for="documento">Número de documento</label>
                     <div class="input-group mb-3">
-                      <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" pattern="\d{5,12}" minlength="5" maxlength="12" required value="<?php echo getFieldValue('documento'); ?>">
+                      <input type="number" class="form-control" placeholder="Número de documento" id="documento" name="documento" pattern="\d{5,12}" minlength="5" maxlength="12" required value="<?php echo getFieldValue('documento'); ?>" oninput="validateInput(this)" onkeydown="preventInvalidKeys(event)">
                     </div>
                   </div>
                 </div>
@@ -188,7 +188,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="form-group">
                     <label for="telefono">Teléfono</label>
                     <div class="input-group mb-3">
-                      <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono" pattern="\d{7,11}" minlength="7" maxlength="11" required value="<?php echo getFieldValue('telefono'); ?>">
+                      <input type="number" class="form-control" placeholder="Teléfono" id="telefono" name="telefono" pattern="\d{7,11}" minlength="7" maxlength="11" required value="<?php echo getFieldValue('telefono'); ?>" oninput="validateInput(this)" onkeydown="preventInvalidKeys(event)">
                     </div>
                   </div>
                 </div>
@@ -327,6 +327,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <?php include('../../../view/admin/layouts/footer.php'); ?>
 
     <!--fin de toda la pagina wrapper -->
+
+    <!-- Validacion Imputs number -->
+<script>
+    function validateInput(input) {
+        // Asegura que el valor sea mayor o igual a 0
+        if (input.value && parseFloat(input.value) < 0) {
+            input.classList.add("is-invalid");
+        } else {
+            input.classList.remove("is-invalid");
+        }
+    }
+
+    function preventInvalidKeys(event) {
+        const input = event.target;
+        if (input.type === 'number') {
+            // Previene la entrada de 'e', 'E', signos menos y más
+            if (event.key === 'e' || event.key === 'E' || event.key === '-' || event.key === '+') {
+                event.preventDefault();
+            }
+        }
+    }
+    </script>
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->

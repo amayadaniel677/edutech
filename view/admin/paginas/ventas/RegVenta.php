@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>EduTech | Add Curso</title>
@@ -91,7 +91,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 data-target="#modal-add-detalle">
                                 Agregar detalle<i class="bi bi-plus-circle"></i>
                             </button>
-                            <?php include('modal_add_detalle_venta.php') ?>
+                            <?php ('modal_add_detalle_venta.php') ?>
                         </div>
 
                         <form action="" method='POST' class="row mb-3" id='form-venta'>
@@ -166,7 +166,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <input type="number" class="form-control" id="valor-abonado" name="valor-abonado"
+                                    <input type="number" class="form-control" id="valor-abonado" name="valor-abonado" oninput="validateInput(this)" onkeydown="preventInvalidKeys(event)"
                                         value='' placeholder="Cantidad pagada del cliente"
                                         value="<?php echo getPostValue('valor-total'); ?>">
                                 </div>
@@ -198,7 +198,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <input type="number" class="form-control" id="descuento" name="descuento"
+                                    <input type="number" class="form-control" id="descuento" name="descuento" oninput="validateInput(this)" onkeydown="preventInvalidKeys(event)"
                                         placeholder="" value="<?php echo getPostValue('descuento'); ?>">
                                 </div>
 
@@ -395,6 +395,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
             .catch(error => console.error('Error:', error));
     });
     </script>
+    <!-- Validacion Imputs number -->
+<script>
+    function validateInput(input) {
+        // Asegura que el valor sea mayor o igual a 0
+        if (input.value && parseFloat(input.value) < 0) {
+            input.classList.add("is-invalid");
+        } else {
+            input.classList.remove("is-invalid");
+        }
+    }
+
+    function preventInvalidKeys(event) {
+        const input = event.target;
+        if (input.type === 'number') {
+            // Previene la entrada de 'e', 'E', signos menos y más
+            if (event.key === 'e' || event.key === 'E' || event.key === '-' || event.key === '+') {
+                event.preventDefault();
+            }
+        }
+    }
+    </script>
 
 
 
@@ -436,6 +457,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
     });
     </script>
+
 </body>
 
 </html>

@@ -41,7 +41,7 @@
                 <h2>Restaurar Contraseña</h2>
                 <div class="form-group">
                     <label for="dni">Identificacion: </label>
-                    <input type="number" id="dni" name="dni" class="form-control" placeholder="Identificacion">
+                    <input type="number" id="dni" name="dni" class="form-control" placeholder="Identificacion" oninput="validateInput(this)" onkeydown="preventInvalidKeys(event)">
                 </div>
                 <div class="form-group">
                     <label for="password">Nueva contraseña</label>
@@ -57,6 +57,27 @@
             </form>
         </div>
     </div>
+    <!-- Validacion Imputs number -->
+<script>
+    function validateInput(input) {
+        // Asegura que el valor sea mayor o igual a 0
+        if (input.value && parseFloat(input.value) < 0) {
+            input.classList.add("is-invalid");
+        } else {
+            input.classList.remove("is-invalid");
+        }
+    }
+
+    function preventInvalidKeys(event) {
+        const input = event.target;
+        if (input.type === 'number') {
+            // Previene la entrada de 'e', 'E', signos menos y más
+            if (event.key === 'e' || event.key === 'E' || event.key === '-' || event.key === '+') {
+                event.preventDefault();
+            }
+        }
+    }
+    </script>
 
 </body>
 
