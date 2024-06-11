@@ -5,7 +5,7 @@ $urlStarter = '../../../view/admin/';  //son desde el controlador
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
+scratch. This page gets rid of all links and provides the needed markup only. 
 -->
 <html lang="en">
 
@@ -16,8 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>EduTech | Pedidos</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../../../view/admin/plugins/fontawesome-free/css/all.min.css" />
@@ -109,18 +108,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <!-- /.col -->
                             <?php
                             if ($usuario) {
-                                ?>
+                            ?>
 
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
                                     <br>
                                     <b>ID usuario</b>
                                     <?php echo htmlspecialchars($usuario['id']); ?><br>
-                                    <img src="../../../<?php echo $usuario['photo']; ?>"
-                                        class="rounded-circle img-fluid w-50" alt="Foto de usuario">
+                                    <img src="../../../<?php echo $usuario['photo']; ?>" class="rounded-circle img-fluid w-50" alt="Foto de usuario">
                                 </div>
                                 <!-- /.col -->
-                                <?php
+                            <?php
                             }
                             ?>
                             <!-- /.row -->
@@ -133,43 +131,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <form class="form" action='' id='form-editarUser' method='POST'>
                                     <div class="row">
                                         <!-- Columna derecha -->
-                                        <input type="hidden" name="id"
-                                            value="<?php echo htmlspecialchars($usuario['id']); ?>">
+                                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($usuario['id']); ?>">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="name">Nombre</label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="<?php echo htmlspecialchars($usuario['name']); ?>"
-                                                    placeholder="<?php echo htmlspecialchars($usuario['name']); ?>"
-                                                    required>
+                                                <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($usuario['name']); ?>" placeholder="<?php echo htmlspecialchars($usuario['name']); ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="city">Ciudad</label>
-                                                <input type="text" class="form-control" id="city" name="city"
-                                                    value="<?php echo htmlspecialchars($usuario['city']); ?>"
-                                                    placeholder="<?php echo htmlspecialchars($usuario['city']); ?>"
-                                                    required>
+                                                <input type="text" class="form-control" id="city" name="city" value="<?php echo htmlspecialchars($usuario['city']); ?>" placeholder="<?php echo htmlspecialchars($usuario['city']); ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="email">Correo Electrónico</label>
-                                                <input type="email" class="form-control" id="email" name="email"
-                                                    value="<?php echo htmlspecialchars($usuario['email']); ?>"
-                                                    placeholder="<?php echo htmlspecialchars($usuario['email']); ?>"
-                                                    required>
+                                                <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($usuario['email']); ?>" placeholder="<?php echo htmlspecialchars($usuario['email']); ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="dni_type">Tipo de DNI</label>
                                                 <select class="form-control" id="dni_type" name="dni_type" required>
                                                     <option value="CC" <?php if ($usuario['dni_type'] == 'CC')
-                                                        echo 'selected'; ?>>C.C</option>
+                                                                            echo 'selected'; ?>>C.C</option>
                                                     <option value="TI" <?php if ($usuario['dni_type'] == 'TI')
-                                                        echo 'selected'; ?>>T.I</option>
+                                                                            echo 'selected'; ?>>T.I</option>
                                                     <option value="CE" <?php if ($usuario['dni_type'] == 'CE')
-                                                        echo 'selected'; ?>>C.E</option>
+                                                                            echo 'selected'; ?>>C.E</option>
                                                     <option value="RC" <?php if ($usuario['dni_type'] == 'RC')
-                                                        echo 'selected'; ?>>R.C</option>
+                                                                            echo 'selected'; ?>>R.C</option>
                                                     <option value="NA" <?php if ($usuario['dni_type'] == 'NA')
-                                                        echo 'selected'; ?>>N.A</option>
+                                                                            echo 'selected'; ?>>N.A</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -177,42 +165,45 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="lastname">Apellido</label>
-                                                <input type="text" class="form-control" id="lastname" name="lastname"
-                                                    value="<?php echo htmlspecialchars($usuario['lastname']); ?>"
-                                                    placeholder="<?php echo htmlspecialchars($usuario['lastname']); ?>"
-                                                    required>
+                                                <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo htmlspecialchars($usuario['lastname']); ?>" placeholder="<?php echo htmlspecialchars($usuario['lastname']); ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="address">Dirección</label>
-                                                <input type="text" class="form-control" id="address" name="address"
-                                                    value="<?php echo htmlspecialchars($usuario['address']); ?>"
-                                                    placeholder="<?php echo htmlspecialchars($usuario['address']); ?>"
-                                                    required>
+                                                <input type="text" class="form-control" id="address" name="address" value="<?php echo htmlspecialchars($usuario['address']); ?>" placeholder="<?php echo htmlspecialchars($usuario['address']); ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="birthdate">Fecha de Nacimiento</label>
-                                                <input type="date" class="form-control" id="birthdate" name="birthdate"
-                                                    value="<?php echo htmlspecialchars($usuario['birthdate']); ?>"
-                                                    required>
+                                                <input type="date" class="form-control" id="birthdate" name="birthdate" value="<?php echo htmlspecialchars($usuario['birthdate']); ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Sexo</label>
                                                 <div>
                                                     <input type="radio" id="sex_m" name="sex" value="M" <?php if ($usuario['sex'] == 'M')
-                                                        echo 'checked'; ?> required>
+                                                                                                            echo 'checked'; ?> required>
                                                     <label for="sex_m">M</label>
                                                 </div>
                                                 <div>
                                                     <input type="radio" id="sex_f" name="sex" value="F" <?php if ($usuario['sex'] == 'F')
-                                                        echo 'checked'; ?> required>
+                                                                                                            echo 'checked'; ?> required>
                                                     <label for="sex_f">F</label>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="rol">Rol:</label>
+                                            <select class="custom-select" id="rol" name="rol">
+                                                <option value="estudiante" <?php echo ($usuario['rol'] == 'estudiante') ? 'selected' : ''; ?>>Estudiante</option>
+                                                <option value="docente" <?php echo ($usuario['rol'] == 'docente') ? 'selected' : ''; ?>>Docente</option>
+                                                
+                                                <?php if ($_SESSION['rol_session'] == 'superadmin') : ?>  
+                                                <option value="administrador" <?php echo ($usuario['rol'] == 'administrador') ? 'selected' : ''; ?>>Administrador</option>
+                                                <?php endif; ?>
+                                            </select>
+                                        </div>
+
                                     </div>
                                     <button type="submit" id='btn-editUser' class="btn btn-primary">Editar</button>
-                                    <a href="controller_usuarios_totales.php?tipo_usuario=<?php echo $tipo_usuario; ?>"
-                                        class="btn btn-danger">Volver</a>
+                                    <a href="controller_usuarios_totales.php?tipo_usuario=<?php echo $tipo_usuario; ?>" class="btn btn-danger">Volver</a>
                                     <!-- falta boton volver -->
                                 </form>
 
@@ -250,7 +241,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- REQUIRED SCRIPTS -->
     <!-- CALCULAR EL TOTAL DE DETALLES -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Obtén los elementos del DOM
             var subtotalInput = document.getElementById('subtotal');
             var descuentoInput = document.getElementById('descuento');
@@ -287,7 +278,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- sweet alert -->
     <script src="../../../view/admin/plugins/sweetalert2/sweetalert2.min.js"></script>
     <script>
-        document.getElementById('btn-editUser').addEventListener('click', function (e) {
+        document.getElementById('btn-editUser').addEventListener('click', function(e) {
             // Prevenir el comportamiento por defecto del botón (enviar el formulario)
             e.preventDefault();
 

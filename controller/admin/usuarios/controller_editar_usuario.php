@@ -10,7 +10,7 @@ include('../../../model/admin/usuarios/editar_usuario_model.php');
 if (isset($_GET['id_usuario'])) {
     $id_usuario = $_GET['id_usuario'];
     $tipo_usuario = $_GET['tipo_usuario'];
-    $consult = new editar_usuario_model();
+    $consult = new editar_usuario_model(); 
     $usuario = $consult->traer_usuario($id_usuario);
 }
 
@@ -25,9 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sexo = $_POST['sex'];
     $correo = $_POST['email'];
     $tipo_documento = $_POST['dni_type'];
+    $rol=$_POST['rol'];
 
     $consult = new editar_usuario_controller();
-    $validar = $consult->validar_campos($id, $nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento);
+    $validar = $consult->validar_campos($id, $nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento,$rol);
     if ($validar) {
         $mensaje = 'El usuario ha sido modificado con exito';
         header("Location: controller_usuarios_totales.php?mensaje=" . urlencode($mensaje) . "&tipo_usuario=" . $tipo_usuario);
@@ -44,10 +45,10 @@ class editar_usuario_controller
     {
     }
 
-    public function validar_campos($id, $nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento)
+    public function validar_campos($id, $nombre, $apellido, $ciudad, $direccion, $fecha_nacimiento, $sexo, $correo, $tipo_documento,$rol)
     {
         // Validar que no estén vacíos
-        if (empty($nombre) || empty($apellido) || empty($ciudad) || empty($direccion) || empty($correo)) {
+        if (empty($nombre) || empty($apellido) || empty($ciudad) || empty($direccion) || empty($correo) || empty($rol)) {
            
             $this->mensaje = 'por favor complete los campos vacíos';
             exit;
@@ -87,7 +88,7 @@ class editar_usuario_controller
                
                 $fechaParaMySQL = $fechaNacimiento->format('Y-m-d');
                 $consult = new editar_usuario_model();
-                $editar = $consult->editar_informacion($id, $nombre, $apellido, $ciudad, $direccion, $fechaParaMySQL, $sexo, $correo, $tipo_documento);
+                $editar = $consult->editar_informacion($id, $nombre, $apellido, $ciudad, $direccion, $fechaParaMySQL, $sexo, $correo, $tipo_documento,$rol);
                 if ($editar) {
                    
                     $mensaje = 'El usuario a sido editado con exito';

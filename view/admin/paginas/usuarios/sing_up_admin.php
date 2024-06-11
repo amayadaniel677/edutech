@@ -23,7 +23,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- CSS CURSOS ADMIN -->
   <link rel="icon" href="../../../resource/img/icons/logo-kepler-removebg-preview.png" />
   <!-- css alertas mensajes -->
-  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" /> <!-- necesario para el tamaño de mensajes alerta  -->
+  <link rel="stylesheet" href="../../../resource/css/mensajes_alertas/mensajes_alertas.css" />
+  <!-- necesario para el tamaño de mensajes alerta  -->
 
 </head>
 
@@ -50,7 +51,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="../controller_inicio_admin.php">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="./controller_usuario.php">Gestionar usuarios</a></li>
+                <li class="breadcrumb-item"><a href="./controller_usuario.php">Gestionar usuarios</a>
+                </li>
                 <li class="breadcrumb-item active">Registrar usuario </li>
               </ol>
             </div><!-- /.col -->
@@ -117,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="form-group">
                     <label for="nombres">Nombres</label>
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="[a-zA-Z\s]+" value="<?php echo getFieldValue('nombres'); ?>" required>
+                      <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" pattern="[a-zA-ZáàâäèéêëîíïôóöùûúüÿÀÂÄÈÉÊËÎÏÔÖÙÛÜŸ\s]+" value="<?php echo getFieldValue('nombres'); ?>" required>
                       <div class="input-group-append">
                         <div class="input-group-text">
                           <span class="fas fa-user"></span>
@@ -130,7 +132,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="form-group">
                     <label for="apellidos">Apellidos</label>
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" pattern="[a-zA-Z\s]+" value="<?php echo getFieldValue('apellidos'); ?>" required>
+                      <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" pattern="[a-zA-ZáàâäèéêëîíïôóöùûúüÿÀÂÄÈÉÊËÎÏÔÖÙÛÜŸ\s]+" value="<?php echo getFieldValue('apellidos'); ?>" required>
                       <div class="input-group-append">
                         <div class="input-group-text">
                           <span class="fas fa-user"></span>
@@ -144,13 +146,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <div class="row">
                 <div class="col-md-6 col-sm-12">
                   <div class="form-group">
-                    <label for="tipo_documento">Tipo de documento</label>
+                    <label for="tipo_documento">Tipo de documentos</label>
                     <div class="input-group mb-3">
                       <select class="form-control" id="tipo_documento" name="tipo_documento">
                         <option value="">Tipo de documento</option>
-                        <option value="CC" <?php echo (getFieldValue('tipo_documento') == 'CC') ? 'selected' : ''; ?>>Cédula de ciudadanía</option>
-                        <option value="TI" <?php echo (getFieldValue('tipo_documento') == 'TI') ? 'selected' : ''; ?>>Tarjeta de identidad</option>
-                        <option value="CE" <?php echo (getFieldValue('tipo_documento') == 'CE') ? 'selected' : ''; ?>>Cédula de extranjería</option>
+                        <option value="CC" <?php echo (getFieldValue('tipo_documento') == 'CC') ? 'selected' : ''; ?>>
+                          Cédula de ciudadanía</option>
+                        <option value="TI" <?php echo (getFieldValue('tipo_documento') == 'TI') ? 'selected' : ''; ?>>
+                          Tarjeta de identidad</option>
+                        <option value="CE" <?php echo (getFieldValue('tipo_documento') == 'CE') ? 'selected' : ''; ?>>
+                          Cédula de extranjería</option>
                       </select>
                     </div>
                   </div>
@@ -223,7 +228,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="form-group">
                     <label for="ciudad">Ciudad</label>
                     <div class="input-group mb-3">
-                      <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" pattern="[a-zA-Z\s]+" required value="<?php echo getFieldValue('ciudad'); ?>">
+                      <input type="text" class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" pattern="[a-zA-ZáàâäèéêëîíïôóöùûúüÿÀÂÄÈÉÊËÎÏÔÖÙÛÜŸ\s]+" required value="<?php echo getFieldValue('ciudad'); ?>">
                     </div>
                   </div>
                 </div>
@@ -242,10 +247,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="input-group mb-3">
                   <select class="form-control" id="rol" name="rol">
                     <option value="">Seleccione un rol</option>
-                    <option value="docente" <?php echo (getFieldValue('rol') == 'docente') ? 'selected' : ''; ?>>Docente</option>
-                    <option value="estudiante" <?php echo (getFieldValue('rol') == 'estudiante') ? 'selected' : ''; ?>>Estudiante</option>
+
+                    <option value="docente" <?php echo (getFieldValue('rol') == 'docente') ? 'selected' : ''; ?>>Docente
+                    </option>
+                    <option value="estudiante" <?php echo (getFieldValue('rol') == 'estudiante') ? 'selected' : ''; ?>>
+                      Estudiante</option>
                     <?php if ($_SESSION['rol_session'] == 'superadmin') : ?>
-                      <option value="administrador" <?php echo (getFieldValue('rol') == 'administrador') ? 'selected' : ''; ?> id="rolAdministardor">Administrador</option>
+                      <option value="administrador" id="rolAdministardor">Administrador</option>
                     <?php endif; ?>
                   </select>
                 </div>
@@ -433,25 +441,25 @@ function confirmarRegistro(event) {
 }
 </script> -->
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const rolSelect = document.getElementById('rol');
-    const contraseniaInput = document.getElementById('contrasenia');
-    const confContraseniaInput = document.getElementById('confContrasenia');
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const rolSelect = document.getElementById('rol');
+        const contraseniaInput = document.getElementById('contrasenia');
+        const confContraseniaInput = document.getElementById('confContrasenia');
 
-    rolSelect.addEventListener('change', function() {
-      if (rolSelect.value === 'administrador') {
-        contraseniaInput.removeAttribute('readonly');
-        confContraseniaInput.removeAttribute('readonly');
-      } else {
-        contraseniaInput.setAttribute('readonly', true);
-        confContraseniaInput.setAttribute('readonly', true);
-        contraseniaInput.value = '';
-        confContraseniaInput.value = '';
-      }
-    });
-  });
-</script>
+        rolSelect.addEventListener('change', function() {
+          if (rolSelect.value === 'administrador') {
+            contraseniaInput.removeAttribute('readonly');
+            confContraseniaInput.removeAttribute('readonly');
+          } else {
+            contraseniaInput.setAttribute('readonly', true);
+            confContraseniaInput.setAttribute('readonly', true);
+            contraseniaInput.value = '';
+            confContraseniaInput.value = '';
+          }
+        });
+      });
+    </script>
 </body>
 
 </html>

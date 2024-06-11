@@ -8,7 +8,7 @@ var cantidadHoras;
 var valorTotal;
 var valorHoraClase;
 function actualizarValorTotal() {
-    console.log('Cantidad de horas funcion actualizar:', cantidadHoras);  
+    console.log('Cantidad de horas funcion actualizar:', cantidadHoras);
     console.log('Precio por hora o clase funcion actualizar:', valorHoraClase.value);
     valorTotal = valorHoraClase.value * cantidadHoras;
     inputValorUnidad.value = valorTotal;
@@ -17,7 +17,7 @@ function actualizarValorTotal() {
 // Función para actualizar los datos
 function actualizarCursos() {
     // Enviar el valor al controlador para obtener los cursos
-    
+
     fetch('controller_regventa.php', {
         method: 'POST',
         headers: {
@@ -31,14 +31,17 @@ function actualizarCursos() {
             var selectCursos = document.getElementById("nombre-curso");
             selectCursos.innerHTML = '';  // Limpiar las opciones existentes
 
+            // Crear y agregar la opción por defecto
+            var defaultOption = new Option("Seleccione una opción", "");
+            selectCursos.options[0] = defaultOption;
+
             // Agregar nuevas opciones al segundo select
-            for (var i = 0; i < data.cursos.length; i++) {
+            for (var i = 1; i < data.cursos.length; i++) { // Comenzamos desde 1 para evitar sobreescribir la opción por defecto
                 var option = document.createElement('option');
                 option.value = data.cursos[i];
                 option.text = data.cursos[i];
                 selectCursos.add(option);
             }
-            
             // // Acceder al precio por hora y actualizar el valor del input "valor-hora"
             // precioPorHora = data.precio;
 
@@ -63,7 +66,7 @@ selectCategorias.addEventListener('change', actualizarCursos);
 // cuando cambie necesito actualizar el precio por hora
 
 // Definir tipoVenta en un ámbito accesible para ambos manejadores de eventos
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var selectModalidad = document.getElementById("modalidad");
     var inputValorHora = document.getElementById("valor-hora");
     var selectTipoVenta = document.getElementById("tipo-venta");
@@ -77,19 +80,19 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Precio por hora:', precioPorHora);
         console.log('Precio por clase:', precioPorClase);
 
-        if(tipoVenta == "clases"){
-             valorHoraClase = document.getElementById("valor-hora-clase");
+        if (tipoVenta == "clases") {
+            valorHoraClase = document.getElementById("valor-hora-clase");
             valorHoraClase.value = precioPorClase;
         }
-        if(tipoVenta == "horas"){
-             valorHoraClase = document.getElementById("valor-hora-clase");
+        if (tipoVenta == "horas") {
+            valorHoraClase = document.getElementById("valor-hora-clase");
             valorHoraClase.value = precioPorHora;
         }
         actualizarValorTotal();
     }
 
     // Asignar el valor de tipoVenta cuando cambie la selección en selectTipoVenta
-    selectTipoVenta.addEventListener('change', function() {
+    selectTipoVenta.addEventListener('change', function () {
         tipoVenta = selectTipoVenta.value;
         // Actualizar los precios cuando cambia el tipo de venta
         actualizarPrecios();
@@ -140,7 +143,7 @@ btnGuardarDetalle.addEventListener("click", function () {
     var valorCurso = parseFloat(document.getElementById("valor-unidad").value);
 
     // Validar que todos los campos estén llenos
-    if (tipoVenta2 =='' || modalidad2=='' || categoria == '' || curso == '' || isNaN(horas) || isNaN(valorHoraClase) || isNaN(valorCurso)) {
+    if (tipoVenta2 == '' || modalidad2 == '' || categoria == '' || curso == '' || isNaN(horas) || isNaN(valorHoraClase) || isNaN(valorCurso)) {
         console.log("horas: " + horas + " Valor: " + valorHora + " Valor Total: " + valorCurso);
         alert("Los campos no están completos");
 
@@ -173,7 +176,7 @@ $('#modal-add-detalle').on('show.bs.modal', function (e) {
 // AGREGAR LOS DETALLES A LA TABLA
 
 function agregarFilaDetalle(detalle) {
-    
+
     var tabla = document.getElementById('tabla-detalles').getElementsByTagName('tbody')[0];
 
     var fila = tabla.insertRow();
@@ -192,7 +195,7 @@ function agregarFilaDetalle(detalle) {
     celdaHoras.innerHTML = detalle.cantidad_horas_clases;
     celdaValorHoraClase.innerHTML = detalle.valorHoraClase;
     celdaSubtotal.innerHTML = detalle.valorCurso;
-    
+
     var botonEliminar = document.createElement('button');
     botonEliminar.className = 'btn btn-danger btn-sm ml-2';
     botonEliminar.innerHTML = '<i class="bi bi-trash-fill"></i> Borrar';
@@ -202,7 +205,7 @@ function agregarFilaDetalle(detalle) {
         calcularValorTotalCursos();
     });
 
-    
+
     celdaEditar.appendChild(botonEliminar);
 }
 
@@ -239,7 +242,7 @@ var valorTotalOriginal = 0;
 function calcularValorTotalCursos() {
     valorTotalCursos = 0;
 
-    detallesVenta.forEach(function(detalle) {
+    detallesVenta.forEach(function (detalle) {
         valorTotalCursos += detalle.valorCurso;
     });
 
