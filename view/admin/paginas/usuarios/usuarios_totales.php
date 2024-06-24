@@ -248,9 +248,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 mt-3">
-                                                                <label for="horasAsistidas">Cantidad de horas
-                                                                    asistidas:</label> <br>
-                                                                <input required type="number" name="horasAsistidas" id="horasAsistidas" class="form-control" placeholder="Cantidad horas">
+                                                            <label for="horasAsistidas">Cantidad de horas/clases asistidas:</label> <br>
+    
+    <select required name="horasAsistidas" id="horasAsistidas" class="form-control">
+        <option value="">Seleccione una opción</option>
+        <option value="0.5">0.5</option>
+        <option value="1">1</option>
+        <option value="1.5">1.5</option>
+        <option value="2">2</option>
+        <option value="2.5">2.5</option>
+        <option value="3">3</option>
+        <option value="3.5">3.5</option>
+        <option value="4">4</option>
+        <option value="4.5">4.5</option>
+        <option value="5">5</option>
+        <option value="5.5">5.5</option>
+        <option value="6">6</option>
+        <option value="6.5">6.5</option>
+        <option value="7">7</option>
+        <option value="7.5">7.5</option>
+        <option value="8">8</option>
+    </select>
                                                             </div>
 
                                                             <div class="col-md-10 mt-3 mb-5">
