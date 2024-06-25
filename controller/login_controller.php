@@ -3,6 +3,9 @@ include_once('../model/user_model.php');
 if(isset($_GET['mensaje'])){
     $mensaje=urldecode($_GET['mensaje']);
 }
+// Decodificar el mensaje de la URL
+
+
 if($_POST){
     //guardar  variables
     $dni=str_replace(' ','',$_POST['dni']);

@@ -56,7 +56,14 @@
         $mensaje = urldecode($_GET['mensaje']);
         echo '<div class="alert alert-info">' . $mensaje . '</div>';
       }    
-        ?>       
+        ?>
+               <?php
+// Decodificar el mensaje de la URL
+if (isset($_GET['message'])) {
+  $message = urldecode($_GET['message']);
+  echo '<div class="alert alert-success">' . $mensaje . '</div>';
+}
+?>
         <?php
     if (isset($_GET['success'])) {
         echo $_GET['success'];

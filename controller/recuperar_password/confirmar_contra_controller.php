@@ -39,9 +39,11 @@ if ($_POST) {
             if ($recuperar_con->modificarContrasenia($dni, $contrasenia)) {
                 // Eliminar el token después de usarlo
                 $recuperar_con->eliminarToken($token);
-                
-                $errors['success'] = "La contraseña se restauró correctamente.";
-                header('location:../login_controller.php');
+                $mensaje_success = "La contraseña se restauró correctamente.";
+$message_encoded = urlencode($mensaje_success);
+header("Location:../login_controller.php?message=$message_encoded");
+exit();
+
                 exit(); // Asegurar que el script termine después de redireccionar
             }
         } catch (\Throwable $th) {
