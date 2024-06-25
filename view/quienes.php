@@ -1,4 +1,4 @@
-<?php $ruta_inicio="../"; ?>
+<?php $ruta_inicio = "../"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,43 +11,34 @@
     <script src="https://cdn.userway.org/widget.js" data-account="oPQTiY7D0x"></script>
     <style>
         body .uwy.userway_p7 .userway_buttons_wrapper {
-    top: 70px !important;
-    left: auto !important;
-    right: 10px !important;
-    bottom: auto !important;
-}
+            top: 70px !important;
+            left: auto !important;
+            right: 10px !important;
+            bottom: auto !important;
+        }
     </style>
     <title>Document</title>
 </head>
+
 <body>
 
-  <?php 
-  
-  
-   require_once('layout/nav.php');
-  
-  ?>
-    <h1 class="ales">¿QUIÉNES SOMOS?</h1>
+    <?php
+
+
+    require_once('layout/nav.php');
+
+    ?>
+    <h1 class="ales" style='margin-top:120px;'>¿QUIÉNES SOMOS?</h1>
     <section class="project">
         <div class="inicio">
             <div class="contenido">
                 <div>
-                    <p class="princi">Lorem ipsum dolor sit amet, consectetur adipiscing 
-                        elit, sed do eiusmod tempor incididunt ut labore
-                        
-                        Ut enim ad minim veniam, quis nostrud exercitation 
-                        ullamco laboris nisi ut aliquip ex ea commodo con
-                        
-                        Duis aute irure dolor in reprehenderit in voluptate 
-                        velit esse cillum dolore eu fugiat nulla pariatu
-                        
-                        Excepteur sint occaecat cupidatat non proident, 
-                        sunt in culpa qui officia deserunt mollit anim id es</p>                                                               
+                    <p class="princi">Somos Kepler, una empresa educativa en Sogamoso, Boyacá, dedicada a brindar una educación accesible y de alta calidad a estudiantes de todas las edades y niveles. Ofrecemos cursos en una amplia variedad de materias, incluyendo preparación para el preicfes, artes, idiomas y refuerzos escolares. Nuestro equipo de profesionales utiliza metodologías innovadoras para proporcionar una educación personalizada y efectiva. En Kepler, estamos comprometidos con el desarrollo académico y personal de nuestros estudiantes, contribuyendo al progreso educativo de nuestra comunidad.</p>
                 </div>
                 <div class="box">
                     <div class="orden">
                         <button class="punto_decorativo"></button>
-                        <p class="texto_botones"> <strong>EFICIENCIA</p> 
+                        <p class="texto_botones"> <strong>EFICIENCIA</p>
                     </div>
                     <div class="orden">
                         <button class="punto_decorativo"></button>
@@ -66,28 +57,7 @@
         <div class="about_text">
             <div class="about_ala">
                 <h2 class="sub_titulos">VISIÓN</h2>
-                <p class="about_paragraph">n a laoreet purus. Integer turpis quam, laoreet id orci nec,
-                    ultrices lacinia nunc. Aliquam erat vo
-
-                    Aliquam pulvinar vestibulum blandit. Donec sed nisl libero.
-                    Fusce dignissim luctus sem eu dapibus. P
-
-                    Vestibulum eu quam nec neque pellentesque efficitur id eget
-                    nisl. Proin porta est convallis lacus bl
-
-                    Donec sed erat ut magna suscipit mattis. Aliquam erat
-                    volutpat. Morbi in orci risus. Donec pretium f
-
-                    Aliquam porta nisl dolor, molestie pellentesque elit molestie in.
-                    Morbi metus neque, elementum ullam</p>
-                <p class="about_paragraph">In a laoreet purus. Integer turpis quam, laoreet id orci nec,
-                    ultrices lacinia nunc. Aliquam erat vo
-
-                    Aliquam pulvinar vestibulum blandit. Donec sed nisl libero.
-                    Fusce dignissim luctus sem eu dapibus. P
-
-                    Vestibulum eu quam nec neque pellentesque efficitur id eget
-                    nisl. Proin porta est convallis lacus bl</p>
+                <p class="about_paragraph">Nuestra visión en Kepler es ser reconocidos como líderes en la educación integral en Sogamoso y Boyacá, extendiendo nuestro impacto a nivel regional y nacional. Aspiramos a ser la institución educativa de referencia para estudiantes de todas las edades que buscan excelencia académica y desarrollo personal. Nos visualizamos como un centro de aprendizaje que utiliza metodologías innovadoras y tecnologías avanzadas para ofrecer una educación adaptada a las necesidades individuales de nuestros estudiantes. Queremos inspirar a nuestros estudiantes a alcanzar su máximo potencial y contribuir positivamente a la sociedad, creando un futuro brillante para ellos y para nuestra comunidad.</p>
             </div>
         </div>
         <figure class="about_img">
@@ -98,31 +68,14 @@
         </figure>
         <div class="about_text">
             <div class="about_ala">
-                <h2 class="sub_titulos">MISION</h2>
-                <p class="about_paragraph">In a laoreet purus. Integer turpis quam, laoreet id orci nec,
-                    ultrices lacinia nunc. Aliquam erat vo
-
-                    Aliquam pulvinar vestibulum blandit. Donec sed nisl libero.
-                    Fusce dignissim luctus sem eu dapibus. P
-
-                    Vestibulum eu quam nec neque pellentesque efficitur id eget
-                    nisl. Proin porta est convallis lacus bl
-
-                    Donec sed erat ut magna suscipit mattis. Aliquam erat
-                    volutpat. Morbi in orci risus. Donec pretium f
-
-                    Aliquam porta nisl dolor, molestie pellentesque elit molestie in.
-                    Morbi metus neque, elementum ullam</p>
-                <p class="about_paragraph">In a laoreet purus. Integer turpis quam, laoreet id orci nec,
-                    ultrices lacinia nunc. Aliquam erat vo
-
-                    Aliquam pulvinar vestibulum blandit. Donec sed nisl libero.
-                    Fusce dignissim luctus sem eu dapibus. P
+                <h2 class="sub_titulos">MISIÓN</h2>
+                <p class="about_paragraph">En Kepler, nuestra misión es proporcionar una educación integral y accesible a estudiantes de todas las edades y niveles, desde niños pequeños hasta universitarios. Nos dedicamos a ofrecer cursos de alta calidad en una amplia variedad de materias, incluyendo preicfes, artes, idiomas y refuerzos escolares. Nuestro compromiso es fomentar el aprendizaje continuo, el desarrollo personal y académico, y preparar a nuestros estudiantes para enfrentar los desafíos del futuro. Ubicados en Sogamoso, Boyacá, nos esforzamos por ser un pilar educativo en nuestra comunidad, promoviendo valores de excelencia, innovación y equidad en la educación.</p>
+                
             </div>
         </div>
 
     </section>
-    <?php require_once('layout/footer.php');?>
+    <?php require_once('layout/footer.php'); ?>
 </body>
 
 </html>

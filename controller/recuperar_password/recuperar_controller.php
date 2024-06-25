@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         );
                       
                         $token = $recuperar->generarToken($email);
-                        $link = "http://localhost/edutech/controller/recuperar_password/confirmar_contra_controller.php?token=$token";
+                        $link = "https://edutech.appimrc2024.site/controller/recuperar_password/confirmar_contra_controller.php?token=$token";
                         $mail->Body = 'Haz clic en el siguiente enlace para restablecer tu contraseña: <a href="' . $link . '">Restablecer Contraseña</a>';
                         
 
