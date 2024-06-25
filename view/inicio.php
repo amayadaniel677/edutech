@@ -32,10 +32,11 @@
       .img-banner img{
         height: 100%;
       }
-      body .uwy.userway_p7 .userway_buttons_wrapper {
+      
+     .userway_buttons_wrapper {
     top: 70px !important;
     left: auto !important;
-    right: 10px !important;
+    right: 5px !important;
     bottom: auto !important;
 }
     </style>

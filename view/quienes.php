@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="../resource/css/layouts/footer2.css" />
     <script src="https://cdn.userway.org/widget.js" data-account="oPQTiY7D0x"></script>
     <style>
-        body .uwy.userway_p7 .userway_buttons_wrapper {
+        .userway_buttons_wrapper {
             top: 70px !important;
             left: auto !important;
-            right: 10px !important;
+            right: 5px !important;
             bottom: auto !important;
         }
     </style>
