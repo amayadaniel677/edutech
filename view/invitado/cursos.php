@@ -29,8 +29,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../../resource/css/inicio/nav.css" />
   <link rel="stylesheet" href="../../resource/css/layouts/footer2.css" />
   <!-- CSS CURSOS ADMIN -->
-
+  <script src="https://cdn.userway.org/widget.js" data-account="oPQTiY7D0x"></script>
     <link rel="icon" href="../../resource/img/icons/logo-kepler-removebg-preview.png" />
+    <style>
+        body .uwy.userway_p7 .userway_buttons_wrapper {
+          top: 70px !important;
+    left: auto !important;
+    right: 10px !important;
+    bottom: auto !important;
+}
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">

@@ -32,7 +32,12 @@
       .img-banner img{
         height: 100%;
       }
-      
+      body .uwy.userway_p7 .userway_buttons_wrapper {
+    top: 70px !important;
+    left: auto !important;
+    right: 10px !important;
+    bottom: auto !important;
+}
     </style>
     
     <script src="https://kit.fontawesome.com/1165876da6.js" crossorigin="anonymous"></script>
@@ -179,78 +184,61 @@
     <section class="section-ofrece">
       <h2 class="h2sub">LO QUE TE OFRECEMOS EN KEPLER</h2>
       <article class="container-ofrece">
-        <div class="ofrece-item">
-          <div class="ofrece-img">
-            <img src="resource/img/inicio/happy.svg" alt="caritafeliz" />
-          </div>
-          <div class="ofrece-txt">
-            <h4>Aprende a tu ritmo</h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore.
-            </p>
-          </div>
-        </div>
-        <div class="ofrece-item">
-          <div class="ofrece-img">
-            <img src="resource/img/inicio/laptop.svg" alt="caritafeliz" />
-          </div>
-          <div class="ofrece-txt">
-            <h4>Aprende a tu ritmo</h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore.
-            </p>
-          </div>
-        </div>
-        <div class="ofrece-item">
-          <div class="ofrece-img">
-            <img src="resource/img/inicio/like.svg" alt="caritafeliz" />
-          </div>
-          <div class="ofrece-txt">
-            <h4>Aprende a tu ritmo</h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore.
-            </p>
-          </div>
-        </div>
-        <div class="ofrece-item">
-          <div class="ofrece-img">
-            <img src="resource/img/inicio/Group.png" alt="caritafeliz" />
-          </div>
-          <div class="ofrece-txt">
-            <h4>Aprende a tu ritmo</h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore.
-            </p>
-          </div>
-        </div>
-        <div class="ofrece-item">
-          <div class="ofrece-img">
-            <img src="resource/img/inicio/cerebro.svg" alt="caritafeliz" />
-          </div>
-          <div class="ofrece-txt">
-            <h4>Aprende a tu ritmo</h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore.
-            </p>
-          </div>
-        </div>
-        <div class="ofrece-item">
-          <div class="ofrece-img">
-            <img src="resource/img/inicio/graduado.png" alt="caritafeliz" />
-          </div>
-          <div class="ofrece-txt">
-            <h4>Aprende a tu ritmo</h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore.
-            </p>
-          </div>
-        </div>
+      <div class="ofrece-item">
+  <div class="ofrece-img">
+    <img src="resource/img/inicio/happy.svg" alt="Acompañamiento docente" />
+  </div>
+  <div class="ofrece-txt">
+    <h4>Acompañamiento </h4>
+    <p>Contamos con programas con acompañamiento intensivo del docente, facilitando el desarrollo de prácticas pedagógicas efectivas. </p>
+  </div>
+</div>
+<div class="ofrece-item">
+  <div class="ofrece-img">
+    <img src="resource/img/inicio/laptop.svg" alt="Métodos de enseñanza innovadores" />
+  </div>
+  <div class="ofrece-txt">
+    <h4>Métodos de Enseñanza Innovadores</h4>
+    <p>Implementamos métodos de enseñanza que combinan la tecnología con la pedagogía tradicionales.</p>
+  </div>
+</div>
+<div class="ofrece-item">
+  <div class="ofrece-img">
+    <img src="resource/img/inicio/like.svg" alt="Flexibilidad en el aprendizaje" />
+  </div>
+  <div class="ofrece-txt">
+    <h4>Flexibilidad</h4>
+    <p>Ofrecemos flexibilidad en nuestros cursos, permitiendo a los estudiantes aprender a su propio ritmo y con el mayor apoyo. </p>
+  </div>
+</div>
+<div class="ofrece-item">
+  <div class="ofrece-img">
+    <img src="resource/img/inicio/Group.png" alt="Ambiente inclusivo" />
+  </div>
+  <div class="ofrece-txt">
+    <h4>Ambiente Inclusivo</h4>
+    <p>Creamos un ambiente de aprendizaje inclusivo y acogedor, donde todos los estudiantes se sientan valorados y apoyados.</p>
+  </div>
+</div>
+<div class="ofrece-item">
+  <div class="ofrece-img">
+    <img src="resource/img/inicio/cerebro.svg" alt="Desarrollo integral" />
+  </div>
+  <div class="ofrece-txt">
+    <h4>Desarrollo Integral</h4>
+    <p>Nuestro enfoque educativo va más allá de la adquisición de conocimientos, enfocándose en el desarrollo integral de los estudiantes.</p>
+  </div>
+</div>
+<div class="ofrece-item">
+  <div class="ofrece-img">
+    <img src="resource/img/inicio/graduado.png" alt="Preparación para el futuro" />
+  </div>
+  <div class="ofrece-txt">
+    <h4>Preparación Futura</h4>
+    <p>Preparamos a nuestros estudiantes para el futuro, equipándolos con habilidades esenciales como adaptabilidad y resiliencia.</p>
+  </div>
+</div>
+
       </article>
     </section>
     <section class="sectionimpar">
@@ -279,10 +267,6 @@
     <section class="section-preguntas">
       <h2 class="h2sub grande">PREGUNTAS FRECUENTES</h2>
       <article class="container-preguntas">
-        <details class="pregunta" name="pregunta">
-          <summary class="p-pregunta">¿CUANDO PUEDO EMPEZAR MIS CLASES?</summary>
-          <p>Puedes empezar desde el momento en que verifiquemos el pago de tu curso</p>
-        </details>
         <details class="pregunta" name="pregunta">
           <summary class="p-pregunta">¿CUÁNDO PUEDO EMPEZAR MIS CLASES?</summary>
           <p>Puedes comenzar tus clases inmediatamente después de que hayamos verificado el pago de tu curso. ¡Estamos emocionados de tenerte con nosotros!</p>
@@ -323,7 +307,7 @@
       </div>
     </section>
     <?php require_once('view/layout/footer.php');?>
-    class
+
     <heard><script src="https://cdn.userway.org/widget.js" data-account="oPQTiY7D0x"></script></heard>
   </body>
 </html>

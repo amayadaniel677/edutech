@@ -8,11 +8,19 @@
     <link rel="stylesheet" href="../resource/css/quienes/quien.css">
     <link rel="stylesheet" href="../resource/css/inicio/nav.css" />
     <link rel="stylesheet" href="../resource/css/layouts/footer2.css" />
-  
+    <script src="https://cdn.userway.org/widget.js" data-account="oPQTiY7D0x"></script>
+    <style>
+        body .uwy.userway_p7 .userway_buttons_wrapper {
+    top: 70px !important;
+    left: auto !important;
+    right: 10px !important;
+    bottom: auto !important;
+}
+    </style>
     <title>Document</title>
 </head>
 <body>
-<heard><script src="https://cdn.userway.org/widget.js" data-account="oPQTiY7D0x"></script></heard>
+
   <?php 
   
   
